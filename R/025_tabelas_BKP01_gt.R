@@ -5263,7 +5263,7 @@ tempo_medio_geral_CIABH_TAB_02 %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-BANCO_MEDIDAS_LET_TABELA %>%
+banco_MEDIA_ENTRADAS_Let %>%
   gt() %>%
 
   tab_header(
@@ -5275,7 +5275,7 @@ BANCO_MEDIDAS_LET_TABELA %>%
   tab_style(
     style = list(
       cell_text(weight = "normal", align = "center", size = "small")),
-    locations = cells_body(rows = nrow(BANCO_MEDIDAS_LET_TABELA)))%>%
+    locations = cells_body(rows = nrow(banco_MEDIA_ENTRADAS_Let)))%>%
 
   tab_style(
     style = cell_text(weight = "bold", align = "center" ),
