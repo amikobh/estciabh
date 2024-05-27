@@ -2819,7 +2819,6 @@ colnames(BANCO_MEDIDAS_LET_TABELA)[3]<-'PERCENTUAL'
 #############################################################################################################
 #graf_pizza_MEDIDAS_LET
 #########################################################################################################
-
 graf_pizza_MEDIDAS_LET =
   banco_iml_GERAL %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
@@ -2831,16 +2830,19 @@ graf_pizza_MEDIDAS_LET$POSSUI_MEDIDA_PROTETIVA = ajustar_nomes(graf_pizza_MEDIDA
 
 graf_pizza_MEDIDAS_LET$POSSUI_MEDIDA_PROTETIVA <- str_replace (graf_pizza_MEDIDAS_LET$POSSUI_MEDIDA_PROTETIVA, "NAO", "NÃO")
 
-colnames(graf_pizza_MEDIDAS_LET)[1]<-'graf_pizza_MEDIDAS_LET'
 #########################################################################################################
-
 graf_pizza_MEDIDAS_LET =
-  graf_pizza_MEDIDAS_LET |>
-  count(graf_pizza_MEDIDAS_LET, sort = TRUE)
-#########################################################################################################
-#colnames(graf_pizza_MEDIDAS_LET)[1]<-'QUANTIDADE'
+  graf_pizza_MEDIDAS_LET %>%
+  janitor::tabyl(POSSUI_MEDIDA_PROTETIVA) %>%
+  arrange(n) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+
 colnames(graf_pizza_MEDIDAS_LET)[2]<-'QUANTIDADE'
-#########################################################################################################
+colnames(graf_pizza_MEDIDAS_LET)[3]<-'PERCENTUAL'
+#############################################################################################################
+#graf_pizza_MEDIDAS_LET FIM
 #########################################################################################################
 #############################################################################################################
 #BANCO_MEDIDAS_LET FIM
