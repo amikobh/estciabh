@@ -1,0 +1,311 @@
+# Atos em foco
+
+A partir deste ponto, explicitar-se-ão as características dos atos infracionais homicídio, roubo, furto e tráfico de drogas.
+
+## Homicídio
+
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[9,].png')
+```
+
+### Dia da Semana
+
+`r df_dia_semana_banco_HOMICIDIO_rmark[1,1]` e `r df_dia_semana_banco_HOMICIDIO_rmark[2,1]` são os dias que mais concentram as ocorrências de homicídio, praticado por adolescentes, em Belo Horizonte.
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[10,].png')
+```
+\newpage
+
+### Regional da ocorrência
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[11,].png')
+```
+
+As regionais `r df_regional_banco_HOMICIDIO_rmark[1,1]` e `r df_regional_banco_HOMICIDIO_rmark[2,1]` acusam os maiores índices de ocorrência no ano em estudo.
+\newpage
+
+### Idade e Sexo    
+
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[11,].png')
+```
+
+Os adolescentes autores de homicídio se encontram na faixa etária de `r df_snr_sexo_idade_HOMICIDIO_rmark[2,1]` a `r df_snr_sexo_idade_HOMICIDIO_rmark[1,1]` anos.
+\leavevmode
+\newline
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[12,].png')
+```
+
+\newpage
+### Taxa por 100.000 habitantes
+```{r, pop_estimada, echo=FALSE}
+```
+O indicador calcula o ato infracional homicídio. Aprecia-se o número de atos incidentes para cada 100 mil habitantes. A população `r format(Sys.Date()-365*1, "%Y")` foi apurada junto ao portal eletrônico do IBGE^[https://ibge.gov.br/cidades-e-estados/mg/belo-horizonte.html]: `r pop_estimada_bh_ibge1` habitantes.    
+Método de cálculo:
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024, }
+knitr::include_graphics('img_nao_apagar/equacao_por_cem_mil.png')
+```
+O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((nrow(banco_HOMICIDIO_sem_concurso)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes, considerado o ato infracional em tela.
+\newpage
+
+### Distribuição espacial: Homicídio    
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('coordenadas/mapa_homicidio.png')
+```
+
+\newpage
+
+## Roubo
+
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[12,].png')
+```
+
+### Dia da Semana
+
+`r df_dia_semana_banco_ROUBO_rmark[1,1]`,  `r df_dia_semana_banco_ROUBO_rmark[2,1]` e `r df_dia_semana_banco_ROUBO_rmark[3,1]` são os dias que mais concentram as ocorrências de roubo, praticado por adolescentes, em Belo Horizonte.
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[13,].png')
+```
+\newpage
+
+### Regional da ocorrência
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[14,].png')
+```
+
+As regionais `r df_regional_banco_ROUBO_rmark[1,1]`, `r df_regional_banco_ROUBO_rmark[2,1]` e `r df_regional_banco_ROUBO_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+\newpage
+
+### Idade e Sexo
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[13,].png')
+```
+
+Os adolescentes autores de roubo são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_ROUBO_rmark1[3,1]` a `r df_snr_sexo_idade_ROUBO_rmark1[1,1]` anos concentram os praticantes dos atos.
+\leavevmode
+\newline
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[14,].png')
+```
+
+\newpage
+
+### Taxa por 100.000 habitantes    
+
+```{r, pop_estimada, echo=FALSE}
+```
+O indicador calcula o ato infracional roubo. Aprecia-se o número de atos incidentes para cada 100 mil habitantes. A população `r format(Sys.Date()-365*1, "%Y")` foi apurada junto ao portal eletrônico do IBGE^[https://ibge.gov.br/cidades-e-estados/mg/belo-horizonte.html]: `r pop_estimada_bh_ibge1` habitantes.    
+Método de cálculo:
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024, }
+knitr::include_graphics('img_nao_apagar/equacao_por_cem_mil.png')
+```
+O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((nrow(banco_ROUBO_sem_concurso)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes, considerado o ato infracional em tela.
+\newpage
+
+### Distribuição espacial: Roubo
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('coordenadas/mapa_roubo.png')
+```
+
+\newpage
+
+## Furto
+
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[15,].png')
+```
+
+### Dia da semana
+
+`r df_dia_semana_banco_FURTO_rmark[1,1]`, `r df_dia_semana_banco_FURTO_rmark[2,1]` e `r df_dia_semana_banco_FURTO_rmark[3,1]` são os dias que mais concentram as ocorrências de furto, praticado por adolescentes, em Belo Horizonte.
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[16,].png')
+```
+\newpage
+
+### Regional da ocorrência
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[17,].png')
+```
+
+As regionais `r df_regional_banco_FURTO_rmark[1,1]`, `r df_regional_banco_FURTO_rmark[2,1]` e `r df_regional_banco_FURTO_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+\newpage
+
+### Idade e Sexo    
+
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[15,].png')
+```
+
+Os adolescentes autores de FURTO são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_FURTO_rmark[4,1]` a `r df_snr_sexo_idade_FURTO_rmark[6,1]` anos concentram os praticantes dos atos.
+\leavevmode
+\newline
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[16,].png')
+```
+
+\newpage
+### Taxa por 100.000 habitantes
+```{r, pop_estimada, echo=FALSE}
+```
+O indicador calcula o ato infracional FURTO. Aprecia-se o número de atos incidentes para cada 100 mil habitantes. A população `r format(Sys.Date()-365*1, "%Y")` foi apurada junto ao portal eletrônico do IBGE^[https://ibge.gov.br/cidades-e-estados/mg/belo-horizonte.html]: `r pop_estimada_bh_ibge1` habitantes.    
+Método de cálculo:
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024, }
+knitr::include_graphics('img_nao_apagar/equacao_por_cem_mil.png')
+```
+O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((nrow(banco_FURTO_sem_concurso)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes, considerado o ato infracional em tela.
+\newpage
+
+### Distribuição espacial: Furto
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('coordenadas/mapa_furto.png')
+```
+
+\newpage
+
+## Posse de drogas para uso pessoal
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[18,].png')
+```
+
+### Dia da semana
+
+`r df_dia_semana_banco_USO_DE_DROGAS_rmark[1,1]`, `r df_dia_semana_banco_USO_DE_DROGAS_rmark[2,1]` e `r df_dia_semana_banco_USO_DE_DROGAS_rmark[3,1]` são os dias que mais concentram as ocorrências de posse de drogas para uso pessoal, praticado por adolescentes, em Belo Horizonte.
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[19,].png')
+```
+\newpage
+
+### Regional da ocorrência
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[20,].png')
+```
+
+As regionais `r df_regional_banco_USO_DE_DROGAS_rmark[1,1]`, `r df_regional_banco_USO_DE_DROGAS_rmark[2,1]` e `r df_regional_banco_USO_DE_DROGAS_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+\newpage
+
+### Idade e Sexo
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[17,].png')
+```
+
+Os adolescentes autores de POSSE DE DROGAS PARA USO PESSOAL são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_USO_DE_DROGAS_rmark1[3,1]` a `r df_snr_sexo_idade_USO_DE_DROGAS_rmark1[1,1]` anos concentram os praticantes dos atos.
+\leavevmode
+\newline
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[18,].png')
+```
+
+\newpage
+### Taxa por 100.000 habitantes
+```{r, pop_estimada, echo=FALSE}
+```
+O indicador calcula o ato infracional POSSE DE DROGAS PARA USO PESSOAL. Aprecia-se o número de atos incidentes para cada 100 mil habitantes. A população `r format(Sys.Date()-365*1, "%Y")` foi apurada junto ao portal eletrônico do IBGE^[https://ibge.gov.br/cidades-e-estados/mg/belo-horizonte.html]: `r pop_estimada_bh_ibge1` habitantes.    
+Método de cálculo:
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024, }
+knitr::include_graphics('img_nao_apagar/equacao_por_cem_mil.png')
+```
+O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((nrow(banco_USO_DE_DROGAS_sem_concurso)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes, considerado o ato infracional em tela.
+\newpage
+
+### Distribuição espacial: Posse de drogas para uso pessoal
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('coordenadas/mapa_uso.png')
+```
+
+\newpage
+
+## Tráfico de drogas
+
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[21,].png')
+```
+
+### Dia da semana
+
+`r df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark[1,1]`, `r df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark[2,1]` e `r df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark[3,1]` são os dias que mais concentram as ocorrências de tráfico de drogas, praticado por adolescentes, em Belo Horizonte.
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[22,].png')
+```
+\newpage
+
+### Regional da ocorrência
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[23,].png')
+```
+
+As regionais `r df_regional_banco_TRAFICO_DE_DROGAS_rmark[1,1]`, `r df_regional_banco_TRAFICO_DE_DROGAS_rmark[2,1]` e `r df_regional_banco_TRAFICO_DE_DROGAS_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+\newpage
+
+### Idade e Sexo
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[19,].png')
+```
+
+Os adolescentes autores de TRÁFICO DE DROGAS são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_TRAFICO_DE_DROGAS_rmark1[3,1]` a `r df_snr_sexo_idade_TRAFICO_DE_DROGAS_rmark1[1,1]` anos concentram os praticantes dos atos.
+\leavevmode
+\newline
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[20,].png')
+```
+
+\newpage
+### Taxa por 100.000 habitantes
+```{r, pop_estimada, echo=FALSE}
+```
+O indicador calcula o ato infracional TRÁFICO DE DROGAS. Aprecia-se o número de atos incidentes para cada 100 mil habitantes. A população `r format(Sys.Date()-365*1, "%Y")` foi apurada junto ao portal eletrônico do IBGE^[https://ibge.gov.br/cidades-e-estados/mg/belo-horizonte.html]: `r pop_estimada_bh_ibge1` habitantes.    
+Método de cálculo:
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024, }
+knitr::include_graphics('img_nao_apagar/equacao_por_cem_mil.png')
+```
+O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((nrow(banco_TRAFICO_DE_DROGAS_sem_concurso)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes, considerado o ato infracional em tela.
+\newpage
+
+### Distribuição espacial: Tráfico de drogas
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('coordenadas/mapa_trafico.png')
+```
+
+\newpage
+
+
+
+
+

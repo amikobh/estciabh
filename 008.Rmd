@@ -1,0 +1,263 @@
+# Dados socioeconômicos
+## Metodologia
+
+Ante a necessidade de se analisar o perfil socioeconômico dos adolescentes autores de atos infracionais, encaminhados ao CIABH, optou-se pela captação de uma amostra representativa da população de interesse, ao se considerar a dificuldade operacional de se alcançar os dados de todos os adolescentes.
+De posse da amostra, utilizou-se a técnica estatística de Estimativa de Proporção Populacional para se aplicar os resultados amostrais na população de interesse.
+	Os dados foram coletados através de questionários estruturados, presencialmente aplicados aos adolescentes no período de 01/01 a 31/12 de `r format(Sys.Date()-365*1, "%Y")`. 
+
+### Amostra
+
+A amostra é constituída de `r nrow(amostra_snr)` indivíduos selecionados aleatoriamente de um universo de `r nrow(total_de_adolescentes_encaminhados)` adolescentes autores de atos infracionais.
+
+### Fórmula utilizada para o cálculo do tamanho amostral
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+knitr::include_graphics('img_nao_apagar/equacao_socioeconomico1.png')
+```
+
+**Onde:**
+
+n: Tamanho da amostra    
+
+N: Tamanho da população    
+
+Z: Variável normal padronizada associada ao nível de confiança^[Nível de Confiança - probabilidade de que um determinado intervalo de confiança, calculado a partir de um valor amostral, contenha o verdadeiro valor da população.]    
+
+P: Percentagem com a qual o fenômeno se verifica (assume com 0,50 quando não se tem informações prévias sobre a população)    
+
+e: erro amostral (Erro máximo admitido - é a diferença entre um resultado amostral e o verdadeiro resultado populacional)    
+\newpage
+
+**Valores adotados:**    
+
+N: `r nrow(total_de_adolescentes_encaminhados)` indivíduos.    
+Z: 2,58, considerando um nível de confiança igual a 99%, ou seja,    
+P: 0,50, considerando que não existe informação prévia da população    
+e: 5,0%    
+
+
+
+Tamanho amostral indicado: 451    
+Total de questionários aplicados: `r nrow(amostra_snr)`    
+O tamanho da amostra coletada, nos garante, com 99% de confiança, que a proporção amostral está afastada da verdadeira em no máximo 5%.   
+
+### Estimativa de proporção populacional
+
+Técnica estatística que permite estimar a proporção $p$ (desconhecida) de indivíduos da população, apresentando certa característica de interesse, a partir das informações fornecidas pela amostra.
+
+### Estimativa Pontual
+
+A proporção amostral $\hat{p}$ é a melhor estimativa pontual para a proporção populacional $p$, calculada como se segue:    
+
+$\hat{p}=\frac{x}{n}$    
+
+**Onde:**    
+
+x: número de sucesso na amostra    
+
+n: tamanho amostral    
+\newpage 
+
+## Características Étnico-raciais
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[24,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, pelas características étnico-raciais, conforme responderam na entrevista.
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[21,].png')
+```
+\newpage   
+
+## Estado civil
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[25,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, tendo em vista o estado civil, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[22,].png')
+```
+\newpage   
+
+## Paternidade e maternidade
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[26,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, considerando se possuem ou não filhos, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[23,].png')
+```
+\newpage   
+
+## Gravidez
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[27,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição das adolescentes, tendo em vista o estado de gestação, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[24,].png')
+```
+\newpage   
+
+## Documentação
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[28,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes tendo em vista a documentação que indicaram possuir, conforme responderam na entrevista. Frisa-se que os adolescentes podem ter declarado possuir mais de um tipo de documento.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[25,].png')
+```
+\newpage 
+
+## Escolaridade
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[29,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, tendo em vista o ano de ensino que indicaram cursar atualmente ou o último que cursaram, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[26,].png')
+```
+\newpage   
+
+## Natureza da escola
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[30,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, considerando a natureza da escola, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[27,].png')
+```
+\newpage
+
+## Trabalho atual
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[31,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, tendo em vista se trabalham ou não, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[28,].png')
+```
+\newpage
+
+## Renda mensal do adolescente
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[32,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, dentre os que afirmaram trabalhar, considerando a renda mensal, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[29,].png')
+```
+\newpage
+
+## Renda familiar do adolescente
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[33,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, considerando a renda familiar, conforme responderam na entrevista.
+
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[30,].png')
+```
+\newpage
+
+## Tipo de moradia do adolescente
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[34,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, considerando o tipo de moradia, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[31,].png')
+```
+\newpage
+
+## Natureza de moradia do adolescente
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[35,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, considerando a natureza da moradia, conforme responderam na entrevista.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[32,].png')
+```
+\newpage
+
+## Uso de drogas
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[36,].png')
+```
+
+Da tabela apresentada é possível extrair a distribuição dos adolescentes, tendo em vista o uso de drogas, conforme responderam na entrevista. Ressalte-se que um adolescente pode usar mais de um tipo de droga.
+
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[33,].png')
+```
+\newpage

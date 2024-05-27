@@ -1,0 +1,230 @@
+# Justiça restaurativa
+\leavevmode
+\newline
+
+Permeando os fatores determinantes do ato infracional pode-se encontrar o conflito em sua multivariada forma de expressão. Seja nas diversas relações interpessoais do adolescente, seja na dimensão institucional, social e política na qual o adolescente se vê inserido.    
+
+Já não padece dúvidas que as formas de justiça restaurativa oferecem à sociedade – e ao adolescente - meios de solução de conflitos e redução de danos causados pelo comportamento infracional.    
+
+O Programa de Justiça Restaurativa, no âmbito de ação da Vara Infracional da Infância e da Juventude de Belo Horizonte, vai ao encontro do Planejamento Estratégico do TJMG, de 2015 a 2020, no escopo traçado no Macrodesafio 4, tocante a adoção de soluções alternativas para o conflito.     
+
+Os dados exibidos revelam o perfil dos adolescentes encaminhados ao atendimento da Justiça Restaurativa.
+
+\newpage
+
+## Total de casos encaminhados
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[52,].png')
+```
+
+## Idade e sexo
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[49,].png')
+```
+Os autores de atos infracionais encaminhados para a Justiça Restaurativa, em sua maioria, possuem idade entre `r df_snr_sexo_idade_JR_bkp_rmark[1,1]` e `r df_snr_sexo_idade_JR_bkp_rmark[6,1]` anos. Note-se que a data de encaminhamento do adolescente ao programa de Justiça Restaurativa pode não ser idêntica à que diz respeito ao cometimento do ato infracional. 
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[50,].png')
+```
+\newpage
+
+## Características étnico-raciais
+
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[53,].png')
+```
+
+Entrevistados quanto as características étnico-raciais, os adolescentes encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[51,].png')
+```
+\newpage
+
+## Escolaridade
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[54,].png')
+```
+
+Entrevistados quanto a escolaridade, os adolescentes encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela. Note-se que a data de encaminhamento do adolescente ao programa de Justiça Restaurativa pode não ser idêntica à que diz respeito ao cometimento do ato infracional. 
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[52,].png')
+```
+\newpage
+
+## Natureza da escola
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[55,].png')
+```
+
+Entrevistados quanto a escolaridade, os adolescentes encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[53,].png')
+```
+\newpage
+
+## Trabalho
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[56,].png')
+```
+
+Entrevistados quanto ao exercício profissional, os adolescentes encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[54,].png')
+```
+\newpage
+
+## Natureza do trabalho
+
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[57,].png')
+```
+
+Entrevistados quanto a natureza do trabalho, `r sum(NATUREZA_DO_TRABALHO_jr_rmark$QUANTIDADE)` adolescentes encaminhados para a Justiça Restaurativa declararam que trabalham, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+  knitr::include_graphics('imagens/GRAFICO[55,].png')
+```
+\newpage
+
+## Renda mensal
+
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[58,].png')
+```
+
+Entrevistados quanto a renda mensal, os adolescentes que trabalham, encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[56,].png')
+```
+\newpage
+
+## Estado civil
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[59,].png')
+```
+
+Entrevistados quanto ao estado civil, os adolescentes encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[57,].png')
+```
+\newpage
+
+## Estado civil dos pais
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[60,].png')
+```
+
+Entrevistados quanto ao estado civil dos pais, os adolescentes encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[58,].png')
+```
+\newpage
+
+## Uso de drogas
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[61,].png')
+```
+
+Da tabela apresentada é possível extrair como se dá o uso de drogas entre os adolescentes encaminhados para a Justiça Restaurativa, conforme responderam na entrevista. Dos `r nrow(banco_jr)` casos encaminhados, `r nrow(BANCO_USO_DROGAS_bkp)` adolescentes responderam que usam drogas. Ressalte-se que um adolescente pode usar mais de um tipo de droga.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[59,].png')
+```
+\newpage
+
+## Medidas protetivas
+### Especificação das medidas protetivas
+
+As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente:
+\leavevmode
+\newline
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('img_nao_apagar/art101eca.png')
+```
+
+\leavevmode
+\newline
+
+Dos `r nrow(BANCO_MEDIDAS_jr_total)` casos encaminhados para a Justiça Restaurativa, `r nrow(BANCO_MEDIDAS_jr_sim)` foram objetos de aplicação de medidas protetivas. Ressalte-se que mais de uma medida pode ser aplicada a determinado adolescente.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[62,].png')
+```
+\newpage
+
+O gráfico a seguir aponta que a medida relacionada ao `r BANCO_MEDIDAS_jr_rmark[1,1]` foi a que mais se aplicou no ano em estudo atingindo o índice de `r BANCO_MEDIDAS_jr_rmark[1,3]`%. As medidas do `r BANCO_MEDIDAS_jr_rmark[2,1]` e `r BANCO_MEDIDAS_jr_rmark[3,1]` seguiram-na no ranking de medidas aplicadas.
+
+\leavevmode
+\newline
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[60,].png')
+```
+\newpage
+
+## Medidas socioeducativas
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[63,].png')
+```
+
+Da tabela e gráfico apresentado é possível extrair as decisões proferidas nos processos que constam  encaminhados para a Justiça Restaurativa. Dos `r nrow(BANCO_MEDIDAS_SOCIOEDU_jr_total)` casos encaminhados, `r nrow(BANCO_MEDIDAS_SOCIOEDU_jr_sim)` foram objetos de aplicação de medidas socioeducativas.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[61,].png')
+```
+\newpage
+
+## Incidência atos infracionais
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[64,].png')
+```
+
+Apresenta-se a incidência de atos infracionais relacionados aos processos encaminhados para a Justiça Restaurativa. Sublinha-se que o ato `r banco_incidencia_jr_rmark[1,1]` é o que possui maior índice seguido dos atos `r banco_incidencia_jr_rmark[2,1]` e `r banco_incidencia_jr_rmark[3,1]`.
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[62,].png')
+```
+\newpage
+
+

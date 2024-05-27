@@ -1,0 +1,34 @@
+# Considerações gerais
+\leavevmode
+
+O presente trabalho faz referência aos adolescentes apreendidos e encaminhados ao Centro Integrado de Atendimento ao Adolescente Autor de Ato Infracional de Belo Horizonte (CIABH).
+O CIABH resultou da união de interesses dos operadores do sistema de Justiça Infracional, capitaneados pela Vara Infracional da Infância e da Juventude de Belo Horizonte.
+O Centro Integrado foi instituído pela Resolução-Conjunta nº 68, de 02 de setembro de 2008, em cumprimento ao estabelecido no art. 88, V, do Estatuto da Criança e do Adolescente (ECA), com mira no melhor atendimento ao adolescente autor de ato infracional.
+O CIABH é composto pelos seguintes órgãos:
+
+1. Poder Judiciário do Estado de Minas Gerais;
+2. Ministério Público do Estado de Minas Gerais;
+3. Defensoria Pública do Estado de Minas Gerais;
+4. Secretaria de Estado de Defesa Social de Minas Gerais;
+5. Polícia Civil do Estado de Minas Gerais;
+6. Polícia Militar do Estado de Minas Gerais;
+7. Prefeitura Municipal de Belo Horizonte.
+
+
+Vale sublinhar que tal estrutura vai ao encontro do disposto na RECOMENDAÇÃO No 87, DE 20 DE JANEIRO DE 2021, do CNJ, que estabelece sobre o atendimento inicial e integrado dos adolescentes em conflito com a lei, no âmbito do Poder Judiciário.    
+O relatório exposto se calca nas anotações consubstanciadas em documentos oriundos dos seguintes órgãos integrantes do CIABH:    
+
+a. Delegacia de Orientação e Proteção à Criança e ao Adolescente (DOPCAD);
+a. Subsecretaria de Atendimento às Medidas Socioeducativas (SUASE); 
+a. Vara Infracional da Infância e da Juventude e
+a. Instituto Médico Legal Dr. André Roquette (IMLAR).    
+
+A Equipe de ANÁLISE DE DADOS, que se incorpora ao Comissariado Infracional, da Vara Infracional da Infância e da Juventude de Belo Horizonte, responsabiliza-se pela organização e apresentação dos dados.    
+
+Para a desincumbência de seu trabalho, a aludida equipe se vale do software R. R é uma linguagem e um ambiente de desenvolvimento integrado, para cálculos estatísticos e gráficos. O código fonte do R está disponível sob a licença GNU GPL e as versões binárias pré-compiladas são fornecidas para Windows, Macintosh, e muitos sistemas operacionais Unix/Linux. A linguagem R é largamente usada entre estatísticos e em Universidades.    
+
+A estruturação do capítulo 8 contou com o trabalho do Centro de Informação para Gestão Institucional – CEINFO/TJMG.    
+
+A construção do capítulo 13 valeu-se do trabalho da Comissão de Prevenção à Letalidade de Adolescentes e Jovens, integrante do Fórum
+Permanente do Sistema de Atendimento Socioeducativo de Belo Horizonte. 
+\newpage

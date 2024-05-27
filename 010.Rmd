@@ -1,0 +1,81 @@
+# Decisões
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[38,].png')
+```
+
+## Decisões em audiência preliminar
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[39,].png')
+```
+\newpage
+De se notar que, no rol das decisões tomadas em audiências preliminares, `r sum(so_decisao_rmark$QUANTIDADE)` casos foram resolvidos, com fim do processo de conhecimento, na primeira audiência a que o adolescente foi apresentado. Esses casos representam `r sum(so_decisao_rmark$PERCENTUAL)`% do total de decisões proferidas.
+Põem fim ao processo de conhecimento as decisões de arquivamento e todos os tipos de remissão elencados na tabela acima.
+\leavevmode
+\newline
+\newline
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[35,].png')
+```
+\newpage
+
+### Tempo das decisões em audiências preliminares
+
+O tempo apresentado é contado a partir da data do ato.
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[40,].png')
+```
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[41,].png')
+```
+
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[36,].png')
+```
+
+\newpage
+
+## Decisão após audiência preliminar
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[42,].png')
+```
+
+
+O gráfico a seguir ilustra os dados representados pela tabela.
+
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[37,].png')
+```
+\newpage
+### Tempo das decisões após audiências preliminares
+
+O tempo apresentado é contado a partir da data do ato.
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[43,].png')
+```
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[44,].png')
+```
+
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[38,].png')
+```
+
+\newpage

@@ -1,0 +1,25 @@
+# Atendimento ao adolescente autor de ato infracional
+
+Estabelece o art. 103, do Estatuto da Criança e do Adolescente (Lei 8069/1990) que é considerado ato infracional toda a conduta descrita como crime ou contravenção penal.
+A apuração dos atos infracionais é da competência da Justiça da Infância e da Juventude.
+
+
+## Encaminhamentos de adolescentes ao CIABH
+
+
+O gráfico a seguir expõe a evolução dos atendimentos aos adolescentes envolvidos em ocorrências infracionais durante os últimos anos.  
+
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024, }
+knitr::include_graphics('imagens/GRAFICO[1,].png')
+```
+\leavevmode
+\newline 
+
+No ano em estudo foram encaminhados para o CIABH, `r nrow(numero_de_casos_geral)` casos para atendimento. Deste universo de atendimento, `r nrow(numero_de_cumprimento_mba)` referem-se apenas a cumprimentos de mandados de busca e apreensão e `r nrow(numero_de_casos_sem_mba)` novos casos de apuração de atos infracionais. `r nrow(total_de_adolescentes_encaminhados)` adolescentes – considerados individualmente – foram encaminhados como autores, em tese, de atos infracionais.
+Destes novos casos, `r nrow(numero_de_casos_sem_mba)-nrow(total_de_adolescentes_encaminhados)`  dizem respeito à reentrada de adolescentes (reincidência).
+
+
+\newpage

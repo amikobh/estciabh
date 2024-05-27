@@ -1,0 +1,161 @@
+# Atos infracionais nas escolas de Belo Horizonte
+\leavevmode
+\newline
+
+Ante ao crescente número de adolescentes encaminhados a Vara da Infância e da
+Juventude, desta capital, em razão de conflitos no ambiente escolar, a Vara Infracional da Infância e
+da Juventude de Belo Horizonte divulga os dados de atendimento relacionados ao cometimento de
+atos infracionais ocorridos nas escolas de Belo Horizonte.    
+
+Os dados expostos se originam nas anotações arrecadadas em documentos provenientes
+dos seguintes órgãos integrantes do CIABH: 
+
+a. Delegacia de Orientação e Proteção à Criança e ao
+Adolescente (DOPCAD); 
+a. Subsecretaria de Atendimento às Medidas Socioeducativas (SUASE) e
+a. Vara Infracional da Infância e da Juventude.    
+
+Torna-se de suma importância a elaboração destes dados estatísticos, com o objetivo de se
+diagnosticar os fatores para que se possa subsidiar a Secretaria de Educação na construção de
+planejamento estratégico preventivo junto aos educadores e alunos.    
+
+
+\newpage
+
+## Total de casos encaminhados
+```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[45,].png')
+```
+
+## Idade e sexo
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[39,].png')
+```
+Os autores de atos infracionais praticados em ambiente escolar são, de forma exponencial, do sexo masculino com idade entre `r df_snr_sexo_idade_escola_rmark[1,1]` e `r df_snr_sexo_idade_escola_rmark[2,1]` anos. 
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[40,].png')
+```
+\newpage
+
+
+## Escolaridade
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[46,].png')
+```
+
+Entrevistados quanto a escolaridade, os adolescentes envolvidos em atos infracionais no
+ambiente escolar assim declararam, conforme exposto na tabela e gráfico em tela.
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[41,].png')
+```
+\newpage
+
+## Incidências dos atos infracionais no ambiente escolar
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[47,].png')
+```
+
+Apresenta-se a incidência de atos infracionais relacionados ao ambiente escolar. Sublinha-se que o ato `r banco_atos_em_foco_escola_rmark[1,1]` é o que possui maior índice seguido dos atos `r banco_atos_em_foco_escola_rmark[2,1]` e `r banco_atos_em_foco_escola_rmark[3,1]`.
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[42,].png')
+```
+\newpage
+
+## Primariedade
+
+
+`r primariedade_ESCOLA_rmark1[1,3]`% dos adolescentes autores de atos infracionais relacionados ao ambiente escolar são
+primários. Já `r primariedade_ESCOLA_rmark1[2,3]`% deles tiveram outras passagens pelo CIA-BH, conforme ilustra o gráfico a
+seguir.
+
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[43,].png')
+```
+\newpage
+
+## Decisões
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[48,].png')
+```
+
+De se notar que, no rol das decisões tomadas em audiências preliminares, `r sum(decisao_ESCOLA_rmark$QUANTIDADE)` casos foram resolvidos, com fim do processo de conhecimento, na primeira audiência a que o adolescente foi apresentado. Esses casos representam `r sum(decisao_ESCOLA_rmark$PERCENTUAL)`% do total de decisões proferidas.
+Põem fim ao processo de conhecimento as decisões de arquivamento e todos os tipos de remissão elencados na tabela acima.
+\leavevmode
+\newline
+\newline
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[44,].png')
+```
+\newpage
+
+## Vítima
+
+
+
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[49,].png')
+```
+
+Ao se analisar a vítima dos atos infracionais praticados nas escolas de Belo Horizonte,
+identifica-se o `r vitima_ESCOLA_rmark[1,1]` com um índice de `r vitima_ESCOLA_rmark[1,3]`%e o `r vitima_ESCOLA_rmark[2,1]`, com `r vitima_ESCOLA_rmark[2,3]`%.
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[45,].png')
+```
+\newpage
+
+## Regional de Residência
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[50,].png')
+```
+
+Em Belo Horizonte, as Regionais `r regional_residencia_ESCOLA_rmark1[1,1]`, `r regional_residencia_ESCOLA_rmark1[2,1]` e `r regional_residencia_ESCOLA_rmark1[3,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais cometidos nas escolas. Destaca-se que `r regional_residencia_ESCOLA_rmark2[1,3]`% dos adolescentes, num total de `r regional_residencia_ESCOLA_rmark2[1,2]` atendimentos, residem nos demais municípios da Região Metropolitana.
+
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[46,].png')
+```
+\newpage
+
+## Tipo de escola
+
+
+A(s) escola(s) `r escola_tipo_ESCOLA_rmark[1,1]`(AIS) (`r escola_tipo_ESCOLA_rmark[1,3]`%), seguidas das  `r escola_tipo_ESCOLA_rmark[2,1]`(AIS) (`r escola_tipo_ESCOLA_rmark[2,3]`%), concentram os maiores
+índices de ocorrências de atos infracionais praticados no ambiente escolar. 
+
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[47,].png')
+```
+\newpage
+
+## Regional da escola
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[51,].png')
+```
+\vspace{2cm}
+Em Belo Horizonte, as Regionais `r regional_ato_ESCOLA_rmark1[1,1]`, `r regional_ato_ESCOLA_rmark1[2,1]` e `r regional_ato_ESCOLA_rmark1[3,1]` concentram os maiores índices de atos infracionais no ambiente escolar.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[48,].png')
+```
+\newpage
+
+
