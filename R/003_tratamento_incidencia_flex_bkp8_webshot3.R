@@ -534,6 +534,7 @@ colnames(banco_incidencia_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 banco_incidencia_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_incidencia_bkp$PERCENTUAL))
+banco_incidencia_bkp_rmd = tail(banco_incidencia_bkp,3)
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
