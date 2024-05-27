@@ -28,7 +28,8 @@ knitr::include_graphics('imagens/GRAFICO[63,].png')
 knitr::include_graphics('imagens/TABELA[66,].png')
 ```
 Os cursos realizados pelos adolescentes matriculados, distribuem-se conforme apresentado pela tabela.    
-Nota-se que o curso mais procurado é o de `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),1]` representando, sozinho, `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),3]` do total.
+Nota-se que o curso mais procurado é o de `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),1]` representando, sozinho, `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),3]` do total.    
+Observa-se que um adolescente pode realizar mais de um curso.
 
 \vspace{1cm}
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
