@@ -2597,7 +2597,7 @@ banco_NUMERO_ENTRADAS_let =
   filter(PASSAGEM_CIABH %in% "SIM" & CAUSA_JURIDICA %in% "HOMICÍDIO") %>%
   select(NUMERO_ENTRADAS)
 
-
+#########################################################################################################
 
 #########################################################################################################
 #classificando
@@ -2670,7 +2670,25 @@ banco_NUMERO_ENTRADAS_let =
 colnames(banco_NUMERO_ENTRADAS_let)[1]<-'ENTRADAS'
 colnames(banco_NUMERO_ENTRADAS_let)[2]<-'QUANTIDADE'
 colnames(banco_NUMERO_ENTRADAS_let)[3]<-'PERCENTUAL'
+#########################################################################################################
+#para tabela media de entradas:
+banco_MEDIA_ENTRADAS_Let =
+  banco_letalidade_12_20 %>%
+  filter(PASSAGEM_CIABH %in% "SIM" & CAUSA_JURIDICA %in% "HOMICÍDIO") %>%
+  select(NUMERO_ENTRADAS)
 
+
+#########################################################################################################
+#tabela media tempo decisao
+banco_MEDIA_ENTRADAS_Let = data.frame(round(mean(banco_MEDIA_ENTRADAS_Let$NUMERO_ENTRADAS), 1))
+
+colnames(banco_MEDIA_ENTRADAS_Let) <- c("MÉDIA ENTRADAS")
+
+#banco_MEDIA_ENTRADAS_Let
+
+#########################################################################################################
+###banco_MEDIA_ENTRADAS_Let FIM
+#########################################################################################################
 #############################################################################################################
 #banco_NUMERO_ENTRADAS_let FIM
 #########################################################################################################
