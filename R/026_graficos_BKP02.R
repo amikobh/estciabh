@@ -2417,10 +2417,10 @@ setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 #salvar png
 ggpie(graf_pizza_MEDIDAS_LET,
-      x= "QUANTIDADE", label = "QUANTIDADE",
+      x= "QUANTIDADE", label = "PERCENTUAL",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
-      fill = "graf_pizza_MEDIDAS_LET", color = "white", face="bold",
+      fill = "POSSUI_MEDIDA_PROTETIVA", color = "white", face="bold",
       palette = "Set1") +
   theme(legend.position = "right",
         legend.text = element_text(size = 8, face = "bold"),
