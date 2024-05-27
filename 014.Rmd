@@ -303,13 +303,13 @@ knitr::include_graphics('imagens/TABELA[93,].png')
 
 A tabela 68 aponta para uma redução na média de entradas no CIABH quando comparada com o relatório anterior: em 2020, os adolescentes vítimas de homicídio em Belo Horizonte e municípios limítrofes, com passagem pelo Sistema Socioeducativo, tiveram, em média, 5,4 entradas no CIABH ao longo de sua trajetória, ao passo que, em 2021, essa média passou para 3,5 entradas. 
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[94,].png')
 ```
 
 Ao analisar a tabela 69, verifica-se que a maior parte dos adolescentes vítimas de homicídio em 2021, que passaram pelo Sistema Socioeducativo, apresentaram entre 01 e 05 entradas no CIABH ao longo de sua trajetória. Observa-se contudo que, em comparação com o ano anterior,  houve um aumento expressivo de registros neste intervalo: entre os adolescentes vítimas de homicídio em 2020, 65,71% (23 adolescentes) tiveram entre 01 e 05 entradas no Sistema Socioeducativo; enquanto que, entre os homicídios ocorridos em 2021, 80,39% se encontram neste intervalo, conforme descrito no gráfico abaixo (41).
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[98,].png')
 ```
 \newpage
