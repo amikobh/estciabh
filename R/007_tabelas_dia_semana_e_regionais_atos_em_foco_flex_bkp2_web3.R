@@ -1,4 +1,6 @@
-##TABELA DIA SEMANA HOMICIDIO
+#########################################################################################################
+# df_dia_semana_banco_HOMICIDIO_gt
+#########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -6,186 +8,93 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO_puro[!duplicated(data.frame(banco_HOMICIDIO_puro$PROCESSO, banco_HOMICIDIO_puro$ATO_INFRACIONAL)),]
 banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO_puro
 
-df_dia_semana_banco_HOMICIDIO <- banco_HOMICIDIO_sem_concurso %>%
-  select(ATO_INFRACIONAL, DIA_SEMANA_ATO, REGIONAL_ATO)
+df_dia_semana_banco_HOMICIDIO_gt =
+  banco_HOMICIDIO_sem_concurso %>%
+  select(DIA_SEMANA_ATO)
 
-names(df_dia_semana_banco_HOMICIDIO)
-
-
-
-table(df_dia_semana_banco_HOMICIDIO$DIA_SEMANA_ATO, useNA ="always")
-sum(table(df_dia_semana_banco_HOMICIDIO$DIA_SEMANA_ATO, useNA ="always"))
-#########################################################################################################
-df_dia_semana_banco_HOMICIDIO <- data.frame(table(df_dia_semana_banco_HOMICIDIO$DIA_SEMANA_ATO, useNA ="always"))
-df_dia_semana_banco_HOMICIDIO_original=df_dia_semana_banco_HOMICIDIO #salvando atos atendimento original
-#df_dia_semana_banco_HOMICIDIO=df_dia_semana_banco_HOMICIDIO_original
-#df_dia_semana_banco_HOMICIDIO$Var1 <- NULL
-colnames(df_dia_semana_banco_HOMICIDIO) <- c("DIA", "QUANTIDADE")
-
-##write.xlsx(df_dia_semana_banco_HOMICIDIO, file = "df_dia_semana_banco_HOMICIDIO_bruto.xlsx") #salvando com modificações anteriores
-
-#df_dia_semana_banco_HOMICIDIO$SEXO <- NULL
-
-df_dia_semana_banco_HOMICIDIO
-
-df_dia_semana_banco_HOMICIDIO = filter(df_dia_semana_banco_HOMICIDIO, !QUANTIDADE == 0)
-df_dia_semana_banco_HOMICIDIO
-
-##write.xlsx(df_dia_semana_banco_HOMICIDIO, file = "df_dia_semana_banco_HOMICIDIO.xlsx")
-
-
-#df_dia_semana_banco_HOMICIDIO$DIA <- NULL
-
-#colnames(df_dia_semana_banco_HOMICIDIO) <- c("QUANTIDADE", "DIA")
-
-df_dia_semana_banco_HOMICIDIO <- df_dia_semana_banco_HOMICIDIO[c("DIA", "QUANTIDADE")]
-
-
-##library(grid)
-##library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_dia_semana_banco_HOMICIDIO$QUANTIDADE)
-
-df_dia_semana_banco_HOMICIDIO <- ddply(df_dia_semana_banco_HOMICIDIO,
-                                    c("DIA"),
-                                    summarise,
-                                    QUANTIDADE = sum(QUANTIDADE))
-
-df_dia_semana_banco_HOMICIDIO
-
-
-#caso queira separar so regionais
-#df_dia_semana_banco_HOMICIDIO1 <- df_dia_semana_banco_HOMICIDIO[!(df_dia_semana_banco_HOMICIDIO$DIA == 'REGIÃO METROPOLITANA'|
-#                                                      df_dia_semana_banco_HOMICIDIO$DIA == 'OUTRA CIDADE MG'|
-#                                                     df_dia_semana_banco_HOMICIDIO$DIA == 'OUTRO ESTADO'|
-#                                                    df_dia_semana_banco_HOMICIDIO$DIA == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_dia_semana_banco_HOMICIDIO$QUANTIDADE <- as.numeric(df_dia_semana_banco_HOMICIDIO$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_dia_semana_banco_HOMICIDIO$PERCENTUAL <- round(prop.table(df_dia_semana_banco_HOMICIDIO$QUANTIDADE)*100, 2)
-
-
-
-
-df_dia_semana_banco_HOMICIDIO
-#df_dia_semana_banco_HOMICIDIO <- df_dia_semana_banco_HOMICIDIO[order(df_dia_semana_banco_HOMICIDIO[,3],decreasing=TRUE),]
-#write.csv(df_dia_semana_banco_HOMICIDIO, file ="df_dia_semana_banco_HOMICIDIO.csv",row.names=TRUE)
-##write.xlsx(df_dia_semana_banco_HOMICIDIO, file ="df_dia_semana_banco_HOMICIDIO.xlsx")
-#df_dia_semana_banco_HOMICIDIO$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_dia_semana_banco_HOMICIDIO<-df_dia_semana_banco_HOMICIDIO %>%
-  arrange(desc(QUANTIDADE))
-df_dia_semana_banco_HOMICIDIO_bkp = df_dia_semana_banco_HOMICIDIO
-
-
-
-df_dia_semana_banco_HOMICIDIO$DIA <- as.character(df_dia_semana_banco_HOMICIDIO$DIA)
-
-df_dia_semana_banco_HOMICIDIO
-
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "segunda"]<- "ASEGUNDA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "terça"]<- "BTERÇA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "quarta"]<- "CQUARTA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "quinta"]<- "DQUINTA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "sexta"]<- "ESEXTA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "sábado"]<- "FSÁBADO"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "domingo"]<- "GDOMINGO"
-
-df_dia_semana_banco_HOMICIDIO
-
-df_dia_semana_banco_HOMICIDIO <-df_dia_semana_banco_HOMICIDIO[order(df_dia_semana_banco_HOMICIDIO$DIA),]
-
-df_dia_semana_banco_HOMICIDIO
-
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "ASEGUNDA"]<- "SEGUNDA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "BTERÇA"]<- "TERÇA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "CQUARTA"]<- "QUARTA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "DQUINTA"]<- "QUINTA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "ESEXTA"]<- "SEXTA"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "FSÁBADO"]<- "SÁBADO"
-df_dia_semana_banco_HOMICIDIO$DIA[df_dia_semana_banco_HOMICIDIO$DIA == "GDOMINGO"]<- "DOMINGO"
-
-
-df_dia_semana_banco_HOMICIDIO
-
-
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-df_dia_semana_banco_HOMICIDIO_rmark = df_dia_semana_banco_HOMICIDIO
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_dia_semana_banco_HOMICIDIO_rmark = df_dia_semana_banco_HOMICIDIO_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-sum(df_dia_semana_banco_HOMICIDIO_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_dia_semana_banco_HOMICIDIO_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-
-
-#acrescentando linha com total
-df_dia_semana_banco_HOMICIDIO <- rbind(df_dia_semana_banco_HOMICIDIO,
-                                    data.frame(DIA = "TOTAL", QUANTIDADE = sum(df_dia_semana_banco_HOMICIDIO$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_dia_semana_banco_HOMICIDIO$PERCENTUAL, 0)),
-                                               stringsAsFactors = FALSE))
-
-df_dia_semana_banco_HOMICIDIO
-
-colnames(df_dia_semana_banco_HOMICIDIO) <- c("DIA", "QUANTIDADE", "%")
-
-#para a tabele gt:
-df_dia_semana_banco_HOMICIDIO_gt = df_dia_semana_banco_HOMICIDIO
-
-#colnames(df_dia_semana_banco_HOMICIDIO) <- c("DIA", "%")
-#df_dia_semana_banco_HOMICIDIO <- df_dia_semana_banco_HOMICIDIO[c("DIA", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#pdf(file=TABELA[3,],"_004_dia_semana_HOMICIDIO_alternativa.pdf",  width = 6, height = 4.8, title = "df_dia_semana_banco_HOMICIDIO")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
+colnames(df_dia_semana_banco_HOMICIDIO_gt)[1]<-'DIA_SEMANA'
 
 #########################################################################################################
 
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "segunda"]<- "SEGUNDA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "terça"]<- "TERÇA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "quarta"]<- "QUARTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "quinta"]<- "QUINTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "sexta"]<- "SEXTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "sábado"]<- "SÁBADO"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "domingo"]<- "DOMINGO"
 #########################################################################################################
-##TABELA df_regional_banco_HOMICIDIO
+
+# salvando para gráfico
+df_dia_semana_banco_HOMICIDIO_gt_bkp = df_dia_semana_banco_HOMICIDIO_gt
+
+df_dia_semana_banco_HOMICIDIO_gt_bkp =
+  df_dia_semana_banco_HOMICIDIO_gt_bkp %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+colnames(df_dia_semana_banco_HOMICIDIO_gt_bkp)[1]<-'df_dia_semana_banco_HOMICIDIO_gt_bkp'
+colnames(df_dia_semana_banco_HOMICIDIO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_HOMICIDIO_gt_bkp)[3]<-'PERCENTUAL'
+
+#########################################################################################################
+#para script rmd:
+df_dia_semana_banco_HOMICIDIO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_dia_semana_banco_HOMICIDIO_gt_bkp$PERCENTUAL))
+df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd = tail(df_dia_semana_banco_HOMICIDIO_gt_bkp,5)
+#########################################################################################################
+#########################################################################################################
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "DOMINGO"]<- "ADOMINGO"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "SEGUNDA"]<- "BSEGUNDA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "TERÇA"]<- "CTERÇA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "QUARTA"]<- "DQUARTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "QUINTA"]<- "EQUINTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "SEXTA"]<- "FSEXTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "SÁBADO"]<- "GSÁBADO"
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+df_dia_semana_banco_HOMICIDIO_gt =
+  df_dia_semana_banco_HOMICIDIO_gt %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(DIA_SEMANA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "ADOMINGO"]<- "DOMINGO"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "BSEGUNDA"]<- "SEGUNDA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "CTERÇA"]<- "TERÇA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "DQUARTA"]<- "QUARTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "EQUINTA"]<- "QUINTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "FSEXTA"]<- "SEXTA"
+df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA[df_dia_semana_banco_HOMICIDIO_gt$DIA_SEMANA == "GSÁBADO"]<- "SÁBADO"
+#########################################################################################################
+
+colnames(df_dia_semana_banco_HOMICIDIO_gt)[1]<-'DIA'
+colnames(df_dia_semana_banco_HOMICIDIO_gt)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_HOMICIDIO_gt)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+
+#df_dia_semana_banco_HOMICIDIO_gt =
+#  df_dia_semana_banco_HOMICIDIO_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+
+
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# df_dia_semana_banco_HOMICIDIO_gt FIM
+#########################################################################################################
+#########################################################################################################
+# df_regional_banco_HOMICIDIO_gt
+#########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -193,179 +102,115 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO_puro[!duplicated(data.frame(banco_HOMICIDIO_puro$PROCESSO, banco_HOMICIDIO_puro$ATO_INFRACIONAL)),]
 banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO_puro
 
-df_regional_banco_HOMICIDIO <- banco_HOMICIDIO_sem_concurso %>%
-  select(ATO_INFRACIONAL, REGIONAL_ATO, REGIONAL_ATO)
+df_regional_banco_HOMICIDIO_gt =
+  banco_HOMICIDIO_sem_concurso %>%
+  select(REGIONAL_ATO)
 
-names(df_regional_banco_HOMICIDIO)
-
-
-table(df_regional_banco_HOMICIDIO$REGIONAL_ATO, useNA ="always")
-sum(table(df_regional_banco_HOMICIDIO$REGIONAL_ATO, useNA ="always"))
-#########################################################################################################
-df_regional_banco_HOMICIDIO <- data.frame(table(df_regional_banco_HOMICIDIO$REGIONAL_ATO, useNA ="always"))
-df_regional_banco_HOMICIDIO_original=df_regional_banco_HOMICIDIO #salvando atos atendimento original
-#df_regional_banco_HOMICIDIO=df_regional_banco_HOMICIDIO_original
-#df_regional_banco_HOMICIDIO$Var1 <- NULL
-colnames(df_regional_banco_HOMICIDIO) <- c("REGIONAL", "QUANTIDADE")
-
-##write.xlsx(df_regional_banco_HOMICIDIO, file = "df_regional_banco_HOMICIDIO_bruto.xlsx") #salvando com modificações anteriores
-
-#df_regional_banco_HOMICIDIO$SEXO <- NULL
-
-df_regional_banco_HOMICIDIO$REGIONAL <- as.character(df_regional_banco_HOMICIDIO$REGIONAL)
-
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == ""]<- "SEM INFORMAÇÃO"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "#N/DISP"]<- "SEM INFORMAÇÃO"
-#df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == NA]<- "SEM INFORMAÇÃO"
-df_regional_banco_HOMICIDIO
-
-df_regional_banco_HOMICIDIO = filter(df_regional_banco_HOMICIDIO, !QUANTIDADE == 0)
-df_regional_banco_HOMICIDIO
-
-df_regional_banco_HOMICIDIO$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO", df_regional_banco_HOMICIDIO$REGIONAL, ignore.case = TRUE),
-                                                gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_regional_banco_HOMICIDIO$REGIONAL), "OUTRO ESTADO")
-
-##write.xlsx(df_regional_banco_HOMICIDIO, file = "df_regional_banco_HOMICIDIO.xlsx")
-
-
-df_regional_banco_HOMICIDIO$REGIONAL <- NULL
-
-colnames(df_regional_banco_HOMICIDIO) <- c("QUANTIDADE", "REGIONAL")
-
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "OUTRO ESTADO"]<- "SEM INFORMAÇÃO"
-
-
-df_regional_banco_HOMICIDIO <- df_regional_banco_HOMICIDIO[c("REGIONAL", "QUANTIDADE")]
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_regional_banco_HOMICIDIO$QUANTIDADE)
-
-df_regional_banco_HOMICIDIO <- ddply(df_regional_banco_HOMICIDIO,
-                                     c("REGIONAL"),
-                                     summarise,
-                                     QUANTIDADE = sum(QUANTIDADE))
-
-###alterando
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
-
-df_regional_banco_HOMICIDIO <-df_regional_banco_HOMICIDIO[order(df_regional_banco_HOMICIDIO$REGIONAL),]
-
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-df_regional_banco_HOMICIDIO$REGIONAL[df_regional_banco_HOMICIDIO$REGIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-
-#caso queira separar so regionais
-#df_regional_banco_HOMICIDIO1 <- df_regional_banco_HOMICIDIO[!(df_regional_banco_HOMICIDIO$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      df_regional_banco_HOMICIDIO$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     df_regional_banco_HOMICIDIO$REGIONAL == 'OUTRO ESTADO'|
-#                                                    df_regional_banco_HOMICIDIO$REGIONAL == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_regional_banco_HOMICIDIO$QUANTIDADE <- as.numeric(df_regional_banco_HOMICIDIO$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_regional_banco_HOMICIDIO$PERCENTUAL <- round_preserve_sum(prop.table(df_regional_banco_HOMICIDIO$QUANTIDADE)*100, 2)
-df_regional_banco_HOMICIDIO
-#df_regional_banco_HOMICIDIO <- df_regional_banco_HOMICIDIO[order(df_regional_banco_HOMICIDIO[,3],decreasing=TRUE),]
-#write.csv(df_regional_banco_HOMICIDIO, file ="df_regional_banco_HOMICIDIO.csv",row.names=TRUE)
-##write.xlsx(df_regional_banco_HOMICIDIO, file ="df_regional_banco_HOMICIDIO.xlsx")
-#df_regional_banco_HOMICIDIO$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_regional_banco_HOMICIDIO<-df_regional_banco_HOMICIDIO %>%
-  arrange(desc(QUANTIDADE))
-df_regional_banco_HOMICIDIO_bkp = df_regional_banco_HOMICIDIO
-
+colnames(df_regional_banco_HOMICIDIO_gt)[1]<-'REGIONAL_ATO'
 
 #########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-df_regional_banco_HOMICIDIO_rmark = df_regional_banco_HOMICIDIO
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_regional_banco_HOMICIDIO_rmark = df_regional_banco_HOMICIDIO_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-sum(df_regional_banco_HOMICIDIO_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_regional_banco_HOMICIDIO_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-#acrescentando linha com total
-df_regional_banco_HOMICIDIO <- rbind(df_regional_banco_HOMICIDIO,
-                                     data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(df_regional_banco_HOMICIDIO$QUANTIDADE), PERCENTUAL = sum(df_regional_banco_HOMICIDIO$PERCENTUAL),
-                                                stringsAsFactors = FALSE))
-
-
-colnames(df_regional_banco_HOMICIDIO) <- c("REGIONAL", "QUANTIDADE", "%")
-
-#para tabela gt abaixo:
-df_regional_banco_HOMICIDIO_gt = df_regional_banco_HOMICIDIO
-
-#colnames(df_regional_banco_HOMICIDIO) <- c("REGIONAL", "%")
-#df_regional_banco_HOMICIDIO <- df_regional_banco_HOMICIDIO[c("REGIONAL", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-#TABELA GT
-
+#encontrando parte do texto e substituindo
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[agrep("/MG", df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[agrep("RMBH", df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[agrep("RIBEIRAO DAS NEVES", df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[agrep("CATAGUASES", df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[agrep("CIDADE DE BRASILIA/DF", df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO)] <- "VOUTRO ESTADO"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[agrep("N/DISP", df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[agrep("INFORMACAO", df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == ""]<- "SEM INFORMAÇÃO"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "PAMPULHA"]<- "PAMPULHA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "VENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "REGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
 #########################################################################################################
 
+# salvando para gráfico
+df_regional_banco_HOMICIDIO_gt_bkp = df_regional_banco_HOMICIDIO_gt
+
+df_regional_banco_HOMICIDIO_gt_bkp =
+  df_regional_banco_HOMICIDIO_gt_bkp %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+
+colnames(df_regional_banco_HOMICIDIO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_HOMICIDIO_gt_bkp)[3]<-'PERCENTUAL'
 
 #########################################################################################################
-##TABELA DIA SEMANA ROUBO
+#para script rmd:
+df_regional_banco_HOMICIDIO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_HOMICIDIO_gt_bkp$PERCENTUAL))
+df_regional_banco_HOMICIDIO_gt_bkp_rmd = tail(df_regional_banco_HOMICIDIO_gt_bkp,5)
+#########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(df_regional_banco_HOMICIDIO_gt_bkp)[1]<-'df_regional_banco_HOMICIDIO_gt_bkp'
+colnames(df_regional_banco_HOMICIDIO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_HOMICIDIO_gt_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+df_regional_banco_HOMICIDIO_gt =
+  df_regional_banco_HOMICIDIO_gt %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(REGIONAL_ATO) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+
+
+colnames(df_regional_banco_HOMICIDIO_gt)[1]<-'REGIONAL'
+colnames(df_regional_banco_HOMICIDIO_gt)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_HOMICIDIO_gt)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+
+#df_regional_banco_HOMICIDIO_gt =
+#  df_regional_banco_HOMICIDIO_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+
+
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# df_regional_banco_HOMICIDIO_gt FIM
+#########################################################################################################
+#########################################################################################################
+# df_dia_semana_banco_ROUBO_gt
+#########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -373,191 +218,93 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_ROUBO_sem_concurso <- banco_ROUBO_puro[!duplicated(data.frame(banco_ROUBO_puro$PROCESSO, banco_ROUBO_puro$ATO_INFRACIONAL)),]
 banco_ROUBO_sem_concurso <- banco_ROUBO_puro
 
-df_dia_semana_banco_ROUBO <- banco_ROUBO_sem_concurso %>%
-  select(ATO_INFRACIONAL, DIA_SEMANA_ATO, REGIONAL_ATO)
+df_dia_semana_banco_ROUBO_gt =
+  banco_ROUBO_sem_concurso %>%
+  select(DIA_SEMANA_ATO)
 
-names(df_dia_semana_banco_ROUBO)
+colnames(df_dia_semana_banco_ROUBO_gt)[1]<-'DIA_SEMANA'
 
-
-table(df_dia_semana_banco_ROUBO$DIA_SEMANA_ATO, useNA ="always")
-sum(table(df_dia_semana_banco_ROUBO$DIA_SEMANA_ATO, useNA ="always"))
 #########################################################################################################
-df_dia_semana_banco_ROUBO <- data.frame(table(df_dia_semana_banco_ROUBO$DIA_SEMANA_ATO, useNA ="always"))
-df_dia_semana_banco_ROUBO_original=df_dia_semana_banco_ROUBO #salvando atos atendimento original
-#df_dia_semana_banco_ROUBO=df_dia_semana_banco_ROUBO_original
-#df_dia_semana_banco_ROUBO$Var1 <- NULL
-colnames(df_dia_semana_banco_ROUBO) <- c("DIA", "QUANTIDADE")
 
-##write.xlsx(df_dia_semana_banco_ROUBO, file = "df_dia_semana_banco_ROUBO_bruto.xlsx") #salvando com modificações anteriores
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "segunda"]<- "SEGUNDA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "terça"]<- "TERÇA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "quarta"]<- "QUARTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "quinta"]<- "QUINTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "sexta"]<- "SEXTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "sábado"]<- "SÁBADO"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "domingo"]<- "DOMINGO"
+#########################################################################################################
 
-#df_dia_semana_banco_ROUBO$SEXO <- NULL
+# salvando para gráfico
+df_dia_semana_banco_ROUBO_gt_bkp = df_dia_semana_banco_ROUBO_gt
 
-df_dia_semana_banco_ROUBO
+df_dia_semana_banco_ROUBO_gt_bkp =
+  df_dia_semana_banco_ROUBO_gt_bkp %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-df_dia_semana_banco_ROUBO = filter(df_dia_semana_banco_ROUBO, !QUANTIDADE == 0)
-df_dia_semana_banco_ROUBO
+colnames(df_dia_semana_banco_ROUBO_gt_bkp)[1]<-'df_dia_semana_banco_ROUBO_gt_bkp'
+colnames(df_dia_semana_banco_ROUBO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_ROUBO_gt_bkp)[3]<-'PERCENTUAL'
 
-##write.xlsx(df_dia_semana_banco_ROUBO, file = "df_dia_semana_banco_ROUBO.xlsx")
+#########################################################################################################
+#para script rmd:
+df_dia_semana_banco_ROUBO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_dia_semana_banco_ROUBO_gt_bkp$PERCENTUAL))
+df_dia_semana_banco_ROUBO_gt_bkp_rmd = tail(df_dia_semana_banco_ROUBO_gt_bkp,5)
+#########################################################################################################
+#########################################################################################################
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "DOMINGO"]<- "ADOMINGO"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "SEGUNDA"]<- "BSEGUNDA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "TERÇA"]<- "CTERÇA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "QUARTA"]<- "DQUARTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "QUINTA"]<- "EQUINTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "SEXTA"]<- "FSEXTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "SÁBADO"]<- "GSÁBADO"
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
+df_dia_semana_banco_ROUBO_gt =
+  df_dia_semana_banco_ROUBO_gt %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(DIA_SEMANA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "ADOMINGO"]<- "DOMINGO"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "BSEGUNDA"]<- "SEGUNDA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "CTERÇA"]<- "TERÇA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "DQUARTA"]<- "QUARTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "EQUINTA"]<- "QUINTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "FSEXTA"]<- "SEXTA"
+df_dia_semana_banco_ROUBO_gt$DIA_SEMANA[df_dia_semana_banco_ROUBO_gt$DIA_SEMANA == "GSÁBADO"]<- "SÁBADO"
+#########################################################################################################
 
-#df_dia_semana_banco_ROUBO$DIA <- NULL
+colnames(df_dia_semana_banco_ROUBO_gt)[1]<-'DIA'
+colnames(df_dia_semana_banco_ROUBO_gt)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_ROUBO_gt)[3]<-'PERCENTUAL'
 
-#colnames(df_dia_semana_banco_ROUBO) <- c("QUANTIDADE", "DIA")
+#############################################################################################################
 
-df_dia_semana_banco_ROUBO <- df_dia_semana_banco_ROUBO[c("DIA", "QUANTIDADE")]
-
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_dia_semana_banco_ROUBO$QUANTIDADE)
-
-df_dia_semana_banco_ROUBO <- ddply(df_dia_semana_banco_ROUBO,
-                                   c("DIA"),
-                                   summarise,
-                                   QUANTIDADE = sum(QUANTIDADE))
-
-df_dia_semana_banco_ROUBO
-
-
-#caso queira separar so regionais
-#df_dia_semana_banco_ROUBO1 <- df_dia_semana_banco_ROUBO[!(df_dia_semana_banco_ROUBO$DIA == 'REGIÃO METROPOLITANA'|
-#                                                      df_dia_semana_banco_ROUBO$DIA == 'OUTRA CIDADE MG'|
-#                                                     df_dia_semana_banco_ROUBO$DIA == 'OUTRO ESTADO'|
-#                                                    df_dia_semana_banco_ROUBO$DIA == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_dia_semana_banco_ROUBO$QUANTIDADE <- as.numeric(df_dia_semana_banco_ROUBO$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_dia_semana_banco_ROUBO$PERCENTUAL <- round(prop.table(df_dia_semana_banco_ROUBO$QUANTIDADE)*100, 2)
-
-
-
-
-df_dia_semana_banco_ROUBO
-#df_dia_semana_banco_ROUBO <- df_dia_semana_banco_ROUBO[order(df_dia_semana_banco_ROUBO[,3],decreasing=TRUE),]
-#write.csv(df_dia_semana_banco_ROUBO, file ="df_dia_semana_banco_ROUBO.csv",row.names=TRUE)
-##write.xlsx(df_dia_semana_banco_ROUBO, file ="df_dia_semana_banco_ROUBO.xlsx")
-#df_dia_semana_banco_ROUBO$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_dia_semana_banco_ROUBO<-df_dia_semana_banco_ROUBO %>%
-  arrange(desc(QUANTIDADE))
-df_dia_semana_banco_ROUBO_bkp = df_dia_semana_banco_ROUBO
-
-
-
-df_dia_semana_banco_ROUBO$DIA <- as.character(df_dia_semana_banco_ROUBO$DIA)
-
-df_dia_semana_banco_ROUBO
-
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "segunda"]<- "ASEGUNDA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "terça"]<- "BTERÇA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "quarta"]<- "CQUARTA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "quinta"]<- "DQUINTA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "sexta"]<- "ESEXTA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "sábado"]<- "FSÁBADO"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "domingo"]<- "GDOMINGO"
-
-df_dia_semana_banco_ROUBO
-
-df_dia_semana_banco_ROUBO <-df_dia_semana_banco_ROUBO[order(df_dia_semana_banco_ROUBO$DIA),]
-
-df_dia_semana_banco_ROUBO
-
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "ASEGUNDA"]<- "SEGUNDA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "BTERÇA"]<- "TERÇA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "CQUARTA"]<- "QUARTA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "DQUINTA"]<- "QUINTA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "ESEXTA"]<- "SEXTA"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "FSÁBADO"]<- "SÁBADO"
-df_dia_semana_banco_ROUBO$DIA[df_dia_semana_banco_ROUBO$DIA == "GDOMINGO"]<- "DOMINGO"
-
-
-df_dia_semana_banco_ROUBO
-
+#df_dia_semana_banco_ROUBO_gt =
+#  df_dia_semana_banco_ROUBO_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-
-#script para o bookdown
-
-df_dia_semana_banco_ROUBO_rmark = df_dia_semana_banco_ROUBO
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_dia_semana_banco_ROUBO_rmark = df_dia_semana_banco_ROUBO_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_dia_semana_banco_ROUBO_rmark1 = df_dia_semana_banco_ROUBO_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_dia_semana_banco_ROUBO_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_dia_semana_banco_ROUBO_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
+# df_dia_semana_banco_ROUBO_gt FIM
 #########################################################################################################
 #########################################################################################################
-
-
-
-#acrescentando linha com total
-df_dia_semana_banco_ROUBO <- rbind(df_dia_semana_banco_ROUBO,
-                                   data.frame(DIA = "TOTAL", QUANTIDADE = sum(df_dia_semana_banco_ROUBO$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_dia_semana_banco_ROUBO$PERCENTUAL, 0)),
-                                              stringsAsFactors = FALSE))
-
-df_dia_semana_banco_ROUBO
-
-colnames(df_dia_semana_banco_ROUBO) <- c("DIA", "QUANTIDADE", "%")
-
-#para tabela gt abaixo:
-df_dia_semana_banco_ROUBO_gt = df_dia_semana_banco_ROUBO
-
-#colnames(df_dia_semana_banco_ROUBO) <- c("DIA", "%")
-#df_dia_semana_banco_ROUBO <- df_dia_semana_banco_ROUBO[c("DIA", "QUANTIDADE")]
-#salvando tabela
+# df_regional_banco_ROUBO_gt
 #########################################################################################################
-#pdf(file=TABELA[3,],"_004_dia_semana_ROUBO_alternativa.pdf",  width = 6, height = 4.8, title = "df_dia_semana_banco_ROUBO")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-##TABELA df_regional_banco_ROUBO
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -565,188 +312,116 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_ROUBO_sem_concurso <- banco_ROUBO_puro[!duplicated(data.frame(banco_ROUBO_puro$PROCESSO, banco_ROUBO_puro$ATO_INFRACIONAL)),]
 banco_ROUBO_sem_concurso <- banco_ROUBO_puro
 
-df_regional_banco_ROUBO <- banco_ROUBO_sem_concurso %>%
-  select(ATO_INFRACIONAL, REGIONAL_ATO, REGIONAL_ATO)
+df_regional_banco_ROUBO_gt =
+  banco_ROUBO_sem_concurso %>%
+  select(REGIONAL_ATO)
 
-names(df_regional_banco_ROUBO)
-
-
-table(df_regional_banco_ROUBO$REGIONAL_ATO, useNA ="always")
-sum(table(df_regional_banco_ROUBO$REGIONAL_ATO, useNA ="always"))
-#########################################################################################################
-df_regional_banco_ROUBO <- data.frame(table(df_regional_banco_ROUBO$REGIONAL_ATO, useNA ="always"))
-df_regional_banco_ROUBO_original=df_regional_banco_ROUBO #salvando atos atendimento original
-#df_regional_banco_ROUBO=df_regional_banco_ROUBO_original
-#df_regional_banco_ROUBO$Var1 <- NULL
-colnames(df_regional_banco_ROUBO) <- c("REGIONAL", "QUANTIDADE")
-
-##write.xlsx(df_regional_banco_ROUBO, file = "df_regional_banco_ROUBO_bruto.xlsx") #salvando com modificações anteriores
-
-#df_regional_banco_ROUBO$SEXO <- NULL
-
-df_regional_banco_ROUBO$REGIONAL <- as.character(df_regional_banco_ROUBO$REGIONAL)
-
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == ""]<- "SEM INFORMAÇÃO"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "#N/DISP"]<- "SEM INFORMAÇÃO"
-#df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == NA]<- "SEM INFORMAÇÃO"
-df_regional_banco_ROUBO
-
-df_regional_banco_ROUBO = filter(df_regional_banco_ROUBO, !QUANTIDADE == 0)
-df_regional_banco_ROUBO
-
-df_regional_banco_ROUBO$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO", df_regional_banco_ROUBO$REGIONAL, ignore.case = TRUE),
-                                            gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_regional_banco_ROUBO$REGIONAL), "OUTRO ESTADO")
-
-##write.xlsx(df_regional_banco_ROUBO, file = "df_regional_banco_ROUBO.xlsx")
-
-
-df_regional_banco_ROUBO$REGIONAL <- NULL
-
-colnames(df_regional_banco_ROUBO) <- c("QUANTIDADE", "REGIONAL")
-
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "OUTRO ESTADO"]<- "SEM INFORMAÇÃO"
-
-
-df_regional_banco_ROUBO <- df_regional_banco_ROUBO[c("REGIONAL", "QUANTIDADE")]
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_regional_banco_ROUBO$QUANTIDADE)
-
-df_regional_banco_ROUBO <- ddply(df_regional_banco_ROUBO,
-                                 c("REGIONAL"),
-                                 summarise,
-                                 QUANTIDADE = sum(QUANTIDADE))
-
-###alterando
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
-
-df_regional_banco_ROUBO <-df_regional_banco_ROUBO[order(df_regional_banco_ROUBO$REGIONAL),]
-
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-df_regional_banco_ROUBO$REGIONAL[df_regional_banco_ROUBO$REGIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-
-#caso queira separar so regionais
-#df_regional_banco_ROUBO1 <- df_regional_banco_ROUBO[!(df_regional_banco_ROUBO$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      df_regional_banco_ROUBO$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     df_regional_banco_ROUBO$REGIONAL == 'OUTRO ESTADO'|
-#                                                    df_regional_banco_ROUBO$REGIONAL == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_regional_banco_ROUBO$QUANTIDADE <- as.numeric(df_regional_banco_ROUBO$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_regional_banco_ROUBO$PERCENTUAL <- round(prop.table(df_regional_banco_ROUBO$QUANTIDADE)*100, 2)
-df_regional_banco_ROUBO
-#df_regional_banco_ROUBO <- df_regional_banco_ROUBO[order(df_regional_banco_ROUBO[,3],decreasing=TRUE),]
-#write.csv(df_regional_banco_ROUBO, file ="df_regional_banco_ROUBO.csv",row.names=TRUE)
-##write.xlsx(df_regional_banco_ROUBO, file ="df_regional_banco_ROUBO.xlsx")
-#df_regional_banco_ROUBO$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_regional_banco_ROUBO<-df_regional_banco_ROUBO %>%
-  arrange(desc(QUANTIDADE))
-df_regional_banco_ROUBO_bkp = df_regional_banco_ROUBO
-
+colnames(df_regional_banco_ROUBO_gt)[1]<-'REGIONAL_ATO'
 
 #########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-df_regional_banco_ROUBO_rmark = df_regional_banco_ROUBO
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_regional_banco_ROUBO_rmark = df_regional_banco_ROUBO_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_regional_banco_ROUBO_rmark1 = df_regional_banco_ROUBO_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_regional_banco_ROUBO_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_regional_banco_ROUBO_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-
-
-
-
-#acrescentando linha com total
-df_regional_banco_ROUBO <- rbind(df_regional_banco_ROUBO,
-                                 data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(df_regional_banco_ROUBO$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_regional_banco_ROUBO$PERCENTUAL, 0)),
-                                            stringsAsFactors = FALSE))
-
-
-colnames(df_regional_banco_ROUBO) <- c("REGIONAL", "QUANTIDADE", "%")
-
-
-#para tabela gt abaixo:
-df_regional_banco_ROUBO_gt = df_regional_banco_ROUBO
-
-#colnames(df_regional_banco_ROUBO) <- c("REGIONAL", "%")
-#df_regional_banco_ROUBO <- df_regional_banco_ROUBO[c("REGIONAL", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#pdf(file=TABELA[3,],"_004_REGIONAL_ROUBO_alternativa.pdf",  width = 6, height = 4.8, title = "df_regional_banco_ROUBO")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
+#encontrando parte do texto e substituindo
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[agrep("/MG", df_regional_banco_ROUBO_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[agrep("RMBH", df_regional_banco_ROUBO_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[agrep("RIBEIRAO DAS NEVES", df_regional_banco_ROUBO_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[agrep("CATAGUASES", df_regional_banco_ROUBO_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[agrep("CIDADE DE BRASILIA/DF", df_regional_banco_ROUBO_gt$REGIONAL_ATO)] <- "VOUTRO ESTADO"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[agrep("N/DISP", df_regional_banco_ROUBO_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[agrep("INFORMACAO", df_regional_banco_ROUBO_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == ""]<- "SEM INFORMAÇÃO"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "PAMPULHA"]<- "PAMPULHA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "VENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "REGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
 #########################################################################################################
 
+# salvando para gráfico
+df_regional_banco_ROUBO_gt_bkp = df_regional_banco_ROUBO_gt
+
+df_regional_banco_ROUBO_gt_bkp =
+  df_regional_banco_ROUBO_gt_bkp %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+
+colnames(df_regional_banco_ROUBO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_ROUBO_gt_bkp)[3]<-'PERCENTUAL'
+
 #########################################################################################################
-##TABELA DIA SEMANA FURTO
+#para script rmd:
+df_regional_banco_ROUBO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_ROUBO_gt_bkp$PERCENTUAL))
+df_regional_banco_ROUBO_gt_bkp_rmd = tail(df_regional_banco_ROUBO_gt_bkp,5)
+#########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(df_regional_banco_ROUBO_gt_bkp)[1]<-'df_regional_banco_ROUBO_gt_bkp'
+colnames(df_regional_banco_ROUBO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_ROUBO_gt_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+df_regional_banco_ROUBO_gt =
+  df_regional_banco_ROUBO_gt %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(REGIONAL_ATO) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_ROUBO_gt$REGIONAL_ATO[df_regional_banco_ROUBO_gt$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+
+
+colnames(df_regional_banco_ROUBO_gt)[1]<-'REGIONAL'
+colnames(df_regional_banco_ROUBO_gt)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_ROUBO_gt)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+
+#df_regional_banco_ROUBO_gt =
+#  df_regional_banco_ROUBO_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+
+
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# df_regional_banco_ROUBO_gt FIM
+#########################################################################################################
+
+#########################################################################################################
+# df_dia_semana_banco_FURTO_gt
+#########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -754,190 +429,93 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_FURTO_sem_concurso <- banco_FURTO_puro[!duplicated(data.frame(banco_FURTO_puro$PROCESSO, banco_FURTO_puro$ATO_INFRACIONAL)),]
 banco_FURTO_sem_concurso <- banco_FURTO_puro
 
-df_dia_semana_banco_FURTO <- banco_FURTO_sem_concurso %>%
-  select(ATO_INFRACIONAL, DIA_SEMANA_ATO, REGIONAL_ATO)
+df_dia_semana_banco_FURTO_gt =
+  banco_FURTO_sem_concurso %>%
+  select(DIA_SEMANA_ATO)
 
-names(df_dia_semana_banco_FURTO)
+colnames(df_dia_semana_banco_FURTO_gt)[1]<-'DIA_SEMANA'
 
-
-table(df_dia_semana_banco_FURTO$DIA_SEMANA_ATO, useNA ="always")
-sum(table(df_dia_semana_banco_FURTO$DIA_SEMANA_ATO, useNA ="always"))
 #########################################################################################################
-df_dia_semana_banco_FURTO <- data.frame(table(df_dia_semana_banco_FURTO$DIA_SEMANA_ATO, useNA ="always"))
-df_dia_semana_banco_FURTO_original=df_dia_semana_banco_FURTO #salvando atos atendimento original
-#df_dia_semana_banco_FURTO=df_dia_semana_banco_FURTO_original
-#df_dia_semana_banco_FURTO$Var1 <- NULL
-colnames(df_dia_semana_banco_FURTO) <- c("DIA", "QUANTIDADE")
 
-##write.xlsx(df_dia_semana_banco_FURTO, file = "df_dia_semana_banco_FURTO_bruto.xlsx") #salvando com modificações anteriores
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "segunda"]<- "SEGUNDA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "terça"]<- "TERÇA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "quarta"]<- "QUARTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "quinta"]<- "QUINTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "sexta"]<- "SEXTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "sábado"]<- "SÁBADO"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "domingo"]<- "DOMINGO"
+#########################################################################################################
 
-#df_dia_semana_banco_FURTO$SEXO <- NULL
+# salvando para gráfico
+df_dia_semana_banco_FURTO_gt_bkp = df_dia_semana_banco_FURTO_gt
 
-df_dia_semana_banco_FURTO
+df_dia_semana_banco_FURTO_gt_bkp =
+  df_dia_semana_banco_FURTO_gt_bkp %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-df_dia_semana_banco_FURTO = filter(df_dia_semana_banco_FURTO, !QUANTIDADE == 0)
-df_dia_semana_banco_FURTO
+colnames(df_dia_semana_banco_FURTO_gt_bkp)[1]<-'df_dia_semana_banco_FURTO_gt_bkp'
+colnames(df_dia_semana_banco_FURTO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_FURTO_gt_bkp)[3]<-'PERCENTUAL'
 
-##write.xlsx(df_dia_semana_banco_FURTO, file = "df_dia_semana_banco_FURTO.xlsx")
+#########################################################################################################
+#para script rmd:
+df_dia_semana_banco_FURTO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_dia_semana_banco_FURTO_gt_bkp$PERCENTUAL))
+df_dia_semana_banco_FURTO_gt_bkp_rmd = tail(df_dia_semana_banco_FURTO_gt_bkp,5)
+#########################################################################################################
+#########################################################################################################
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "DOMINGO"]<- "ADOMINGO"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "SEGUNDA"]<- "BSEGUNDA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "TERÇA"]<- "CTERÇA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "QUARTA"]<- "DQUARTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "QUINTA"]<- "EQUINTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "SEXTA"]<- "FSEXTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "SÁBADO"]<- "GSÁBADO"
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
+df_dia_semana_banco_FURTO_gt =
+  df_dia_semana_banco_FURTO_gt %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(DIA_SEMANA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "ADOMINGO"]<- "DOMINGO"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "BSEGUNDA"]<- "SEGUNDA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "CTERÇA"]<- "TERÇA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "DQUARTA"]<- "QUARTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "EQUINTA"]<- "QUINTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "FSEXTA"]<- "SEXTA"
+df_dia_semana_banco_FURTO_gt$DIA_SEMANA[df_dia_semana_banco_FURTO_gt$DIA_SEMANA == "GSÁBADO"]<- "SÁBADO"
+#########################################################################################################
 
-#df_dia_semana_banco_FURTO$DIA <- NULL
+colnames(df_dia_semana_banco_FURTO_gt)[1]<-'DIA'
+colnames(df_dia_semana_banco_FURTO_gt)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_FURTO_gt)[3]<-'PERCENTUAL'
 
-#colnames(df_dia_semana_banco_FURTO) <- c("QUANTIDADE", "DIA")
+#############################################################################################################
 
-df_dia_semana_banco_FURTO <- df_dia_semana_banco_FURTO[c("DIA", "QUANTIDADE")]
-
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_dia_semana_banco_FURTO$QUANTIDADE)
-
-df_dia_semana_banco_FURTO <- ddply(df_dia_semana_banco_FURTO,
-                                   c("DIA"),
-                                   summarise,
-                                   QUANTIDADE = sum(QUANTIDADE))
-
-df_dia_semana_banco_FURTO
-
-
-#caso queira separar so regionais
-#df_dia_semana_banco_FURTO1 <- df_dia_semana_banco_FURTO[!(df_dia_semana_banco_FURTO$DIA == 'REGIÃO METROPOLITANA'|
-#                                                      df_dia_semana_banco_FURTO$DIA == 'OUTRA CIDADE MG'|
-#                                                     df_dia_semana_banco_FURTO$DIA == 'OUTRO ESTADO'|
-#                                                    df_dia_semana_banco_FURTO$DIA == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_dia_semana_banco_FURTO$QUANTIDADE <- as.numeric(df_dia_semana_banco_FURTO$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_dia_semana_banco_FURTO$PERCENTUAL <- round(prop.table(df_dia_semana_banco_FURTO$QUANTIDADE)*100, 2)
-
-
-
-
-df_dia_semana_banco_FURTO
-#df_dia_semana_banco_FURTO <- df_dia_semana_banco_FURTO[order(df_dia_semana_banco_FURTO[,3],decreasing=TRUE),]
-#write.csv(df_dia_semana_banco_FURTO, file ="df_dia_semana_banco_FURTO.csv",row.names=TRUE)
-##write.xlsx(df_dia_semana_banco_FURTO, file ="df_dia_semana_banco_FURTO.xlsx")
-#df_dia_semana_banco_FURTO$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_dia_semana_banco_FURTO<-df_dia_semana_banco_FURTO %>%
-  arrange(desc(QUANTIDADE))
-df_dia_semana_banco_FURTO_bkp = df_dia_semana_banco_FURTO
-
-
-
-df_dia_semana_banco_FURTO$DIA <- as.character(df_dia_semana_banco_FURTO$DIA)
-
-df_dia_semana_banco_FURTO
-
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "segunda"]<- "ASEGUNDA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "terça"]<- "BTERÇA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "quarta"]<- "CQUARTA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "quinta"]<- "DQUINTA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "sexta"]<- "ESEXTA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "sábado"]<- "FSÁBADO"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "domingo"]<- "GDOMINGO"
-
-df_dia_semana_banco_FURTO
-
-df_dia_semana_banco_FURTO <-df_dia_semana_banco_FURTO[order(df_dia_semana_banco_FURTO$DIA),]
-
-df_dia_semana_banco_FURTO
-
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "ASEGUNDA"]<- "SEGUNDA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "BTERÇA"]<- "TERÇA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "CQUARTA"]<- "QUARTA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "DQUINTA"]<- "QUINTA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "ESEXTA"]<- "SEXTA"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "FSÁBADO"]<- "SÁBADO"
-df_dia_semana_banco_FURTO$DIA[df_dia_semana_banco_FURTO$DIA == "GDOMINGO"]<- "DOMINGO"
-
-
-df_dia_semana_banco_FURTO
+#df_dia_semana_banco_FURTO_gt =
+#  df_dia_semana_banco_FURTO_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-
-#script para o bookdown
-
-df_dia_semana_banco_FURTO_rmark = df_dia_semana_banco_FURTO
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_dia_semana_banco_FURTO_rmark = df_dia_semana_banco_FURTO_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_dia_semana_banco_FURTO_rmark1 = df_dia_semana_banco_FURTO_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_dia_semana_banco_FURTO_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_dia_semana_banco_FURTO_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
+# df_dia_semana_banco_FURTO_gt FIM
 #########################################################################################################
 #########################################################################################################
-
-
-
-#acrescentando linha com total
-df_dia_semana_banco_FURTO <- rbind(df_dia_semana_banco_FURTO,
-                                   data.frame(DIA = "TOTAL", QUANTIDADE = sum(df_dia_semana_banco_FURTO$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_dia_semana_banco_FURTO$PERCENTUAL, 0)),
-                                              stringsAsFactors = FALSE))
-
-df_dia_semana_banco_FURTO
-
-colnames(df_dia_semana_banco_FURTO) <- c("DIA", "QUANTIDADE", "%")
-
-
-#para tabela gt abaixo:
-df_dia_semana_banco_FURTO_gt = df_dia_semana_banco_FURTO
-#colnames(df_dia_semana_banco_FURTO) <- c("DIA", "%")
-#df_dia_semana_banco_FURTO <- df_dia_semana_banco_FURTO[c("DIA", "QUANTIDADE")]
-#salvando tabela
+# df_regional_banco_FURTO_gt
 #########################################################################################################
-#pdf(file=TABELA[3,],"_004_dia_semana_FURTO_alternativa.pdf",  width = 6, height = 4.8, title = "df_dia_semana_banco_FURTO")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-##TABELA df_regional_banco_FURTO
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -945,187 +523,116 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_FURTO_sem_concurso <- banco_FURTO_puro[!duplicated(data.frame(banco_FURTO_puro$PROCESSO, banco_FURTO_puro$ATO_INFRACIONAL)),]
 banco_FURTO_sem_concurso <- banco_FURTO_puro
 
-df_regional_banco_FURTO <- banco_FURTO_sem_concurso %>%
-  select(ATO_INFRACIONAL, REGIONAL_ATO, REGIONAL_ATO)
+df_regional_banco_FURTO_gt =
+  banco_FURTO_sem_concurso %>%
+  select(REGIONAL_ATO)
 
-names(df_regional_banco_FURTO)
+colnames(df_regional_banco_FURTO_gt)[1]<-'REGIONAL_ATO'
 
-
-table(df_regional_banco_FURTO$REGIONAL_ATO, useNA ="always")
-sum(table(df_regional_banco_FURTO$REGIONAL_ATO, useNA ="always"))
 #########################################################################################################
-df_regional_banco_FURTO <- data.frame(table(df_regional_banco_FURTO$REGIONAL_ATO, useNA ="always"))
-df_regional_banco_FURTO_original=df_regional_banco_FURTO #salvando atos atendimento original
-#df_regional_banco_FURTO=df_regional_banco_FURTO_original
-#df_regional_banco_FURTO$Var1 <- NULL
-colnames(df_regional_banco_FURTO) <- c("REGIONAL", "QUANTIDADE")
+#encontrando parte do texto e substituindo
+df_regional_banco_FURTO_gt$REGIONAL_ATO[agrep("/MG", df_regional_banco_FURTO_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[agrep("RMBH", df_regional_banco_FURTO_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[agrep("RIBEIRAO DAS NEVES", df_regional_banco_FURTO_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[agrep("CATAGUASES", df_regional_banco_FURTO_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[agrep("CIDADE DE BRASILIA/DF", df_regional_banco_FURTO_gt$REGIONAL_ATO)] <- "VOUTRO ESTADO"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[agrep("N/DISP", df_regional_banco_FURTO_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[agrep("INFORMACAO", df_regional_banco_FURTO_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == ""]<- "SEM INFORMAÇÃO"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "PAMPULHA"]<- "PAMPULHA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "VENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "REGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
-##write.xlsx(df_regional_banco_FURTO, file = "df_regional_banco_FURTO_bruto.xlsx") #salvando com modificações anteriores
+#########################################################################################################
 
-#df_regional_banco_FURTO$SEXO <- NULL
+# salvando para gráfico
+df_regional_banco_FURTO_gt_bkp = df_regional_banco_FURTO_gt
 
-df_regional_banco_FURTO$REGIONAL <- as.character(df_regional_banco_FURTO$REGIONAL)
-
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == ""]<- "SEM INFORMAÇÃO"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "#N/DISP"]<- "SEM INFORMAÇÃO"
-#df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == NA]<- "SEM INFORMAÇÃO"
-df_regional_banco_FURTO
-
-df_regional_banco_FURTO = filter(df_regional_banco_FURTO, !QUANTIDADE == 0)
-df_regional_banco_FURTO
-
-df_regional_banco_FURTO$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO", df_regional_banco_FURTO$REGIONAL, ignore.case = TRUE),
-                                            gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_regional_banco_FURTO$REGIONAL), "OUTRO ESTADO")
-
-##write.xlsx(df_regional_banco_FURTO, file = "df_regional_banco_FURTO.xlsx")
-
-
-df_regional_banco_FURTO$REGIONAL <- NULL
-
-colnames(df_regional_banco_FURTO) <- c("QUANTIDADE", "REGIONAL")
-
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "OUTRO ESTADO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_FURTO_gt_bkp =
+  df_regional_banco_FURTO_gt_bkp %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
 
-df_regional_banco_FURTO <- df_regional_banco_FURTO[c("REGIONAL", "QUANTIDADE")]
+colnames(df_regional_banco_FURTO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_FURTO_gt_bkp)[3]<-'PERCENTUAL'
 
-#library(grid)
-#library(gridExtra)
+#########################################################################################################
+#para script rmd:
+df_regional_banco_FURTO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_FURTO_gt_bkp$PERCENTUAL))
+df_regional_banco_FURTO_gt_bkp_rmd = tail(df_regional_banco_FURTO_gt_bkp,5)
+#########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
 
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_regional_banco_FURTO$QUANTIDADE)
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
-df_regional_banco_FURTO <- ddply(df_regional_banco_FURTO,
-                                 c("REGIONAL"),
-                                 summarise,
-                                 QUANTIDADE = sum(QUANTIDADE))
+colnames(df_regional_banco_FURTO_gt_bkp)[1]<-'df_regional_banco_FURTO_gt_bkp'
+colnames(df_regional_banco_FURTO_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_FURTO_gt_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
-###alterando
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
+df_regional_banco_FURTO_gt =
+  df_regional_banco_FURTO_gt %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(REGIONAL_ATO) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
 
-df_regional_banco_FURTO <-df_regional_banco_FURTO[order(df_regional_banco_FURTO$REGIONAL),]
-
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-df_regional_banco_FURTO$REGIONAL[df_regional_banco_FURTO$REGIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-
-#caso queira separar so regionais
-#df_regional_banco_FURTO1 <- df_regional_banco_FURTO[!(df_regional_banco_FURTO$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      df_regional_banco_FURTO$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     df_regional_banco_FURTO$REGIONAL == 'OUTRO ESTADO'|
-#                                                    df_regional_banco_FURTO$REGIONAL == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_regional_banco_FURTO$QUANTIDADE <- as.numeric(df_regional_banco_FURTO$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_FURTO_gt$REGIONAL_ATO[df_regional_banco_FURTO_gt$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
 
 
-#usando a funcao criada:
+colnames(df_regional_banco_FURTO_gt)[1]<-'REGIONAL'
+colnames(df_regional_banco_FURTO_gt)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_FURTO_gt)[3]<-'PERCENTUAL'
 
+#############################################################################################################
 
-df_regional_banco_FURTO$PERCENTUAL <- round(prop.table(df_regional_banco_FURTO$QUANTIDADE)*100, 2)
-df_regional_banco_FURTO
-#df_regional_banco_FURTO <- df_regional_banco_FURTO[order(df_regional_banco_FURTO[,3],decreasing=TRUE),]
-#write.csv(df_regional_banco_FURTO, file ="df_regional_banco_FURTO.csv",row.names=TRUE)
-##write.xlsx(df_regional_banco_FURTO, file ="df_regional_banco_FURTO.xlsx")
-#df_regional_banco_FURTO$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_regional_banco_FURTO<-df_regional_banco_FURTO %>%
-  arrange(desc(QUANTIDADE))
-df_regional_banco_FURTO_bkp = df_regional_banco_FURTO
-
+#df_regional_banco_FURTO_gt =
+#  df_regional_banco_FURTO_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-
-#script para o bookdown
-
-df_regional_banco_FURTO_rmark = df_regional_banco_FURTO
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_regional_banco_FURTO_rmark = df_regional_banco_FURTO_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_regional_banco_FURTO_rmark1 = df_regional_banco_FURTO_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_regional_banco_FURTO_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_regional_banco_FURTO_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-
-
-
-
-#acrescentando linha com total
-df_regional_banco_FURTO <- rbind(df_regional_banco_FURTO,
-                                 data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(df_regional_banco_FURTO$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_regional_banco_FURTO$PERCENTUAL, 0)),
-                                            stringsAsFactors = FALSE))
-
-
-colnames(df_regional_banco_FURTO) <- c("REGIONAL", "QUANTIDADE", "%")
-
-#para tabela gt abaixo:
-df_regional_banco_FURTO_gt = df_regional_banco_FURTO
-
-#colnames(df_regional_banco_FURTO) <- c("REGIONAL", "%")
-#df_regional_banco_FURTO <- df_regional_banco_FURTO[c("REGIONAL", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#pdf(file=TABELA[3,],"_004_REGIONAL_FURTO_alternativa.pdf",  width = 6, height = 4.8, title = "df_regional_banco_FURTO")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
+# df_regional_banco_FURTO_gt FIM
 #########################################################################################################
 
 #########################################################################################################
+# df_dia_semana_banco_USO_DE_DROGAS_gt
 #########################################################################################################
-##TABELA DIA SEMANA USO_DE_DROGAS
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -1133,188 +640,93 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS_puro[!duplicated(data.frame(banco_USO_DE_DROGAS_puro$PROCESSO, banco_USO_DE_DROGAS_puro$ATO_INFRACIONAL)),]
 banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS_puro
 
-df_dia_semana_banco_USO_DE_DROGAS <- banco_USO_DE_DROGAS_sem_concurso %>%
-  select(ATO_INFRACIONAL, DIA_SEMANA_ATO, REGIONAL_ATO)
+df_dia_semana_banco_USO_DE_DROGAS_gt =
+  banco_USO_DE_DROGAS_sem_concurso %>%
+  select(DIA_SEMANA_ATO)
 
-names(df_dia_semana_banco_USO_DE_DROGAS)
+colnames(df_dia_semana_banco_USO_DE_DROGAS_gt)[1]<-'DIA_SEMANA'
 
-
-table(df_dia_semana_banco_USO_DE_DROGAS$DIA_SEMANA_ATO, useNA ="always")
-sum(table(df_dia_semana_banco_USO_DE_DROGAS$DIA_SEMANA_ATO, useNA ="always"))
 #########################################################################################################
-df_dia_semana_banco_USO_DE_DROGAS <- data.frame(table(df_dia_semana_banco_USO_DE_DROGAS$DIA_SEMANA_ATO, useNA ="always"))
-df_dia_semana_banco_USO_DE_DROGAS_original=df_dia_semana_banco_USO_DE_DROGAS #salvando atos atendimento original
-#df_dia_semana_banco_USO_DE_DROGAS=df_dia_semana_banco_USO_DE_DROGAS_original
-#df_dia_semana_banco_USO_DE_DROGAS$Var1 <- NULL
-colnames(df_dia_semana_banco_USO_DE_DROGAS) <- c("DIA", "QUANTIDADE")
 
-##write.xlsx(df_dia_semana_banco_USO_DE_DROGAS, file = "df_dia_semana_banco_USO_DE_DROGAS_bruto.xlsx") #salvando com modificações anteriores
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "segunda"]<- "SEGUNDA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "terça"]<- "TERÇA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "quarta"]<- "QUARTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "quinta"]<- "QUINTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "sexta"]<- "SEXTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "sábado"]<- "SÁBADO"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "domingo"]<- "DOMINGO"
+#########################################################################################################
 
-#df_dia_semana_banco_USO_DE_DROGAS$SEXO <- NULL
+# salvando para gráfico
+df_dia_semana_banco_USO_DE_DROGAS_gt_bkp = df_dia_semana_banco_USO_DE_DROGAS_gt
 
-df_dia_semana_banco_USO_DE_DROGAS
+df_dia_semana_banco_USO_DE_DROGAS_gt_bkp =
+  df_dia_semana_banco_USO_DE_DROGAS_gt_bkp %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-df_dia_semana_banco_USO_DE_DROGAS = filter(df_dia_semana_banco_USO_DE_DROGAS, !QUANTIDADE == 0)
-df_dia_semana_banco_USO_DE_DROGAS
+colnames(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp)[1]<-'df_dia_semana_banco_USO_DE_DROGAS_gt_bkp'
+colnames(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
 
-##write.xlsx(df_dia_semana_banco_USO_DE_DROGAS, file = "df_dia_semana_banco_USO_DE_DROGAS.xlsx")
+#########################################################################################################
+#para script rmd:
+df_dia_semana_banco_USO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_dia_semana_banco_USO_DE_DROGAS_gt_bkp$PERCENTUAL))
+df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd = tail(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp,5)
+#########################################################################################################
+#########################################################################################################
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "DOMINGO"]<- "ADOMINGO"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "SEGUNDA"]<- "BSEGUNDA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "TERÇA"]<- "CTERÇA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "QUARTA"]<- "DQUARTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "QUINTA"]<- "EQUINTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "SEXTA"]<- "FSEXTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "SÁBADO"]<- "GSÁBADO"
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
+df_dia_semana_banco_USO_DE_DROGAS_gt =
+  df_dia_semana_banco_USO_DE_DROGAS_gt %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(DIA_SEMANA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "ADOMINGO"]<- "DOMINGO"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "BSEGUNDA"]<- "SEGUNDA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "CTERÇA"]<- "TERÇA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "DQUARTA"]<- "QUARTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "EQUINTA"]<- "QUINTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "FSEXTA"]<- "SEXTA"
+df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_USO_DE_DROGAS_gt$DIA_SEMANA == "GSÁBADO"]<- "SÁBADO"
+#########################################################################################################
 
-#df_dia_semana_banco_USO_DE_DROGAS$DIA <- NULL
+colnames(df_dia_semana_banco_USO_DE_DROGAS_gt)[1]<-'DIA'
+colnames(df_dia_semana_banco_USO_DE_DROGAS_gt)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_USO_DE_DROGAS_gt)[3]<-'PERCENTUAL'
 
-#colnames(df_dia_semana_banco_USO_DE_DROGAS) <- c("QUANTIDADE", "DIA")
+#############################################################################################################
 
-df_dia_semana_banco_USO_DE_DROGAS <- df_dia_semana_banco_USO_DE_DROGAS[c("DIA", "QUANTIDADE")]
-
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_dia_semana_banco_USO_DE_DROGAS$QUANTIDADE)
-
-df_dia_semana_banco_USO_DE_DROGAS <- ddply(df_dia_semana_banco_USO_DE_DROGAS,
-                                           c("DIA"),
-                                           summarise,
-                                           QUANTIDADE = sum(QUANTIDADE))
-
-df_dia_semana_banco_USO_DE_DROGAS
-
-
-#caso queira separar so regionais
-#df_dia_semana_banco_USO_DE_DROGAS1 <- df_dia_semana_banco_USO_DE_DROGAS[!(df_dia_semana_banco_USO_DE_DROGAS$DIA == 'REGIÃO METROPOLITANA'|
-#                                                      df_dia_semana_banco_USO_DE_DROGAS$DIA == 'OUTRA CIDADE MG'|
-#                                                     df_dia_semana_banco_USO_DE_DROGAS$DIA == 'OUTRO ESTADO'|
-#                                                    df_dia_semana_banco_USO_DE_DROGAS$DIA == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_dia_semana_banco_USO_DE_DROGAS$QUANTIDADE <- as.numeric(df_dia_semana_banco_USO_DE_DROGAS$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_dia_semana_banco_USO_DE_DROGAS$PERCENTUAL <- round(prop.table(df_dia_semana_banco_USO_DE_DROGAS$QUANTIDADE)*100, 2)
-
-
-
-
-df_dia_semana_banco_USO_DE_DROGAS
-#df_dia_semana_banco_USO_DE_DROGAS <- df_dia_semana_banco_USO_DE_DROGAS[order(df_dia_semana_banco_USO_DE_DROGAS[,3],decreasing=TRUE),]
-#write.csv(df_dia_semana_banco_USO_DE_DROGAS, file ="df_dia_semana_banco_USO_DE_DROGAS.csv",row.names=TRUE)
-##write.xlsx(df_dia_semana_banco_USO_DE_DROGAS, file ="df_dia_semana_banco_USO_DE_DROGAS.xlsx")
-#df_dia_semana_banco_USO_DE_DROGAS$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_dia_semana_banco_USO_DE_DROGAS<-df_dia_semana_banco_USO_DE_DROGAS %>%
-  arrange(desc(QUANTIDADE))
-df_dia_semana_banco_USO_DE_DROGAS_bkp = df_dia_semana_banco_USO_DE_DROGAS
-
-
-
-df_dia_semana_banco_USO_DE_DROGAS$DIA <- as.character(df_dia_semana_banco_USO_DE_DROGAS$DIA)
-
-df_dia_semana_banco_USO_DE_DROGAS
-
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "segunda"]<- "ASEGUNDA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "terça"]<- "BTERÇA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "quarta"]<- "CQUARTA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "quinta"]<- "DQUINTA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "sexta"]<- "ESEXTA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "sábado"]<- "FSÁBADO"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "domingo"]<- "GDOMINGO"
-
-df_dia_semana_banco_USO_DE_DROGAS
-
-df_dia_semana_banco_USO_DE_DROGAS <-df_dia_semana_banco_USO_DE_DROGAS[order(df_dia_semana_banco_USO_DE_DROGAS$DIA),]
-
-df_dia_semana_banco_USO_DE_DROGAS
-
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "ASEGUNDA"]<- "SEGUNDA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "BTERÇA"]<- "TERÇA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "CQUARTA"]<- "QUARTA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "DQUINTA"]<- "QUINTA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "ESEXTA"]<- "SEXTA"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "FSÁBADO"]<- "SÁBADO"
-df_dia_semana_banco_USO_DE_DROGAS$DIA[df_dia_semana_banco_USO_DE_DROGAS$DIA == "GDOMINGO"]<- "DOMINGO"
-
-
-df_dia_semana_banco_USO_DE_DROGAS
-
+#df_dia_semana_banco_USO_DE_DROGAS_gt =
+#  df_dia_semana_banco_USO_DE_DROGAS_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-
-#script para o bookdown
-
-df_dia_semana_banco_USO_DE_DROGAS_rmark = df_dia_semana_banco_USO_DE_DROGAS
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_dia_semana_banco_USO_DE_DROGAS_rmark = df_dia_semana_banco_USO_DE_DROGAS_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_dia_semana_banco_USO_DE_DROGAS_rmark1 = df_dia_semana_banco_USO_DE_DROGAS_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_dia_semana_banco_USO_DE_DROGAS_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_dia_semana_banco_USO_DE_DROGAS_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
+# df_dia_semana_banco_USO_DE_DROGAS_gt FIM
 #########################################################################################################
 #########################################################################################################
-#acrescentando linha com total
-df_dia_semana_banco_USO_DE_DROGAS <- rbind(df_dia_semana_banco_USO_DE_DROGAS,
-                                           data.frame(DIA = "TOTAL", QUANTIDADE = sum(df_dia_semana_banco_USO_DE_DROGAS$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_dia_semana_banco_USO_DE_DROGAS$PERCENTUAL, 0)),
-                                                      stringsAsFactors = FALSE))
-
-df_dia_semana_banco_USO_DE_DROGAS
-
-colnames(df_dia_semana_banco_USO_DE_DROGAS) <- c("DIA", "QUANTIDADE", "%")
-
-#para tabela gt abaixo:
-df_dia_semana_banco_USO_DE_DROGAS_gt = df_dia_semana_banco_USO_DE_DROGAS
-
-#colnames(df_dia_semana_banco_USO_DE_DROGAS) <- c("DIA", "%")
-#df_dia_semana_banco_USO_DE_DROGAS <- df_dia_semana_banco_USO_DE_DROGAS[c("DIA", "QUANTIDADE")]
-#salvando tabela
+# df_regional_banco_USO_DE_DROGAS_gt
 #########################################################################################################
-#pdf(file=TABELA[3,],"_004_dia_semana_USO_DE_DROGAS_alternativa.pdf",  width = 6, height = 4.8, title = "df_dia_semana_banco_USO_DE_DROGAS")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-##TABELA df_regional_banco_USO_DE_DROGAS
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -1322,185 +734,116 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS_puro[!duplicated(data.frame(banco_USO_DE_DROGAS_puro$PROCESSO, banco_USO_DE_DROGAS_puro$ATO_INFRACIONAL)),]
 banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS_puro
 
-df_regional_banco_USO_DE_DROGAS <- banco_USO_DE_DROGAS_sem_concurso %>%
-  select(ATO_INFRACIONAL, REGIONAL_ATO, REGIONAL_ATO)
+df_regional_banco_USO_DE_DROGAS_gt =
+  banco_USO_DE_DROGAS_sem_concurso %>%
+  select(REGIONAL_ATO)
 
-names(df_regional_banco_USO_DE_DROGAS)
-
-
-table(df_regional_banco_USO_DE_DROGAS$REGIONAL_ATO, useNA ="always")
-sum(table(df_regional_banco_USO_DE_DROGAS$REGIONAL_ATO, useNA ="always"))
-#########################################################################################################
-df_regional_banco_USO_DE_DROGAS <- data.frame(table(df_regional_banco_USO_DE_DROGAS$REGIONAL_ATO, useNA ="always"))
-df_regional_banco_USO_DE_DROGAS_original=df_regional_banco_USO_DE_DROGAS #salvando atos atendimento original
-#df_regional_banco_USO_DE_DROGAS=df_regional_banco_USO_DE_DROGAS_original
-#df_regional_banco_USO_DE_DROGAS$Var1 <- NULL
-colnames(df_regional_banco_USO_DE_DROGAS) <- c("REGIONAL", "QUANTIDADE")
-
-##write.xlsx(df_regional_banco_USO_DE_DROGAS, file = "df_regional_banco_USO_DE_DROGAS_bruto.xlsx") #salvando com modificações anteriores
-
-#df_regional_banco_USO_DE_DROGAS$SEXO <- NULL
-
-df_regional_banco_USO_DE_DROGAS$REGIONAL <- as.character(df_regional_banco_USO_DE_DROGAS$REGIONAL)
-
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == ""]<- "SEM INFORMAÇÃO"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "#N/DISP"]<- "SEM INFORMAÇÃO"
-#df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == NA]<- "SEM INFORMAÇÃO"
-df_regional_banco_USO_DE_DROGAS
-
-df_regional_banco_USO_DE_DROGAS = filter(df_regional_banco_USO_DE_DROGAS, !QUANTIDADE == 0)
-df_regional_banco_USO_DE_DROGAS
-
-df_regional_banco_USO_DE_DROGAS$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO", df_regional_banco_USO_DE_DROGAS$REGIONAL, ignore.case = TRUE),
-                                                    gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_regional_banco_USO_DE_DROGAS$REGIONAL), "OUTRO ESTADO")
-
-##write.xlsx(df_regional_banco_USO_DE_DROGAS, file = "df_regional_banco_USO_DE_DROGAS.xlsx")
-
-
-df_regional_banco_USO_DE_DROGAS$REGIONAL <- NULL
-
-colnames(df_regional_banco_USO_DE_DROGAS) <- c("QUANTIDADE", "REGIONAL")
-
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "OUTRO ESTADO"]<- "SEM INFORMAÇÃO"
-
-
-df_regional_banco_USO_DE_DROGAS <- df_regional_banco_USO_DE_DROGAS[c("REGIONAL", "QUANTIDADE")]
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_regional_banco_USO_DE_DROGAS$QUANTIDADE)
-
-df_regional_banco_USO_DE_DROGAS <- ddply(df_regional_banco_USO_DE_DROGAS,
-                                         c("REGIONAL"),
-                                         summarise,
-                                         QUANTIDADE = sum(QUANTIDADE))
-
-###alterando
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
-
-df_regional_banco_USO_DE_DROGAS <-df_regional_banco_USO_DE_DROGAS[order(df_regional_banco_USO_DE_DROGAS$REGIONAL),]
-
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-df_regional_banco_USO_DE_DROGAS$REGIONAL[df_regional_banco_USO_DE_DROGAS$REGIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-
-#caso queira separar so regionais
-#df_regional_banco_USO_DE_DROGAS1 <- df_regional_banco_USO_DE_DROGAS[!(df_regional_banco_USO_DE_DROGAS$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      df_regional_banco_USO_DE_DROGAS$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     df_regional_banco_USO_DE_DROGAS$REGIONAL == 'OUTRO ESTADO'|
-#                                                    df_regional_banco_USO_DE_DROGAS$REGIONAL == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_regional_banco_USO_DE_DROGAS$QUANTIDADE <- as.numeric(df_regional_banco_USO_DE_DROGAS$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_regional_banco_USO_DE_DROGAS$PERCENTUAL <- round(prop.table(df_regional_banco_USO_DE_DROGAS$QUANTIDADE)*100, 2)
-df_regional_banco_USO_DE_DROGAS
-#df_regional_banco_USO_DE_DROGAS <- df_regional_banco_USO_DE_DROGAS[order(df_regional_banco_USO_DE_DROGAS[,3],decreasing=TRUE),]
-#write.csv(df_regional_banco_USO_DE_DROGAS, file ="df_regional_banco_USO_DE_DROGAS.csv",row.names=TRUE)
-##write.xlsx(df_regional_banco_USO_DE_DROGAS, file ="df_regional_banco_USO_DE_DROGAS.xlsx")
-#df_regional_banco_USO_DE_DROGAS$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_regional_banco_USO_DE_DROGAS<-df_regional_banco_USO_DE_DROGAS %>%
-  arrange(desc(QUANTIDADE))
-df_regional_banco_USO_DE_DROGAS_bkp = df_regional_banco_USO_DE_DROGAS
-
+colnames(df_regional_banco_USO_DE_DROGAS_gt)[1]<-'REGIONAL_ATO'
 
 #########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-df_regional_banco_USO_DE_DROGAS_rmark = df_regional_banco_USO_DE_DROGAS
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_regional_banco_USO_DE_DROGAS_rmark = df_regional_banco_USO_DE_DROGAS_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_regional_banco_USO_DE_DROGAS_rmark1 = df_regional_banco_USO_DE_DROGAS_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_regional_banco_USO_DE_DROGAS_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_regional_banco_USO_DE_DROGAS_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-
-
-
-#acrescentando linha com total
-df_regional_banco_USO_DE_DROGAS <- rbind(df_regional_banco_USO_DE_DROGAS,
-                                         data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(df_regional_banco_USO_DE_DROGAS$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_regional_banco_USO_DE_DROGAS$PERCENTUAL, 0)),
-                                                    stringsAsFactors = FALSE))
-
-
-colnames(df_regional_banco_USO_DE_DROGAS) <- c("REGIONAL", "QUANTIDADE", "%")
-
-#para tabela gt abaixo:
-df_regional_banco_USO_DE_DROGAS_gt = df_regional_banco_USO_DE_DROGAS
-#colnames(df_regional_banco_USO_DE_DROGAS) <- c("REGIONAL", "%")
-#df_regional_banco_USO_DE_DROGAS <- df_regional_banco_USO_DE_DROGAS[c("REGIONAL", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#pdf(file=TABELA[3,],"_004_REGIONAL_USO_DE_DROGAS_alternativa.pdf",  width = 6, height = 4.8, title = "df_regional_banco_USO_DE_DROGAS")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
+#encontrando parte do texto e substituindo
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[agrep("/MG", df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[agrep("RMBH", df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[agrep("RIBEIRAO DAS NEVES", df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[agrep("CATAGUASES", df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[agrep("CIDADE DE BRASILIA/DF", df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO)] <- "VOUTRO ESTADO"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[agrep("N/DISP", df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[agrep("INFORMACAO", df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == ""]<- "SEM INFORMAÇÃO"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "PAMPULHA"]<- "PAMPULHA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "VENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "REGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
 #########################################################################################################
 
+# salvando para gráfico
+df_regional_banco_USO_DE_DROGAS_gt_bkp = df_regional_banco_USO_DE_DROGAS_gt
+
+df_regional_banco_USO_DE_DROGAS_gt_bkp =
+  df_regional_banco_USO_DE_DROGAS_gt_bkp %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+
+colnames(df_regional_banco_USO_DE_DROGAS_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_USO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
+
 #########################################################################################################
-##TABELA DIA SEMANA TRAFICO_DE_DROGAS
+#para script rmd:
+df_regional_banco_USO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_USO_DE_DROGAS_gt_bkp$PERCENTUAL))
+df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd = tail(df_regional_banco_USO_DE_DROGAS_gt_bkp,5)
+#########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(df_regional_banco_USO_DE_DROGAS_gt_bkp)[1]<-'df_regional_banco_USO_DE_DROGAS_gt_bkp'
+colnames(df_regional_banco_USO_DE_DROGAS_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_USO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+df_regional_banco_USO_DE_DROGAS_gt =
+  df_regional_banco_USO_DE_DROGAS_gt %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(REGIONAL_ATO) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+
+
+colnames(df_regional_banco_USO_DE_DROGAS_gt)[1]<-'REGIONAL'
+colnames(df_regional_banco_USO_DE_DROGAS_gt)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_USO_DE_DROGAS_gt)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+
+#df_regional_banco_USO_DE_DROGAS_gt =
+#  df_regional_banco_USO_DE_DROGAS_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+
+
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# df_regional_banco_USO_DE_DROGAS_gt FIM
+#########################################################################################################
+
+#########################################################################################################
+# df_dia_semana_banco_TRAFICO_DE_DROGAS_gt
+#########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -1508,190 +851,93 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS_puro[!duplicated(data.frame(banco_TRAFICO_DE_DROGAS_puro$PROCESSO, banco_TRAFICO_DE_DROGAS_puro$ATO_INFRACIONAL)),]
 banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS_puro
 
-df_dia_semana_banco_TRAFICO_DE_DROGAS <- banco_TRAFICO_DE_DROGAS_sem_concurso %>%
-  select(ATO_INFRACIONAL, DIA_SEMANA_ATO, REGIONAL_ATO)
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt =
+  banco_TRAFICO_DE_DROGAS_sem_concurso %>%
+  select(DIA_SEMANA_ATO)
 
-names(df_dia_semana_banco_TRAFICO_DE_DROGAS)
+colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt)[1]<-'DIA_SEMANA'
 
-
-table(df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA_SEMANA_ATO, useNA ="always")
-sum(table(df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA_SEMANA_ATO, useNA ="always"))
 #########################################################################################################
-df_dia_semana_banco_TRAFICO_DE_DROGAS <- data.frame(table(df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA_SEMANA_ATO, useNA ="always"))
-df_dia_semana_banco_TRAFICO_DE_DROGAS_original=df_dia_semana_banco_TRAFICO_DE_DROGAS #salvando atos atendimento original
-#df_dia_semana_banco_TRAFICO_DE_DROGAS=df_dia_semana_banco_TRAFICO_DE_DROGAS_original
-#df_dia_semana_banco_TRAFICO_DE_DROGAS$Var1 <- NULL
-colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS) <- c("DIA", "QUANTIDADE")
 
-##write.xlsx(df_dia_semana_banco_TRAFICO_DE_DROGAS, file = "df_dia_semana_banco_TRAFICO_DE_DROGAS_bruto.xlsx") #salvando com modificações anteriores
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "segunda"]<- "SEGUNDA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "terça"]<- "TERÇA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "quarta"]<- "QUARTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "quinta"]<- "QUINTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "sexta"]<- "SEXTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "sábado"]<- "SÁBADO"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "domingo"]<- "DOMINGO"
+#########################################################################################################
 
-#df_dia_semana_banco_TRAFICO_DE_DROGAS$SEXO <- NULL
+# salvando para gráfico
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp = df_dia_semana_banco_TRAFICO_DE_DROGAS_gt
 
-df_dia_semana_banco_TRAFICO_DE_DROGAS
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp =
+  df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-df_dia_semana_banco_TRAFICO_DE_DROGAS = filter(df_dia_semana_banco_TRAFICO_DE_DROGAS, !QUANTIDADE == 0)
-df_dia_semana_banco_TRAFICO_DE_DROGAS
+colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp)[1]<-'df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp'
+colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
 
-##write.xlsx(df_dia_semana_banco_TRAFICO_DE_DROGAS, file = "df_dia_semana_banco_TRAFICO_DE_DROGAS.xlsx")
+#########################################################################################################
+#para script rmd:
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL))
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd = tail(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp,5)
+#########################################################################################################
+#########################################################################################################
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "DOMINGO"]<- "ADOMINGO"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "SEGUNDA"]<- "BSEGUNDA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "TERÇA"]<- "CTERÇA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "QUARTA"]<- "DQUARTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "QUINTA"]<- "EQUINTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "SEXTA"]<- "FSEXTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "SÁBADO"]<- "GSÁBADO"
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt =
+  df_dia_semana_banco_TRAFICO_DE_DROGAS_gt %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(DIA_SEMANA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "ADOMINGO"]<- "DOMINGO"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "BSEGUNDA"]<- "SEGUNDA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "CTERÇA"]<- "TERÇA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "DQUARTA"]<- "QUARTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "EQUINTA"]<- "QUINTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "FSEXTA"]<- "SEXTA"
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "GSÁBADO"]<- "SÁBADO"
+#########################################################################################################
 
-#df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA <- NULL
+colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt)[1]<-'DIA'
+colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt)[2]<-'QUANTIDADE'
+colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt)[3]<-'PERCENTUAL'
 
-#colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS) <- c("QUANTIDADE", "DIA")
+#############################################################################################################
 
-df_dia_semana_banco_TRAFICO_DE_DROGAS <- df_dia_semana_banco_TRAFICO_DE_DROGAS[c("DIA", "QUANTIDADE")]
-
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_dia_semana_banco_TRAFICO_DE_DROGAS$QUANTIDADE)
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS <- ddply(df_dia_semana_banco_TRAFICO_DE_DROGAS,
-                                               c("DIA"),
-                                               summarise,
-                                               QUANTIDADE = sum(QUANTIDADE))
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-
-#caso queira separar so regionais
-#df_dia_semana_banco_TRAFICO_DE_DROGAS1 <- df_dia_semana_banco_TRAFICO_DE_DROGAS[!(df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == 'REGIÃO METROPOLITANA'|
-#                                                      df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == 'OUTRA CIDADE MG'|
-#                                                     df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == 'OUTRO ESTADO'|
-#                                                    df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_dia_semana_banco_TRAFICO_DE_DROGAS$QUANTIDADE <- as.numeric(df_dia_semana_banco_TRAFICO_DE_DROGAS$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS$PERCENTUAL <- round(prop.table(df_dia_semana_banco_TRAFICO_DE_DROGAS$QUANTIDADE)*100, 2)
-
-
-
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS
-#df_dia_semana_banco_TRAFICO_DE_DROGAS <- df_dia_semana_banco_TRAFICO_DE_DROGAS[order(df_dia_semana_banco_TRAFICO_DE_DROGAS[,3],decreasing=TRUE),]
-#write.csv(df_dia_semana_banco_TRAFICO_DE_DROGAS, file ="df_dia_semana_banco_TRAFICO_DE_DROGAS.csv",row.names=TRUE)
-##write.xlsx(df_dia_semana_banco_TRAFICO_DE_DROGAS, file ="df_dia_semana_banco_TRAFICO_DE_DROGAS.xlsx")
-#df_dia_semana_banco_TRAFICO_DE_DROGAS$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_dia_semana_banco_TRAFICO_DE_DROGAS<-df_dia_semana_banco_TRAFICO_DE_DROGAS %>%
-  arrange(desc(QUANTIDADE))
-df_dia_semana_banco_TRAFICO_DE_DROGAS_bkp = df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA <- as.character(df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA)
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "segunda"]<- "ASEGUNDA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "terça"]<- "BTERÇA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "quarta"]<- "CQUARTA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "quinta"]<- "DQUINTA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "sexta"]<- "ESEXTA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "sábado"]<- "FSÁBADO"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "domingo"]<- "GDOMINGO"
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS <-df_dia_semana_banco_TRAFICO_DE_DROGAS[order(df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA),]
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "ASEGUNDA"]<- "SEGUNDA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "BTERÇA"]<- "TERÇA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "CQUARTA"]<- "QUARTA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "DQUINTA"]<- "QUINTA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "ESEXTA"]<- "SEXTA"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "FSÁBADO"]<- "SÁBADO"
-df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA[df_dia_semana_banco_TRAFICO_DE_DROGAS$DIA == "GDOMINGO"]<- "DOMINGO"
-
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS
+#df_dia_semana_banco_TRAFICO_DE_DROGAS_gt =
+#  df_dia_semana_banco_TRAFICO_DE_DROGAS_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-
-#script para o bookdown
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark = df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark = df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark1 = df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
+# df_dia_semana_banco_TRAFICO_DE_DROGAS_gt FIM
 #########################################################################################################
 #########################################################################################################
-
-
-
-#acrescentando linha com total
-df_dia_semana_banco_TRAFICO_DE_DROGAS <- rbind(df_dia_semana_banco_TRAFICO_DE_DROGAS,
-                                               data.frame(DIA = "TOTAL", QUANTIDADE = sum(df_dia_semana_banco_TRAFICO_DE_DROGAS$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_dia_semana_banco_TRAFICO_DE_DROGAS$PERCENTUAL, 0)),
-                                                          stringsAsFactors = FALSE))
-
-df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS) <- c("DIA", "QUANTIDADE", "%")
-
-#para tabela gt abaixo:
-df_dia_semana_banco_TRAFICO_DE_DROGAS_gt = df_dia_semana_banco_TRAFICO_DE_DROGAS
-
-#colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS) <- c("DIA", "%")
-#df_dia_semana_banco_TRAFICO_DE_DROGAS <- df_dia_semana_banco_TRAFICO_DE_DROGAS[c("DIA", "QUANTIDADE")]
-#salvando tabela
+# df_regional_banco_TRAFICO_DE_DROGAS_gt
 #########################################################################################################
-#pdf(file=TABELA[3,],"_004_dia_semana_TRAFICO_DE_DROGAS_alternativa.pdf",  width = 6, height = 4.8, title = "df_dia_semana_banco_TRAFICO_DE_DROGAS")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-##TABELA df_regional_banco_TRAFICO_DE_DROGAS
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -1699,180 +945,116 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS_puro[!duplicated(data.frame(banco_TRAFICO_DE_DROGAS_puro$PROCESSO, banco_TRAFICO_DE_DROGAS_puro$ATO_INFRACIONAL)),]
 banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS_puro
 
-df_regional_banco_TRAFICO_DE_DROGAS <- banco_TRAFICO_DE_DROGAS_sem_concurso %>%
-  select(ATO_INFRACIONAL, REGIONAL_ATO, REGIONAL_ATO)
+df_regional_banco_TRAFICO_DE_DROGAS_gt =
+  banco_TRAFICO_DE_DROGAS_sem_concurso %>%
+  select(REGIONAL_ATO)
 
-names(df_regional_banco_TRAFICO_DE_DROGAS)
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt)[1]<-'REGIONAL_ATO'
 
-
-table(df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL_ATO, useNA ="always")
-sum(table(df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL_ATO, useNA ="always"))
 #########################################################################################################
-df_regional_banco_TRAFICO_DE_DROGAS <- data.frame(table(df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL_ATO, useNA ="always"))
-df_regional_banco_TRAFICO_DE_DROGAS_original=df_regional_banco_TRAFICO_DE_DROGAS #salvando atos atendimento original
-#df_regional_banco_TRAFICO_DE_DROGAS=df_regional_banco_TRAFICO_DE_DROGAS_original
-#df_regional_banco_TRAFICO_DE_DROGAS$Var1 <- NULL
-colnames(df_regional_banco_TRAFICO_DE_DROGAS) <- c("REGIONAL", "QUANTIDADE")
+#encontrando parte do texto e substituindo
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[agrep("/MG", df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[agrep("RMBH", df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[agrep("RIBEIRAO DAS NEVES", df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[agrep("CATAGUASES", df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[agrep("CIDADE DE BRASILIA/DF", df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO)] <- "VOUTRO ESTADO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[agrep("N/DISP", df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[agrep("INFORMACAO", df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == ""]<- "SEM INFORMAÇÃO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "PAMPULHA"]<- "PAMPULHA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "VENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "REGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
-##write.xlsx(df_regional_banco_TRAFICO_DE_DROGAS, file = "df_regional_banco_TRAFICO_DE_DROGAS_bruto.xlsx") #salvando com modificações anteriores
+#########################################################################################################
 
-#df_regional_banco_TRAFICO_DE_DROGAS$SEXO <- NULL
+# salvando para gráfico
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp = df_regional_banco_TRAFICO_DE_DROGAS_gt
 
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL <- as.character(df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL)
-
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == ""]<- "SEM INFORMAÇÃO"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "#N/DISP"]<- "SEM INFORMAÇÃO"
-#df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == NA]<- "SEM INFORMAÇÃO"
-df_regional_banco_TRAFICO_DE_DROGAS
-
-df_regional_banco_TRAFICO_DE_DROGAS = filter(df_regional_banco_TRAFICO_DE_DROGAS, !QUANTIDADE == 0)
-df_regional_banco_TRAFICO_DE_DROGAS
-
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO", df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL, ignore.case = TRUE),
-                                                        gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL), "OUTRO ESTADO")
-
-##write.xlsx(df_regional_banco_TRAFICO_DE_DROGAS, file = "df_regional_banco_TRAFICO_DE_DROGAS.xlsx")
-
-
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL <- NULL
-
-colnames(df_regional_banco_TRAFICO_DE_DROGAS) <- c("QUANTIDADE", "REGIONAL")
-
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-#REGIONAIS INDEVIDAS EM SEM INFORMAÇÃO:
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "REGIÃO METROPOLITANA"]<- "SEM INFORMAÇÃO"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "OUTRA CIDADE MG"]<- "SEM INFORMAÇÃO"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "OUTRO ESTADO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp =
+  df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
 
-df_regional_banco_TRAFICO_DE_DROGAS <- df_regional_banco_TRAFICO_DE_DROGAS[c("REGIONAL", "QUANTIDADE")]
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
 
-#library(grid)
-#library(gridExtra)
+#########################################################################################################
+#para script rmd:
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL))
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd = tail(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp,5)
+#########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
 
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(df_regional_banco_TRAFICO_DE_DROGAS$QUANTIDADE)
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
-df_regional_banco_TRAFICO_DE_DROGAS <- ddply(df_regional_banco_TRAFICO_DE_DROGAS,
-                                             c("REGIONAL"),
-                                             summarise,
-                                             QUANTIDADE = sum(QUANTIDADE))
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp)[1]<-'df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp'
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
-###alterando
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt =
+  df_regional_banco_TRAFICO_DE_DROGAS_gt %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(REGIONAL_ATO) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
 
-df_regional_banco_TRAFICO_DE_DROGAS <-df_regional_banco_TRAFICO_DE_DROGAS[order(df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL),]
-
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL[df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-
-#caso queira separar so regionais
-#df_regional_banco_TRAFICO_DE_DROGAS1 <- df_regional_banco_TRAFICO_DE_DROGAS[!(df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == 'OUTRO ESTADO'|
-#                                                    df_regional_banco_TRAFICO_DE_DROGAS$REGIONAL == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_regional_banco_TRAFICO_DE_DROGAS$QUANTIDADE <- as.numeric(df_regional_banco_TRAFICO_DE_DROGAS$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
+# Adaptando:
+#SUBSTITUIR
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
 
 
-#usando a funcao criada:
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt)[1]<-'REGIONAL'
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt)[2]<-'QUANTIDADE'
+colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt)[3]<-'PERCENTUAL'
 
+#############################################################################################################
 
-df_regional_banco_TRAFICO_DE_DROGAS$PERCENTUAL <- round(prop.table(df_regional_banco_TRAFICO_DE_DROGAS$QUANTIDADE)*100, 2)
-df_regional_banco_TRAFICO_DE_DROGAS
-#df_regional_banco_TRAFICO_DE_DROGAS <- df_regional_banco_TRAFICO_DE_DROGAS[order(df_regional_banco_TRAFICO_DE_DROGAS[,3],decreasing=TRUE),]
-#write.csv(df_regional_banco_TRAFICO_DE_DROGAS, file ="df_regional_banco_TRAFICO_DE_DROGAS.csv",row.names=TRUE)
-##write.xlsx(df_regional_banco_TRAFICO_DE_DROGAS, file ="df_regional_banco_TRAFICO_DE_DROGAS.xlsx")
-#df_regional_banco_TRAFICO_DE_DROGAS$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_regional_banco_TRAFICO_DE_DROGAS<-df_regional_banco_TRAFICO_DE_DROGAS %>%
-  arrange(desc(QUANTIDADE))
-df_regional_banco_TRAFICO_DE_DROGAS_bkp = df_regional_banco_TRAFICO_DE_DROGAS
+#df_regional_banco_TRAFICO_DE_DROGAS_gt =
+#  df_regional_banco_TRAFICO_DE_DROGAS_gt %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-
-#script para o bookdown
-
-df_regional_banco_TRAFICO_DE_DROGAS_rmark = df_regional_banco_TRAFICO_DE_DROGAS
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_regional_banco_TRAFICO_DE_DROGAS_rmark = df_regional_banco_TRAFICO_DE_DROGAS_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#opcao quando há empate:
-df_regional_banco_TRAFICO_DE_DROGAS_rmark1 = df_regional_banco_TRAFICO_DE_DROGAS_rmark %>%
-  top_n(7, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-
-#somando
-sum(df_regional_banco_TRAFICO_DE_DROGAS_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_regional_banco_TRAFICO_DE_DROGAS_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
+# df_regional_banco_TRAFICO_DE_DROGAS_gt FIM
 #########################################################################################################
 
 
 
 
-#acrescentando linha com total
-df_regional_banco_TRAFICO_DE_DROGAS <- rbind(df_regional_banco_TRAFICO_DE_DROGAS,
-                                             data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(df_regional_banco_TRAFICO_DE_DROGAS$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_regional_banco_TRAFICO_DE_DROGAS$PERCENTUAL, 0)),
-                                                        stringsAsFactors = FALSE))
-
-
-colnames(df_regional_banco_TRAFICO_DE_DROGAS) <- c("REGIONAL", "QUANTIDADE", "%")
-#para tabela gt abaixo:
-df_regional_banco_TRAFICO_DE_DROGAS_gt = df_regional_banco_TRAFICO_DE_DROGAS
-
-#colnames(df_regional_banco_TRAFICO_DE_DROGAS) <- c("REGIONAL", "%")
-#df_regional_banco_TRAFICO_DE_DROGAS <- df_regional_banco_TRAFICO_DE_DROGAS[c("REGIONAL", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#pdf(file=TABELA[3,],"_004_REGIONAL_TRAFICO_DE_DROGAS_alternativa.pdf",  width = 6, height = 4.8, title = "df_regional_banco_TRAFICO_DE_DROGAS")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
 
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
