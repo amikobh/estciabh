@@ -359,10 +359,9 @@ df_snr_sexo_MBA$PERCENTUAL <- paste(df_snr_sexo_MBA$PERCENTUAL, "%", sep=" ")
 #salvar pdf
 ########################################################################################################
 
-########################################################################################################
-# df_snr_regional_residencia_MBA INICIO
+
 #########################################################################################################
-##TABELA REGIONAL
+#df_snr_regional_residencia_MBA
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -370,197 +369,100 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-df_snr_regional_residencia_MBA = snr_banco_so_com_mba %>%
+df_snr_regional_residencia_MBA =
+  snr_banco_so_com_mba %>%
   select(REGIONAL_RESIDENCIAL)
 
-table(df_snr_regional_residencia_MBA$REGIONAL_RESIDENCIAL, useNA ="always")
-#sum(table(df_snr_regional_residencia_MBA$REGIONAL_RESIDENCIAL, useNA ="always"))
+colnames(df_snr_regional_residencia_MBA)[1]<-'regional_residencial'
+
 #########################################################################################################
-df_snr_regional_residencia_MBA <- data.frame(table(df_snr_regional_residencia_MBA$REGIONAL_RESIDENCIAL, useNA ="always"))
-df_snr_regional_residencia_MBA_original=df_snr_regional_residencia_MBA #salvando atos atendimento original
-#df_snr_regional_residencia_MBA=df_snr_regional_residencia_MBA_original
-#df_snr_regional_residencia_MBA$Var1 <- NULL
-colnames(df_snr_regional_residencia_MBA) <- c("REGIONAL", "QUANTIDADE")
+#encontrando parte do texto e substituindo
+df_snr_regional_residencia_MBA$regional_residencial[agrep("/MG", df_snr_regional_residencia_MBA$regional_residencial)] <- "UOUTRA CIDADE MG"
+df_snr_regional_residencia_MBA$regional_residencial[agrep("RMBH", df_snr_regional_residencia_MBA$regional_residencial)] <- "REGIÃO METROPOLITANA"
+df_snr_regional_residencia_MBA$regional_residencial[agrep("RIBEIRAO DAS NEVES", df_snr_regional_residencia_MBA$regional_residencial)] <- "REGIÃO METROPOLITANA"
+df_snr_regional_residencia_MBA$regional_residencial[agrep("CATAGUASES", df_snr_regional_residencia_MBA$regional_residencial)] <- "UOUTRA CIDADE MG"
+df_snr_regional_residencia_MBA$regional_residencial[agrep("CIDADE DE BRASILIA/DF", df_snr_regional_residencia_MBA$regional_residencial)] <- "VOUTRO ESTADO"
+df_snr_regional_residencia_MBA$regional_residencial[agrep("N/DISP", df_snr_regional_residencia_MBA$regional_residencial)] <- "ZSEM INFORMAÇÃO"
+df_snr_regional_residencia_MBA$regional_residencial[agrep("INFORMACAO", df_snr_regional_residencia_MBA$regional_residencial)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == ""]<- "ZSEM INFORMAÇÃO"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "PAMPULHA"]<- "OESTEPAMPULHA"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "VENDA NOVA"]<- "PVENDA NOVA"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "REGIÃO METROPOLITANA"]<- "QREGIÃO METROPOLITANA"
 
-#write.csv(df_snr_regional_residencia_MBA, file = "df_snr_regional_residencia_MBA_bruto.csv", row.names = TRUE)
-###write.xlsx(df_snr_regional_residencia_MBA, file = "df_snr_regional_residencia_MBA_bruto.xlsx") #salvando com modificações anteriores
+#########################################################################################################
 
-#df_snr_regional_residencia_MBA$SEXO <- NULL
-
-df_snr_regional_residencia_MBA$REGIONAL <- as.character(df_snr_regional_residencia_MBA$REGIONAL)
-
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == ""]<- "SEM INFORMAÇÃO"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "#N/DISP"]<- "SEM INFORMAÇÃO"
-#df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == NA]<- "SEM INFORMAÇÃO"
-#df_snr_regional_residencia_MBA
-
-df_snr_regional_residencia_MBA = filter(df_snr_regional_residencia_MBA, !QUANTIDADE == 0)
-#df_snr_regional_residencia_MBA
-
-df_snr_regional_residencia_MBA$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO", df_snr_regional_residencia_MBA$REGIONAL, ignore.case = TRUE),
-                                                   gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_snr_regional_residencia_MBA$REGIONAL), "OUTRO ESTADO")
-
-#write.csv(df_snr_regional_residencia_MBA, file = "df_snr_regional_residencia_MBA.csv", row.names = TRUE)
-###write.xlsx(df_snr_regional_residencia_MBA, file = "df_snr_regional_residencia_MBA.xlsx")
-
-
-df_snr_regional_residencia_MBA$REGIONAL <- NULL
-
-colnames(df_snr_regional_residencia_MBA) <- c("QUANTIDADE", "REGIONAL")
-
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-
-df_snr_regional_residencia_MBA <- df_snr_regional_residencia_MBA[c("REGIONAL", "QUANTIDADE")]
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-#sum(df_snr_regional_residencia_MBA$QUANTIDADE)
-
-df_snr_regional_residencia_MBA <- ddply(df_snr_regional_residencia_MBA,
-                                        c("REGIONAL"),
-                                        summarise,
-                                        QUANTIDADE = sum(QUANTIDADE))
-
-###alterando
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
-
-df_snr_regional_residencia_MBA <-df_snr_regional_residencia_MBA[order(df_snr_regional_residencia_MBA$REGIONAL),]
-
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-df_snr_regional_residencia_MBA$REGIONAL[df_snr_regional_residencia_MBA$REGIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-
-#caso queira separar so regionais
-#df_snr_regional_residencia_MBA1 <- df_snr_regional_residencia_MBA[!(df_snr_regional_residencia_MBA$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      df_snr_regional_residencia_MBA$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     df_snr_regional_residencia_MBA$REGIONAL == 'OUTRO ESTADO'|
-#                                                    df_snr_regional_residencia_MBA$REGIONAL == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_snr_regional_residencia_MBA$QUANTIDADE <- as.numeric(df_snr_regional_residencia_MBA$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-
-
-df_snr_regional_residencia_MBA$PERCENTUAL <- round_preserve_sum(prop.table(df_snr_regional_residencia_MBA$QUANTIDADE)*100, 2)
-
-#df_snr_regional_residencia_MBA <- df_snr_regional_residencia_MBA[order(df_snr_regional_residencia_MBA[,3],decreasing=TRUE),]
-#write.csv(df_snr_regional_residencia_MBA, file ="df_snr_regional_residencia_MBA.csv",row.names=TRUE)
-###write.xlsx(df_snr_regional_residencia_MBA, file ="df_snr_regional_residencia_MBA.xlsx")
-#df_snr_regional_residencia_MBA$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
+# salvando para gráfico
 df_snr_regional_residencia_MBA_bkp = df_snr_regional_residencia_MBA
 
-#########################################################################################################
-#########################################################################################################
+df_snr_regional_residencia_MBA_bkp =
+  df_snr_regional_residencia_MBA_bkp %>%
+  janitor::tabyl(regional_residencial) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-#script para o bookdown
-
-df_snr_regional_residencia_MBA_rmark = df_snr_regional_residencia_MBA
-
-#SEPARANDO REGIAO METROPOLITANA POR CONTA DO TEXTO NO RELATORIO
-df_snr_regional_residencia_MBA_rmark1 = df_snr_regional_residencia_MBA_rmark
-df_snr_regional_residencia_MBA_rmark1 = filter(df_snr_regional_residencia_MBA_rmark1, !REGIONAL == "REGIÃO METROPOLITANA")
-
-df_snr_regional_residencia_MBA_rmark1 = df_snr_regional_residencia_MBA_rmark1 %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#SO REGIAO METROPOLITANA e outros
-df_snr_regional_residencia_MBA_rmark2 = filter(df_snr_regional_residencia_MBA_rmark, REGIONAL == "REGIÃO METROPOLITANA")
-df_snr_regional_residencia_MBA_rmark3 = filter(df_snr_regional_residencia_MBA_rmark, REGIONAL == "OUTRA CIDADE MG")
-df_snr_regional_residencia_MBA_rmark4 = filter(df_snr_regional_residencia_MBA_rmark, REGIONAL == "OUTRO ESTADO")
-df_snr_regional_residencia_MBA_rmark5 = filter(df_snr_regional_residencia_MBA_rmark, REGIONAL == "SEM INFORMAÇÃO")
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_snr_regional_residencia_MBA_rmark = df_snr_regional_residencia_MBA_rmark %>%
-  top_n(20, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-#sum(df_snr_regional_residencia_MBA_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-#df_snr_regional_residencia_MBA_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-#acrescentando linha com total
-df_snr_regional_residencia_MBA <- rbind(df_snr_regional_residencia_MBA,
-                                        data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(df_snr_regional_residencia_MBA$QUANTIDADE), PERCENTUAL = sum(df_snr_regional_residencia_MBA$PERCENTUAL),
-                                                   stringsAsFactors = FALSE))
-
-
-
-
-colnames(df_snr_regional_residencia_MBA) <- c("REGIONAL", "QUANTIDADE", "%")
-
-
-#para tabela gt abaixo:
-
-df_snr_regional_residencia_MBA_gt = df_snr_regional_residencia_MBA
-
-########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
 #########################################################################################################
 
+# Adaptando:
+#SUBSTITUIR
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "PVENDA NOVA"]<- "VENDA NOVA"
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_snr_regional_residencia_MBA_bkp$regional_residencial[df_snr_regional_residencia_MBA_bkp$regional_residencial == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(df_snr_regional_residencia_MBA_bkp)[1]<-'df_snr_regional_residencia_MBA_bkp'
+colnames(df_snr_regional_residencia_MBA_bkp)[2]<-'QUANTIDADE'
+colnames(df_snr_regional_residencia_MBA_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+df_snr_regional_residencia_MBA =
+  df_snr_regional_residencia_MBA %>%
+  janitor::tabyl(regional_residencial) %>%
+  arrange(regional_residencial) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 #########################################################################################################
 
-#########################################################################################################
-#FIM
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#GRAFICO df_snr_regional_residencia_MBA
-#df_snr_regional_residencia_MBA_original=df_snr_regional_residencia_MBA #salvando REGIONALs atendimento original
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-#########################################################################################################
-#########################################################################################################
-#GRAFICO REGIONAL
-#df_snr_regional_residencia_MBA_original=df_snr_regional_residencia_MBA #salvando REGIONALs atendimento original
-df_snr_regional_residencia_MBA=df_snr_regional_residencia_MBA_bkp
-
-df_snr_regional_residencia_MBA<-df_snr_regional_residencia_MBA%>%
-  arrange(QUANTIDADE)
+# Adaptando:
+#SUBSTITUIR
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "PVENDA NOVA"]<- "VENDA NOVA"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_snr_regional_residencia_MBA$regional_residencial[df_snr_regional_residencia_MBA$regional_residencial == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
 
 
+colnames(df_snr_regional_residencia_MBA)[1]<-'REGIONAL'
+colnames(df_snr_regional_residencia_MBA)[2]<-'QUANTIDADE'
+colnames(df_snr_regional_residencia_MBA)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+
+#df_snr_regional_residencia_MBA =
+#  df_snr_regional_residencia_MBA %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+
+
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
-#########################################################################################################
 #########################################################################################################
 # df_snr_regional_residencia_MBA FIM
 #########################################################################################################
-#########################################################################################################
-
-
 
 #########################################################################################################
 
@@ -679,176 +581,99 @@ round_preserve_sum <- function(x, digits = 0) {
 ##setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #########################################################################################################
 
-########################################################################################################
-# MOTIVO_MBA INICIO
 #########################################################################################################
-
-MOTIVO_MBA <- data.frame(table(banco_so_com_mba$MOTIVO_MBA))
-
-colnames(MOTIVO_MBA) <- c("MOTIVO_MBA", "QUANTIDADE")
-#acrescentando coluna com percentual
-MOTIVO_MBA$QUANTIDADE <- as.numeric(MOTIVO_MBA$QUANTIDADE)
 #MOTIVO_MBA
-MOTIVO_MBA = filter(MOTIVO_MBA, !QUANTIDADE == 0)
-#MOTIVO_MBA
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/planilhas"))
+#########################################################################################################
+#########################################################################################################
+#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
+library(dplyr)
 
-MOTIVO_MBA$MOTIVO_MBA <- as.character(MOTIVO_MBA$MOTIVO_MBA)
+MOTIVO_MBA =
+  banco_so_com_mba %>%
+  select(MOTIVO_MBA)
 
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "NSA"]<- "NAO RESPONDEU"
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "SEM INFORMAÇÃO"]<- "NAO RESPONDEU"
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "NAO SABE"]<- "VNAO SABE"
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "NAO RESPONDEU"]<- "VNAO RESPONDEU"
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == ""]<- "VNAO RESPONDEU"
-
+#colnames(MOTIVO_MBA)[1]<-'regional_residencial'
 MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "DESCUMPRIMENTO DE MEIO ABERTO"]<- "DESCUMPRIMENTO DE MEDIDA EM MEIO ABERTO"
 MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "EVASAO DA SEMILIBERDADE"]<- "EVASÃO DA UNIDADE DE SEMILIBERDADE"
 MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "EVASAO DE CENTRO DE INTERNACAO"]<- "EVASÃO DA UNIDADE DE INTERNAÇÃO"
 MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "INICIAR CUMPRIMENTO DE MEDIDA DE INTERNACAO"]<- "INICIAR CUMPRIMENTO DE MEDIDA DE INTERNAÇÃO"
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "INICIAR CUMPRIMENTO DE MEDIDA DE SEMILIBERDADE"]<- "INICIAR CUMPRIMENTO DE MEDIDA DE SEMILIBERDADE"
 MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "NAO COMPARECIMENTO A AUDIENCIA"]<- "NÃO COMPARECIMENTO A AUDIÊNCIA"
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "RESPONDER PELO ATO INFRACIONAL"]<- "RESPONDER PELO ATO INFRACIONAL"
 MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "RETORNAR UNIDADE "]<- "RETORNO A UNIDADE PARA CUMPRIMENTO DA MEDIDA"
 MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "SEM INFORAMCAO"]<- "SEM INFORMAÇÃO"
+#MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+#########################################################################################################
+#encontrando parte do texto e substituindo
+#########################################################################################################
 
-MOTIVO_MBA[order(MOTIVO_MBA$MOTIVO_MBA),]#ordenar, crescente, nome2
-#MOTIVO_MBA
-
-
-MOTIVO_MBA <- ddply(MOTIVO_MBA,
-                    c("MOTIVO_MBA"),
-                    summarise,
-                    QUANTIDADE = sum(QUANTIDADE)
-                    #,
-                    #PERCENTUAL = sum(PERCENTUAL)
-)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-MOTIVO_MBA$PERCENTUAL <- round_preserve_sum(prop.table(MOTIVO_MBA$QUANTIDADE)*100, 2)
-#write.csv(MOTIVO_MBA, file ="MOTIVO_MBA.csv",row.names=TRUE)
-###write.xlsx(MOTIVO_MBA, file = "MOTIVO_MBA.xlsx")
-
-#MOTIVO_MBA$QUANTIDADE <- NULL
-
-
-
-#MOTIVO_MBA
-
-
-#MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == NA]<- "SEM INFORMAÇÃO"
-
-
-
-
-
-
-
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "VNAO SABE"]<- "NAO SABE"
-MOTIVO_MBA$MOTIVO_MBA[MOTIVO_MBA$MOTIVO_MBA == "VNAO RESPONDEU"]<- "NAO RESPONDEU"
-
-
-#MOTIVO_MBA
-
-
-
-
-#salvando para utilizacao graficos
+# salvando para gráfico
 MOTIVO_MBA_bkp = MOTIVO_MBA
 
-#########################################################################################################
-#########################################################################################################
+MOTIVO_MBA_bkp =
+  MOTIVO_MBA_bkp %>%
+  janitor::tabyl(MOTIVO_MBA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-#script para o bookdown
-
-MOTIVO_MBA_rmark = MOTIVO_MBA
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-MOTIVO_MBA_rmark = MOTIVO_MBA_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-sum(MOTIVO_MBA_rmark$QUANTIDADE)
-
-#para escolher linhas e posicoes
-MOTIVO_MBA_rmark[1,3]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+MOTIVO_MBA_bkp$MOTIVO_MBA[MOTIVO_MBA_bkp$MOTIVO_MBA == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+MOTIVO_MBA_bkp$MOTIVO_MBA[MOTIVO_MBA_bkp$MOTIVO_MBA == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+#MOTIVO_MBA_bkp$regional_residencial[MOTIVO_MBA_bkp$regional_residencial == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
 #########################################################################################################
 
-
-
-#acrescentando linha com total
-MOTIVO_MBA <- rbind(MOTIVO_MBA,
-                    data.frame(MOTIVO_MBA = "TOTAL",
-                               QUANTIDADE = sum(MOTIVO_MBA$QUANTIDADE),
-                               PERCENTUAL = sum(MOTIVO_MBA$PERCENTUAL),
-                               stringsAsFactors = FALSE))
-
-#MOTIVO_MBA
-colnames(MOTIVO_MBA) <- c("MOTIVO", "QUANTIDADE", "%")
-#MOTIVO_MBA
-
-#para tabela gt abaixo:
-MOTIVO_MBA_gt = MOTIVO_MBA
-
-#colnames(MOTIVO_MBA) <- c("MOTIVO_MBA", "%")
-#MOTIVO_MBA <- MOTIVO_MBA[c("MOTIVO_MBA", "QUANTIDADE")]
+colnames(MOTIVO_MBA_bkp)[1]<-'MOTIVO_MBA_bkp'
+colnames(MOTIVO_MBA_bkp)[2]<-'QUANTIDADE'
+colnames(MOTIVO_MBA_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+MOTIVO_MBA =
+  MOTIVO_MBA %>%
+  janitor::tabyl(MOTIVO_MBA) %>%
+  arrange(MOTIVO_MBA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 #########################################################################################################
 
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#GRAFICO MOTIVO_MBA
-#MOTIVO_MBA_original=MOTIVO_MBA #salvando MOTIVO_MBAs atendimento original
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/mba"))
-#########################################################################################################
-MOTIVO_MBA=MOTIVO_MBA
-#########################################################################################################
-#########################################################################################################
-#GRAFICO MOTIVO_MBA
-#MOTIVO_MBA_original=MOTIVO_MBA #salvando MOTIVO_MBAs atendimento original
-MOTIVO_MBA=MOTIVO_MBA_bkp
+# Adaptando:
+#SUBSTITUIR
+
+colnames(MOTIVO_MBA)[1]<-'MOTIVO'
+colnames(MOTIVO_MBA)[2]<-'QUANTIDADE'
+colnames(MOTIVO_MBA)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+
+#MOTIVO_MBA =
+#  MOTIVO_MBA %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
-MOTIVO_MBA<-MOTIVO_MBA%>%
-  arrange(PERCENTUAL)
-
-
-
-setwd(file.path("~/diretorio_r/estciabh/mba"))
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 # MOTIVO_MBA FIM
 #########################################################################################################
-
 #########################################################################################################
-# banco_ato_MBA INICIO
+# banco_ato_MBA
 #########################################################################################################
-#########################################################################################################
-banco_ato_MBA = banco_so_com_mba
 #########################################################################################################
 
+library(dplyr)
+
+banco_ato_MBA =
+  banco_so_com_mba |>
+  select(ATO_INFRACIONAL_MBA)
+
+banco_ato_MBA$ATO_INFRACIONAL_MBA = gsub(" ","", banco_ato_MBA$ATO_INFRACIONAL_MBA)
+
 #########################################################################################################
-banco_ato_MBA$ATO_INFRACIONAL_MBA <- gsub(" ","", banco_ato_MBA$ATO_INFRACIONAL_MBA)
 #########################################################################################################
 #AMEAÇA
 
@@ -1279,196 +1104,71 @@ banco_ato_MBA$ATO_INFRACIONAL_MBA = ifelse(banco_ato_MBA$ATO_INFRACIONAL_MBA == 
 #########################################################################################################
 #########################################################################################################
 
-###EXCLUIR LINHA DESCONSIDERAR AO SOMAR
-#########################################################################################################
-#Encontrando OS VARIADOS ARTIGOS QUE SOBRARAM e os que já estao como VOUTROS e os colocando na NOVA COLUNA ATO_INFRACIONAL_MBA_INFRACIONAL_MBA2
-
-#########################################################################################################
-#excluir coluna
-#banco_ato_MBA  <- banco_ato_MBA[order(banco_ato_MBA[,2],decreasing=FALSE),]
-banco_ato_MBA = arrange(banco_ato_MBA, ATO_INFRACIONAL_MBA)
-
-###renomeando:
-#banco_ato_MBA <- banco_ato_MBA[!(banco_ato_MBA$QUANTIDADE == "0"),]
-#banco_ato_MBA <- banco_ato_MBA[!(banco_ato_MBA$ATO_INFRACIONAL_MBA == "DESCONSIDERAR AO SOMAR"),]
-#banco_ato_MBA = data.frame(table(banco_ato_MBA$ATO_INFRACIONAL_MBA_INFRACIONAL_MBA))
-banco_ato_MBA = data.frame(table(banco_ato_MBA$ATO_INFRACIONAL_MBA))
-#banco_ato_MBA = as_tibble(table(banco_ato_MBA$ATO_INFRACIONAL_MBA))
-#ordenar coluna para facilitar visualizacao na soma com tabela dinamica
-banco_ato_MBA$Var1 <- as.character(banco_ato_MBA$Var1)
-
-banco_ato_MBA$Var1[banco_ato_MBA$Var1 == "SEM INFORMAÇÃO"]<- "VSEM INFORMAÇÃO"
-banco_ato_MBA$Var1[banco_ato_MBA$Var1 == "OUTROS"]<- "VOUTROS"
-
-banco_ato_MBA<-banco_ato_MBA%>%
-  arrange(Var1)
-
-banco_ato_MBA$Var1[banco_ato_MBA$Var1 == "VSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-banco_ato_MBA$Var1[banco_ato_MBA$Var1 == "VOUTROS"]<- "OUTROS"
-
-#write.csv(banco_ato_MBA, file ="banco_ato_MBA.csv",row.names=FALSE)
-
-#SALVAR CSV NO DIRETORIO RAIZ
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-
-#write.csv(banco_ato_MBA, file ="banco_ato_MBA.csv",row.names=FALSE)
-
-#VOLTAR PAAR O DIRETORIO PADRAO
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-
-##write.xlsx(banco_ato_MBA, file ="banco_ato_MBA.xlsx")
-
 #########################################################################################################
 #########################################################################################################
-
-#########################################################################################################
-##TABELA ENVOLVIMENTOS ATO_INFRACIONAL_MBAs Infracionais
-
-colnames(banco_ato_MBA) <- c("ATO_INFRACIONAL_MBA", "QUANTIDADE")
-
-banco_ato_MBA_bkp = banco_ato_MBA #salvando ATO_INFRACIONAL_MBAs atendimento original
-
-#library(grid)
-#library(gridExtra)
-
-#acrescentando coluna com percentual
-banco_ato_MBA$QUANTIDADE <- as.numeric(banco_ato_MBA$QUANTIDADE)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-#banco_ato_MBA$PERCENTUAL <- round(prop.table(banco_ato_MBA$QUANTIDADE)*100, 2)
-banco_ato_MBA$PERCENTUAL <- round(prop.table(banco_ato_MBA$QUANTIDADE)*100, 2)
-
-#script para o bookdown
-
-banco_ato_MBA_rmark = banco_ato_MBA
-
-#banco_ato_MBA_rmark <- banco_ato_MBA_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_ato_MBA_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-banco_ato_MBA_rmark = banco_ato_MBA_rmark %>%
-  top_n(5, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-#sum(banco_ato_MBA_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-#banco_ato_MBA_rmark[1,2]
-#outra forma de calcular percentual
-#banco_ato_MBA = mutate(banco_ato_MBA,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-
-
-
-#acrescentando linha com total
-banco_ato_MBA <- rbind(banco_ato_MBA,
-                       data.frame(ATO_INFRACIONAL_MBA = "TOTAL", QUANTIDADE = sum(banco_ato_MBA$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(banco_ato_MBA$PERCENTUAL, 0)),
-                                  stringsAsFactors = FALSE))
-
-
-colnames(banco_ato_MBA) <- c("ATO_INFRACIONAL_MBA", "QUANTIDADE", "%")
-
-##write.xlsx(banco_ato_MBA, file = "banco_ato_MBA_total.xlsx") #salvando para usar na comparada
-#write.csv(banco_ato_MBA, file = "banco_ato_MBA_total.csv", row.names=FALSE) #salvando com modificações anteriores
-
-
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-
-#########################################################################################################
-banco_ato_MBA=banco_ato_MBA_bkp
-
-#library(grid)
-#library(gridExtra)
-
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#INCIDENCIA COMPARADA. obs: trazer arquivo ano anterior para a pasta.
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-#########################################################################################################
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-#banco_ato_MBA$PERCENTUAL <- round(prop.table(banco_ato_MBA$QUANTIDADE)*100, 2)
-banco_ato_MBA$PERCENTUAL <- round_preserve_sum(prop.table(banco_ato_MBA$QUANTIDADE)*100, 2)
-
-#outra forma de calcular percentual
-#banco_ato_MBA = mutate(banco_ato_MBA,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-
-
-
-
-
-banco_ato_MBA$ATO_INFRACIONAL_MBA <- as.character(banco_ato_MBA$ATO_INFRACIONAL_MBA)
-
-#NA POR ZERO
-
-banco_ato_MBA = replace(x = banco_ato_MBA, list = is.na(banco_ato_MBA), values = 0)
-
+# salvando para gráfico
 banco_ato_MBA_bkp = banco_ato_MBA
-#acrescentando linha com total
-banco_ato_MBA <- rbind(banco_ato_MBA,
-                       data.frame(ATO_INFRACIONAL_MBA = "TOTAL",
-                                  QUANTIDADE = sum(banco_ato_MBA$QUANTIDADE),
-                                  PERCENTUAL = sum(banco_ato_MBA$PERCENTUAL),
-                                  stringsAsFactors = FALSE))
 
-#banco_ato_MBA$VAR <- round(((banco_ato_MBA$ANOATUAL*100)/banco_ato_MBA$ANOANTERIOR)-100, 2)
+banco_ato_MBA_bkp =
+  banco_ato_MBA_bkp %>%
+  janitor::tabyl(ATO_INFRACIONAL_MBA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
+# Adaptando para scrip grafico:
 
-
-#colnames(banco_ato_MBA) <- c("ATO_INFRACIONAL_MBA", format(Sys.Date()-365*2, "%Y"), format(Sys.Date()-365*1, "%Y"), "VAR%")
-
-#TESTES TABELA GT:
-colnames(banco_ato_MBA) <- c("ATO INFRACIONAL", "QUANTIDADE", "%")
-
-banco_ato_MBA_gt = banco_ato_MBA
+#SUBSTITUIR
+banco_ato_MBA_bkp$ATO_INFRACIONAL_MBA[banco_ato_MBA_bkp$ATO_INFRACIONAL_MBA == "VS/INF"]<- "SEM INFORMAÇÃO"
+banco_ato_MBA_bkp$ATO_INFRACIONAL_MBA[banco_ato_MBA_bkp$ATO_INFRACIONAL_MBA == "VOUTROS"]<- "OUTROS"
 
 
+colnames(banco_ato_MBA_bkp)[1]<-'banco_ato_MBA_bkp'
+colnames(banco_ato_MBA_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ato_MBA_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+#para script rmd:
+banco_ato_MBA_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ato_MBA_bkp$PERCENTUAL))
+banco_ato_MBA_bkp_rmd = tail(banco_ato_MBA_bkp,3)
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
+banco_ato_MBA =
+  banco_ato_MBA %>%
+  janitor::tabyl(ATO_INFRACIONAL_MBA) %>%
+  arrange(ATO_INFRACIONAL_MBA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 #########################################################################################################
 
+# Adaptando:
+banco_ato_MBA$ATO_INFRACIONAL_MBA[banco_ato_MBA$ATO_INFRACIONAL_MBA == "VS/INF"]<- "SEM INFORMAÇÃO"
+banco_ato_MBA$ATO_INFRACIONAL_MBA[banco_ato_MBA$ATO_INFRACIONAL_MBA == "VOUTROS"]<- "OUTROS"
 
+
+
+colnames(banco_ato_MBA)[1]<-'ATO INFRACIONAL'
+colnames(banco_ato_MBA)[2]<-'QUANTIDADE'
+colnames(banco_ato_MBA)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+
+#banco_ato_MBA =
+#  banco_ato_MBA %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+
+setwd(file.path("~/diretorio_r/estciabh/planilhas"))
+write.csv(banco_ato_MBA, file ="banco_ato_MBA_atual.csv",row.names=FALSE)
 #########################################################################################################
-#########################################################################################################
-
-
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-##########################################################################################################
 # banco_ato_MBA FIM
 #########################################################################################################
-###########################################################################################################
-#df_regional_banco_MBA INICIO
+#########################################################################################################
+# df_regional_ATO_banco_MBA
 #########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
@@ -1477,172 +1177,112 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
+df_regional_ATO_banco_MBA =
+  banco_so_com_mba %>%
+  select(REGIONAL_ATO)
 
-df_regional_banco_MBA <- banco_so_com_mba %>%
-  select(DIA_SEMANA_ATO, REGIONAL_ATO)
+colnames(df_regional_ATO_banco_MBA)[1]<-'REGIONAL_ATO'
 
-#names(df_regional_banco_MBA)
-
-
-#table(df_regional_banco_MBA$REGIONAL_ATO, useNA ="always")
-#sum(table(df_regional_banco_MBA$REGIONAL_ATO, useNA ="always"))
 #########################################################################################################
-df_regional_banco_MBA <- data.frame(table(df_regional_banco_MBA$REGIONAL_ATO, useNA ="always"))
-df_regional_banco_MBA_original=df_regional_banco_MBA #salvando atos atendimento original
-#df_regional_banco_MBA=df_regional_banco_MBA_original
-#df_regional_banco_MBA$Var1 <- NULL
-colnames(df_regional_banco_MBA) <- c("REGIONAL", "QUANTIDADE")
+#encontrando parte do texto e substituindo
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("/MG", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("RMBH", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("RIBEIRAO DAS NEVES", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("CATAGUASES", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("CIDADE DE BRASILIA/DF", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "VOUTRO ESTADO"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("N/DISP", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("INFORMACAO", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == ""]<- "SEM INFORMAÇÃO"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "PAMPULHA"]<- "PAMPULHA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "VENDA NOVA"]<- "VENDA NOVA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "REGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
-##write.xlsx(df_regional_banco_MBA, file = "df_regional_banco_MBA_bruto.xlsx") #salvando com modificações anteriores
+#########################################################################################################
 
-#df_regional_banco_MBA$SEXO <- NULL
+# salvando para gráfico
+df_regional_ATO_banco_MBA_bkp = df_regional_ATO_banco_MBA
 
-df_regional_banco_MBA$REGIONAL <- as.character(df_regional_banco_MBA$REGIONAL)
-
-#df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == ""]<- "SEM INFORMAÇÃO"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "#N/DISP"]<- "SEM INFORMAÇÃO"
-#df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == NA]<- "SEM INFORMAÇÃO"
-#df_regional_banco_MBA
-
-df_regional_banco_MBA = filter(df_regional_banco_MBA, !QUANTIDADE == 0)
-#df_regional_banco_MBA
-
-#df_regional_banco_MBA$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO", df_regional_banco_MBA$REGIONAL, ignore.case = TRUE),
-#gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_regional_banco_MBA$REGIONAL), "OUTRO ESTADO")
-
-df_regional_banco_MBA$REGIONAL2 <- ifelse(grepl("MG", df_regional_banco_MBA$REGIONAL, ignore.case = T),
-                                          gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMAÇÃO).*", "\\1",df_regional_banco_MBA$REGIONAL), df_regional_banco_MBA$REGIONAL)
-
-
-
-
-df_regional_banco_MBA$REGIONAL2 <- str_replace(df_regional_banco_MBA$REGIONAL2, "RMBH.*", "REGIÃO METROPOLITANA")
-df_regional_banco_MBA$REGIONAL2 <- str_replace(df_regional_banco_MBA$REGIONAL2, "SEM.*", "SEM INFORMAÇÃO")
-df_regional_banco_MBA$REGIONAL2 <- str_replace(df_regional_banco_MBA$REGIONAL2, "MG.*", "OUTRA CIDADE MG")
-
-df_regional_banco_MBA$REGIONAL <- NULL
-
-colnames(df_regional_banco_MBA) <- c("QUANTIDADE", "REGIONAL")
-
-df_regional_banco_MBA =
-  df_regional_banco_MBA %>%
-  select(REGIONAL, QUANTIDADE)
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-#sum(df_regional_banco_MBA$QUANTIDADE)
-
-df_regional_banco_MBA <- ddply(df_regional_banco_MBA,
-                               c("REGIONAL"),
-                               summarise,
-                               QUANTIDADE = sum(QUANTIDADE))
-
-###alterando
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
-
-df_regional_banco_MBA <-df_regional_banco_MBA[order(df_regional_banco_MBA$REGIONAL),]
-
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-df_regional_banco_MBA$REGIONAL[df_regional_banco_MBA$REGIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-
-#caso queira separar so regionais
-#df_regional_banco_MBA1 <- df_regional_banco_MBA[!(df_regional_banco_MBA$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      df_regional_banco_MBA$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     df_regional_banco_MBA$REGIONAL == 'OUTRO ESTADO'|
-#                                                    df_regional_banco_MBA$REGIONAL == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_regional_banco_MBA$QUANTIDADE <- as.numeric(df_regional_banco_MBA$QUANTIDADE)
+df_regional_ATO_banco_MBA_bkp =
+  df_regional_ATO_banco_MBA_bkp %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
 
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
+colnames(df_regional_ATO_banco_MBA_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_ATO_banco_MBA_bkp)[3]<-'PERCENTUAL'
+
+#########################################################################################################
+#para script rmd:
+df_regional_ATO_banco_MBA_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_ATO_banco_MBA_bkp$PERCENTUAL))
+df_regional_ATO_banco_MBA_bkp_rmd = tail(df_regional_ATO_banco_MBA_bkp,5)
+#########################################################################################################
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO[df_regional_ATO_banco_MBA_bkp$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(df_regional_ATO_banco_MBA_bkp)[1]<-'df_regional_ATO_banco_MBA_bkp'
+colnames(df_regional_ATO_banco_MBA_bkp)[2]<-'QUANTIDADE'
+colnames(df_regional_ATO_banco_MBA_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+df_regional_ATO_banco_MBA =
+  df_regional_ATO_banco_MBA %>%
+  janitor::tabyl(REGIONAL_ATO) %>%
+  arrange(REGIONAL_ATO) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
 
 
-#usando a funcao criada:
+colnames(df_regional_ATO_banco_MBA)[1]<-'REGIONAL'
+colnames(df_regional_ATO_banco_MBA)[2]<-'QUANTIDADE'
+colnames(df_regional_ATO_banco_MBA)[3]<-'PERCENTUAL'
 
+#############################################################################################################
 
-df_regional_banco_MBA$PERCENTUAL <- round_preserve_sum(prop.table(df_regional_banco_MBA$QUANTIDADE)*100, 2)
-#df_regional_banco_MBA
-#df_regional_banco_MBA <- df_regional_banco_MBA[order(df_regional_banco_MBA[,3],decreasing=TRUE),]
-#write.csv(df_regional_banco_MBA, file ="df_regional_banco_MBA.csv",row.names=TRUE)
-##write.xlsx(df_regional_banco_MBA, file ="df_regional_banco_MBA.xlsx")
-#df_regional_banco_MBA$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_regional_banco_MBA<-df_regional_banco_MBA %>%
-  arrange(desc(QUANTIDADE))
-df_regional_banco_MBA_bkp = df_regional_banco_MBA
+#df_regional_ATO_banco_MBA =
+#  df_regional_ATO_banco_MBA %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-
-#script para o bookdown
-
-df_regional_banco_MBA_rmark = df_regional_banco_MBA
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_regional_banco_MBA_rmark = df_regional_banco_MBA_rmark %>%
-  top_n(6, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-sum(df_regional_banco_MBA_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-df_regional_banco_MBA_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
+# df_regional_ATO_banco_MBA FIM
 #########################################################################################################
 #########################################################################################################
-
-#acrescentando linha com total
-df_regional_banco_MBA <- rbind(df_regional_banco_MBA,
-                               data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(df_regional_banco_MBA$QUANTIDADE), PERCENTUAL = sum(df_regional_banco_MBA$PERCENTUAL),
-                                          stringsAsFactors = FALSE))
-
-
-colnames(df_regional_banco_MBA) <- c("REGIONAL", "QUANTIDADE", "%")
-
-#para tabela gt abaixo:
-df_regional_banco_MBA_gt = df_regional_banco_MBA
-
-#colnames(df_regional_banco_MBA) <- c("REGIONAL", "%")
-#df_regional_banco_MBA <- df_regional_banco_MBA[c("REGIONAL", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
-#########################################################################################################
-#df_regional_banco_MBA FIM
-#################################################################################################################################################################
-##########################################################################################################################################################
-#df_dia_semana_banco_MBA INICIO
+# df_DIA_SEMANA_banco_MBA
 #########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
@@ -1651,181 +1291,89 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-#banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO_puro[!duplicated(data.frame(banco_HOMICIDIO_puro$PROCESSO, banco_HOMICIDIO_puro$ATO_INFRACIONAL)),]
-df_dia_semana_banco_MBA <- banco_so_com_mba %>%
-  select(DIA_SEMANA_ATO, REGIONAL_ATO)
+df_DIA_SEMANA_banco_MBA =
+  banco_so_com_mba %>%
+  select(DIA_SEMANA_ATO)
 
+colnames(df_DIA_SEMANA_banco_MBA)[1]<-'DIA_SEMANA'
 
-#table(df_dia_semana_banco_MBA$DIA_SEMANA_ATO, useNA ="always")
-#sum(table(df_dia_semana_banco_MBA$DIA_SEMANA_ATO, useNA ="always"))
 #########################################################################################################
-df_dia_semana_banco_MBA <- data.frame(table(df_dia_semana_banco_MBA$DIA_SEMANA_ATO, useNA ="always"))
-df_dia_semana_banco_MBA_original=df_dia_semana_banco_MBA #salvando atos atendimento original
-#df_dia_semana_banco_MBA=df_dia_semana_banco_MBA_original
-#df_dia_semana_banco_MBA$Var1 <- NULL
-colnames(df_dia_semana_banco_MBA) <- c("DIA", "QUANTIDADE")
 
-##write.xlsx(df_dia_semana_banco_MBA, file = "df_dia_semana_banco_MBA_bruto.xlsx") #salvando com modificações anteriores
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "segunda"]<- "SEGUNDA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "terça"]<- "TERÇA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "quarta"]<- "QUARTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "quinta"]<- "QUINTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "sexta"]<- "SEXTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "sábado"]<- "SÁBADO"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "domingo"]<- "DOMINGO"
+#########################################################################################################
 
-#df_dia_semana_banco_MBA$SEXO <- NULL
+# salvando para gráfico
+df_DIA_SEMANA_banco_MBA_bkp = df_DIA_SEMANA_banco_MBA
 
-#df_dia_semana_banco_MBA
+df_DIA_SEMANA_banco_MBA_bkp =
+  df_DIA_SEMANA_banco_MBA_bkp %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-df_dia_semana_banco_MBA = filter(df_dia_semana_banco_MBA, !QUANTIDADE == 0)
+colnames(df_DIA_SEMANA_banco_MBA_bkp)[1]<-'df_DIA_SEMANA_banco_MBA_bkp'
+colnames(df_DIA_SEMANA_banco_MBA_bkp)[2]<-'QUANTIDADE'
+colnames(df_DIA_SEMANA_banco_MBA_bkp)[3]<-'PERCENTUAL'
 
+#########################################################################################################
+#para script rmd:
+df_DIA_SEMANA_banco_MBA_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_DIA_SEMANA_banco_MBA_bkp$PERCENTUAL))
+df_DIA_SEMANA_banco_MBA_bkp_rmd = tail(df_DIA_SEMANA_banco_MBA_bkp,5)
+#########################################################################################################
+#########################################################################################################
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "DOMINGO"]<- "ADOMINGO"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "SEGUNDA"]<- "BSEGUNDA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "TERÇA"]<- "CTERÇA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "QUARTA"]<- "DQUARTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "QUINTA"]<- "EQUINTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "SEXTA"]<- "FSEXTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "SÁBADO"]<- "GSÁBADO"
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
-##write.xlsx(df_dia_semana_banco_MBA, file = "df_dia_semana_banco_MBA.xlsx")
+df_DIA_SEMANA_banco_MBA =
+  df_DIA_SEMANA_banco_MBA %>%
+  janitor::tabyl(DIA_SEMANA) %>%
+  arrange(DIA_SEMANA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "ADOMINGO"]<- "DOMINGO"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "BSEGUNDA"]<- "SEGUNDA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "CTERÇA"]<- "TERÇA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "DQUARTA"]<- "QUARTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "EQUINTA"]<- "QUINTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "FSEXTA"]<- "SEXTA"
+df_DIA_SEMANA_banco_MBA$DIA_SEMANA[df_DIA_SEMANA_banco_MBA$DIA_SEMANA == "GSÁBADO"]<- "SÁBADO"
+#########################################################################################################
 
+colnames(df_DIA_SEMANA_banco_MBA)[1]<-'DIA'
+colnames(df_DIA_SEMANA_banco_MBA)[2]<-'QUANTIDADE'
+colnames(df_DIA_SEMANA_banco_MBA)[3]<-'PERCENTUAL'
 
-#df_dia_semana_banco_MBA$DIA <- NULL
+#############################################################################################################
 
-#colnames(df_dia_semana_banco_MBA) <- c("QUANTIDADE", "DIA")
-
-df_dia_semana_banco_MBA <- df_dia_semana_banco_MBA[c("DIA", "QUANTIDADE")]
-
-
-#library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-#sum(df_dia_semana_banco_MBA$QUANTIDADE)
-
-df_dia_semana_banco_MBA <- ddply(df_dia_semana_banco_MBA,
-                                 c("DIA"),
-                                 summarise,
-                                 QUANTIDADE = sum(QUANTIDADE))
-
-#df_dia_semana_banco_MBA
-
-
-#caso queira separar so regionais
-#df_dia_semana_banco_MBA1 <- df_dia_semana_banco_MBA[!(df_dia_semana_banco_MBA$DIA == 'REGIÃO METROPOLITANA'|
-#                                                      df_dia_semana_banco_MBA$DIA == 'OUTRA CIDADE MG'|
-#                                                     df_dia_semana_banco_MBA$DIA == 'OUTRO ESTADO'|
-#                                                    df_dia_semana_banco_MBA$DIA == 'SEM INFORMAÇÃO'),]
-
-#acrescentando coluna com percentual
-df_dia_semana_banco_MBA$QUANTIDADE <- as.numeric(df_dia_semana_banco_MBA$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-
-
-#usando a funcao criada:
-
-
-df_dia_semana_banco_MBA$PERCENTUAL <- round(prop.table(df_dia_semana_banco_MBA$QUANTIDADE)*100, 2)
-
-
-
-
-#df_dia_semana_banco_MBA
-#df_dia_semana_banco_MBA <- df_dia_semana_banco_MBA[order(df_dia_semana_banco_MBA[,3],decreasing=TRUE),]
-#write.csv(df_dia_semana_banco_MBA, file ="df_dia_semana_banco_MBA.csv",row.names=TRUE)
-##write.xlsx(df_dia_semana_banco_MBA, file ="df_dia_semana_banco_MBA.xlsx")
-#df_dia_semana_banco_MBA$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-df_dia_semana_banco_MBA<-df_dia_semana_banco_MBA %>%
-  arrange(desc(QUANTIDADE))
-df_dia_semana_banco_MBA_bkp = df_dia_semana_banco_MBA
-
-
-
-df_dia_semana_banco_MBA$DIA <- as.character(df_dia_semana_banco_MBA$DIA)
-
-#df_dia_semana_banco_MBA
-
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "segunda"]<- "ASEGUNDA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "terça"]<- "BTERÇA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "quarta"]<- "CQUARTA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "quinta"]<- "DQUINTA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "sexta"]<- "ESEXTA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "sábado"]<- "FSABADO"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "domingo"]<- "GDOMINGO"
-
-#df_dia_semana_banco_MBA
-
-df_dia_semana_banco_MBA <-df_dia_semana_banco_MBA[order(df_dia_semana_banco_MBA$DIA),]
-
-#df_dia_semana_banco_MBA
-
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "ASEGUNDA"]<- "SEGUNDA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "BTERÇA"]<- "TERÇA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "CQUARTA"]<- "QUARTA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "DQUINTA"]<- "QUINTA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "ESEXTA"]<- "SEXTA"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "FSABADO"]<- "SABADO"
-df_dia_semana_banco_MBA$DIA[df_dia_semana_banco_MBA$DIA == "GDOMINGO"]<- "DOMINGO"
-
-
-#df_dia_semana_banco_MBA
+#df_DIA_SEMANA_banco_MBA =
+#  df_DIA_SEMANA_banco_MBA %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# df_DIA_SEMANA_banco_MBA FIM
 #########################################################################################################
 
-#script para o bookdown
-
-df_dia_semana_banco_MBA_rmark = df_dia_semana_banco_MBA
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_dia_semana_banco_MBA_rmark = df_dia_semana_banco_MBA_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-#sum(df_dia_semana_banco_MBA_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-#df_dia_semana_banco_MBA_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-
-
-#acrescentando linha com total
-df_dia_semana_banco_MBA <- rbind(df_dia_semana_banco_MBA,
-                                 data.frame(DIA = "TOTAL", QUANTIDADE = sum(df_dia_semana_banco_MBA$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(df_dia_semana_banco_MBA$PERCENTUAL, 0)),
-                                            stringsAsFactors = FALSE))
-
-#df_dia_semana_banco_MBA
-
-colnames(df_dia_semana_banco_MBA) <- c("DIA", "QUANTIDADE", "%")
-
-#para a tabele gt:
-df_dia_semana_banco_MBA_gt = df_dia_semana_banco_MBA
-
-#colnames(df_dia_semana_banco_MBA) <- c("DIA", "%")
-#df_dia_semana_banco_MBA <- df_dia_semana_banco_MBA[c("DIA", "QUANTIDADE")]
-#salvando tabela
-#########################################################################################################
-#pdf(file=TABELA[3,],"_004_dia_semana_HOMICIDIO_alternativa.pdf",  width = 6, height = 4.8, title = "df_dia_semana_banco_MBA")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-#df_dia_semana_banco_MBA FIM
-#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
