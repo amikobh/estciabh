@@ -116,7 +116,7 @@ incidencia_comparada %>%
 #########################################################################################################
 #Perfil dos adolescentes atendidos
 #########################################################################################################
-df_snr_regional_residencia_gt %>%
+df_snr_regional_residencia %>%
   gt() %>%
 
   tab_header(
@@ -128,7 +128,7 @@ df_snr_regional_residencia_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(df_snr_regional_residencia_gt))) %>%
+    locations = cells_body(rows = nrow(df_snr_regional_residencia))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -231,7 +231,7 @@ total_MBA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-df_snr_regional_residencia_MBA_gt %>%
+df_snr_regional_residencia_MBA %>%
   gt() %>%
 
   tab_header(
@@ -243,7 +243,7 @@ df_snr_regional_residencia_MBA_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(df_snr_regional_residencia_MBA_gt))) %>%
+    locations = cells_body(rows = nrow(df_snr_regional_residencia_MBA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -287,7 +287,7 @@ df_snr_regional_residencia_MBA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-MOTIVO_MBA_gt %>%
+MOTIVO_MBA %>%
   gt() %>%
 
   tab_header(
@@ -299,7 +299,7 @@ MOTIVO_MBA_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(MOTIVO_MBA_gt))) %>%
+    locations = cells_body(rows = nrow(MOTIVO_MBA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -343,19 +343,19 @@ MOTIVO_MBA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-banco_ato_MBA_gt %>%
+banco_ato_MBA %>%
   gt() %>%
 
   tab_header(
     title = md((str_c(TABELA[6,],": Atos infracionais atribuídos aos adolescentes encaminhados por MBA, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
-    subtitle = "MBAs") %>%
+    subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(banco_ato_MBA_gt))) %>%
+    locations = cells_body(rows = nrow(banco_ato_MBA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -401,7 +401,7 @@ banco_ato_MBA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-df_regional_banco_MBA_gt %>%
+df_regional_ATO_banco_MBA %>%
   gt() %>%
 
   tab_header(
@@ -413,7 +413,7 @@ df_regional_banco_MBA_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(df_regional_banco_MBA_gt))) %>%
+    locations = cells_body(rows = nrow(df_regional_ATO_banco_MBA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -456,7 +456,7 @@ df_regional_banco_MBA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-df_dia_semana_banco_MBA_gt %>%
+df_DIA_SEMANA_banco_MBA %>%
   gt() %>%
 
   tab_header(
@@ -468,7 +468,7 @@ df_dia_semana_banco_MBA_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(df_dia_semana_banco_MBA_gt))) %>%
+    locations = cells_body(rows = nrow(df_DIA_SEMANA_banco_MBA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2186,7 +2186,7 @@ soma_decisoes_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-so_decisao_gt %>%
+so_decisao_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -2198,7 +2198,7 @@ so_decisao_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(so_decisao_gt))) %>%
+    locations = cells_body(rows = nrow(so_decisao_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
