@@ -1,208 +1,170 @@
+#############################################################################################################
+#so_sentenca
+#########################################################################################################
+so_sentenca =
+  banco_sem_mba %>%
+  #filter(COMPARECIMENTO_AUD_PRELIMINAR %in% "COMPARECEU") %>%
+  select(SENTENCA)
+
 #########################################################################################################
 #########################################################################################################
-###AUDIENCIAS PRELIMINARES
+colnames(so_sentenca)[1]<-'so_sentenca'
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-so_sentenca = banco_sem_mba %>%
-  select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, DECISAO, COMPARECIMENTO_AUD_PRELIMINAR)
-
-#head(so_sentenca, 10)[3:7]
-
-#PREENCHER COM NA'S CELULAS VAZIAS
-
-#so_sentenca_com_compareceu <- subset(banco_sem_mba, COMPARECIMENTO_AUD_PRELIMINAR %in% c('COMPARECEU'))
-so_sentenca <- table(so_sentenca$SENTENCA)
-
-#TRASFORMAR TABELA ANTERIOR EM DATA FRAME
-
-so_sentenca <- data.frame(so_sentenca)
-
-#ACERTAR TERMOS
-colnames(so_sentenca) <- c("SENTENCA", "QUANTIDADE")
-
-
-so_sentenca$SENTENCA <- as.character(so_sentenca$SENTENCA)
-
-so_sentenca
 
 #preenchimento de celulas:
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "ABSOLVICAO"]<-	"ABSOLVIÇÃO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "ADVERTENCIA"]<-	"ADVERTÊNCIA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "ARQUIVAMENTO"]<-	"ARQUIVAMENTO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "ARQUIVAMENTO/ATIPICIDADE"]<-	"ARQUIVAMENTO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "SENTENCAINCONCLUSIVA"]<-	"VOUTROS"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "EXTINCAODOPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "EXTINCAOPORMORTE"]<-	"EXTINÇÃO POR MORTE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "EXTINCAOPORPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "INSTRUCAODOFEITO"]<-	"INSTRUÇÃO DO FEITO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "INTERNACAO"]<-	"INTERNAÇÃO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "INTERNACAOPROVISORIA"]<-	"INTERNAÇÃO PROVISÓRIA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "JUSTICARESTAURATIVA"]<-	"JUSTIÇA RESTAURATIVA"
-#so_sentenca$SENTENCA[so_sentenca$SENTENCA == "LA"]<-	"REMISSÃO c/c LA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "OUTRAS(OS)"]<-	"VOUTROS"
-#so_sentenca$SENTENCA[so_sentenca$SENTENCA == "PSC"]<-	"REMISSÃO c/c PSC"
-#so_sentenca$SENTENCA[so_sentenca$SENTENCA == "PSC/LA"]<-	"REMISSÃO c/c LA/PSC"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMESSAAOJUIZOCOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMESSACOMARCACOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMETIDOSAUTOSJ.COMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOEXTINTIVA"]<-	"REMISSÃO EXTINTIVA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOEXTINTIVA/ADVERTENCIA"]<-	"REMISSÃO EXTINTIVA c/c ADVERTÊNCIA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA-L.A"]<-	"REMISSÃO SUSPENSIVA c/c LA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA-LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA-PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA-PSC/REPARACAODEDANO"]<-	"REMISSÃO SUSPENSIVA c/c PSC/REPARAÇÃO DE DANO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA-REPARACAODEDANO"]<- "REMISSÃO SUSPENSIVA c/c REPARAÇÃO DE DANO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA/LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA/LA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c LA/PSC"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "RESPONDERPROCESSOEMLIBERDADE"]<-	"RESPONDER EM LIBERDADE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "RETORNOAINTERNACAO"]<-	"RETORNO A INTERNAÇÃO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "RETORNOAOCEIP"]<-	"RETORNO AO CEIP"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "RETORNOASEMILIBERDADE"]<-	"RETORNO A SEMILIBERDADE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "RETORNODOSAUTOSADELEGACIA"]<-	"RETORNO DOS AUTOS A DELEGACIA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "SEMILIBERDADE"]<-	"SEMILIBERDADE"
-#so_sentenca$SENTENCA[so_sentenca$SENTENCA == "SEMINFORMACAO"]<-	"AGUARDANDO SENTENCA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "SEMINFORMACAO"]<-	"ENCAMINHADOS PARA SENTENÇA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAO/ADVERTENCIA/REPARACAODEDANO"]<-	"REMISSÃO/ADVERTÊNCIA/REPARAÇÃO DE DANO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "RETORNOAOCUMPRIMENTODEPSC"]<-	"RETORNO A PSC"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "RETORNOAOCUMPRIMENTODEL.A"]<-	"RETORNO DOS AUTOS A DELEGACIA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "EXTINCAOPORPRESCRICAO"]<-	"EXTINÇÃO POR PRESCRIÇÃO"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAO SUSPENSIVA c/c LA"]<-	"REMISSÃO c/c LA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAO SUSPENSIVA c/c PSC"]<-	"REMISSÃO c/c PSC"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "REMISSAOSUSPENSIVA/PSC/LA"]<-	"REMISSÃO c/c LA"
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == ""]<-	"VAZIO"
-so_sentenca
+#########################################################################################################
+#SEPARAR OS ENCAMINHADOS PARA DECISÃO PARA CONSTAR NA TABELA TOTAL DE DECISÃO.
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "SEMINFORMACAO"]<-	"ENCAMINHADOS PARA DECISÃO"
+#########################################################################################################
 
-#write.csv(so_sentenca, file ="so_sentenca.csv", row.names=FALSE)
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "ABSOLVICAO"]<-	"ABSOLVIÇÃO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "ADVERTENCIA"]<-	"ADVERTÊNCIA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "ARQUIVAMENTO"]<-	"ARQUIVAMENTO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "DECISAOINCONCLUSIVA"]<-	"VOUTROS"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "EXTINCAODOPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "EXTINCAOPORMORTE"]<-	"EXTINÇÃO POR MORTE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "EXTINCAOPORPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "INSTRUCAODOFEITO"]<-	"INSTRUÇÃO DO FEITO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "INTERNACAO"]<-	"INTERNAÇÃO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "INTERNACAOPROVISORIA"]<-	"INTERNAÇÃO PROVISÓRIA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "INTERNACAOPROVISORIA/REGIMEDOMICILIAR"]<-	"INTERNAÇÃO PROVISÓRIA (REGIME DOMICILIAR)"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "JUSTICARESTAURATIVA"]<-	"JUSTIÇA RESTAURATIVA"
+#so_sentenca$so_sentenca[so_sentenca$so_sentenca == "LA"]<-	"REMISSAO c/c LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "OUTRAS(OS)"]<-	"VOUTROS"
+#so_sentenca$so_sentenca[so_sentenca$so_sentenca == "PSC"]<-	"REMISSAO c/c PSC"
+#so_sentenca$so_sentenca[so_sentenca$so_sentenca == "PSC/LA"]<-	"REMISSAO c/c LA/PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMESSAAOJUIZOCOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMESSACOMARCACOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMETIDOSAUTOSJ.COMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOEXTINTIVA"]<-	"REMISSÃO EXTINTIVA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOEXTINTIVA/ADVERTENCIA"]<-	"REMISSÃO EXTINTIVA c/c ADVERTÊNCIA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOEXTINTIVAc/cADVERTENCIA"]<-	"REMISSÃO EXTINTIVA c/c ADVERTÊNCIA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA-L.A"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA–L.A"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA-LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA-PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA-PSC/REPARACAODEDANO"]<-	"REMISSÃO SUSPENSIVA c/c PSC/REPARAÇÃO DE DANO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA-REPARACAODEDANO"]<- "REMISSÃO SUSPENSIVA c/c REPARAÇÃO DE DANO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA/LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA/LA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c LA/PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAOSUSPENSIVA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RESPONDERPROCESSOEMLIBERDADE"]<-	"RESPONDER EM LIBERDADE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "ENTREGUEAOSRESPONSAVEIS"]<-	"RESPONDER EM LIBERDADE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOAINTERNACAO"]<-	"RETORNO A INTERNAÇÃO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOAOCEIP"]<-	"RETORNO AO CEIP"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOASEMILIBERDADE"]<-	"RETORNO A SEMILIBERDADE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNODOSAUTOSADELEGACIA"]<-	"RETORNO DOS AUTOS A DELEGACIA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "SEMILIBERDADE"]<-	"SEMILIBERDADE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "SEMINFORMACAO"]<-	"VAZIO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAO/ADVERTENCIA/REPARACAODEDANO"]<-	"REMISSÃO/ADVERTÊNCIA/REPARAÇÃO DE DANO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOAOCUMPRIMENTODEPSC"]<-	"RETORNO A PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOAPSC"]<-	"RETORNO A PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOALA"]<-	"RETORNO A LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOALA/PSC"]<-	"RETORNO A LA/PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOAOCUMPRIMENTODELA/PSC"]<-	"RETORNO A LA/PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "RETORNOAOCUMPRIMENTODEL.A"]<-	"RETORNO A LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "EXTINCAOPORPRESCRICAO"]<-	"EXTINÇÃO POR PRESCRIÇÃO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAO SUSPENSIVA c/c LA"]<-	"REMISSÃO c/c LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAO_CC_PSC"]<-	"REMISSÃO c/c PSC"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAO_CC_LA"]<-	"REMISSÃO c/c LA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == ""]<-	"VAZIO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "EXTINÇAO_PUNIBILIDADE_MORTE"]<-	"EXTINÇÃO PUNIBILIDADE POR MORTE"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "INTERNAÇAO"]<-	"INTERNAÇÃO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "NI"]<-	"VSEM INFORMAÇÃO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSÃO_C_EXCLUSÃO PROCESSUAL"]<-	"REMISSÃO c/c EXCLUSÃO PROCESSUAL"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAO"]<-	"REMISSÃO"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "REMISSAO_CC_ADV"]<-	"REMISSÃO c/c ADVERTÊNCIA"
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "EXTINÇÃO POR PRESCRIÇAO"]<-	"EXTINÇÃO POR PRESCRIÇÃO"
 
-##JUNTANDO AS LINHAS
-library(plyr)
-
-so_sentenca <- ddply(so_sentenca,
-                    c("SENTENCA"),
-                    summarise,
-                    QUANTIDADE = sum(QUANTIDADE))
-
-so_sentenca
-
-so_sentenca = filter(so_sentenca, !SENTENCA == "VAZIO")
-sum(so_sentenca$QUANTIDADE)
-
-#SEPARAR LINHA ENCAMINHADOS PARA SENTECA
-so_sentenca1 = filter(so_sentenca, SENTENCA == "ENCAMINHADOS PARA SENTENÇA")
-#MUDANDO ENCAMINHADOS PARA SENTENÇA PARA ENCAMINHADOS PARA DECISAO
-so_sentenca1$SENTENCA[so_sentenca1$SENTENCA == "ENCAMINHADOS PARA SENTENÇA"]<-	"ENCAMINHADOS PARA DECISÃO"
-so_sentenca2 = so_sentenca1
-#APAGAR ENCAMINHADOS PARA SENTECA E SEMINFORMACAO
-so_sentenca2[1,2]
-#so_sentenca = filter(so_sentenca, !SENTENCA == "SEMINFORMACAO")
-so_sentenca = filter(so_sentenca, !SENTENCA == "ENCAMINHADOS PARA SENTENÇA")
-so_sentenca
-sum(so_sentenca$QUANTIDADE)
-
-#so_sentenca  <- so_sentenca[order(so_sentenca[,1],decreasing=FALSE),]
-so_sentenca
-
-so_sentenca$SENTENCA[so_sentenca$SENTENCA == "VOUTROS"]<-	"OUTROS"
-so_sentenca
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
-so_sentenca_bkp = so_sentenca #salvando atos atendimento original
+#separando para script soma das decisões
 
-#library(grid)
-#library(gridExtra)
+so_sentenca1 =
+  so_sentenca |>
+  filter(so_sentenca %in% "ENCAMINHADOS PARA DECISÃO") |>
+  tabyl(so_sentenca)
 
-#acrescentando coluna com percentual
-so_sentenca$QUANTIDADE <- as.numeric(so_sentenca$QUANTIDADE)
+#excluindo para tabela sentenças
 
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
+so_sentenca =
+  so_sentenca |>
+  filter(!so_sentenca %in% "VAZIO" & !so_sentenca %in% "ENCAMINHADOS PARA DECISÃO")
+#########################################################################################################
+# salvando para gráfico
+so_sentenca_bkp = so_sentenca
 
-#usando a funcao criada:
-#so_sentenca$PERCENTUAL <- round(prop.table(so_sentenca$QUANTIDADE)*100, 2)
-so_sentenca$PERCENTUAL <- round_preserve_sum(prop.table(so_sentenca$QUANTIDADE)*100, 2)
+so_sentenca_bkp =
+  so_sentenca_bkp %>%
+  janitor::tabyl(so_sentenca) %>%
+  arrange(n) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-#outra forma de calcular percentual
-#so_sentenca = mutate(so_sentenca,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
+#########################################################################################################
+so_sentenca_bkp$so_sentenca[so_sentenca_bkp$so_sentenca == "VSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+so_sentenca_bkp$so_sentenca[so_sentenca_bkp$so_sentenca == "VOUTROS"]<- "OUTROS"
+#########################################################################################################
+#replace "%" with "" in the percentual column
+so_sentenca_bkp$PERCENTUAL2 <- str_replace (so_sentenca_bkp$percent, "%", "")
+so_sentenca_bkp$PERCENTUAL2 = as.numeric(so_sentenca_bkp$PERCENTUAL2)
+#########################################################################################################
 
+# Adaptando para scrip grafico:
 
-so_sentenca_bkp=so_sentenca
+colnames(so_sentenca_bkp)[1]<-'so_sentenca_bkp'
+colnames(so_sentenca_bkp)[2]<-'QUANTIDADE'
+colnames(so_sentenca_bkp)[3]<-'PERCENTUAL'
 
 #########################################################################################################
 #########################################################################################################
 
 #script para o bookdown
 
-so_sentenca_rmark = so_sentenca
+so_sentenca_bkp_rmark = so_sentenca_bkp
+
+so_sentenca_bkp_rmark = so_sentenca_bkp_rmark %>%
+  top_n(4, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
+
 
 #banco_incidencia_rmark <- banco_incidencia_rmark %>%
 # arrange(desc(PERCENTUAL))
+so_sentenca_bkp_rmark =
+  so_sentenca_bkp_rmark %>% slice(1:4)
 
-#banco_incidencia_rmark %>% slice(1:3)
+library (stringr)
 
-#selecionando os 3 principais e ordenando descrescente por quantidade
-so_sentenca_rmark = so_sentenca_rmark %>%
-  top_n(3, PERCENTUAL) %>% arrange(desc(PERCENTUAL))
-
-#somando
-sum(so_sentenca_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-so_sentenca_rmark[1,2]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
 
 #########################################################################################################
 #########################################################################################################
-
-
-#acrescentando linha com total
-so_sentenca <- rbind(so_sentenca,
-                    data.frame(SENTENCA = "TOTAL", QUANTIDADE = sum(so_sentenca$QUANTIDADE), PERCENTUAL = sum(so_sentenca$PERCENTUAL),
-                               stringsAsFactors = FALSE))
-
-colnames(so_sentenca) <- c("SENTENÇA", "QUANTIDADE", "%")
-
-#write.xlsx(so_sentenca, file = "so_sentenca_total.xlsx") #salvando para usar na comparada
-#write.csv(so_sentenca, file = "so_sentenca_total.csv", row.names=FALSE) #salvando com modificações anteriores
-
-#para tabela gt abaixo:
-so_sentenca_gt = so_sentenca
-
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+#########################################################################################################
+so_sentenca$so_sentenca[so_sentenca$so_sentenca == "VNÃO SABE"]<- "UNÃO SABE"
+#so_sentenca$so_sentenca[so_sentenca$so_sentenca == "VNÃO RESPONDEU"]<- "NÃO RESPONDEU"
+#########################################################################################################
+so_sentenca_TABELA =
+  so_sentenca %>%
+  janitor::tabyl(so_sentenca) %>%
+  arrange(so_sentenca) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+so_sentenca_TABELA$so_sentenca[so_sentenca_TABELA$so_sentenca == "VSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+so_sentenca_TABELA$so_sentenca[so_sentenca_TABELA$so_sentenca == "VOUTROS"]<- "OUTROS"
 #########################################################################################################
 #########################################################################################################
-#tabela alternativa
-#require(ggpubr)
-#########################################################################################################
-#salvando tabela
-#pdf(file="tabela_so_sentenca_geral_alternativa.pdf",  width = 6, height = 4.8, title = "so_sentenca")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
+# Adaptando:
 
+colnames(so_sentenca_TABELA)[1]<-'SENTENÇA'
+colnames(so_sentenca_TABELA)[2]<-'QUANTIDADE'
+colnames(so_sentenca_TABELA)[3]<-'PERCENTUAL'
+#############################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))
+#############################################################################################################
+#so_sentenca FIM
 #########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-
-setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
-#########################################################################################################
-# so_sentenca FIM
-#########################################################################################################
-
-
