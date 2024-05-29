@@ -4,7 +4,7 @@ A partir deste ponto, explicitar-se-ão as características dos atos infracionai
 
 ## Homicídio
 
-```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[9,].png')
 ```
 
@@ -65,7 +65,7 @@ knitr::include_graphics('coordenadas/mapa_homicidio.png')
 
 ## Roubo
 
-```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[12,].png')
 ```
 
@@ -126,7 +126,7 @@ knitr::include_graphics('coordenadas/mapa_roubo.png')
 
 ## Furto
 
-```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[15,].png')
 ```
 
@@ -187,7 +187,7 @@ knitr::include_graphics('coordenadas/mapa_furto.png')
 
 ## Posse de drogas para uso pessoal
 
-```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[18,].png')
 ```
 
@@ -247,7 +247,7 @@ knitr::include_graphics('coordenadas/mapa_uso.png')
 
 ## Tráfico de drogas
 
-```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[21,].png')
 ```
 
