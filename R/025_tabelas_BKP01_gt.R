@@ -2130,7 +2130,7 @@ BANCO_MEDIDAS_TABELA %>%
 #SALVANDO PNG:
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-soma_decisoes_gt %>%
+soma_decisoes %>%
   gt() %>%
 
   tab_header(
@@ -2142,7 +2142,7 @@ soma_decisoes_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(soma_decisoes_gt))) %>%
+    locations = cells_body(rows = nrow(soma_decisoes))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2242,11 +2242,11 @@ so_decisao_TABELA %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-tempo_medio_decisao_gt %>%
+tempo_medio_decisao %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[40,],": Tempo médio das decisões em audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"), " e ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[40,],": Tempo médio das decisões em audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -2254,7 +2254,7 @@ tempo_medio_decisao_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", align = "center", size = "small")),
-    locations = cells_body(rows = nrow(tempo_medio_decisao_gt)))%>%
+    locations = cells_body(rows = nrow(tempo_medio_decisao)))%>%
 
   tab_style(
     style = cell_text(weight = "bold", align = "center" ),
@@ -2295,7 +2295,7 @@ tab_options(
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-intervalo_decisao_gt %>%
+intervalo_decisao %>%
   gt() %>%
 
   tab_header(
@@ -2307,7 +2307,7 @@ intervalo_decisao_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(intervalo_decisao_gt))) %>%
+    locations = cells_body(rows = nrow(intervalo_decisao))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2351,7 +2351,7 @@ intervalo_decisao_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-so_sentenca_gt %>%
+so_sentenca_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -2363,7 +2363,7 @@ so_sentenca_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(so_sentenca_gt))) %>%
+    locations = cells_body(rows = nrow(so_sentenca_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2407,11 +2407,11 @@ so_sentenca_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-tempo_medio_sentenca_gt %>%
+tempo_medio_sentenca %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[43,],": Tempo médio das decisões após as audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"), " e ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[43,],": Tempo médio das decisões após as audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -2419,7 +2419,7 @@ tempo_medio_sentenca_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", align = "center", size = "small")),
-    locations = cells_body(rows = nrow(tempo_medio_sentenca_gt)))%>%
+    locations = cells_body(rows = nrow(tempo_medio_sentenca)))%>%
 
   tab_style(
     style = cell_text(weight = "bold", align = "center" ),
@@ -2460,7 +2460,7 @@ tab_options(
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-intervalo_sentenca_gt %>%
+intervalo_sentenca %>%
   gt() %>%
 
   tab_header(
@@ -2472,7 +2472,7 @@ intervalo_sentenca_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(intervalo_sentenca_gt))) %>%
+    locations = cells_body(rows = nrow(intervalo_sentenca))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),

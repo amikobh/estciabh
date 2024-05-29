@@ -278,6 +278,10 @@ ggsave("GRAFICO[10,].png", width=12, height=6, pointsize=12, dpi = 512)
 
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 ggplot(df_snr_sexo_idade_HOMICIDIO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
@@ -296,6 +300,8 @@ ggplot(df_snr_sexo_idade_HOMICIDIO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
 ggsave("GRAFICO[11,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 #dev.off()
+#########################################################################################################
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 
@@ -329,6 +335,10 @@ ggsave("GRAFICO[12,].png", width=6, height=5, pointsize=12, dpi = 512)
 
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 ggplot(df_snr_sexo_idade_ROUBO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
@@ -347,6 +357,8 @@ ggplot(df_snr_sexo_idade_ROUBO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
 ggsave("GRAFICO[13,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 #dev.off()
+#########################################################################################################
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 
@@ -379,6 +391,10 @@ ggsave("GRAFICO[14,].png", width=6, height=5, pointsize=12, dpi = 512)
 
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 ggplot(df_snr_sexo_idade_FURTO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
@@ -397,6 +413,8 @@ ggplot(df_snr_sexo_idade_FURTO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
 ggsave("GRAFICO[15,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 #dev.off()
+#########################################################################################################
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 
@@ -429,6 +447,10 @@ ggsave("GRAFICO[16,].png", width=6, height=5, pointsize=12, dpi = 512)
 
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 ggplot(df_snr_sexo_idade_USO_DE_DROGAS, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
@@ -447,6 +469,8 @@ ggplot(df_snr_sexo_idade_USO_DE_DROGAS, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
 ggsave("GRAFICO[17,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 #dev.off()
+#########################################################################################################
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 
@@ -479,6 +503,10 @@ ggsave("GRAFICO[18,].png", width=6, height=5, pointsize=12, dpi = 512)
 
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 ggplot(df_snr_sexo_idade_TRAFICO_DE_DROGAS, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
@@ -497,6 +525,8 @@ ggplot(df_snr_sexo_idade_TRAFICO_DE_DROGAS, aes(fill=SEXO, y=QUANTIDADE, x=IDADE
 ggsave("GRAFICO[19,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 #dev.off()
+#########################################################################################################
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 
@@ -972,110 +1002,122 @@ ggsave("GRAFICO[35,].png", width=10, height=8, pointsize=12, dpi = 512)
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
-#GRAFICO intervalo_decisao ALTERNATIVO
-#intervalo_decisao_original=intervalo_decisao #salvando TEMPOs atendimento original
-intervalo_decisao=intervalo_decisao_bkp
-
-intervalo_decisao<-intervalo_decisao%>%
-  arrange(PERCENTUAL)
-SINAL <- paste(intervalo_decisao$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
+#########################################################################################################
+SINAL <- paste(intervalo_decisao_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_decisao_bkp_alternativo.pdf", title = "grafico_intervalo_decisao_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=intervalo_decisao, aes(x=TEMPO, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, sum(intervalo_decisao_rmark[1,3]+5)) +
-  scale_x_discrete(limits = intervalo_decisao$TEMPO)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
-  labs(title = (str_c(GRAFICO[36,],": Tempo das decisões em audiências preliminares")),
-       subtitle = (str_c("Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
-       caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "TEMPO", y = "") +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold"),
-        plot.caption =element_text(hjust = 0.5)  )
+library(forcats)
 
-ggsave("GRAFICO[36,].png", width=8.5, height=3, pointsize=12, dpi = 512)
+intervalo_decisao_bkp =
+  intervalo_decisao_bkp |>
+  mutate(intervalo_decisao_bkp = fct_reorder(intervalo_decisao_bkp, QUANTIDADE))
+
+ggplot(intervalo_decisao_bkp, aes(x = intervalo_decisao_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
+  labs(title = (str_c(GRAFICO[36,],": Tempo das decisões em audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+       #subtitle = (str_c("Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+       caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
+       x = "", y = "")  +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
+        plot.subtitle = element_text(hjust = 0.5, size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 1490))
+ggsave("GRAFICO[36,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#GRAFICO so_sentenca ALTERNATIVO
-#so_sentenca_original=so_sentenca #salvando MEDIDAs atendimento original
-so_sentenca=so_sentenca_bkp
-
-so_sentenca<-so_sentenca%>%
-  arrange(QUANTIDADE)
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
+SINAL <- paste(so_sentenca_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=so_sentenca, aes(x=SENTENCA, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, sum(so_sentenca_rmark[1,2]+10)) +
-  scale_x_discrete(limits = so_sentenca$SENTENCA)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+so_sentenca_bkp =
+  so_sentenca_bkp |>
+  mutate(so_sentenca_bkp = fct_reorder(so_sentenca_bkp, QUANTIDADE))
+
+ggplot(so_sentenca_bkp, aes(x = so_sentenca_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[37,],": Sentenças, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        #subtitle = "Adolescentes por MEDIDAs Infracionais",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "SENTENÇAS", y = "") +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
-        #plot.subtitle = element_text(hjust = 0.5, size = 14),
-        plot.caption =element_text(hjust = 0.5)  )
+       x = "", y = "")  +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
+        plot.subtitle = element_text(hjust = 0.5, size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 245))
+ggsave("GRAFICO[37,].png", width=10, height=8, pointsize=12, dpi = 512)
 
-ggsave("GRAFICO[37,].png", width=8, height=4, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#GRAFICO intervalo_sentenca ALTERNATIVO
-#intervalo_sentenca_original=intervalo_sentenca #salvando TEMPOs atendimento original
-intervalo_sentenca=intervalo_sentenca_bkp
-
-intervalo_sentenca<-intervalo_sentenca%>%
-  arrange(PERCENTUAL)
-SINAL <- paste(intervalo_sentenca$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
+SINAL <- paste(intervalo_sentenca_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=intervalo_sentenca, aes(x=TEMPO, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, sum(intervalo_sentenca_rmark[1,3]+10)) +
-  scale_x_discrete(limits = intervalo_sentenca$TEMPO)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
-  labs(title = str_c(GRAFICO[38,],": Tempo das decisões após audiências preliminares"),
-       subtitle = (str_c("Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
-       caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "TEMPO", y = "") +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold"),
-        plot.caption =element_text(hjust = 0.5)  )
+library(forcats)
 
-ggsave("GRAFICO[38,].png", width=8.7, height=3.5, pointsize=12, dpi = 512)
+intervalo_sentenca_bkp =
+  intervalo_sentenca_bkp |>
+  mutate(intervalo_sentenca_bkp = fct_reorder(intervalo_sentenca_bkp, QUANTIDADE))
+
+ggplot(intervalo_sentenca_bkp, aes(x = intervalo_sentenca_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
+  labs(title = (str_c(GRAFICO[38,],": Tempo das decisões após audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+       #subtitle = (str_c("Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+       caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
+       x = "", y = "")  +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
+        plot.subtitle = element_text(hjust = 0.5, size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 500))
+ggsave("GRAFICO[38,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #Atos infracionais nas escolas de Belo Horizonte
 #########################################################################################################
-
+#########################################################################################################
 #GRAFICO IDADE/SEXO
-
-library(ggplot2)
-library(scales)
-
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#salvar png
-ggplot(data = df_snr_sexo_idade_escola, aes(x=IDADE, y=QUANTIDADE, fill= SEXO)) +
-  geom_bar(stat="identity", position=position_dodge())+
-  scale_color_brewer(palette="Set1")+
-  theme_minimal()+
-  geom_text(aes(label=QUANTIDADE), vjust=0, color="black", fontface = "plain",
-            position = position_dodge(0.9), size=3.5)+
+
+ggplot(df_snr_sexo_idade_escola, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+  geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[39,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Ato infracional nas escolas",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "IDADE", y = "QUANTIDADE", fill = "SEXO") +
+       x = "", y = "", fill = "SEXO") +
   theme(plot.title = element_text(hjust = 0.5, face="bold", size = 12),
-        plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[39,].png", width=8, height=6, pointsize=12, dpi = 512)
+        plot.subtitle = element_text(hjust = 0.5, face="plain", size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  theme(legend.position = "right") +
+  geom_text(aes(label=QUANTIDADE), vjust=0, color="red", fontface = "plain",
+            position = position_dodge(0.9), size=3.5)
+
+ggsave("GRAFICO[39,].png", width=13, height=5, pointsize=12, dpi = 512)
+
 #dev.off()
+#########################################################################################################
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
@@ -1277,29 +1319,30 @@ ggsave("GRAFICO[48,].png", width=10, height=6.5, pointsize=12, dpi = 512)
 #########################################################################################################
 #Justiça restaurativa
 #########################################################################################################
+#########################################################################################################
 #GRAFICO IDADE/SEXO
-
-library(ggplot2)
-library(scales)
-
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-#salvar png
-ggplot(data = df_snr_sexo_idade_JR, aes(x=IDADE, y=QUANTIDADE, fill= SEXO)) +
-  geom_bar(stat="identity", position=position_dodge())+
-  scale_color_brewer(palette="Set1")+
-  theme_minimal()+
-  geom_text(aes(label=QUANTIDADE), vjust=0, color="black", fontface = "plain",
-            position = position_dodge(0.9), size=3.5)+
+ggplot(df_snr_sexo_idade_JR, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+  geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[49,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "IDADE", y = "QUANTIDADE", fill = "SEXO") +
+       x = "", y = "", fill = "SEXO") +
   theme(plot.title = element_text(hjust = 0.5, face="bold", size = 12),
-        plot.subtitle = element_text(hjust = 0.5, face="bold", size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[49,].png", width=8, height=6, pointsize=12, dpi = 512)
+        plot.subtitle = element_text(hjust = 0.5, face="plain", size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  theme(legend.position = "right") +
+  geom_text(aes(label=QUANTIDADE), vjust=0, color="red", fontface = "plain",
+            position = position_dodge(0.9), size=3.5)
+
+ggsave("GRAFICO[49,].png", width=13, height=5, pointsize=12, dpi = 512)
+
 #dev.off()
+#########################################################################################################
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
@@ -1647,20 +1690,30 @@ ggsave("GRAFICO[64,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #########################################################################################################
 
-ggplot(data = df_snr_sexo_idade_banco_matriculados_CEDIPRO, aes(x=idade, y=QUANTIDADE, fill= sexo)) +
-  geom_bar(stat="identity", position=position_dodge())+
-  scale_color_brewer(palette="Set1")+
-  theme_minimal()+
-  geom_text(aes(label=QUANTIDADE), vjust=0, color="black", fontface = "plain",
-            position = position_dodge(0.9), size=3.5)+
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/imagens"))
+
+ggplot(df_snr_sexo_idade_banco_matriculados_CEDIPRO, aes(fill=sexo, y=QUANTIDADE, x=idade)) +
+  geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[65,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos matriculados",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "IDADE", y = "QUANTIDADE", fill = "SEXO") +
+       x = "", y = "", fill = "SEXO") +
   theme(plot.title = element_text(hjust = 0.5, face="bold", size = 12),
-        plot.subtitle = element_text(hjust = 0.5, face="bold", size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[65,].png", width=8, height=6, pointsize=12, dpi = 512)
+        plot.subtitle = element_text(hjust = 0.5, face="plain", size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  theme(legend.position = "right") +
+  geom_text(aes(label=QUANTIDADE), vjust=0, color="red", fontface = "plain",
+            position = position_dodge(0.9), size=3.5)
+
+ggsave("GRAFICO[65,].png", width=13, height=5, pointsize=12, dpi = 512)
+
+#dev.off()
+#########################################################################################################
+#########################################################################################################
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -1842,20 +1895,30 @@ ggsave("GRAFICO[72,].png", width=7, height=4, pointsize=12, dpi = 512)
 #TRATAMENTO banco_desistencia_CEDIPRO
 #########################################################################################################
 
-ggplot(data = df_snr_sexo_idade_banco_desistencia_CEDIPRO, aes(x=idade, y=QUANTIDADE, fill= sexo)) +
-  geom_bar(stat="identity", position=position_dodge())+
-  scale_color_brewer(palette="Set1")+
-  theme_minimal()+
-  geom_text(aes(label=QUANTIDADE), vjust=0, color="black", fontface = "plain",
-            position = position_dodge(0.9), size=3.5)+
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/imagens"))
+
+ggplot(df_snr_sexo_idade_banco_desistencia_CEDIPRO, aes(fill=sexo, y=QUANTIDADE, x=idade)) +
+  geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[73,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "IDADE", y = "QUANTIDADE", fill = "SEXO") +
+       x = "", y = "", fill = "SEXO") +
   theme(plot.title = element_text(hjust = 0.5, face="bold", size = 12),
-        plot.subtitle = element_text(hjust = 0.5, face="bold", size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[73,].png", width=8, height=6, pointsize=12, dpi = 512)
+        plot.subtitle = element_text(hjust = 0.5, face="plain", size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  theme(legend.position = "right") +
+  geom_text(aes(label=QUANTIDADE), vjust=0, color="red", fontface = "plain",
+            position = position_dodge(0.9), size=3.5)
+
+ggsave("GRAFICO[73,].png", width=13, height=5, pointsize=12, dpi = 512)
+
+#dev.off()
+#########################################################################################################
+#########################################################################################################
 #dev.off()
 #########################################################################################################
 #########################################################################################################
