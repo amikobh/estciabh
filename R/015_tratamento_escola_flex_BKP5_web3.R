@@ -3,416 +3,193 @@
 
 #rm(list=ls(all=TRUE)): SEM USAR SCRIPT.E sim, este:
 
-##CRIANDO E MUDANDO O DIRETORIO PARA TRABALHAR escola:
-dir.create(file.path("~/diretorio_r/estciabh", "escola"))
-setwd(file.path("~/diretorio_r/estciabh/escola"))
-
+##CRIANDO E MUDANDO O DIRETORIO PARA TRABALHAR ESCOLA:
+dir.create(file.path("~/diretorio_r/estciabh", "ESCOLA"))
+setwd(file.path("~/diretorio_r/estciabh/ESCOLA"))
 #########################################################################################################
-
-banco_escola = banco_atos_em_foco_ESCOLA
-
+#funcao para preservar soma de 100 no processamento do round:
+round_preserve_sum <- function(x, digits = 0) {
+  up <- 10 ^ digits
+  x <- x * up
+  y <- floor(x)
+  indices <- tail(order(x-y), round(sum(x)) - sum(y))
+  y[indices] <- y[indices] + 1
+  return(y / up)
+}
 #########################################################################################################
-
-library(dplyr)
-
-escola = banco_escola %>%
-  select(NOME2, FILIACAO2, NASCIMENTO, SEXO, IDADE, DATA_ATO, PROCESSO, ATO_INFRACIONAL, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, DECISAO, MEDIDA_PROTETIVA,
-         QUAL_MEDIDA_PROTETIVA_01, QUAL_MEDIDA_PROTETIVA_02, QUAL_MEDIDA_PROTETIVA_03, COMPARECIMENTO_AUD_PRELIMINAR,
-         REGIONAL_RESIDENCIAL, TIPO_LOG.ATO, NOME_LOG_ATO, N_LOG.ATO, BAIRRO_REGIAO_ATO, REGIONAL_ATO, CIDADE_ATO, UF_ATO,
-         PAIS_ATO, NOME_DA_.ESCOLA, 122:126,ESCOLARIDADE, ESTUDA., PRIMARIO)
-
+banco_ESCOLA = banco_atos_em_foco_ESCOLA
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-write.csv(escola, file = "escola_inicial.csv", row.names = TRUE)
-##write.xlsx(escola, file = "escola_inicial.xlsx")
-head(escola, 10)[27:31]
+write.csv(banco_ESCOLA, file = "banco_ESCOLA_inicial.csv", row.names = TRUE)
 #########################################################################################################
-escola$NOME_DA_.ESCOLA = as.character(escola$NOME_DA_.ESCOLA)
-#PREENCHER COM NA'S CELULAS VAZIAS
-escola$NOME_DA_.ESCOLA[escola$NOME_DA_.ESCOLA == ""]<- "VAZIO"
-#VERIFICAR QUANTIDADE DE NA'S
-head(escola, 10)[27:31]
-##SEPARAR do escola a escola
-#escola<-subset(escola, !is.na(escola$NOME_DA_.ESCOLA))
-escola = filter(escola, !NOME_DA_.ESCOLA == "VAZIO")
-head(escola, 10)[27:31]
-#APAGAR LINHA ESPECIFICA:
-#escola$NOME_DA_.ESCOLA <- as.character(escola$NOME_DA_.ESCOLA)
-#escola[which(escola$NOME_DA_.ESCOLA == 211), ] <-  NULL
-#escola <- subset(escola, NOME_DA_.ESCOLA==211)
-#escola<-escola[!(escola$NOME_DA_.ESCOLA == "211"),]
+#Acertando nome colunas
+#rename column by name
+banco_ESCOLA =
+  banco_ESCOLA |>
+  rename_at('NOME_DA_.ESCOLA', ~'NOME_ESCOLA')
 
-escola_bkp = escola
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
-#########################################################################################################
-#retirar nomes duplicados:snr=sem nome repetido
-#snr_banco_ESCOLA <- escola_bkp[!duplicated(data.frame(escola_bkp$NOME2, escola_bkp$NASCIMENTO)),]
 
+#setnames(banco_ESCOLA, "NOME_DA_.ESCOLA", "NOME_ESCOLA")
+#########################################################################################################
+#PREENCHER COM NA'S CELULAS VAZIAS e excluir
+banco_ESCOLA$NOME_ESCOLA[banco_ESCOLA$NOME_ESCOLA == ""]<- "VAZIO"
+
+banco_ESCOLA =
+  banco_ESCOLA |>
+  filter(!NOME_ESCOLA %in% "VAZIO")
+
+#########################################################################################################
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/ESCOLA"))
+#########################################################################################################
+#########################################################################################################
+#tabela total_casos_ESCOLA
+banco_ESCOLA_total_casos = data.frame(nrow(banco_ESCOLA))
+
+colnames(banco_ESCOLA_total_casos) <- c("QUANTIDADE DE CASOS ENCAMINHADOS")
+#########################################################################################################
 # Remove duplicate rows of the dataframe using variables
-snr_banco_ESCOLA = distinct(escola_bkp, NOME2,NASCIMENTO, .keep_all= TRUE)
+banco_ESCOLA_snr = distinct(banco_ESCOLA, NOME2, NASCIMENTO, .keep_all= TRUE)
 
-
-#banco_para_amostra <-banco[!duplicated(data.frame(banco$NOME2, banco$NASCIMENTO)),]
-#write.csv(banco_para_amostra, file ="banco_para_amostra.csv",row.names=FALSE)
-
+#banco sem concurso de pessoas
+banco_ESCOLA_sem_concurso <- banco_ESCOLA[!duplicated(data.frame(banco_ESCOLA$PROCESSO, banco_ESCOLA$ATO_INFRACIONAL)),]
 #########################################################################################################
 #########################################################################################################
-
-
-
-#########################################################################################################
+#TRATAMENTO banco_ESCOLA_snr_SEXO_IDADE
 #########################################################################################################
 
-# 9 Idade e sexo adolescente atendido (colocar todos acima de 18 nos s/inf ou #valor!)
-ESCOLA_snr = snr_banco_ESCOLA
-
-#########################################################################################################
-#########################################################################################################
-##########################################################################################################
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
 #########################################################################################################
 
-banco_sem_concurso_ESCOLA <- escola_bkp[!duplicated(data.frame(escola_bkp$PROCESSO, escola_bkp$ATO_INFRACIONAL)),]
+banco_ESCOLA_snr_SEXO_IDADE =
 
-banco_sem_concurso_ESCOLA_bkp = banco_sem_concurso_ESCOLA
-
-banco_incidencia_ESCOLA = banco_sem_concurso_ESCOLA
-
-#########################################################################################################
-#########################################################################################################
-#tabela total_casos_escola
-total_casos_escola = data.frame(nrow(banco_sem_concurso_ESCOLA))
-
-colnames(total_casos_escola) <- c("QUANTIDADE DE CASOS ENCAMINHADOS")
-
-#para tabela gt abaixo:
-total_casos_escola_gt = total_casos_escola
-
-#########################################################################################################
-#########################################################################################################
-
-
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-df_snr_sexo_idade_escola = ESCOLA_snr %>%
+  banco_ESCOLA_snr %>%
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO" | CAUSA_JURIDICA %in% "IGNORADA") |>
   select(SEXO, IDADE)
 
-table(df_snr_sexo_idade_escola$SEXO)
+#########################################################################################################
+banco_ESCOLA_snr_SEXO_IDADE$SEXO = ajustar_nomes(banco_ESCOLA_snr_SEXO_IDADE$SEXO)
+#########################################################################################################
+#encontrando parte do texto e substituindo
+banco_ESCOLA_snr_SEXO_IDADE$SEXO[banco_ESCOLA_snr_SEXO_IDADE$SEXO == "F"]<- "FEMININO"
+banco_ESCOLA_snr_SEXO_IDADE$SEXO[banco_ESCOLA_snr_SEXO_IDADE$SEXO == "M"]<- "MASCULINO"
+#########################################################################################################
+# PARA OS GRÁFICOS DE PIZZA
+banco_ESCOLA_snr_SEXO_IDADE_pizza = banco_ESCOLA_snr_SEXO_IDADE
+#########################################################################################################
+banco_ESCOLA_snr_SEXO_IDADE_pizza =
+  banco_ESCOLA_snr_SEXO_IDADE_pizza |>
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO") |>
+  count(SEXO, IDADE, sort = TRUE)
 
+colnames(banco_ESCOLA_snr_SEXO_IDADE_pizza)[3]<-'QUANTIDADE'
+#########################################################################################################
+########################################################################################################
+#SUBSTITUIR
+banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE[which(is.na(banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE))] <- "s/inf"
+banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE <- paste(banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE, "anos", sep=" ")
+banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE[banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE == "s/inf anos"]<- "s/inf"
+#########################################################################################################
+banco_ESCOLA_snr_SEXO_IDADE_pizza$PERCENTUAL <- round_preserve_sum(prop.table(banco_ESCOLA_snr_SEXO_IDADE_pizza$QUANTIDADE)*100, 2)
+#########################################################################################################
+# GRAFICO PIZZA
+banco_ESCOLA_snr_SEXO_IDADE_graf_pizza <- ddply(banco_ESCOLA_snr_SEXO_IDADE_pizza,
+                                                c("SEXO"),
+                                                summarise,
+                                                QUANTIDADE = sum(QUANTIDADE))
+
+banco_ESCOLA_snr_SEXO_IDADE_graf_pizza =
+  banco_ESCOLA_snr_SEXO_IDADE_graf_pizza |>
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+
+
+banco_ESCOLA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_ESCOLA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
+#########################################################################################################
+#para script rmd:
+
+banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp <- ddply(banco_ESCOLA_snr_SEXO_IDADE_pizza,
+                                               c("IDADE"),
+                                               summarise,
+                                               QUANTIDADE = sum(QUANTIDADE))
+
+banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp = banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp |> arrange(QUANTIDADE)
+
+banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd = tail(banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp,5)
+#########################################################################################################
+
+#########################################################################################################
+#TRATAMENTO banco_ESCOLA_snr_SEXO_IDADE FIM
+#########################################################################################################
+#########################################################################################################
+#TRATAMENTO banco_ESCOLA_snr_SEXO_IDADE
 #########################################################################################################
 #########################################################################################################
 
-df_snr_sexo_idade_escola$SEXO <- as.character(df_snr_sexo_idade_escola$SEXO)
+banco_ESCOLA_snr_SEXO_IDADE =
 
-df_snr_sexo_idade_escola$SEXO[df_snr_sexo_idade_escola$SEXO == "m"]<- "M"
-table(df_snr_sexo_idade_escola$SEXO)
-
-df_snr_sexo_idade_escola <- table(df_snr_sexo_idade_escola$IDADE, df_snr_sexo_idade_escola$SEXO, useNA ="always")
-#write.csv(df_snr_sexo_idade_escola, file ="df_snr_sexo_idade_escola.csv",row.names=TRUE)
-#write.csv(df_snr_sexo_idade_escola, file ="df_snr_sexo_idade_escola.csv",row.names=TRUE)
-sum(df_snr_sexo_idade_escola)
-
-df_snr_sexo_idade_escola = data.frame(df_snr_sexo_idade_escola)
-#########################################################################################################
-#########################################################################################################
-
-
-df_snr_sexo_idade_escola_bkp = df_snr_sexo_idade_escola
-
-
-df_snr_sexo_idade_escola
-
-colnames(df_snr_sexo_idade_escola) <- c("IDADE", "SEXO", "QUANTIDADE")
-
-df_snr_sexo_idade_escola
-
-df_snr_sexo_idade_escola$IDADE <- as.character(df_snr_sexo_idade_escola$IDADE)
-df_snr_sexo_idade_escola$SEXO <- as.character(df_snr_sexo_idade_escola$SEXO)
-sum(df_snr_sexo_idade_escola$QUANTIDADE)
-
-
-df_snr_sexo_idade_escola = filter(df_snr_sexo_idade_escola, !QUANTIDADE == 0)
-df_snr_sexo_idade_escola
-
-#PREENCHER COM NA'S CELULAS VAZIAS
-#df_snr_sexo_idade_escola$IDADE[df_snr_sexo_idade_escola$IDADE == "SEM INFORMACAO"]<- "<NA>"
-df_snr_sexo_idade_escola$IDADE[which(is.na(df_snr_sexo_idade_escola$IDADE))] <- "S/Informação"
-df_snr_sexo_idade_escola
-
-
-df_snr_sexo_idade_escola$IDADE[df_snr_sexo_idade_escola$IDADE == "S/Informação anos"]<- "S/Informação"
-
-df_snr_sexo_idade_escola <- reshape(data = df_snr_sexo_idade_escola, idvar = "IDADE", timevar = "SEXO", direction = "wide")
-df_snr_sexo_idade_escola
-
-colnames(df_snr_sexo_idade_escola) <- c("IDADE", "FEMININO", "MASCULINO")
-df_snr_sexo_idade_escola
-
-df_snr_sexo_idade_escola$FEMININO[which(is.na(df_snr_sexo_idade_escola$FEMININO))] <- 0
-df_snr_sexo_idade_escola$MASCULINO[which(is.na(df_snr_sexo_idade_escola$MASCULINO))] <- 0
-
-df_snr_sexo_idade_escola
-
-
-
-
-
-#########################################################################################################
-df_snr_sexo_idade_escola2 = df_snr_sexo_idade_escola #salvando para proximo modelo de tabela
-#########################################################################################################
-df_snr_sexo_idade_escola<- rbind(df_snr_sexo_idade_escola,
-                          data.frame(IDADE = "TOTAL",
-                                     FEMININO = sum(df_snr_sexo_idade_escola$FEMININO),
-                                     MASCULINO = sum(df_snr_sexo_idade_escola$MASCULINO),
-                                     stringsAsFactors = FALSE))
-
-df_snr_sexo_idade_escola
-#########################################################################################################
-#########################################################################################################
-#require(ggpubr)
-#library(gridExtra)
-
-#df_snr_sexo_idade_escola = ggtexttable(df_snr_sexo_idade_escola, rows = NULL,
-#                               theme = ttheme(
-#                              colnames.style = colnames_style(face = "bold", color = "white", fill = "#bb1e23"),
-#                             tbody.style = tbody_style(color = "black", fill = c("#edece0", "#edece0"))))
-#df_snr_sexo_idade_escola
-#########################################################################################################
-#negrito na linha total
-#df_snr_sexo_idade_escola <- table_cell_font(df_snr_sexo_idade_escola, row = 10, column = 1, face = "bold")
-#df_snr_sexo_idade_escola <- table_cell_font(df_snr_sexo_idade_escola, row = 10, column = 2, face = "bold")
-#df_snr_sexo_idade_escola <- table_cell_font(df_snr_sexo_idade_escola, row = 10, column = 3, face = "bold")
-#df_snr_sexo_idade_escola
-#########################################################################################################
-#salvando tabela
-#pdf(file="TABELA_003_df_snr_sexo_idade_escola_geral_alternativa.pdf", width = 3.5, height = 3.2, title = "tabela_df_snr_sexo_idade_escola_geral_alternativa")
-##setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#svg(filename="TABELA_002_idade_e_sexo.svg", width=5, height=3.5, pointsize=12)
-#df_snr_sexo_idade_escola +  labs(title = "TABELA 2: Idade e Sexo, Belo Horizonte, 2021",
-#                         caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD") +
-#theme(plot.title = element_text(hjust = 0.5, vjust = 0, face="bold"),
-#     plot.caption =element_text(hjust = 0.5, vjust = 1)  )
-
-#dev.off()
-
-#########################################################################################################
-df_snr_sexo_idade_escola = df_snr_sexo_idade_escola2
-#########################################################################################################
-
-df_snr_sexo_idade_escola$FEMININO <- as.numeric(df_snr_sexo_idade_escola$FEMININO)
-df_snr_sexo_idade_escola$MASCULINO <- as.numeric(df_snr_sexo_idade_escola$MASCULINO)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-#########################################################################################################
-#usando a funcao criada:
-df_snr_sexo_idade_escola$F <- round_preserve_sum(prop.table(df_snr_sexo_idade_escola$FEMININO)*100, 2)
-df_snr_sexo_idade_escola$M <- round_preserve_sum(prop.table(df_snr_sexo_idade_escola$MASCULINO)*100, 2)
-df_snr_sexo_idade_escola
-#########################################################################################################
-df_snr_sexo_idade_escola <- df_snr_sexo_idade_escola[c("IDADE", "FEMININO", "F", "MASCULINO", "M")]
-df_snr_sexo_idade_escola
-
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-df_snr_sexo_idade_escola_rmark = df_snr_sexo_idade_escola
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_snr_sexo_idade_escola_rmark = df_snr_sexo_idade_escola_rmark %>%
-  select(IDADE, MASCULINO) %>%
-  top_n(4, MASCULINO) %>% arrange(desc(MASCULINO))
-
-#somando
-sum(df_snr_sexo_idade_escola_rmark$M)
-
-#para escolher linhas e posicoes
-df_snr_sexo_idade_escola_rmark[3,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-df_snr_sexo_idade_escola$IDADE <- paste(df_snr_sexo_idade_escola$IDADE, "anos", sep=" ")
-
-#########################################################################################################
-#########################################################################################################
-
-df_snr_sexo_idade_escola<- rbind(df_snr_sexo_idade_escola,
-                          data.frame(IDADE = "TOTAL",
-                                     FEMININO = sum(df_snr_sexo_idade_escola$FEMININO),
-                                     F = sum(df_snr_sexo_idade_escola$F),
-                                     MASCULINO = sum(df_snr_sexo_idade_escola$MASCULINO),
-                                     M = sum(df_snr_sexo_idade_escola$M),
-                                     stringsAsFactors = FALSE))
-
-df_snr_sexo_idade_escola
-
-colnames(df_snr_sexo_idade_escola) <- c("IDADE", "FEM", "%", "MAS", "%")
-df_snr_sexo_idade_escola
-#########################################################################################################
-#require(ggpubr)
-#library(gridExtra)
-#########################################################################################################
-#salvando tabela
-#pdf(file="TABELA_003_df_snr_sexo_idade_escola_geral_alternativa2.pdf", width = 3.5, height = 3.2, title = "tabela_df_snr_sexo_idade_escola_geral_alternativa")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-#########################################################################################################
-#GRAFICO IDADE/SEXO
-#########################################################################################################
-#########################################################################################################
-
-library(ggplot2)
-library(scales)
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-df_snr_sexo_idade_escola = ESCOLA_snr %>%
+  banco_ESCOLA_snr %>%
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO" | CAUSA_JURIDICA %in% "IGNORADA") |>
   select(SEXO, IDADE)
 
-table(df_snr_sexo_idade_escola$SEXO)
-
-df_snr_sexo_idade_escola$SEXO <- as.character(df_snr_sexo_idade_escola$SEXO)
-
-df_snr_sexo_idade_escola$SEXO[df_snr_sexo_idade_escola$SEXO == "m"]<- "M"
-table(df_snr_sexo_idade_escola$SEXO)
-
-df_snr_sexo_idade_escola <- table(df_snr_sexo_idade_escola$IDADE, df_snr_sexo_idade_escola$SEXO, useNA ="always")
-##write.csv(df_snr_sexo_idade_escola, file ="df_snr_sexo_idade_escola.csv",row.names=TRUE)
-##write.csv(df_snr_sexo_idade_escola, file ="df_snr_sexo_idade_escola.csv",row.names=TRUE)
-sum(df_snr_sexo_idade_escola)
-
-df_snr_sexo_idade_escola = data.frame(df_snr_sexo_idade_escola)
 #########################################################################################################
+banco_ESCOLA_snr_SEXO_IDADE$SEXO = ajustar_nomes(banco_ESCOLA_snr_SEXO_IDADE$SEXO)
 #########################################################################################################
+#encontrando parte do texto e substituindo
+banco_ESCOLA_snr_SEXO_IDADE$SEXO[banco_ESCOLA_snr_SEXO_IDADE$SEXO == "F"]<- "FEMININO"
+banco_ESCOLA_snr_SEXO_IDADE$SEXO[banco_ESCOLA_snr_SEXO_IDADE$SEXO == "M"]<- "MASCULINO"
 #########################################################################################################
+# PARA OS GRÁFICOS DE PIZZA
+banco_ESCOLA_snr_SEXO_IDADE_pizza = banco_ESCOLA_snr_SEXO_IDADE
+#########################################################################################################
+banco_ESCOLA_snr_SEXO_IDADE_pizza =
+  banco_ESCOLA_snr_SEXO_IDADE_pizza |>
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO") |>
+  count(SEXO, IDADE, sort = TRUE)
 
-
-df_snr_sexo_idade_escola_bkp = df_snr_sexo_idade_escola
-
-
-df_snr_sexo_idade_escola
-
-colnames(df_snr_sexo_idade_escola) <- c("IDADE", "SEXO", "QUANTIDADE")
-
-df_snr_sexo_idade_escola
-
-df_snr_sexo_idade_escola$IDADE <- as.character(df_snr_sexo_idade_escola$IDADE)
-df_snr_sexo_idade_escola$SEXO <- as.character(df_snr_sexo_idade_escola$SEXO)
-sum(df_snr_sexo_idade_escola$QUANTIDADE)
-
-
-df_snr_sexo_idade_escola = filter(df_snr_sexo_idade_escola, !QUANTIDADE == 0)
-df_snr_sexo_idade_escola
-
-#PREENCHER COM NA'S CELULAS VAZIAS
-#df_snr_sexo_idade_escola$IDADE[df_snr_sexo_idade_escola$IDADE == "SEM INFORMACAO"]<- "<NA>"
-df_snr_sexo_idade_escola$IDADE[which(is.na(df_snr_sexo_idade_escola$IDADE))] <- "s/inf"
-df_snr_sexo_idade_escola
-
-
-df_snr_sexo_idade_escola$IDADE <- paste(df_snr_sexo_idade_escola$IDADE, "anos", sep=" ")
-df_snr_sexo_idade_escola$IDADE[df_snr_sexo_idade_escola$IDADE == "s/inf anos"]<- "s/inf"
-df_snr_sexo_idade_escola
-
-
+colnames(banco_ESCOLA_snr_SEXO_IDADE_pizza)[3]<-'QUANTIDADE'
+#########################################################################################################
 ########################################################################################################
+#SUBSTITUIR
+banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE[which(is.na(banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE))] <- "s/inf"
+banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE <- paste(banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE, "anos", sep=" ")
+banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE[banco_ESCOLA_snr_SEXO_IDADE_pizza$IDADE == "s/inf anos"]<- "s/inf"
 #########################################################################################################
-# GRAFICO SEXO PIZZA
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-df_snr_sexo_escola = ESCOLA_snr %>%
-  select(SEXO)
-
-table(df_snr_sexo_escola$SEXO)
-
+banco_ESCOLA_snr_SEXO_IDADE_pizza$PERCENTUAL <- round_preserve_sum(prop.table(banco_ESCOLA_snr_SEXO_IDADE_pizza$QUANTIDADE)*100, 2)
 #########################################################################################################
+# GRAFICO PIZZA
+banco_ESCOLA_snr_SEXO_IDADE_graf_pizza <- ddply(banco_ESCOLA_snr_SEXO_IDADE_pizza,
+                                                c("SEXO"),
+                                                summarise,
+                                                QUANTIDADE = sum(QUANTIDADE))
+
+banco_ESCOLA_snr_SEXO_IDADE_graf_pizza =
+  banco_ESCOLA_snr_SEXO_IDADE_graf_pizza |>
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+
+
+banco_ESCOLA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_ESCOLA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
 #########################################################################################################
+#para script rmd:
 
-df_snr_sexo_escola$SEXO <- as.character(df_snr_sexo_escola$SEXO)
+banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp <- ddply(banco_ESCOLA_snr_SEXO_IDADE_pizza,
+                                               c("IDADE"),
+                                               summarise,
+                                               QUANTIDADE = sum(QUANTIDADE))
 
-df_snr_sexo_escola$SEXO[df_snr_sexo_escola$SEXO == "m"]<- "M"
-table(df_snr_sexo_escola$SEXO)
+banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp = banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp |> arrange(QUANTIDADE)
 
-df_snr_sexo_escola = data.frame(table(df_snr_sexo_escola$SEXO))
-
-colnames(df_snr_sexo_escola) <- c("SEXO", "QUANTIDADE")
-
-sum(df_snr_sexo_escola$QUANTIDADE)
-
+banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd = tail(banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp,5)
 #########################################################################################################
-#########################################################################################################
-
-
-df_snr_sexo_escola$SEXO <- as.character(df_snr_sexo_escola$SEXO)
-
-df_snr_sexo_escola$SEXO[df_snr_sexo_escola$SEXO == "F"]<- "FEMININO"
-df_snr_sexo_escola$SEXO[df_snr_sexo_escola$SEXO == "M"]<- "MASCULINO"
-
-df_snr_sexo_escola_original=df_snr_sexo_escola
 
 #########################################################################################################
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
+#TRATAMENTO banco_ESCOLA_snr_SEXO_IDADE FIM
 #########################################################################################################
-#usando a funcao criada:
-df_snr_sexo_escola
-
-library("ggplot2")  # Data visualization
-library("dplyr")    # Data manipulation
-
-df_snr_sexo_escola <- df_snr_sexo_escola %>%
-  arrange(desc(QUANTIDADE)) %>%
-  mutate(PERCENTUAL = round_preserve_sum(prop.table(QUANTIDADE)*100, 2))
-
-df_snr_sexo_escola$PERCENTUAL <- paste(df_snr_sexo_escola$PERCENTUAL, "%", sep=" ")
-
-df_snr_sexo_escola
-
-
-
-setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
-########################################################################################################
-#FIM
-##################################################################################################################################################################################################
 
 #############################################################################################################
 #ESCOLARIDADE_banco_escola
 #########################################################################################################
 
 ESCOLARIDADE_banco_escola =
-  snr_banco_ESCOLA |>
+  banco_ESCOLA_snr |>
   select(ESCOLARIDADE)
 
 #adaptando para o restante dos scripts
@@ -553,824 +330,374 @@ colnames(ESCOLARIDADE_banco_escola_TABELA)[3]<-'PERCENTUAL'
 #ESCOLARIDADE_banco_escola FIM
 #########################################################################################################
 #########################################################################################################
-#TRATAMENTO INCIDENCIA:
-#########################################################################################################
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-#########################################################################################################
-#DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
-banco_atos_em_foco_escola =
-
-  banco_sem_concurso_ESCOLA %>%
-  pivot_longer(cols = starts_with("ATO_INFRACIONAL"), values_to = "ATO_INFRACIONAL") %>%
-  #select(-name) %>%
-  filter(ATO_INFRACIONAL != "DESCONSIDERARAOSOMAR")
-
-banco_atos_em_foco_escola$ATO_INFRACIONAL <- as.character(banco_atos_em_foco_escola$ATO_INFRACIONAL)
-
-#banco_atos_em_foco_escola$ATO_INFRACIONAL <- gsub(" ","",banco_atos_em_foco_escola$ATO_INFRACIONAL)
-
-
-head (banco_atos_em_foco_escola %>%
-        select(NOME2, PROCESSO, name, ATO_INFRACIONAL), 20)
-#########################################################################################################
+#banco_ESCOLA_incidencia
 #########################################################################################################
 #########################################################################################################
 
-library(dplyr)
-
-banco_atos_em_foco_escola = banco_atos_em_foco_escola %>%
+banco_ESCOLA_incidencia =
+  banco_ESCOLA_sem_concurso %>%
   select(ATO_INFRACIONAL)
-
-#########################################################################################################
-banco_atos_em_foco_escola$ATO_INFRACIONAL[banco_atos_em_foco_escola$ATO_INFRACIONAL == "FATO ATÍPICO"]<- "OUTROS"
-
-#OUTROS (PARA QUE ELE SEJA CONSIDERADO "VOUTROS" E APARECA EM ORDEM ALFABETICA NA HORA DE SOMAR COM TABELA DINAMICA)
-
-banco_atos_em_foco_escola$ATO_INFRACIONAL[banco_atos_em_foco_escola$ATO_INFRACIONAL == "OUTROS"]<- "VOUTROS"
-banco_atos_em_foco_escola$ATO_INFRACIONAL[banco_atos_em_foco_escola$ATO_INFRACIONAL == "TERMOSEMINF"]<- "VS/INF"
-
-#########################################################################################################
-
-#banco_atos_em_foco_escola$ATO_INFRACIONAL <- gsub(" ","", banco_atos_em_foco_escola$ATO_INFRACIONAL)
-
-table(banco_atos_em_foco_escola)
-###EXCLUIR LINHA DESCONSIDERAR AO SOMAR
-banco_atos_em_foco_escola$ATO_INFRACIONAL[banco_atos_em_foco_escola$ATO_INFRACIONAL == "NSA"]<- "DESCONSIDERARAOSOMAR"
-table(banco_atos_em_foco_escola)
-sum(table(banco_atos_em_foco_escola))
-banco_atos_em_foco_escola = filter(banco_atos_em_foco_escola, !ATO_INFRACIONAL == "REPETIDO")
-table(banco_atos_em_foco_escola)
-sum(table(banco_atos_em_foco_escola))
-
-banco_atos_em_foco_escola = filter(banco_atos_em_foco_escola, !ATO_INFRACIONAL == "MBA")
-table(banco_atos_em_foco_escola)
-sum(table(banco_atos_em_foco_escola))
-#########################################################################################################
-#Encontrando OS VARIADOS ARTIGOS QUE SOBRARAM e os que já estao como VOUTROS e os colocando na NOVA COLUNA ATO_INFRACIONAL2
-
-banco_atos_em_foco_escola$ATO = grepl(pattern = "ART", x = banco_atos_em_foco_escola$ATO_INFRACIONAL) | grepl(pattern = "VOUTROS", x = banco_atos_em_foco_escola$ATO_INFRACIONAL)
-
-table(banco_atos_em_foco_escola$ATO)
-
-#substituindo
-banco_atos_em_foco_escola$ATO = ifelse(banco_atos_em_foco_escola$ATO == TRUE,
-                                       "VOUTROS", banco_atos_em_foco_escola$ATO_INFRACIONAL)
-
-sum(table(banco_atos_em_foco_escola))
-head(banco_atos_em_foco_escola, 25)
-table(banco_atos_em_foco_escola$ATO_INFRACIONAL)
-table(banco_atos_em_foco_escola$ATO)
-#########################################################################################################
-#excluir coluna
-#banco_atos_em_foco_escola  <- banco_atos_em_foco_escola[order(banco_atos_em_foco_escola[,2],decreasing=FALSE),]
-banco_atos_em_foco_escola = arrange(banco_atos_em_foco_escola, ATO)
-
-banco_atos_em_foco_escola$ATO_INFRACIONAL <- NULL
-
-###renomeando:
-#banco_atos_em_foco_escola <- banco_atos_em_foco_escola[!(banco_atos_em_foco_escola$QUANTIDADE == "0"),]
-#banco_atos_em_foco_escola <- banco_atos_em_foco_escola[!(banco_atos_em_foco_escola$ATO == "DESCONSIDERAR AO SOMAR"),]
-#banco_atos_em_foco_escola = data.frame(table(banco_atos_em_foco_escola$ATO_INFRACIONAL))
-banco_atos_em_foco_escola = data.frame(table(banco_atos_em_foco_escola$ATO))
-#banco_atos_em_foco_escola = as_tibble(table(banco_atos_em_foco_escola$ATO))
-#ordenar coluna para facilitar visualizacao na soma com tabela dinamica
-banco_atos_em_foco_escola$Var1 <- as.character(banco_atos_em_foco_escola$Var1)
-
-banco_atos_em_foco_escola$Var1[banco_atos_em_foco_escola$Var1 == "VS/INF"]<- "SEM INFORMAÇÃO"
-banco_atos_em_foco_escola$Var1[banco_atos_em_foco_escola$Var1 == "VOUTROS"]<- "OUTROS"
-
-
-#write.csv(banco_atos_em_foco_escola, file ="banco_atos_em_foco_escola_atual.csv",row.names=FALSE)
-
-#SALVAR CSV NO DIRETORIO RAIZ
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-
-#write.csv(banco_atos_em_foco_escola, file ="banco_atos_em_foco_escola_atual.csv",row.names=FALSE)
-
-#VOLTAR PAAR O DIRETORIO PADRAO
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-
-##write.xlsx(banco_atos_em_foco_escola, file ="banco_atos_em_foco_escola_atual.xlsx")
-
 #########################################################################################################
 #########################################################################################################
-
-#########################################################################################################
-##TABELA ENVOLVIMENTOS Atos Infracionais
-
-colnames(banco_atos_em_foco_escola) <- c("ATO", "QUANTIDADE")
-
-banco_atos_em_foco_escola_bkp = banco_atos_em_foco_escola #salvando atos atendimento original
-
-library(grid)
-#library(gridExtra)
-
-#acrescentando coluna com percentual
-banco_atos_em_foco_escola$QUANTIDADE <- as.numeric(banco_atos_em_foco_escola$QUANTIDADE)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-#banco_atos_em_foco_escola$PERCENTUAL <- round(prop.table(banco_atos_em_foco_escola$QUANTIDADE)*100, 2)
-banco_atos_em_foco_escola$PERCENTUAL <- round(prop.table(banco_atos_em_foco_escola$QUANTIDADE)*100, 2)
-
-#script para o bookdown
-
-banco_atos_em_foco_escola_rmark = banco_atos_em_foco_escola
-
-#banco_atos_em_foco_escola_rmark <- banco_atos_em_foco_escola_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_atos_em_foco_escola_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-banco_atos_em_foco_escola_rmark = banco_atos_em_foco_escola_rmark %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-sum(banco_atos_em_foco_escola_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-banco_atos_em_foco_escola_rmark[1,2]
-#outra forma de calcular percentual
-#banco_atos_em_foco_escola = mutate(banco_atos_em_foco_escola,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-
-
-
-#acrescentando linha com total
-banco_atos_em_foco_escola <- rbind(banco_atos_em_foco_escola,
-                                   data.frame(ATO = "TOTAL", QUANTIDADE = sum(banco_atos_em_foco_escola$QUANTIDADE), PERCENTUAL = sum(round_preserve_sum(banco_atos_em_foco_escola$PERCENTUAL, 0)),
-                                              stringsAsFactors = FALSE))
-
-
-colnames(banco_atos_em_foco_escola) <- c("ATO", "QUANTIDADE", "%")
-
-##write.xlsx(banco_atos_em_foco_escola, file = "banco_atos_em_foco_escola_atual_total.xlsx") #salvando para usar na comparada
-#write.csv(banco_atos_em_foco_escola, file = "banco_atos_em_foco_escola_atual_total.csv", row.names=FALSE) #salvando com modificações anteriores
-
-
+#SUBSTITUIR
+banco_ESCOLA_incidencia$ATO_INFRACIONAL[banco_ESCOLA_incidencia$ATO_INFRACIONAL == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
+banco_ESCOLA_incidencia$ATO_INFRACIONAL[agrep(".ART", banco_ESCOLA_incidencia$ATO_INFRACIONAL)] <- "OUTROS"
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
+# salvando para gráfico
+banco_ESCOLA_incidencia_bkp = banco_ESCOLA_incidencia
 
+banco_ESCOLA_incidencia_bkp =
+  banco_ESCOLA_incidencia_bkp %>%
+  janitor::tabyl(ATO_INFRACIONAL) %>%
+  arrange(n) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+banco_ESCOLA_incidencia_bkp$ATO_INFRACIONAL[banco_ESCOLA_incidencia_bkp$ATO_INFRACIONAL == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+
+
+colnames(banco_ESCOLA_incidencia_bkp)[1]<-'banco_ESCOLA_incidencia_bkp'
+colnames(banco_ESCOLA_incidencia_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_incidencia_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
-banco_atos_em_foco_escola=banco_atos_em_foco_escola_bkp
-
-library(grid)
-#library(gridExtra)
-
 #########################################################################################################
+#para script rmd:
+banco_ESCOLA_incidencia_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_incidencia_bkp$PERCENTUAL))
+banco_ESCOLA_incidencia_bkp_rmd = tail(banco_ESCOLA_incidencia_bkp,3)
 #########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+banco_ESCOLA_incidencia =
+  banco_ESCOLA_incidencia %>%
+  janitor::tabyl(ATO_INFRACIONAL) %>%
+  arrange(ATO_INFRACIONAL) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 #########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#INCIDENCIA COMPARADA. obs: trazer arquivo ano anterior para a pasta.
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-#########################################################################################################
-banco_atos_em_foco_escola_atual = banco_atos_em_foco_escola
-colnames(banco_atos_em_foco_escola_atual) <- c("ATO", "QUANTIDADE")
 
-#Garantir ordem alfabetica
-banco_atos_em_foco_escola_atual$ATO <- as.character(banco_atos_em_foco_escola_atual$ATO)
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "SEM INFORMAÇÃO"]<- "VSEM INFORMAÇÃO"
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "OUTROS"]<- "VOUTROS"
-#banco_atos_em_foco_escola_atual  <- banco_atos_em_foco_escola_atual[order(banco_atos_em_foco_escola_atual[,1],decreasing=FALSE),]
-banco_atos_em_foco_escola_atual<-banco_atos_em_foco_escola_atual %>%
-  arrange(ATO)
-#renomeando
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "VSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "VOUTROS"]<- "OUTROS"
-
-#RETORNANDO PARA O DIRETÓRIO PADRÃO
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-
-banco_atos_em_foco_escola_atual
-
-#Garantir ordem alfabetica
-banco_atos_em_foco_escola_atual$ATO <- as.character(banco_atos_em_foco_escola_atual$ATO)
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "SEM INFORMAÇÃO"]<- "VSEM INFORMAÇÃO"
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "OUTROS"]<- "VOUTROS"
-banco_atos_em_foco_escola_atual  <- banco_atos_em_foco_escola_atual[order(banco_atos_em_foco_escola_atual[,1],decreasing=FALSE),]
-
-#renomeando
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "VSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-banco_atos_em_foco_escola_atual$ATO[banco_atos_em_foco_escola_atual$ATO == "VOUTROS"]<- "OUTROS"
-banco_atos_em_foco_escola_atual
-
-#renomeando colunas
-#colnames(banco_atos_em_foco_escola_atual) <- c("ATO", "ANOANTERIOR", "ANOATUAL")
-
-#acrescentando coluna com percentual
-banco_atos_em_foco_escola_atual$QUANTIDADE <- as.numeric(banco_atos_em_foco_escola_atual$QUANTIDADE)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-#banco_atos_em_foco_escola_atual$PERCENTUAL <- round(prop.table(banco_atos_em_foco_escola_atual$QUANTIDADE)*100, 2)
-banco_atos_em_foco_escola_atual$PERCENTUAL <- round_preserve_sum(prop.table(banco_atos_em_foco_escola_atual$QUANTIDADE)*100, 2)
-
-#outra forma de calcular percentual
-#banco_atos_em_foco_escola_atual = mutate(banco_atos_em_foco_escola_atual,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_incidencia$ATO_INFRACIONAL[banco_ESCOLA_incidencia$ATO_INFRACIONAL == "VS/INF"]<- "SEM INFORMAÇÃO"
 
 
+colnames(banco_ESCOLA_incidencia)[1]<-'ATO INFRACIONAL'
+colnames(banco_ESCOLA_incidencia)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_incidencia)[3]<-'PERCENTUAL'
 
-
-
-
-banco_atos_em_foco_escola_atual$ATO <- as.character(banco_atos_em_foco_escola_atual$ATO)
-
-#NA POR ZERO
-
-banco_atos_em_foco_escola_atual = replace(x = banco_atos_em_foco_escola_atual, list = is.na(banco_atos_em_foco_escola_atual), values = 0)
-
-banco_atos_em_foco_escola_atual_bkp = banco_atos_em_foco_escola_atual
-#acrescentando linha com total
-banco_atos_em_foco_escola_atual <- rbind(banco_atos_em_foco_escola_atual,
-                                         data.frame(ATO = "TOTAL",
-                                                    QUANTIDADE = sum(banco_atos_em_foco_escola_atual$QUANTIDADE),
-                                                    PERCENTUAL = sum(banco_atos_em_foco_escola_atual$PERCENTUAL),
-                                                    stringsAsFactors = FALSE))
-
-#banco_atos_em_foco_escola_atual$VAR <- round(((banco_atos_em_foco_escola_atual$ANOATUAL*100)/banco_atos_em_foco_escola_atual$ANOANTERIOR)-100, 2)
-
-
-
-#colnames(banco_atos_em_foco_escola_atual) <- c("ATO", format(Sys.Date()-365*2, "%Y"), format(Sys.Date()-365*1, "%Y"), "VAR%")
-
-#TESTES TABELA GT:
-colnames(banco_atos_em_foco_escola_atual) <- c("ATO", "QUANTIDADE", "%")
-
-banco_atos_em_foco_escola_atual_gt = banco_atos_em_foco_escola_atual
-
+#############################################################################################################
+# banco_ESCOLA_incidencia =
+#   banco_ESCOLA_incidencia %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-
-
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-#TRATAMENTO INCIDENCIA FIM
+# banco_ESCOLA_incidencia FIM
 #########################################################################################################
-#tratamento PRIMARIEDADE
+#banco_ESCOLA_primariedade
 #########################################################################################################
-#retirar nomes duplicados:snr=sem nome repetido
-snr_banco_ESCOLA <- escola_bkp[!duplicated(data.frame(escola_bkp$NOME2, escola_bkp$NASCIMENTO)),]
-
-#banco_para_amostra <-banco[!duplicated(data.frame(banco$NOME2, banco$NASCIMENTO)),]
-#write.csv(banco_para_amostra, file ="banco_para_amostra.csv",row.names=FALSE)
-
 #########################################################################################################
 
-#########################################################################################################
-#########################################################################################################
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-primariedade_ESCOLA = snr_banco_ESCOLA %>%
+banco_ESCOLA_primariedade =
+  banco_ESCOLA_snr %>%
   select(PRIMARIO)
-
-table(primariedade_ESCOLA$PRIMARIO)
-primariedade_ESCOLA$PRIMARIO <- gsub(" ","", primariedade_ESCOLA$PRIMARIO)
 #########################################################################################################
+banco_ESCOLA_primariedade$PRIMARIO = ajustar_nomes(banco_ESCOLA_primariedade$PRIMARIO)
 #########################################################################################################
-
-primariedade_ESCOLA$PRIMARIO <- as.character(primariedade_ESCOLA$PRIMARIO)
-
-primariedade_ESCOLA$PRIMARIO[primariedade_ESCOLA$PRIMARIO == ""]<- "NAO"
-table(primariedade_ESCOLA$PRIMARIO)
-
-primariedade_ESCOLA <- table(primariedade_ESCOLA$PRIMARIO)
-
-
-primariedade_ESCOLA = data.frame(primariedade_ESCOLA)
-#########################################################################################################
-#########################################################################################################
-
-
-primariedade_ESCOLA_bkp = primariedade_ESCOLA
-
-
-primariedade_ESCOLA
-
-colnames(primariedade_ESCOLA) <- c("PRIMARIO", "QUANTIDADE")
-
-primariedade_ESCOLA
-
-primariedade_ESCOLA$PRIMARIO <- as.character(primariedade_ESCOLA$PRIMARIO)
-
-primariedade_ESCOLA = filter(primariedade_ESCOLA, !PRIMARIO == 0)
-primariedade_ESCOLA
-
-#PREENCHER COM NA'S CELULAS VAZIAS
-#primariedade_ESCOLA$PRIMARIO[primariedade_ESCOLA$PRIMARIO == "SEM INFORMACAO"]<- "<NA>"
-#primariedade_ESCOLA$PRIMARIO[which(is.na(primariedade_ESCOLA$PRIMARIO))] <- "s/inf"
-primariedade_ESCOLA
-
-
-#ordenar PRIMARIO
-primariedade_ESCOLA = primariedade_ESCOLA %>% arrange(PRIMARIO)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-#########################################################################################################
-#usando a funcao criada:
-# GRAFICO SEXO PIZZA
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-
-
-#########################################################################################################
-#########################################################################################################
-
-primariedade_ESCOLA$PRIMARIO <- as.character(primariedade_ESCOLA$PRIMARIO)
-
-########################################################################################################
-#usando a funcao criada:
-primariedade_ESCOLA
-
-library("ggplot2")  # Data visualization
-library("dplyr")    # Data manipulation
-
-primariedade_ESCOLA <- primariedade_ESCOLA %>%
-  arrange((QUANTIDADE)) %>%
-  mutate(PERCENTUAL = round_preserve_sum(prop.table(QUANTIDADE)*100, 2))
-
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-primariedade_ESCOLA_rmark = primariedade_ESCOLA
-primariedade_ESCOLA_rmark1 = primariedade_ESCOLA
-#SEPARAR CASOS DE ARQUIVAMENTO E REMISSÕES PARA SCRIPTS EM 014_DECISOES_Rmd
-
-#filter(primariedade_ESCOLA_rmark, !grepl("REMISSAO", DECISAO))
-#primariedade_ESCOLA_rmark = filter(primariedade_ESCOLA_rmark, grepl("ARQUIVAMENTO|REMISSAO", DECISAO))
-
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-primariedade_ESCOLA_rmark1 = primariedade_ESCOLA_rmark1 %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-#sum(primariedade_ESCOLA_rmark$QUANTIDADE)
-
-#para escolher linhas e posicoes
-primariedade_ESCOLA_rmark1[1,3]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-
-primariedade_ESCOLA$PERCENTUAL <- paste(primariedade_ESCOLA$PERCENTUAL, "%", sep=" ")
-
-primariedade_ESCOLA
-
-
-########################################################################################################
-#########################################################################################################
-#tratamento PRIMARIEDADE FIM
+#SUBSTITUIR
+banco_ESCOLA_primariedade$PRIMARIO[banco_ESCOLA_primariedade$PRIMARIO == "NAO"]<- "NÃO"
+banco_ESCOLA_primariedade$PRIMARIO[banco_ESCOLA_primariedade$PRIMARIO == ""]<- "NÃO"
+banco_ESCOLA_primariedade$PRIMARIO[agrep(".ART", banco_ESCOLA_primariedade$PRIMARIO)] <- "OUTROS"
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
-###decisao_ESCOLA
+# salvando para gráfico
+banco_ESCOLA_primariedade_bkp = banco_ESCOLA_primariedade
+
+banco_ESCOLA_primariedade_bkp =
+  banco_ESCOLA_primariedade_bkp %>%
+  janitor::tabyl(PRIMARIO) %>%
+  arrange(n) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+banco_ESCOLA_primariedade_bkp$PRIMARIO[banco_ESCOLA_primariedade_bkp$PRIMARIO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+
+
+colnames(banco_ESCOLA_primariedade_bkp)[1]<-'banco_ESCOLA_primariedade_bkp'
+colnames(banco_ESCOLA_primariedade_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_primariedade_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+#########################################################################################################
+#para script rmd:
+banco_ESCOLA_primariedade_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_primariedade_bkp$PERCENTUAL))
+banco_ESCOLA_primariedade_bkp_rmd = tail(banco_ESCOLA_primariedade_bkp,3)
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+banco_ESCOLA_primariedade =
+  banco_ESCOLA_primariedade %>%
+  janitor::tabyl(PRIMARIO) %>%
+  arrange(PRIMARIO) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_primariedade$PRIMARIO[banco_ESCOLA_primariedade$PRIMARIO == "VS/INF"]<- "SEM INFORMAÇÃO"
+
+
+colnames(banco_ESCOLA_primariedade)[1]<-'PRIMÁRIO'
+colnames(banco_ESCOLA_primariedade)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_primariedade)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+# banco_ESCOLA_primariedade =
+#   banco_ESCOLA_primariedade %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+
+
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# banco_ESCOLA_primariedade FIM
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
+###banco_ESCOLA_decisao
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/escola"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-decisao_ESCOLA = escola_bkp
-#decisao_geral_bkp = decisao_geral
-#decisao02 = banco_sem_mba %>%
-# select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, DECISAO, DECISAO_PROTETIVA, QUAL_DECISAO_PROTETIVA_01,
-#       QUAL_DECISAO_PROTETIVA_02, QUAL_DECISAO_PROTETIVA_03, COMPARECIMENTO_AUD_PRELIMINAR)
+banco_ESCOLA_decisao =
+  banco_ESCOLA |>
+  select(DECISAO)
+#########################################################################################################
+colnames(banco_ESCOLA_decisao)[1]<-'decisao'
 #########################################################################################################
 #########################################################################################################
-
-decisao_ESCOLA = data.frame(table(decisao_ESCOLA$DECISAO))
-
-colnames(decisao_ESCOLA) <- c("DECISAO", "QUANTIDADE")
-
-
-decisao_ESCOLA$DECISAO <- as.character(decisao_ESCOLA$DECISAO)
-
-decisao_ESCOLA
+banco_ESCOLA_decisao$decisao <- gsub(" ","", banco_ESCOLA_decisao$decisao)
+#########################################################################################################
 
 #preenchimento de celulas:
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "ABSOLVICAO"]<-	"ABSOLVIÇÃO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "ADVERTENCIA"]<-	"ADVERTÊNCIA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "ARQUIVAMENTO"]<-	"ARQUIVAMENTO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "DECISAOINCONCLUSIVA"]<-	"VOUTROS"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "EXTINCAODOPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "EXTINCAOPORMORTE"]<-	"EXTINÇÃO POR MORTE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "EXTINCAOPORPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "INSTRUCAODOFEITO"]<-	"INSTRUÇÃO DO FEITO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "INTERNACAO"]<-	"INTERNAÇÃO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "INTERNACAOPROVISORIA"]<-	"INTERNAÇÃO PROVISÓRIA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "INTERNACAOPROVISORIA/REGIMEDOMICILIAR"]<-	"INTERNAÇÃO PROVISÓRIA (REGIME DOMICILIAR)"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "JUSTICARESTAURATIVA"]<-	"JUSTIÇA RESTAURATIVA"
-#decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "LA"]<-	"REMISSAO c/c LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "OUTRAS(OS)"]<-	"VOUTROS"
-#decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "PSC"]<-	"REMISSAO c/c PSC"
-#decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "PSC/LA"]<-	"REMISSAO c/c LA/PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMESSAAOJUIZOCOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMESSACOMARCACOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMETIDOSAUTOSJ.COMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOEXTINTIVA"]<-	"REMISSÃO EXTINTIVA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOEXTINTIVA/ADVERTENCIA"]<-	"REMISSÃO EXTINTIVA c/c ADVERTÊNCIA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOEXTINTIVAc/cADVERTENCIA"]<-	"REMISSÃO EXTINTIVA c/c ADVERTÊNCIA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA-L.A"]<-	"REMISSÃO SUSPENSIVA c/c LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA–L.A"]<-	"REMISSÃO SUSPENSIVA c/c LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA-LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA-PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA-PSC/REPARACAODEDANO"]<-	"REMISSÃO SUSPENSIVA c/c PSC/REPARAÇÃO DE DANO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA-REPARACAODEDANO"]<- "REMISSÃO SUSPENSIVA c/c REPARAÇÃO DE DANO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA/LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA/LA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c LA/PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RESPONDERPROCESSOEMLIBERDADE"]<-	"RESPONDER EM LIBERDADE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "ENTREGUEAOSRESPONSAVEIS"]<-	"RESPONDER EM LIBERDADE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOAINTERNACAO"]<-	"RETORNO A INTERNAÇÃO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOAOCEIP"]<-	"RETORNO AO CEIP"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOASEMILIBERDADE"]<-	"RETORNO A SEMILIBERDADE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNODOSAUTOSADELEGACIA"]<-	"RETORNO DOS AUTOS A DELEGACIA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "SEMILIBERDADE"]<-	"SEMILIBERDADE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "SEMINFORMACAO"]<-	"VAZIO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAO/ADVERTENCIA/REPARACAODEDANO"]<-	"REMISSÃO/ADVERTÊNCIA/REPARAÇÃO DE DANO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOAOCUMPRIMENTODEPSC"]<-	"RETORNO A PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOAPSC"]<-	"RETORNO A PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOALA"]<-	"RETORNO A LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOALA/PSC"]<-	"RETORNO A LA/PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOAOCUMPRIMENTODELA/PSC"]<-	"RETORNO A LA/PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "RETORNOAOCUMPRIMENTODEL.A"]<-	"RETORNO A LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "EXTINCAOPORPRESCRICAO"]<-	"EXTINÇÃO POR PRESCRIÇÃO"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAO SUSPENSIVA c/c LA"]<-	"REMISSÃO c/c LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAO SUSPENSIVA c/c PSC"]<-	"REMISSÃO c/c PSC"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "REMISSAOSUSPENSIVA/PSC/LA"]<-	"REMISSÃO c/c LA"
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == ""]<-	"VAZIO"
-
-
-
-decisao_ESCOLA
-sum(decisao_ESCOLA$QUANTIDADE)
-#write.csv(decisao_ESCOLA, file ="decisao_ESCOLA.csv", row.names=FALSE)
-
-decisao_ESCOLA
-##JUNTANDO AS LINHAS
-library(plyr)
-
-decisao_ESCOLA <- ddply(decisao_ESCOLA,
-                        c("DECISAO"),
-                        summarise,
-                        QUANTIDADE = sum(QUANTIDADE))
-
-decisao_ESCOLA
-sum(decisao_ESCOLA$QUANTIDADE)
-decisao_ESCOLA = filter(decisao_ESCOLA, !DECISAO == "VAZIO")
-sum(table(decisao_ESCOLA))
-decisao_ESCOLA = filter(decisao_ESCOLA, !DECISAO == "SEMINFORMACAO")
-
-decisao_ESCOLA
-sum(decisao_ESCOLA$QUANTIDADE)
-
-#decisao_ESCOLA  <- decisao_ESCOLA[order(decisao_ESCOLA[,1],decreasing=FALSE),]
-decisao_ESCOLA
-
-decisao_ESCOLA$DECISAO[decisao_ESCOLA$DECISAO == "VOUTROS"]<-	"OUTROS"
-decisao_ESCOLA
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-decisao_ESCOLA_bkp = decisao_ESCOLA #salvando atos atendimento original
-sum(decisao_ESCOLA_bkp$QUANTIDADE)
-library(grid)
-#library(gridExtra)
-
-#acrescentando coluna com percentual
-decisao_ESCOLA$QUANTIDADE <- as.numeric(decisao_ESCOLA$QUANTIDADE)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-#decisao_ESCOLA$PERCENTUAL <- round(prop.table(decisao_ESCOLA$QUANTIDADE)*100, 2)
-decisao_ESCOLA$PERCENTUAL <- round_preserve_sum(prop.table(decisao_ESCOLA$QUANTIDADE)*100, 2)
-
-#outra forma de calcular percentual
-#decisao_ESCOLA = mutate(decisao_ESCOLA,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-
-decisao_ESCOLA_bkp=decisao_ESCOLA
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-decisao_ESCOLA_rmark = decisao_ESCOLA
-decisao_ESCOLA_rmark1 = decisao_ESCOLA
-#SEPARAR CASOS DE ARQUIVAMENTO E REMISSÕES PARA SCRIPTS EM 014_DECISOES_Rmd
-
-#filter(decisao_ESCOLA_rmark, !grepl("REMISSAO", DECISAO))
-decisao_ESCOLA_rmark = filter(decisao_ESCOLA_rmark, grepl("ARQUIVAMENTO|REMISSÃO", DECISAO))
-
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-decisao_ESCOLA_rmark1 = decisao_ESCOLA_rmark1 %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-#sum(decisao_ESCOLA_rmark$QUANTIDADE)
-
-#para escolher linhas e posicoes
-decisao_ESCOLA_rmark1[1,2]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ABSOLVICAO"]<-	"ABSOLVIÇÃO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ADVERTENCIA"]<-	"ADVERTÊNCIA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ARQUIVAMENTO"]<-	"ARQUIVAMENTO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "DECISAOINCONCLUSIVA"]<-	"VOUTROS"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "EXTINCAODOPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "EXTINCAOPORMORTE"]<-	"EXTINÇÃO POR MORTE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "EXTINCAOPORPROCESSO"]<-	"EXTINÇÃO DO PROCESSO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "INSTRUCAODOFEITO"]<-	"INSTRUÇÃO DO FEITO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "INTERNACAO"]<-	"INTERNAÇÃO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "INTERNACAOPROVISORIA"]<-	"INTERNAÇÃO PROVISÓRIA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "INTERNACAOPROVISORIA/REGIMEDOMICILIAR"]<-	"INTERNAÇÃO PROVISÓRIA (REGIME DOMICILIAR)"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "JUSTICARESTAURATIVA"]<-	"JUSTIÇA RESTAURATIVA"
+#banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "LA"]<-	"REMISSAO c/c LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "OUTRAS(OS)"]<-	"VOUTROS"
+#banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "PSC"]<-	"REMISSAO c/c PSC"
+#banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "PSC/LA"]<-	"REMISSAO c/c LA/PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMESSAAOJUIZOCOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMESSACOMARCACOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMETIDOSAUTOSJ.COMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOEXTINTIVA"]<-	"REMISSÃO EXTINTIVA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOEXTINTIVA/ADVERTENCIA"]<-	"REMISSÃO EXTINTIVA c/c ADVERTÊNCIA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOEXTINTIVAc/cADVERTENCIA"]<-	"REMISSÃO EXTINTIVA c/c ADVERTÊNCIA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA-L.A"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA–L.A"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA-LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA-PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA-PSC/REPARACAODEDANO"]<-	"REMISSÃO SUSPENSIVA c/c PSC/REPARAÇÃO DE DANO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA-REPARACAODEDANO"]<- "REMISSÃO SUSPENSIVA c/c REPARAÇÃO DE DANO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA/LA"]<-	"REMISSÃO SUSPENSIVA c/c LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA/LA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c LA/PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA/PSC"]<-	"REMISSÃO SUSPENSIVA c/c PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RESPONDERPROCESSOEMLIBERDADE"]<-	"RESPONDER EM LIBERDADE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ENTREGUEAOSRESPONSAVEIS"]<-	"RESPONDER EM LIBERDADE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOAINTERNACAO"]<-	"RETORNO A INTERNAÇÃO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOAOCEIP"]<-	"RETORNO AO CEIP"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOASEMILIBERDADE"]<-	"RETORNO A SEMILIBERDADE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNODOSAUTOSADELEGACIA"]<-	"RETORNO DOS AUTOS A DELEGACIA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "SEMILIBERDADE"]<-	"SEMILIBERDADE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "SEMINFORMACAO"]<-	"VAZIO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAO/ADVERTENCIA/REPARACAODEDANO"]<-	"REMISSÃO/ADVERTÊNCIA/REPARAÇÃO DE DANO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOAOCUMPRIMENTODEPSC"]<-	"RETORNO A PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOAPSC"]<-	"RETORNO A PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOALA"]<-	"RETORNO A LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOALA/PSC"]<-	"RETORNO A LA/PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOAOCUMPRIMENTODELA/PSC"]<-	"RETORNO A LA/PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "RETORNOAOCUMPRIMENTODEL.A"]<-	"RETORNO A LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "EXTINCAOPORPRESCRICAO"]<-	"EXTINÇÃO POR PRESCRIÇÃO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAO SUSPENSIVA c/c LA"]<-	"REMISSÃO c/c LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAO SUSPENSIVA c/c PSC"]<-	"REMISSÃO c/c PSC"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "REMISSAOSUSPENSIVA/PSC/LA"]<-	"REMISSÃO c/c LA"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == ""]<-	"VAZIO"
 
 #########################################################################################################
 #########################################################################################################
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "VAZIO"]<-	"SEM INFORMAÇÃO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "VOUTROS"]<-	"OUTROS"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
+# salvando para gráfico
+banco_ESCOLA_decisao_bkp = banco_ESCOLA_decisao
 
-#acrescentando linha com total
-decisao_ESCOLA <- rbind(decisao_ESCOLA,
-                        data.frame(DECISAO = "TOTAL", QUANTIDADE = sum(decisao_ESCOLA$QUANTIDADE), PERCENTUAL = sum(decisao_ESCOLA$PERCENTUAL),
-                                   stringsAsFactors = FALSE))
+banco_ESCOLA_decisao_bkp =
+  banco_ESCOLA_decisao_bkp %>%
+  janitor::tabyl(decisao) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-colnames(decisao_ESCOLA) <- c("DECISAO", "QUANTIDADE", "%")
+# Adaptando para scrip grafico:
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
-#para tabela gt abaixo:
-decisao_ESCOLA_gt = decisao_ESCOLA
+colnames(banco_ESCOLA_decisao_bkp)[1]<-'banco_ESCOLA_decisao_bkp'
+colnames(banco_ESCOLA_decisao_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_decisao_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+#########################################################################################################
+#para script rmd:
+banco_ESCOLA_decisao_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_decisao_bkp$PERCENTUAL))
+banco_ESCOLA_decisao_bkp_rmd = tail(banco_ESCOLA_decisao_bkp,5)
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+#ordenando outros para final da tabela
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "OUTROS"]<-	"ROUTROS"
+#########################################################################################################
+banco_ESCOLA_decisao =
+  banco_ESCOLA_decisao %>%
+  janitor::tabyl(decisao) %>%
+  arrange(decisao) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
 
+# Adaptando:
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_decisao$decisao[banco_ESCOLA_decisao$decisao == "ROUTROS"]<- "OUTROS"
 
+colnames(banco_ESCOLA_decisao)[1]<-'DECISÃO'
+colnames(banco_ESCOLA_decisao)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_decisao)[3]<-'PERCENTUAL'
 
-#write.xlsx(decisao_ESCOLA, file = "decisao_ESCOLA_total.xlsx") #salvando para usar na comparada
-#write.csv(decisao_ESCOLA, file = "decisao_ESCOLA_total.csv", row.names=FALSE) #salvando com modificações anteriores
-
-
+#############################################################################################################
+# banco_ESCOLA_decisao =
+#   banco_ESCOLA_decisao %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
-#########################################################################################################
-#tabela alternativa
-#########################################################################################################
-#salvando tabela
-#pdf(file="tabela_decisao_ESCOLA_geral_alternativa.pdf",  width = 6, height = 4.8, title = "decisao_ESCOLA")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
-#########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-
-
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-# decisao_ESCOLA FIM
+# banco_ESCOLA_decisao FIM
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
-###vitima_ESCOLA
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
-#########################################################################################################
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-vitima_ESCOLA = escola_bkp
-vitima_ESCOLA = as_tibble(vitima_ESCOLA)
-vitima_ESCOLA <- vitima_ESCOLA[!duplicated(data.frame(escola_bkp$PROCESSO, escola_bkp$ATO_INFRACIONAL)),]
-#VITIMA_geral_bkp = VITIMA_geral
-#VITIMA02 = banco_sem_mba %>%
-# select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, VITIMA, VITIMA_PROTETIVA, QUAL_VITIMA_PROTETIVA_01,
-#       QUAL_VITIMA_PROTETIVA_02, QUAL_VITIMA_PROTETIVA_03, COMPARECIMENTO_AUD_PRELIMINAR)
+#banco_ESCOLA_vitima
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
 #DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
+banco_ESCOLA_vitima =
+  banco_ESCOLA |>
+  select(-name)
 
-
-
-
-vitima_ESCOLA =
-
-  vitima_ESCOLA %>%
-  pivot_longer(cols = starts_with("TIPO_DE_VITIMA"), values_to = "TIPO_DE_VITIMA_TOTAL")
+banco_ESCOLA_vitima =
+  banco_ESCOLA_vitima %>%
+  pivot_longer(cols = starts_with("TIPO_DE_VITIMA"), values_to = "VITIMA") %>%
   #select(-name) %>%
-
-
-vitima_ESCOLA$TIPO_DE_VITIMA_TOTAL[vitima_ESCOLA$TIPO_DE_VITIMA_TOTAL == ""]<- "NSA"
-
-
-vitima_ESCOLA =
-    vitima_ESCOLA %>%
-  filter(TIPO_DE_VITIMA_TOTAL != "NSA")
-
-
-#########################################################################################################
-
-
-
-vitima_ESCOLA = data.frame(table(vitima_ESCOLA$TIPO_DE_VITIMA_TOTAL))
-vitima_ESCOLA$Var1 <- as.character(vitima_ESCOLA$Var1)
-vitima_ESCOLA = as_tibble(vitima_ESCOLA)
-colnames(vitima_ESCOLA) <- c("TIPO_DE_VITIMA", "QUANTIDADE")
-
-
-
-
-vitima_ESCOLA
-
-vitima_ESCOLA$TIPO_DE_VITIMA <- gsub(" ","", vitima_ESCOLA$TIPO_DE_VITIMA)
-vitima_ESCOLA
-#preenchimento de celulas:
-vitima_ESCOLA$TIPO_DE_VITIMA[vitima_ESCOLA$TIPO_DE_VITIMA == "FUNCINARIODAESCOLA"]<-	"FUNCIONARIO DA ESCOLA"
-vitima_ESCOLA$TIPO_DE_VITIMA[vitima_ESCOLA$TIPO_DE_VITIMA == "FUNCIONARIODAESCOLA"]<-	"FUNCIONARIO DA ESCOLA"
-vitima_ESCOLA$TIPO_DE_VITIMA[vitima_ESCOLA$TIPO_DE_VITIMA == "FUNCIONARIODAESCOLA"]<-	"FUNCIONARIO DA ESCOLA"
-vitima_ESCOLA$TIPO_DE_VITIMA[vitima_ESCOLA$TIPO_DE_VITIMA == "NAOESPECIFICADO"]<-	"NAO ESPECIFICADO"
-vitima_ESCOLA$TIPO_DE_VITIMA[vitima_ESCOLA$TIPO_DE_VITIMA == "COMUNIDADEESCOLAR"]<-	"COMUNIDADE ESCOLAR"
-vitima_ESCOLA$TIPO_DE_VITIMA[vitima_ESCOLA$TIPO_DE_VITIMA == "OUTROS"]<-	"VOUTROS"
-vitima_ESCOLA
-
-vitima_ESCOLA = filter(vitima_ESCOLA, !QUANTIDADE == 0)
-
-vitima_ESCOLA
-
-
-##JUNTANDO AS LINHAS
-library(plyr)
-
-vitima_ESCOLA <- ddply(vitima_ESCOLA,
-                       c("TIPO_DE_VITIMA"),
-                       summarise,
-                       QUANTIDADE = sum(QUANTIDADE))
-
-vitima_ESCOLA
-
-sum(table(vitima_ESCOLA))
-
-#vitima_ESCOLA  <- vitima_ESCOLA[order(vitima_ESCOLA[,1],decreasing=FALSE),]
-vitima_ESCOLA
-
-vitima_ESCOLA$TIPO_DE_VITIMA[vitima_ESCOLA$TIPO_DE_VITIMA == "VOUTROS"]<-	"OUTROS"
-vitima_ESCOLA
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-vitima_ESCOLA_bkp = vitima_ESCOLA #salvando atos atendimento original
-
-library(grid)
-#library(gridExtra)
-
-#acrescentando coluna com percentual
-vitima_ESCOLA$QUANTIDADE <- as.numeric(vitima_ESCOLA$QUANTIDADE)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-#vitima_ESCOLA$PERCENTUAL <- round(prop.table(vitima_ESCOLA$QUANTIDADE)*100, 2)
-vitima_ESCOLA$PERCENTUAL <- round_preserve_sum(prop.table(vitima_ESCOLA$QUANTIDADE)*100, 2)
-
-#outra forma de calcular percentual
-#vitima_ESCOLA = mutate(vitima_ESCOLA,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
+  filter(VITIMA != "") |>
+  select(VITIMA) |>
+  filter(!VITIMA %in% "NSA")
 
 #########################################################################################################
 #########################################################################################################
-
-#script para o bookdown
-
-vitima_ESCOLA_rmark = vitima_ESCOLA
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-vitima_ESCOLA_rmark = vitima_ESCOLA_rmark %>%
-  top_n(5, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-#sum(vitima_ESCOLA_rmark$M)
-
-#para escolher linhas e posicoes
-vitima_ESCOLA_rmark[2,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
+#########################################################################################################
+banco_ESCOLA_vitima$VITIMA = ajustar_nomes(banco_ESCOLA_vitima$VITIMA)
+#########################################################################################################
+banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "COMUNIDADEESCOLAR"]<- "COMUNIDADE ESCOLAR"
+banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "DIRETORA"]<- "DIRETOR(A)"
+banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "FUNCIONARIODAESCOLA"]<- "FUNCIONÁRIO DA ESCOLA"
+#banco_ESCOLA_vitima$VITIMA[agrep(".ART", banco_ESCOLA_vitima$VITIMA)] <- "OUTROS"
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+# salvando para gráfico
+banco_ESCOLA_vitima_bkp = banco_ESCOLA_vitima
+
+banco_ESCOLA_vitima_bkp =
+  banco_ESCOLA_vitima_bkp %>%
+  janitor::tabyl(VITIMA) %>%
+  arrange(n) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+banco_ESCOLA_vitima_bkp$VITIMA[banco_ESCOLA_vitima_bkp$VITIMA == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
 
 
-vitima_ESCOLA_bkp=vitima_ESCOLA
+colnames(banco_ESCOLA_vitima_bkp)[1]<-'banco_ESCOLA_vitima_bkp'
+colnames(banco_ESCOLA_vitima_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_vitima_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+#########################################################################################################
+#para script rmd:
+banco_ESCOLA_vitima_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_vitima_bkp$PERCENTUAL))
+banco_ESCOLA_vitima_bkp_rmd = tail(banco_ESCOLA_vitima_bkp,3)
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
 
-#acrescentando linha com total
-vitima_ESCOLA <- rbind(vitima_ESCOLA,
-                       data.frame(TIPO_DE_VITIMA = "TOTAL", QUANTIDADE = sum(vitima_ESCOLA$QUANTIDADE), PERCENTUAL = sum(vitima_ESCOLA$PERCENTUAL),
-                                  stringsAsFactors = FALSE))
+banco_ESCOLA_vitima =
+  banco_ESCOLA_vitima %>%
+  janitor::tabyl(VITIMA) %>%
+  arrange(VITIMA) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
 
-colnames(vitima_ESCOLA) <- c("VITIMA", "QUANTIDADE", "%")
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "VS/INF"]<- "SEM INFORMAÇÃO"
 
-#write.xlsx(vitima_ESCOLA, file = "vitima_ESCOLA_total.xlsx") #salvando para usar na comparada
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-write.csv(vitima_ESCOLA, file = "vitima_ESCOLA_total.csv", row.names=FALSE) #salvando com modificações anteriores
+
+colnames(banco_ESCOLA_vitima)[1]<-'VÍTIMA'
+colnames(banco_ESCOLA_vitima)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_vitima)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+# banco_ESCOLA_vitima =
+#   banco_ESCOLA_vitima %>%
+#  mutate(PERCENTUAL = PERCENTUAL*100)%>%
+#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
-#require(ggpubr)
-#########################################################################################################
-
-#########################################################################################################
-#########################################################################################################
-#usando a funcao criada:
-vitima_ESCOLA_bkp
-
-library("ggplot2")  # Data visualization
-library("dplyr")    # Data manipulation
-
-vitima_ESCOLA_bkp <- vitima_ESCOLA_bkp %>%
-  arrange(desc(QUANTIDADE)) %>%
-  mutate(PERCENTUAL = round_preserve_sum(prop.table(QUANTIDADE)*100, 2))
-
-vitima_ESCOLA_bkp$PERCENTUAL <- paste(vitima_ESCOLA_bkp$PERCENTUAL, "%", sep=" ")
-
-colnames(vitima_ESCOLA_bkp) <- c("VITIMA", "QUANTIDADE", "PERCENTUAL")
-
-vitima_ESCOLA_bkp
-
-
-
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
-########################################################################################################
-#FIM
-##################################################################################################################################################################################################
-##TABELA REGIONAL
+#########################################################################################################
+# banco_ESCOLA_vitima FIM
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -1378,291 +705,98 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-regional_residencia_ESCOLA = ESCOLA_snr %>%
+banco_ESCOLA_regional_residencia =
+  banco_ESCOLA_snr %>%
   select(REGIONAL_RESIDENCIAL)
 
-
-table(regional_residencia_ESCOLA$REGIONAL_RESIDENCIAL, useNA ="always")
-sum(table(regional_residencia_ESCOLA$REGIONAL_RESIDENCIAL, useNA ="always"))
-#########################################################################################################
-regional_residencia_ESCOLA <- data.frame(table(regional_residencia_ESCOLA$REGIONAL_RESIDENCIAL, useNA ="always"))
-regional_residencia_ESCOLA_original=regional_residencia_ESCOLA #salvando atos atendimento original
-#regional_residencia_ESCOLA=regional_residencia_ESCOLA_original
-#regional_residencia_ESCOLA$Var1 <- NULL
-colnames(regional_residencia_ESCOLA) <- c("REGIONAL", "QUANTIDADE")
-
-#write.csv(regional_residencia_ESCOLA, file = "regional_residencia_ESCOLA_bruto.csv", row.names = TRUE)
-###write.xlsx(regional_residencia_ESCOLA, file = "regional_residencia_ESCOLA_bruto.xlsx") #salvando com modificações anteriores
-
-#regional_residencia_ESCOLA$SEXO <- NULL
-
-regional_residencia_ESCOLA$REGIONAL <- as.character(regional_residencia_ESCOLA$REGIONAL)
-
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == ""]<- "SEM INFORMACAO"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "#N/DISP"]<- "SEM INFORMACAO"
-#regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == NA]<- "SEM INFORMACAO"
-regional_residencia_ESCOLA
-
-regional_residencia_ESCOLA = filter(regional_residencia_ESCOLA, !QUANTIDADE == 0)
-regional_residencia_ESCOLA
-
-regional_residencia_ESCOLA$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMACAO", regional_residencia_ESCOLA$REGIONAL, ignore.case = TRUE),
-                                               gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMACAO).*", "\\1",regional_residencia_ESCOLA$REGIONAL), "OUTRO ESTADO")
-
-#write.csv(regional_residencia_ESCOLA, file = "regional_residencia_ESCOLA.csv", row.names = TRUE)
-###write.xlsx(regional_residencia_ESCOLA, file = "regional_residencia_ESCOLA.xlsx")
-
-
-regional_residencia_ESCOLA$REGIONAL <- NULL
-
-colnames(regional_residencia_ESCOLA) <- c("QUANTIDADE", "REGIONAL")
-
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-
-regional_residencia_ESCOLA <- regional_residencia_ESCOLA[c("REGIONAL", "QUANTIDADE")]
-
-library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(regional_residencia_ESCOLA$QUANTIDADE)
-
-regional_residencia_ESCOLA <- ddply(regional_residencia_ESCOLA,
-                                    c("REGIONAL"),
-                                    summarise,
-                                    QUANTIDADE = sum(QUANTIDADE))
-
-###alterando
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "SEM INFORMACAO"]<- "ZSEM INFORMACAO"
-
-regional_residencia_ESCOLA <-regional_residencia_ESCOLA[order(regional_residencia_ESCOLA$REGIONAL),]
-
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-regional_residencia_ESCOLA$REGIONAL[regional_residencia_ESCOLA$REGIONAL == "ZSEM INFORMACAO"]<- "SEM INFORMACAO"
-
-#caso queira separar so regionais
-#regional_residencia_ESCOLA1 <- regional_residencia_ESCOLA[!(regional_residencia_ESCOLA$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      regional_residencia_ESCOLA$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     regional_residencia_ESCOLA$REGIONAL == 'OUTRO ESTADO'|
-#                                                    regional_residencia_ESCOLA$REGIONAL == 'SEM INFORMACAO'),]
-
-#acrescentando coluna com percentual
-regional_residencia_ESCOLA$QUANTIDADE <- as.numeric(regional_residencia_ESCOLA$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-
-
-regional_residencia_ESCOLA$PERCENTUAL <- round_preserve_sum(prop.table(regional_residencia_ESCOLA$QUANTIDADE)*100, 2)
-
-#regional_residencia_ESCOLA <- regional_residencia_ESCOLA[order(regional_residencia_ESCOLA[,3],decreasing=TRUE),]
-#write.csv(regional_residencia_ESCOLA, file ="regional_residencia_ESCOLA.csv",row.names=TRUE)
-###write.xlsx(regional_residencia_ESCOLA, file ="regional_residencia_ESCOLA.xlsx")
-#regional_residencia_ESCOLA$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-regional_residencia_ESCOLA_bkp = regional_residencia_ESCOLA
+colnames(banco_ESCOLA_regional_residencia)[1]<-'regional_residencial'
 
 #########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-regional_residencia_ESCOLA_rmark = regional_residencia_ESCOLA
-
-#SEPARANDO REGIAO METROPOLITANA POR CONTA DO TEXTO NO RELATORIO
-regional_residencia_ESCOLA_rmark1 = regional_residencia_ESCOLA_rmark
-regional_residencia_ESCOLA_rmark1 = filter(regional_residencia_ESCOLA_rmark1, !REGIONAL == "REGIÃO METROPOLITANA")
-
-regional_residencia_ESCOLA_rmark1 = regional_residencia_ESCOLA_rmark1 %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#SO REGIAO METROPOLITANA e outros
-regional_residencia_ESCOLA_rmark2 = filter(regional_residencia_ESCOLA_rmark, REGIONAL == "REGIÃO METROPOLITANA")
-regional_residencia_ESCOLA_rmark3 = filter(regional_residencia_ESCOLA_rmark, REGIONAL == "OUTRA CIDADE MG")
-regional_residencia_ESCOLA_rmark4 = filter(regional_residencia_ESCOLA_rmark, REGIONAL == "OUTRO ESTADO")
-regional_residencia_ESCOLA_rmark5 = filter(regional_residencia_ESCOLA_rmark, REGIONAL == "SEM INFORMACAO")
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-regional_residencia_ESCOLA_rmark = regional_residencia_ESCOLA_rmark %>%
-  top_n(20, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-sum(regional_residencia_ESCOLA_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-regional_residencia_ESCOLA_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-#acrescentando linha com total
-regional_residencia_ESCOLA <- rbind(regional_residencia_ESCOLA,
-                                    data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(regional_residencia_ESCOLA$QUANTIDADE), PERCENTUAL = sum(regional_residencia_ESCOLA$PERCENTUAL),
-                                               stringsAsFactors = FALSE))
-
-
-
-
-colnames(regional_residencia_ESCOLA) <- c("REGIONAL", "QUANTIDADE", "%")
-
-
-#para tabela gt abaixo:
-
-regional_residencia_ESCOLA_gt = regional_residencia_ESCOLA
-
-########################################################################################################
-#########################################################################################################
+#encontrando parte do texto e substituindo
+banco_ESCOLA_regional_residencia$regional_residencial[agrep("/MG", banco_ESCOLA_regional_residencia$regional_residencial)] <- "UOUTRA CIDADE MG"
+banco_ESCOLA_regional_residencia$regional_residencial[agrep("RMBH", banco_ESCOLA_regional_residencia$regional_residencial)] <- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_residencia$regional_residencial[agrep("RIBEIRAO DAS NEVES", banco_ESCOLA_regional_residencia$regional_residencial)] <- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_residencia$regional_residencial[agrep("CATAGUASES", banco_ESCOLA_regional_residencia$regional_residencial)] <- "UOUTRA CIDADE MG"
+banco_ESCOLA_regional_residencia$regional_residencial[agrep("CIDADE DE BRASILIA/DF", banco_ESCOLA_regional_residencia$regional_residencial)] <- "VOUTRO ESTADO"
+banco_ESCOLA_regional_residencia$regional_residencial[agrep("N/DISP", banco_ESCOLA_regional_residencia$regional_residencial)] <- "ZSEM INFORMAÇÃO"
+banco_ESCOLA_regional_residencia$regional_residencial[agrep("INFORMACAO", banco_ESCOLA_regional_residencia$regional_residencial)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == ""]<- "ZSEM INFORMAÇÃO"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "PAMPULHA"]<- "OESTEPAMPULHA"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "VENDA NOVA"]<- "PVENDA NOVA"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "REGIÃO METROPOLITANA"]<- "QREGIÃO METROPOLITANA"
 
 #########################################################################################################
 
-#########################################################################################################
-#FIM
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-#GRAFICO regional_residencia_ESCOLA
-#regional_residencia_ESCOLA_original=regional_residencia_ESCOLA #salvando REGIONALs atendimento original
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-#########################################################################################################
-#########################################################################################################
-#GRAFICO REGIONAL
-#regional_residencia_ESCOLA_original=regional_residencia_ESCOLA #salvando REGIONALs atendimento original
-regional_residencia_ESCOLA=regional_residencia_ESCOLA_bkp
+# salvando para gráfico
+banco_ESCOLA_regional_residencia_bkp = banco_ESCOLA_regional_residencia
 
-regional_residencia_ESCOLA<-regional_residencia_ESCOLA%>%
-  arrange(QUANTIDADE)
+banco_ESCOLA_regional_residencia_bkp =
+  banco_ESCOLA_regional_residencia_bkp %>%
+  janitor::tabyl(regional_residencial) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
 
-regional_residencia_ESCOLA$REGIONAL = factor(regional_residencia_ESCOLA$REGIONAL)
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
 
-#pdf(file="GRAFICO[30,].06_regional_residencia_ESCOLA_alternativo.pdf", title = "grafico_regional_residencia_ESCOLA", width = 10, height = 8)
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "OESTEPAMPULHA"]<- "PAMPULHA"
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "PVENDA NOVA"]<- "VENDA NOVA"
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+banco_ESCOLA_regional_residencia_bkp$regional_residencial[banco_ESCOLA_regional_residencia_bkp$regional_residencial == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(banco_ESCOLA_regional_residencia_bkp)[1]<-'banco_ESCOLA_regional_residencia_bkp'
+colnames(banco_ESCOLA_regional_residencia_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_regional_residencia_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+#########################################################################################################
+#para script rmd:
+banco_ESCOLA_regional_residencia_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_regional_residencia_bkp$PERCENTUAL))
+banco_ESCOLA_regional_residencia_bkp_rmd = tail(banco_ESCOLA_regional_residencia_bkp,5)
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+banco_ESCOLA_regional_residencia =
+  banco_ESCOLA_regional_residencia %>%
+  janitor::tabyl(regional_residencial) %>%
+  arrange(regional_residencial) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "OESTEPAMPULHA"]<- "PAMPULHA"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "PVENDA NOVA"]<- "VENDA NOVA"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+banco_ESCOLA_regional_residencia$regional_residencial[banco_ESCOLA_regional_residencia$regional_residencial == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
 
+
+colnames(banco_ESCOLA_regional_residencia)[1]<-'REGIONAL'
+colnames(banco_ESCOLA_regional_residencia)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_regional_residencia)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
-#FIM
+# banco_ESCOLA_regional_residencia FIM
 #########################################################################################################
-#########################################################################################################
-#INICIO escola_tipo_ESCOLA
-#########################################################################################################
-
-escola_tipo_ESCOLA = banco_sem_concurso_ESCOLA
-
-
-
-table(escola_tipo_ESCOLA$NOME_DA_.ESCOLA, useNA ="always")
-
-#APAGAR NA'S EM escola_tipo_ESCOLA$NOME_DA_.ESCOLA
-#escola_tipo_ESCOLA[which(escola_tipo_ESCOLA$NOME_DA_.ESCOLA == NA), ] <-  NULL
-setwd(file.path("~/diretorio_r/estciabh/planilhas"))
-write.csv(escola_tipo_ESCOLA, file ="escola_tipo_ESCOLA.csv",row.names=FALSE)
-#write.xlsx(escola_tipo_ESCOLA, file = "escola_tipo_ESCOLA.xlsx")
-
-escola_tipo_ESCOLA = escola_tipo_ESCOLA %>%
-  select(NOME_DA_.ESCOLA)
-
-#########################################################################################################
-
-#CRIAR COLUNA TIPO_escola_tipo_ESCOLA: MUNICIPAL, ESTADUAL OU PARTICULAR
-
-escola_tipo_ESCOLA$TIPO_escola<-ifelse(grepl("MUNICIPAL|ESTADUAL|UFMG", escola_tipo_ESCOLA$NOME_DA_.ESCOLA, ignore.case = TRUE),
-                                       gsub(".*(MUNICIPAL|ESTADUAL|UFMG).*", "\\1", escola_tipo_ESCOLA$NOME_DA_.ESCOLA), "PARTICULAR")
-
-########################################################################################################
-escola_tipo_ESCOLA = data.frame(table(escola_tipo_ESCOLA$TIPO_escola))
-
-##JUNTANDO AS LINHAS
-library(plyr)
-escola_tipo_ESCOLA
-
-colnames(escola_tipo_ESCOLA) <- c("ESCOLA", "QUANTIDADE")
-
-library(grid)
-#library(gridExtra)
-
-#acrescentando coluna com percentual
-escola_tipo_ESCOLA$QUANTIDADE <- as.numeric(escola_tipo_ESCOLA$QUANTIDADE)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-#escola_tipo_ESCOLA$PERCENTUAL <- round(prop.table(escola_tipo_ESCOLA$QUANTIDADE)*100, 2)
-escola_tipo_ESCOLA$PERCENTUAL <- round_preserve_sum(prop.table(escola_tipo_ESCOLA$QUANTIDADE)*100, 2)
-
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-escola_tipo_ESCOLA_rmark = escola_tipo_ESCOLA
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-escola_tipo_ESCOLA_rmark = escola_tipo_ESCOLA_rmark %>%
- top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-#sum(escola_tipo_ESCOLA_rmark$M)
-
-#para escolher linhas e posicoes
-escola_tipo_ESCOLA_rmark[2,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-
-escola_tipo_ESCOLA
-
-escola_tipo_ESCOLA$PERCENTUAL <- paste(escola_tipo_ESCOLA$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-
-
-setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
-########################################################################################################
-#FIM
-##################################################################################################################################################################################################
-##regional_ato_ESCOLA
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
@@ -1670,190 +804,191 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-regional_ato_ESCOLA <- banco_sem_concurso_ESCOLA_bkp %>%
-  select(ATO_INFRACIONAL, REGIONAL_ATO)
+banco_ESCOLA_tipo_escola =
+  banco_ESCOLA_sem_concurso %>%
+  select(NOME_ESCOLA)
 
-
-#########################################################################################################
-regional_ato_ESCOLA <- data.frame(table(regional_ato_ESCOLA$REGIONAL_ATO, useNA ="always"))
-regional_ato_ESCOLA_original=regional_ato_ESCOLA #salvando atos atendimento original
-#regional_ato_ESCOLA=regional_ato_ESCOLA_original
-#regional_ato_ESCOLA$Var1 <- NULL
-colnames(regional_ato_ESCOLA) <- c("REGIONAL", "QUANTIDADE")
-
-#write.csv(regional_ato_ESCOLA, file = "regional_ato_ESCOLA_bruto.csv", row.names = TRUE)
-###write.xlsx(regional_ato_ESCOLA, file = "regional_ato_ESCOLA_bruto.xlsx") #salvando com modificações anteriores
-
-#regional_ato_ESCOLA$SEXO <- NULL
-
-regional_ato_ESCOLA$REGIONAL <- as.character(regional_ato_ESCOLA$REGIONAL)
-
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "OESTE"]<- "ALTERNATIVA"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == ""]<- "SEM INFORMACAO"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "#N/DISP"]<- "SEM INFORMACAO"
-#regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == NA]<- "SEM INFORMACAO"
-regional_ato_ESCOLA
-
-regional_ato_ESCOLA = filter(regional_ato_ESCOLA, !QUANTIDADE == 0)
-regional_ato_ESCOLA
-
-regional_ato_ESCOLA$REGIONAL2 <- ifelse(grepl("BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMACAO", regional_ato_ESCOLA$REGIONAL, ignore.case = TRUE),
-                                        gsub(".*(BARREIRO|CENTRO-SUL|LESTE|NORDESTE|NOROESTE|NORTE|ALTERNATIVA|PAMPULHA|VENDA NOVA|RMBH|MG|SEM INFORMACAO).*", "\\1",regional_ato_ESCOLA$REGIONAL), "OUTRO ESTADO")
-
-#write.csv(regional_ato_ESCOLA, file = "regional_ato_ESCOLA.csv", row.names = TRUE)
-###write.xlsx(regional_ato_ESCOLA, file = "regional_ato_ESCOLA.xlsx")
-
-
-regional_ato_ESCOLA$REGIONAL <- NULL
-
-colnames(regional_ato_ESCOLA) <- c("QUANTIDADE", "REGIONAL")
-
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "ALTERNATIVA"]<- "OESTE"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "MG"]<- "OUTRA CIDADE MG"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "RMBH"]<- "REGIÃO METROPOLITANA"
-
-regional_ato_ESCOLA <- regional_ato_ESCOLA[c("REGIONAL", "QUANTIDADE")]
-
-library(grid)
-#library(gridExtra)
-
-##JUNTANDO AS LINHAS
-library(plyr)
-sum(regional_ato_ESCOLA$QUANTIDADE)
-
-regional_ato_ESCOLA <- ddply(regional_ato_ESCOLA,
-                             c("REGIONAL"),
-                             summarise,
-                             QUANTIDADE = sum(QUANTIDADE))
-
-###alterando
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "OUTRA CIDADE MG"]<- "ROUTRA CIDADE MG"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "OUTRO ESTADO"]<- "ROUTRO ESTADO"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "VENDA NOVA"]<- "PVENDA NOVA"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "SEM INFORMACAO"]<- "ZSEM INFORMACAO"
-
-regional_ato_ESCOLA <-regional_ato_ESCOLA[order(regional_ato_ESCOLA$REGIONAL),]
-
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "ROUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "ROUTRO ESTADO"]<- "OUTRO ESTADO"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "PVENDA NOVA"]<- "VENDA NOVA"
-regional_ato_ESCOLA$REGIONAL[regional_ato_ESCOLA$REGIONAL == "ZSEM INFORMACAO"]<- "SEM INFORMACAO"
-
-#caso queira separar so regionais
-#regional_ato_ESCOLA1 <- regional_ato_ESCOLA[!(regional_ato_ESCOLA$REGIONAL == 'REGIÃO METROPOLITANA'|
-#                                                      regional_ato_ESCOLA$REGIONAL == 'OUTRA CIDADE MG'|
-#                                                     regional_ato_ESCOLA$REGIONAL == 'OUTRO ESTADO'|
-#                                                    regional_ato_ESCOLA$REGIONAL == 'SEM INFORMACAO'),]
-
-#acrescentando coluna com percentual
-regional_ato_ESCOLA$QUANTIDADE <- as.numeric(regional_ato_ESCOLA$QUANTIDADE)
-
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-
-#usando a funcao criada:
-
-
-regional_ato_ESCOLA$PERCENTUAL <- round_preserve_sum(prop.table(regional_ato_ESCOLA$QUANTIDADE)*100, 2)
-
-#regional_ato_ESCOLA <- regional_ato_ESCOLA[order(regional_ato_ESCOLA[,3],decreasing=TRUE),]
-#write.csv(regional_ato_ESCOLA, file ="regional_ato_ESCOLA.csv",row.names=TRUE)
-###write.xlsx(regional_ato_ESCOLA, file ="regional_ato_ESCOLA.xlsx")
-#regional_ato_ESCOLA$QUANTIDADE <- NULL
-
-#salvando para utilizacao graficos
-regional_ato_ESCOLA_bkp = regional_ato_ESCOLA
+colnames(banco_ESCOLA_tipo_escola)[1]<-'tipo_escola'
 
 #########################################################################################################
-#########################################################################################################
+#encontrando parte do texto e substituindo
+banco_ESCOLA_tipo_escola$tipo_escola[agrep("ESTADUAL", banco_ESCOLA_tipo_escola$tipo_escola)] <- "ESTADUAL"
+banco_ESCOLA_tipo_escola$tipo_escola[agrep("MUNICIPAL", banco_ESCOLA_tipo_escola$tipo_escola)] <- "MUNICIPAL"
 
-#script para o bookdown
-
-regional_ato_ESCOLA_rmark = regional_ato_ESCOLA
-
-#SEPARANDO REGIAO METROPOLITANA POR CONTA DO TEXTO NO RELATORIO
-regional_ato_ESCOLA_rmark1 = regional_ato_ESCOLA_rmark
-regional_ato_ESCOLA_rmark1 = filter(regional_ato_ESCOLA_rmark1, !REGIONAL == "REGIÃO METROPOLITANA")
-
-regional_ato_ESCOLA_rmark1 = regional_ato_ESCOLA_rmark1 %>%
-  top_n(3, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#SO REGIAO METROPOLITANA e outros
-regional_ato_ESCOLA_rmark2 = filter(regional_ato_ESCOLA_rmark, REGIONAL == "REGIÃO METROPOLITANA")
-regional_ato_ESCOLA_rmark3 = filter(regional_ato_ESCOLA_rmark, REGIONAL == "OUTRA CIDADE MG")
-regional_ato_ESCOLA_rmark4 = filter(regional_ato_ESCOLA_rmark, REGIONAL == "OUTRO ESTADO")
-regional_ato_ESCOLA_rmark5 = filter(regional_ato_ESCOLA_rmark, REGIONAL == "SEM INFORMACAO")
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-
-#selecionando os 3 principais e ordenando descrescente por quantidade
-regional_ato_ESCOLA_rmark = regional_ato_ESCOLA_rmark %>%
-  top_n(20, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-#somando
-sum(regional_ato_ESCOLA_rmark$PERCENTUAL)
-
-#para escolher linhas e posicoes
-regional_ato_ESCOLA_rmark[1,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-#acrescentando linha com total
-regional_ato_ESCOLA <- rbind(regional_ato_ESCOLA,
-                             data.frame(REGIONAL = "TOTAL", QUANTIDADE = sum(regional_ato_ESCOLA$QUANTIDADE), PERCENTUAL = sum(regional_ato_ESCOLA$PERCENTUAL),
-                                        stringsAsFactors = FALSE))
-
-
-
-
-colnames(regional_ato_ESCOLA) <- c("REGIONAL", "QUANTIDADE", "%")
-
-
-#para tabela gt abaixo:
-
-regional_ato_ESCOLA_gt = regional_ato_ESCOLA
-
-########################################################################################################
-#########################################################################################################
+banco_ESCOLA_tipo_escola$tipo_escola =
+  ifelse(banco_ESCOLA_tipo_escola$tipo_escola == "ESTADUAL" | banco_ESCOLA_tipo_escola$tipo_escola == "MUNICIPAL",
+         banco_ESCOLA_tipo_escola$tipo_escola, "PARTICULAR")
 
 #########################################################################################################
 
+# salvando para gráfico
+banco_ESCOLA_tipo_escola_bkp = banco_ESCOLA_tipo_escola
+
+banco_ESCOLA_tipo_escola_bkp =
+  banco_ESCOLA_tipo_escola_bkp %>%
+  janitor::tabyl(tipo_escola) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
 #########################################################################################################
-#FIM
+
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "OESTEPAMPULHA"]<- "PAMPULHA"
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "PVENDA NOVA"]<- "VENDA NOVA"
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+banco_ESCOLA_tipo_escola_bkp$tipo_escola[banco_ESCOLA_tipo_escola_bkp$tipo_escola == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(banco_ESCOLA_tipo_escola_bkp)[1]<-'banco_ESCOLA_tipo_escola_bkp'
+colnames(banco_ESCOLA_tipo_escola_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_tipo_escola_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #########################################################################################################
+#para script rmd:
+banco_ESCOLA_tipo_escola_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_tipo_escola_bkp$PERCENTUAL))
+banco_ESCOLA_tipo_escola_bkp_rmd = tail(banco_ESCOLA_tipo_escola_bkp,5)
 #########################################################################################################
-#GRAFICO regional_ato_ESCOLA
-#regional_ato_ESCOLA_original=regional_ato_ESCOLA #salvando REGIONALs atendimento original
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+banco_ESCOLA_tipo_escola =
+  banco_ESCOLA_tipo_escola %>%
+  janitor::tabyl(tipo_escola) %>%
+  arrange(tipo_escola) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_tipo_escola$tipo_escola[banco_ESCOLA_tipo_escola$tipo_escola == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_tipo_escola$tipo_escola[banco_ESCOLA_tipo_escola$tipo_escola == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_tipo_escola$tipo_escola[banco_ESCOLA_tipo_escola$tipo_escola == "OESTEPAMPULHA"]<- "PAMPULHA"
+banco_ESCOLA_tipo_escola$tipo_escola[banco_ESCOLA_tipo_escola$tipo_escola == "PVENDA NOVA"]<- "VENDA NOVA"
+banco_ESCOLA_tipo_escola$tipo_escola[banco_ESCOLA_tipo_escola$tipo_escola == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_tipo_escola$tipo_escola[banco_ESCOLA_tipo_escola$tipo_escola == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+banco_ESCOLA_tipo_escola$tipo_escola[banco_ESCOLA_tipo_escola$tipo_escola == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+
+
+colnames(banco_ESCOLA_tipo_escola)[1]<-'ESCOLA'
+colnames(banco_ESCOLA_tipo_escola)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_tipo_escola)[3]<-'PERCENTUAL'
+
+#############################################################################################################
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# banco_ESCOLA_tipo_escola FIM
+#########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
 #########################################################################################################
-#GRAFICO REGIONAL
-#regional_ato_ESCOLA_original=regional_ato_ESCOLA #salvando REGIONALs atendimento original
-regional_ato_ESCOLA=regional_ato_ESCOLA_bkp
+#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
+library(dplyr)
 
-regional_ato_ESCOLA<-regional_ato_ESCOLA%>%
-  arrange(QUANTIDADE)
+banco_ESCOLA_regional_ato =
+  banco_ESCOLA_sem_concurso %>%
+  select(REGIONAL_ATO)
+
+colnames(banco_ESCOLA_regional_ato)[1]<-'regional_ato'
+
+#########################################################################################################
+#encontrando parte do texto e substituindo
+banco_ESCOLA_regional_ato$regional_ato[agrep("/MG", banco_ESCOLA_regional_ato$regional_ato)] <- "UOUTRA CIDADE MG"
+banco_ESCOLA_regional_ato$regional_ato[agrep("RMBH", banco_ESCOLA_regional_ato$regional_ato)] <- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_ato$regional_ato[agrep("RIBEIRAO DAS NEVES", banco_ESCOLA_regional_ato$regional_ato)] <- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_ato$regional_ato[agrep("CATAGUASES", banco_ESCOLA_regional_ato$regional_ato)] <- "UOUTRA CIDADE MG"
+banco_ESCOLA_regional_ato$regional_ato[agrep("CIDADE DE BRASILIA/DF", banco_ESCOLA_regional_ato$regional_ato)] <- "VOUTRO ESTADO"
+banco_ESCOLA_regional_ato$regional_ato[agrep("N/DISP", banco_ESCOLA_regional_ato$regional_ato)] <- "ZSEM INFORMAÇÃO"
+banco_ESCOLA_regional_ato$regional_ato[agrep("INFORMACAO", banco_ESCOLA_regional_ato$regional_ato)] <- "ZSEM INFORMAÇÃO"
+#substituindo
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == ""]<- "ZSEM INFORMAÇÃO"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "PAMPULHA"]<- "OESTEPAMPULHA"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "VENDA NOVA"]<- "PVENDA NOVA"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "REGIÃO METROPOLITANA"]<- "QREGIÃO METROPOLITANA"
+
+#########################################################################################################
+
+# salvando para gráfico
+banco_ESCOLA_regional_ato_bkp = banco_ESCOLA_regional_ato
+
+banco_ESCOLA_regional_ato_bkp =
+  banco_ESCOLA_regional_ato_bkp %>%
+  janitor::tabyl(regional_ato) %>%
+  arrange(n) %>%
+  #arrange(desc(n)) %>%
+  #janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+
+# Adaptando para scrip grafico:
+#SUBSTITUIR
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "OESTEPAMPULHA"]<- "PAMPULHA"
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "PVENDA NOVA"]<- "VENDA NOVA"
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+banco_ESCOLA_regional_ato_bkp$regional_ato[banco_ESCOLA_regional_ato_bkp$regional_ato == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
+
+colnames(banco_ESCOLA_regional_ato_bkp)[1]<-'banco_ESCOLA_regional_ato_bkp'
+colnames(banco_ESCOLA_regional_ato_bkp)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_regional_ato_bkp)[3]<-'PERCENTUAL'
+#########################################################################################################
+#########################################################################################################
+#para script rmd:
+banco_ESCOLA_regional_ato_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_regional_ato_bkp$PERCENTUAL))
+banco_ESCOLA_regional_ato_bkp_rmd = tail(banco_ESCOLA_regional_ato_bkp,5)
+#########################################################################################################
+# Fazer uma tabela de frequência com valores totais,
+# e porcentagem
+
+banco_ESCOLA_regional_ato =
+  banco_ESCOLA_regional_ato %>%
+  janitor::tabyl(regional_ato) %>%
+  arrange(regional_ato) %>%
+  janitor::adorn_totals() %>%
+  adorn_pct_formatting(digits = 2)
+#########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "OESTEPAMPULHA"]<- "PAMPULHA"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "PVENDA NOVA"]<- "VENDA NOVA"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+banco_ESCOLA_regional_ato$regional_ato[banco_ESCOLA_regional_ato$regional_ato == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
 
 
-#pdf(file="GRAFICO[30,].06_regional_ato_ESCOLA_alternativo.pdf", title = "grafico_regional_ato_ESCOLA", width = 10, height = 8)
+colnames(banco_ESCOLA_regional_ato)[1]<-'REGIONAL'
+colnames(banco_ESCOLA_regional_ato)[2]<-'QUANTIDADE'
+colnames(banco_ESCOLA_regional_ato)[3]<-'PERCENTUAL'
 
+#############################################################################################################
+#########################################################################################################
+setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
+#########################################################################################################
+# banco_ESCOLA_regional_ato FIM
+#########################################################################################################
 
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################

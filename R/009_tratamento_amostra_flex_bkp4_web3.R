@@ -165,22 +165,11 @@ colnames(RACA_COR_bkp)[3]<-'PERCENTUAL'
 
 #########################################################################################################
 #########################################################################################################
-
-#script para o bookdown
-
-RACA_COR_bkp_rmark = RACA_COR_bkp
-
-RACA_COR_bkp_rmark = RACA_COR_bkp_rmark %>%
-  top_n(4, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-RACA_COR_bkp_rmark =
-  RACA_COR_bkp_rmark %>% slice(1:4)
-
-library (stringr)
-
+#########################################################################################################
+#para script rmd:
+RACA_COR_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", RACA_COR_bkp$PERCENTUAL))
+RACA_COR_bkp_rmd = tail(RACA_COR_bkp,3)
+#########################################################################################################
 
 #########################################################################################################
 #########################################################################################################

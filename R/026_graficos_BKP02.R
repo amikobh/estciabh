@@ -1100,7 +1100,7 @@ ggsave("GRAFICO[38,].png", width=10, height=8, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade_escola, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_ESCOLA_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[39,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Ato infracional nas escolas",
@@ -1124,14 +1124,14 @@ setwd(file.path("~/diretorio_r/estciabh/imagens"))
 mycols <- c("#c0504d", "#4f81bd")
 
 #salvar png
-ggpie(df_snr_sexo_escola,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_ESCOLA_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
       palette = "Set1") +
   theme(legend.position = "right",
-        legend.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(size = 8, face = "plain"),
         plot.title = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12),
         plot.caption = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
@@ -1149,11 +1149,11 @@ ggplot(data=ESCOLARIDADE_banco_escola_bkp,
            y = reorder(ESCOLARIDADE_banco_escola_bkp, PERCENTUAL2))) +
   geom_bar(stat="identity", fill="#bb1e23")+
   labs(title = (str_c(GRAFICO[41,],": Escolaridade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
-       subtitle = "Justiça Restaurativa",
+       subtitle = "Ato infracional nas escolas",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
        x = "", y = "ESCOLARIDADE") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5, face = "plain"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
@@ -1162,159 +1162,181 @@ ggsave("GRAFICO[41,].png", width=15, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#GRAFICO banco_atos_em_foco_escola ALTERNATIVO
-#banco_atos_em_foco_escola_original=banco_atos_em_foco_escola #salvando atos atendimento original
-banco_atos_em_foco_escola=banco_atos_em_foco_escola_bkp
-
-banco_atos_em_foco_escola<-banco_atos_em_foco_escola%>%
-  arrange(QUANTIDADE)
+SINAL <- paste(banco_ESCOLA_incidencia_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
+setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=banco_atos_em_foco_escola, aes(x=ATO, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (sum(banco_atos_em_foco_escola_rmark[1,2])+0)) +
-  scale_x_discrete(limits = banco_atos_em_foco_escola$ATO)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_ESCOLA_incidencia_bkp =
+  banco_ESCOLA_incidencia_bkp |>
+  mutate(banco_ESCOLA_incidencia_bkp = fct_reorder(banco_ESCOLA_incidencia_bkp, QUANTIDADE))
+
+ggplot(banco_ESCOLA_incidencia_bkp, aes(x = banco_ESCOLA_incidencia_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[42,],": Incidência atos infracionais, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Ato infracional nas escolas",
-       caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "", y = "") +
+       caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[42,].png", width=8.7, height=3.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 45))
+ggsave("GRAFICO[42,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
 
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggpie(primariedade_ESCOLA,
+ggpie(banco_ESCOLA_primariedade_bkp,
       x= "QUANTIDADE", label = "PERCENTUAL",
-      lab.pos = "out", lab.font = list(color = "black", face = "bold"),
+      lab.pos = "out", lab.font = list(color = "black", face = "plain"),
       lab.adjust = 5,
-      fill = "PRIMARIO", color = "white", face="bold",
+      fill = "banco_ESCOLA_primariedade_bkp", color = "white", face="bold",
       palette = "Set1") +
-  theme(legend.position = "right",
+  theme(legend.position = "bottom",
         legend.text = element_text(size = 8, face = "bold"),
         plot.title = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12),
         plot.caption = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
-  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO", subtitle = "Ato infracional nas escolas") +
+  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
+       subtitle = "Ato infracional nas escolas",
+       fill= "PRIMÁRIO") +
   ggtitle((str_c(GRAFICO[43,],": Primariedade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
 ggsave("GRAFICO[43,].png", width=6.5, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#GRAFICO decisao_ESCOLA ALTERNATIVO
-#decisao_ESCOLA_original=decisao_ESCOLA #salvando MEDIDAs atendimento original
-decisao_ESCOLA=decisao_ESCOLA_bkp
-
-decisao_ESCOLA<-decisao_ESCOLA%>%
-  arrange(QUANTIDADE)
+SINAL <- paste(banco_ESCOLA_decisao_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=decisao_ESCOLA, aes(x=DECISAO, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, sum(decisao_ESCOLA_rmark1[1,2]+1)) +
-  scale_x_discrete(limits = decisao_ESCOLA$DECISAO)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_ESCOLA_decisao_bkp =
+  banco_ESCOLA_decisao_bkp |>
+  mutate(banco_ESCOLA_decisao_bkp = fct_reorder(banco_ESCOLA_decisao_bkp, QUANTIDADE))
+
+ggplot(banco_ESCOLA_decisao_bkp, aes(x = banco_ESCOLA_decisao_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[44,],": Decisão, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Ato infracional nas escolas",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "DECISAO", y = "") +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+       x = "", y = "")  +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[44,].png", width=10, height=5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 90))
+ggsave("GRAFICO[44,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/imagens"))
-mycols <- c("#c0504d", "#4f81bd")
 
+setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggpie(vitima_ESCOLA_bkp,
+ggpie(banco_ESCOLA_vitima_bkp,
       x= "QUANTIDADE", label = "PERCENTUAL",
-      lab.pos = "out", lab.font = list(color = "black", face = "bold"),
-      lab.adjust = 0,
-      fill = "VITIMA", color = "white", face="bold",
+      lab.pos = "out", lab.font = list(color = "black", face = "plain"),
+      lab.adjust = 5,
+      fill = "banco_ESCOLA_vitima_bkp", color = "white", face="plain",
       palette = "Set1") +
   theme(legend.position = "right",
-        legend.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(size = 8, face = "plain"),
         plot.title = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12),
         plot.caption = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
-  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO", subtitle = "Ato infracional nas escolas") +
-  ggtitle((str_c(GRAFICO[45,],": Vítima, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
+  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
+       subtitle = "Ato infracional nas escolas",
+       fill= "VÍTIMA") +
+  ggtitle((str_c(GRAFICO[45,],": Primariedade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
 ggsave("GRAFICO[45,].png", width=6.5, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
+SINAL <- paste(banco_ESCOLA_regional_residencia_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
-
 #salvar png
-ggplot(data=regional_residencia_ESCOLA, aes(x=REGIONAL, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (sum(regional_residencia_ESCOLA_rmark[1,2]+1))) +
-  scale_x_discrete(limits = regional_residencia_ESCOLA$REGIONAL)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_ESCOLA_regional_residencia_bkp =
+  banco_ESCOLA_regional_residencia_bkp |>
+  mutate(banco_ESCOLA_regional_residencia_bkp = fct_reorder(banco_ESCOLA_regional_residencia_bkp, QUANTIDADE))
+
+ggplot(banco_ESCOLA_regional_residencia_bkp, aes(x = banco_ESCOLA_regional_residencia_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[46,],": Regional de Residência, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Ato infracional nas escolas",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "REGIONAL", y = "Nº DE OCORRÊNCIAS") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-#scale_fill_brewer(direction = 1)
-#scale_fill_manual(values=c("#c0504d","#4f81bd"))
-ggsave("GRAFICO[46,].png", width=10, height=6.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 30))
+ggsave("GRAFICO[46,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
+
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
-
-mycols <- c("#c0504d", "#4f81bd")
-
 #salvar png
-ggpie(escola_tipo_ESCOLA,
+ggpie(banco_ESCOLA_tipo_escola_bkp,
       x= "QUANTIDADE", label = "PERCENTUAL",
-      lab.pos = "in", lab.font = list(color = "white", face = "bold"),
-      lab.adjust = 0,
-      fill = "ESCOLA", color = "white", face="bold",
+      lab.pos = "out", lab.font = list(color = "black", face = "plain"),
+      lab.adjust = 5,
+      fill = "banco_ESCOLA_tipo_escola_bkp", color = "white", face="plain",
       palette = "Set1") +
-  theme(legend.position = "right",
-        legend.text = element_text(size = 8, face = "bold"),
+  theme(legend.position = "top",
+        legend.text = element_text(size = 8, face = "plain"),
         plot.title = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12),
         plot.caption = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
-  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO", subtitle = "Ato infracional nas escolas") +
-  ggtitle((str_c(GRAFICO[47,],": Tipo de escola, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
+  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
+       subtitle = "Ato infracional nas escolas",
+       fill= "ESCOLA") +
+  ggtitle((str_c(GRAFICO[47,],": Primariedade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
 ggsave("GRAFICO[47,].png", width=6.5, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
+SINAL <- paste(banco_ESCOLA_regional_ato_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
-regional_ato_ESCOLA$REGIONAL = factor(regional_ato_ESCOLA$REGIONAL)
 #salvar png
-ggplot(data=regional_ato_ESCOLA, aes(x=REGIONAL, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (sum(regional_ato_ESCOLA_rmark[1,2]+0))) +
-  scale_x_discrete(limits = regional_ato_ESCOLA$REGIONAL)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_ESCOLA_regional_ato_bkp =
+  banco_ESCOLA_regional_ato_bkp |>
+  mutate(banco_ESCOLA_regional_ato_bkp = fct_reorder(banco_ESCOLA_regional_ato_bkp, QUANTIDADE))
+
+ggplot(banco_ESCOLA_regional_ato_bkp, aes(x = banco_ESCOLA_regional_ato_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[48,],": Regional da escola, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Ato infracional nas escolas",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "REGIONAL", y = "Nº DE OCORRÊNCIAS") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-#scale_fill_brewer(direction = 1)
-#scale_fill_manual(values=c("#c0504d","#4f81bd"))
-ggsave("GRAFICO[48,].png", width=10, height=6.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 31))
+ggsave("GRAFICO[48,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #Justiça restaurativa
@@ -1323,13 +1345,17 @@ ggsave("GRAFICO[48,].png", width=10, height=6.5, pointsize=12, dpi = 512)
 #GRAFICO IDADE/SEXO
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+#GRAFICO IDADE/SEXO
+#########################################################################################################
+#########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade_JR, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_JR_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[49,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
-       caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
+       caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
        x = "", y = "", fill = "SEXO") +
   theme(plot.title = element_text(hjust = 0.5, face="bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, face="plain", size = 12),
@@ -1346,295 +1372,363 @@ ggsave("GRAFICO[49,].png", width=13, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
+mycols <- c("#c0504d", "#4f81bd")
 
 #salvar png
-ggpie(df_snr_sexo_JR_PIZZA,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_JR_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
       palette = "Set1") +
   theme(legend.position = "right",
-        legend.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(size = 8, face = "plain"),
         plot.title = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
-        plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
+        plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12),
         plot.caption = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
-  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO", subtitle = "Justiça Restaurativa") +
+  labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
+       subtitle = "Justiça Restaurativa") +
   ggtitle((str_c(GRAFICO[50,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
 ggsave("GRAFICO[50,].png", width=6.5, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-RACA_COR_jr$RACA_COR_jr = factor(RACA_COR_jr$RACA_COR_jr)
-SINAL <- paste(RACA_COR_jr$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_RACA_COR_jr_alternativo.pdf", title = "grafico_RACA_COR_jr", width = 10, height = 8)
+#########################################################################################################
+#########################################################################################################
+SINAL <- paste(banco_JR_raca_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=RACA_COR_jr, aes(x=RACA_COR_jr, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (RACA_COR_jr_rmark[1,3]+10)) +
-  scale_x_discrete(limits = RACA_COR_jr$RACA_COR_jr)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_raca_bkp =
+  banco_JR_raca_bkp |>
+  mutate(banco_JR_raca_bkp = fct_reorder(banco_JR_raca_bkp, QUANTIDADE))
+
+ggplot(banco_JR_raca_bkp, aes(x = banco_JR_raca_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[51,],": Raça/Cor, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "RAÇA/COR", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[51,].png", width=6.5, height=4, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 26))
+ggsave("GRAFICO[51,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#SINAL <- paste(ESCOLARIDADE_jr_bkp$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-SINAL <- paste(ESCOLARIDADE_jr_bkp$PERCENTUAL2, "%", sep=" ")#para plotar o sinal de porcentagem
+SINAL <- paste(banco_JR_escolaridade_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
-ggplot(data=ESCOLARIDADE_jr_bkp,
-       aes(x = QUANTIDADE,
-           y = reorder(ESCOLARIDADE_jr_bkp, PERCENTUAL2))) +
-  geom_bar(stat="identity", fill="#bb1e23")+
+#salvar png
+library(forcats)
+
+banco_JR_escolaridade_bkp =
+  banco_JR_escolaridade_bkp |>
+  mutate(banco_JR_escolaridade_bkp = fct_reorder(banco_JR_escolaridade_bkp, QUANTIDADE))
+
+ggplot(banco_JR_escolaridade_bkp, aes(x = banco_JR_escolaridade_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[52,],": Escolaridade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "", y = "ESCOLARIDADE") +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold"),
-        plot.caption =element_text(hjust = 0.5)  ) +
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
-  scale_x_continuous(n.breaks=5)
-#scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[52,].png", width=15, height=5, pointsize=12, dpi = 512)
+       x = "", y = "")  +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
+        plot.subtitle = element_text(hjust = 0.5, size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 16))
+ggsave("GRAFICO[52,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-NATUREZA_ESCOLA_jr$NATUREZA_ESCOLA_jr = factor(NATUREZA_ESCOLA_jr$NATUREZA_ESCOLA_jr)
-SINAL <- paste(NATUREZA_ESCOLA_jr$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_NATUREZA_ESCOLA_jr_alternativo.pdf", title = "grafico_NATUREZA_ESCOLA_jr", width = 10, height = 8)
+SINAL <- paste(banco_JR_natureza_escola_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=NATUREZA_ESCOLA_jr, aes(x=NATUREZA_ESCOLA_jr, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (NATUREZA_ESCOLA_jr_rmark[1,3]+10)) +
-  scale_x_discrete(limits = NATUREZA_ESCOLA_jr$NATUREZA_ESCOLA_jr)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_natureza_escola_bkp =
+  banco_JR_natureza_escola_bkp |>
+  mutate(banco_JR_natureza_escola_bkp = fct_reorder(banco_JR_natureza_escola_bkp, QUANTIDADE))
+
+ggplot(banco_JR_natureza_escola_bkp, aes(x = banco_JR_natureza_escola_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[53,],": Natureza da Escola, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "RENDA", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[53,].png", width=6.5, height=3.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 47))
+ggsave("GRAFICO[53,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-TRABALHA_ATUALMENTE_jr$TRABALHA_ATUALMENTE_jr = factor(TRABALHA_ATUALMENTE_jr$TRABALHA_ATUALMENTE_jr)
-SINAL <- paste(TRABALHA_ATUALMENTE_jr$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_TRABALHA_ATUALMENTE_jr_alternativo.pdf", title = "grafico_TRABALHA_ATUALMENTE_jr", width = 10, height = 8)
+SINAL <- paste(banco_JR_trabalho_atual_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=TRABALHA_ATUALMENTE_jr, aes(x=TRABALHA_ATUALMENTE_jr, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (TRABALHA_ATUALMENTE_jr_rmark[1,3]+10)) +
-  scale_x_discrete(limits = TRABALHA_ATUALMENTE_jr$TRABALHA_ATUALMENTE_jr)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
-  labs(title = (str_c(GRAFICO[54,],": Trabalho, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+library(forcats)
+
+banco_JR_trabalho_atual_bkp =
+  banco_JR_trabalho_atual_bkp |>
+  mutate(banco_JR_trabalho_atual_bkp = fct_reorder(banco_JR_trabalho_atual_bkp, QUANTIDADE))
+
+ggplot(banco_JR_trabalho_atual_bkp, aes(x = banco_JR_trabalho_atual_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
+  labs(title = (str_c(GRAFICO[54,],": Trabalho atual, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "TRABALHO", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[54,].png", width=6.5, height=4, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 37))
+ggsave("GRAFICO[54,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-NATUREZA_DO_TRABALHO_jr$NATUREZA_DO_TRABALHO_jr = factor(NATUREZA_DO_TRABALHO_jr$NATUREZA_DO_TRABALHO_jr)
-SINAL <- paste(NATUREZA_DO_TRABALHO_jr$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_NATUREZA_DO_TRABALHO_jr_alternativo.pdf", title = "grafico_NATUREZA_DO_TRABALHO_jr", width = 10, height = 8)
+SINAL <- paste(banco_JR_natureza_trabalho_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=NATUREZA_DO_TRABALHO_jr, aes(x=NATUREZA_DO_TRABALHO_jr, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (NATUREZA_DO_TRABALHO_jr_rmark[1,3]+10)) +
-  scale_x_discrete(limits = NATUREZA_DO_TRABALHO_jr$NATUREZA_DO_TRABALHO_jr)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_natureza_trabalho_bkp =
+  banco_JR_natureza_trabalho_bkp |>
+  mutate(banco_JR_natureza_trabalho_bkp = fct_reorder(banco_JR_natureza_trabalho_bkp, QUANTIDADE))
+
+ggplot(banco_JR_natureza_trabalho_bkp, aes(x = banco_JR_natureza_trabalho_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[55,],": Natureza do Trabalho, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "NATUREZA", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[55,].png", width=7, height=4, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 7))
+ggsave("GRAFICO[55,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-RENDA_MENSAL_jr$RENDA_MENSAL_jr = factor(RENDA_MENSAL_jr$RENDA_MENSAL_jr)
-SINAL <- paste(RENDA_MENSAL_jr$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_RENDA_MENSAL_jr_alternativo.pdf", title = "grafico_RENDA_MENSAL_jr", width = 10, height = 8)
+SINAL <- paste(banco_JR_renda_mensal_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=RENDA_MENSAL_jr, aes(x=RENDA_MENSAL_jr, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (RENDA_MENSAL_jr_rmark[1,3]+10)) +
-  scale_x_discrete(limits = RENDA_MENSAL_jr$RENDA_MENSAL_jr)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_renda_mensal_bkp =
+  banco_JR_renda_mensal_bkp |>
+  mutate(banco_JR_renda_mensal_bkp = fct_reorder(banco_JR_renda_mensal_bkp, QUANTIDADE))
+
+ggplot(banco_JR_renda_mensal_bkp, aes(x = banco_JR_renda_mensal_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[56,],": Renda Mensal, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "RENDA", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[56,].png", width=6.5, height=3.5, pointsize=12, dpi = 512)
-#dev.off()
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 11))
+ggsave("GRAFICO[56,].png", width=10, height=8, pointsize=12, dpi = 512)
 
+#dev.off()
 #########################################################################################################
 #########################################################################################################
-ESTADO_CIVIL_jr$ESTADO_CIVIL_jr = factor(ESTADO_CIVIL_jr$ESTADO_CIVIL_jr)
-SINAL <- paste(ESTADO_CIVIL_jr$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_ESTADO_CIVIL_jr_alternativo.pdf", title = "grafico_ESTADO_CIVIL_jr", width = 10, height = 8)
+SINAL <- paste(banco_JR_estado_civil_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=ESTADO_CIVIL_jr, aes(x=ESTADO_CIVIL_jr, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (ESTADO_CIVIL_jr_rmark[1,3]+10)) +
-  scale_x_discrete(limits = ESTADO_CIVIL_jr$ESTADO_CIVIL_jr)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_estado_civil_bkp =
+  banco_JR_estado_civil_bkp |>
+  mutate(banco_JR_estado_civil_bkp = fct_reorder(banco_JR_estado_civil_bkp, QUANTIDADE))
+
+ggplot(banco_JR_estado_civil_bkp, aes(x = banco_JR_estado_civil_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[57,],": Estado Civil, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "ESTADO CIVIL", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[57,].png", width=7, height=3.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 49))
+ggsave("GRAFICO[57,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-ESTADO_CIVIL_PAIS$ESTADO_CIVIL_PAIS = factor(ESTADO_CIVIL_PAIS$ESTADO_CIVIL_PAIS)
-SINAL <- paste(ESTADO_CIVIL_PAIS$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_ESTADO_CIVIL_PAIS_alternativo.pdf", title = "grafico_ESTADO_CIVIL_PAIS", width = 10, height = 8)
+SINAL <- paste(banco_JR_estado_civil_pais_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=ESTADO_CIVIL_PAIS, aes(x=ESTADO_CIVIL_PAIS, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (ESTADO_CIVIL_PAIS_rmark[1,3]+10)) +
-  scale_x_discrete(limits = ESTADO_CIVIL_PAIS$ESTADO_CIVIL_PAIS)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_estado_civil_pais_bkp =
+  banco_JR_estado_civil_pais_bkp |>
+  mutate(banco_JR_estado_civil_pais_bkp = fct_reorder(banco_JR_estado_civil_pais_bkp, QUANTIDADE))
+
+ggplot(banco_JR_estado_civil_pais_bkp, aes(x = banco_JR_estado_civil_pais_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[58,],": Estado civil dos pais, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "ESTADO CIVIL", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[58,].png", width=7, height=3.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 27))
+ggsave("GRAFICO[58,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-DROGAS_USO_jr$DROGAS_USO_jr = factor(DROGAS_USO_jr$DROGAS_USO_jr)
-SINAL <- paste(DROGAS_USO_jr$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
-#pdf(file="grafico_DROGAS_USO_jr_alternativo.pdf", title = "grafico_DROGAS_USO_jr", width = 10, height = 8)
+SINAL <- paste(banco_JR_uso_drogas_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=DROGAS_USO_jr, aes(x=DROGAS_USO_jr, y=PERCENTUAL, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (DROGAS_USO_jr_rmark[1,3]+10)) +
-  scale_x_discrete(limits = DROGAS_USO_jr$DROGAS_USO_jr)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_uso_drogas_bkp =
+  banco_JR_uso_drogas_bkp |>
+  mutate(banco_JR_uso_drogas_bkp = fct_reorder(banco_JR_uso_drogas_bkp, QUANTIDADE))
+
+ggplot(banco_JR_uso_drogas_bkp, aes(x = banco_JR_uso_drogas_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[59,],": Uso de drogas, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "DROGA", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[59,].png", width=7, height=3.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 10))
+ggsave("GRAFICO[59,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
-
 #########################################################################################################
 #########################################################################################################
-#GRAFICO BANCO_MEDIDAS_jr ALTERNATIVO
-#BANCO_MEDIDAS_jr_original=BANCO_MEDIDAS_jr #salvando MEDIDAs atendimento original
-BANCO_MEDIDAS_jr=BANCO_MEDIDAS_jr_bkp
-
-BANCO_MEDIDAS_jr<-BANCO_MEDIDAS_jr%>%
-  arrange(QUANTIDADE)
+SINAL <- paste(banco_JR_medidaspro_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=BANCO_MEDIDAS_jr, aes(x=MEDIDA, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, sum(BANCO_MEDIDAS_jr_rmark[1,2]+0.5)) +
-  scale_x_discrete(limits = BANCO_MEDIDAS_jr$MEDIDA)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_medidaspro_bkp =
+  banco_JR_medidaspro_bkp |>
+  mutate(banco_JR_medidaspro_bkp = fct_reorder(banco_JR_medidaspro_bkp, QUANTIDADE))
+
+ggplot(banco_JR_medidaspro_bkp, aes(x = banco_JR_medidaspro_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[60,],": Medidas Protetivas, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "MEDIDAS", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[60,].png", width=7.2, height=4, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 17))
+ggsave("GRAFICO[60,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#GRAFICO BANCO_MEDIDAS_SOCIOEDU_jr ALTERNATIVO
-#BANCO_MEDIDAS_SOCIOEDU_jr_original=BANCO_MEDIDAS_SOCIOEDU_jr #salvando MEDIDAs atendimento original
-BANCO_MEDIDAS_SOCIOEDU_jr=BANCO_MEDIDAS_SOCIOEDU_jr_bkp
-
-BANCO_MEDIDAS_SOCIOEDU_jr<-BANCO_MEDIDAS_SOCIOEDU_jr%>%
-  arrange(QUANTIDADE)
+SINAL <- paste(banco_JR_decisao_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=BANCO_MEDIDAS_SOCIOEDU_jr, aes(x=MEDIDA, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, sum(BANCO_MEDIDAS_SOCIOEDU_jr_rmark[1,2]+0.5)) +
-  scale_x_discrete(limits = BANCO_MEDIDAS_SOCIOEDU_jr$MEDIDA)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_decisao_bkp =
+  banco_JR_decisao_bkp |>
+  mutate(banco_JR_decisao_bkp = fct_reorder(banco_JR_decisao_bkp, QUANTIDADE))
+
+ggplot(banco_JR_decisao_bkp, aes(x = banco_JR_decisao_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[61,],": Medidas Socioeducativas, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "MEDIDAS", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[61,].png", width=8.5, height=4, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 9))
+ggsave("GRAFICO[61,].png", width=10, height=8, pointsize=12, dpi = 512)
+
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#GRAFICO banco_incidencia_jr ALTERNATIVO
-#banco_incidencia_jr_original=banco_incidencia_jr #salvando atos atendimento original
-banco_incidencia_jr=banco_incidencia_jr_bkp
-
-banco_incidencia_jr<-banco_incidencia_jr%>%
-  arrange(QUANTIDADE)
+SINAL <- paste(banco_JR_incidencia_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+#pdf(file="grafico_intervalo_sentenca_bkp_alternativo.pdf", title = "grafico_intervalo_sentenca_bkp", width = 10, height = 8)
+setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=banco_incidencia_jr, aes(x=ATO, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, (sum(banco_incidencia_jr_rmark[1,2])+1)) +
-  scale_x_discrete(limits = banco_incidencia_jr$ATO)+
-  geom_text(aes(label = QUANTIDADE), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+library(forcats)
+
+banco_JR_incidencia_bkp =
+  banco_JR_incidencia_bkp |>
+  mutate(banco_JR_incidencia_bkp = fct_reorder(banco_JR_incidencia_bkp, QUANTIDADE))
+
+ggplot(banco_JR_incidencia_bkp, aes(x = banco_JR_incidencia_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[62,],": Incidência atos infracionais, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Justiça Restaurativa",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "", y = "") +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
-ggsave("GRAFICO[62,].png", width=8.5, height=3.5, pointsize=12, dpi = 512)
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, 17.5))
+ggsave("GRAFICO[62,].png", width=10, height=8, pointsize=12, dpi = 512)
+
+#dev.off()
 #dev.off()
 #########################################################################################################
 #Projetos socioeducativos

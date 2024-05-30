@@ -2519,19 +2519,19 @@ intervalo_sentenca %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-total_casos_escola_gt %>%
+banco_ESCOLA_total_casos %>%
   gt() %>%
 
   tab_header(
     title = md((str_c(TABELA[45,],": Quantidade de casos encaminhados, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
-    subtitle = "") %>%
+    subtitle = "Ato infracional nas escolas") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
 
   tab_style(
     style = list(
       cell_text(weight = "normal", align = "center", size = "small")),
-    locations = cells_body(rows = nrow(total_casos_escola_gt))) %>%
+    locations = cells_body(rows = nrow(banco_ESCOLA_total_casos))) %>%
 
   tab_style(
     style = cell_text(weight = "bold", align = "center" ),
@@ -2631,7 +2631,7 @@ ESCOLARIDADE_banco_escola_TABELA %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-banco_atos_em_foco_escola_atual_gt %>%
+banco_ESCOLA_incidencia %>%
   gt() %>%
 
   tab_header(
@@ -2643,7 +2643,7 @@ banco_atos_em_foco_escola_atual_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(banco_atos_em_foco_escola_atual_gt))) %>%
+    locations = cells_body(rows = nrow(banco_ESCOLA_incidencia))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2687,7 +2687,7 @@ banco_atos_em_foco_escola_atual_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-decisao_ESCOLA_gt %>%
+banco_ESCOLA_decisao %>%
   gt() %>%
 
   tab_header(
@@ -2699,7 +2699,7 @@ decisao_ESCOLA_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(decisao_ESCOLA_gt))) %>%
+    locations = cells_body(rows = nrow(banco_ESCOLA_decisao))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2743,7 +2743,7 @@ decisao_ESCOLA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-vitima_ESCOLA %>%
+banco_ESCOLA_vitima %>%
   gt() %>%
 
   tab_header(
@@ -2755,7 +2755,7 @@ vitima_ESCOLA %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(vitima_ESCOLA))) %>%
+    locations = cells_body(rows = nrow(banco_ESCOLA_vitima))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2799,7 +2799,7 @@ vitima_ESCOLA %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-regional_residencia_ESCOLA_gt %>%
+banco_ESCOLA_regional_residencia %>%
   gt() %>%
 
   tab_header(
@@ -2811,7 +2811,7 @@ regional_residencia_ESCOLA_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(regional_residencia_ESCOLA_gt))) %>%
+    locations = cells_body(rows = nrow(banco_ESCOLA_regional_residencia))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2855,7 +2855,7 @@ regional_residencia_ESCOLA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-regional_ato_ESCOLA_gt %>%
+banco_ESCOLA_regional_ato %>%
   gt() %>%
 
   tab_header(
@@ -2867,7 +2867,7 @@ regional_ato_ESCOLA_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(regional_ato_ESCOLA_gt))) %>%
+    locations = cells_body(rows = nrow(banco_ESCOLA_regional_ato))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -2914,7 +2914,7 @@ regional_ato_ESCOLA_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-total_casos_jr_gt %>%
+banco_JR_total_casos %>%
   gt() %>%
 
   tab_header(
@@ -2926,7 +2926,7 @@ total_casos_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "normal", align = "center", size = "small")),
-    locations = cells_body(rows = nrow(total_casos_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_total_casos))) %>%
 
   tab_style(
     style = cell_text(weight = "bold", align = "center" ),
@@ -2970,7 +2970,7 @@ total_casos_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-RACA_COR_jr_gt %>%
+banco_JR_raca_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -2982,7 +2982,7 @@ RACA_COR_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(RACA_COR_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_raca_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3025,7 +3025,7 @@ RACA_COR_jr_gt %>%
 #SALVANDO PNG:
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ESCOLARIDADE_jr_TABELA %>%
+banco_JR_escolaridade_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -3037,7 +3037,7 @@ ESCOLARIDADE_jr_TABELA %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(ESCOLARIDADE_jr_TABELA))) %>%
+    locations = cells_body(rows = nrow(banco_JR_escolaridade_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3081,7 +3081,7 @@ ESCOLARIDADE_jr_TABELA %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-NATUREZA_ESCOLA_jr_gt %>%
+banco_JR_natureza_escola %>%
   gt() %>%
 
   tab_header(
@@ -3093,7 +3093,7 @@ NATUREZA_ESCOLA_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(NATUREZA_ESCOLA_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_natureza_escola))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3137,11 +3137,11 @@ NATUREZA_ESCOLA_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-TRABALHA_ATUALMENTE_jr_gt %>%
+banco_JR_trabalho_atual %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[56,],": Trabalho, Belo Horizonte, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[56,],": Trabalho atual, Belo Horizonte, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "Justiça Restaurativa") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -3149,7 +3149,7 @@ TRABALHA_ATUALMENTE_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(TRABALHA_ATUALMENTE_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_trabalho_atual))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3193,7 +3193,7 @@ TRABALHA_ATUALMENTE_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-NATUREZA_DO_TRABALHO_jr_gt %>%
+banco_JR_natureza_trabalho %>%
   gt() %>%
 
   tab_header(
@@ -3205,7 +3205,7 @@ NATUREZA_DO_TRABALHO_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(NATUREZA_DO_TRABALHO_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_natureza_trabalho))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3249,7 +3249,7 @@ NATUREZA_DO_TRABALHO_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-RENDA_MENSAL_jr_gt %>%
+banco_JR_renda_mensal_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -3261,7 +3261,7 @@ RENDA_MENSAL_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(RENDA_MENSAL_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_renda_mensal_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3305,7 +3305,7 @@ RENDA_MENSAL_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-ESTADO_CIVIL_jr_gt %>%
+banco_JR_estado_civil_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -3317,7 +3317,7 @@ ESTADO_CIVIL_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(ESTADO_CIVIL_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_estado_civil_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3361,7 +3361,7 @@ ESTADO_CIVIL_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-ESTADO_CIVIL_PAIS_gt %>%
+banco_JR_estado_civil_pais_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -3373,7 +3373,7 @@ ESTADO_CIVIL_PAIS_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(ESTADO_CIVIL_PAIS_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_estado_civil_pais_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3417,7 +3417,7 @@ ESTADO_CIVIL_PAIS_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-DROGAS_USO_jr_gt %>%
+banco_JR_uso_drogas_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -3429,7 +3429,7 @@ DROGAS_USO_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(DROGAS_USO_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_uso_drogas_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3473,7 +3473,7 @@ DROGAS_USO_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-BANCO_MEDIDAS_jr_gt %>%
+banco_JR_medidaspro_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -3485,7 +3485,7 @@ BANCO_MEDIDAS_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(BANCO_MEDIDAS_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_medidaspro_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3529,7 +3529,7 @@ BANCO_MEDIDAS_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-BANCO_MEDIDAS_SOCIOEDU_jr_gt %>%
+banco_JR_decisao_TABELA %>%
   gt() %>%
 
   tab_header(
@@ -3541,7 +3541,7 @@ BANCO_MEDIDAS_SOCIOEDU_jr_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(BANCO_MEDIDAS_SOCIOEDU_jr_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_decisao_TABELA))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
@@ -3585,7 +3585,7 @@ BANCO_MEDIDAS_SOCIOEDU_jr_gt %>%
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
-banco_incidencia_jr_atual_gt %>%
+banco_JR_incidencia %>%
   gt() %>%
 
   tab_header(
@@ -3597,7 +3597,7 @@ banco_incidencia_jr_atual_gt %>%
   tab_style(
     style = list(
       cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(banco_incidencia_jr_atual_gt))) %>%
+    locations = cells_body(rows = nrow(banco_JR_incidencia))) %>%
 
   #tab_style(
   # style = cell_text(weight = "bold", align = "center" ),
