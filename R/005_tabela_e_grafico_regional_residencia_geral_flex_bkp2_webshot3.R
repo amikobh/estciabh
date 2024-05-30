@@ -59,6 +59,11 @@ colnames(df_snr_regional_residencia_bkp)[1]<-'df_snr_regional_residencia_bkp'
 colnames(df_snr_regional_residencia_bkp)[2]<-'QUANTIDADE'
 colnames(df_snr_regional_residencia_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+#########################################################################################################
+#para script rmd:
+df_snr_regional_residencia_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_snr_regional_residencia_bkp$PERCENTUAL))
+df_snr_regional_residencia_bkp_rmd = tail(df_snr_regional_residencia_bkp,5)
+#########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
 
