@@ -232,7 +232,7 @@ ggplot(MOTIVO_MBA_bkp, aes(x = MOTIVO_MBA_bkp, y = QUANTIDADE)) +
   labs(title = (str_c(GRAFICO[9,],": Motivo do MBA, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "MBAs cumpridos",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "MOTIVO MBA", y = "")  +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
@@ -367,7 +367,7 @@ ggsave("GRAFICO[13,].png", width=13, height=5, pointsize=12, dpi = 512)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
 ggpie(banco_ROUBO_snr_SEXO_IDADE_graf_pizza,
-      x= "QUANTIDADE", label = "QUANTIDADE",
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -1257,7 +1257,7 @@ ggpie(banco_ESCOLA_vitima_bkp,
   labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
        subtitle = "Ato infracional nas escolas",
        fill= "VÍTIMA") +
-  ggtitle((str_c(GRAFICO[45,],": Primariedade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
+  ggtitle((str_c(GRAFICO[45,],": Vítima, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
 ggsave("GRAFICO[45,].png", width=6.5, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
@@ -1307,7 +1307,7 @@ ggpie(banco_ESCOLA_tipo_escola_bkp,
   labs(caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
        subtitle = "Ato infracional nas escolas",
        fill= "ESCOLA") +
-  ggtitle((str_c(GRAFICO[47,],": Primariedade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
+  ggtitle((str_c(GRAFICO[47,],": Escola, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))))
 ggsave("GRAFICO[47,].png", width=6.5, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
