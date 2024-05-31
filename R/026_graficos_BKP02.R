@@ -73,7 +73,7 @@ ggsave("GRAFICO[2,].png", width=10, height=8, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_GERAL_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[3,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        #subtitle = "Letalidade",
@@ -95,8 +95,8 @@ setwd(file.path("~/diretorio_r/estciabh/imagens"))
 mycols <- c("#c0504d", "#4f81bd")
 
 #salvar png
-ggpie(df_snr_sexo,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_GERAL_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -135,7 +135,7 @@ ggplot(df_snr_regional_residencia_bkp, aes(x = df_snr_regional_residencia_bkp, y
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 314))
+  scale_y_continuous(limits=c(0, 320))
 ggsave("GRAFICO[5,].png", width=10, height=4, pointsize=12, dpi = 512)
 
 #dev.off()
