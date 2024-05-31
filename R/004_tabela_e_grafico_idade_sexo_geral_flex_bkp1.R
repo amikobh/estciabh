@@ -2,12 +2,12 @@
 #########################################################################################################
 #TRATAMENTO banco_GERAL_snr_SEXO_IDADE
 #########################################################################################################
-banco_sem_mba_snr = distinct(banco_sem_mba, NOME2, NASCIMENTO, .keep_all= TRUE)
+#banco_SNR = distinct(banco_sem_mba, NOME2, NASCIMENTO, .keep_all= TRUE)
 #########################################################################################################
 
 banco_GERAL_snr_SEXO_IDADE =
 
-  banco_sem_mba_snr %>%
+  banco_SNR %>%
   #filter(CAUSA_JURIDICA %in% "HOMICÍDIO" | CAUSA_JURIDICA %in% "IGNORADA") |>
   select(SEXO, IDADE)
 
@@ -72,7 +72,7 @@ banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd = tail(banco_GERAL_snr_SEXO_IDADE_pizza
 
 banco_GERAL_snr_SEXO_IDADE =
 
-  banco_sem_mba_snr %>%
+  banco_SNR %>%
   #filter(CAUSA_JURIDICA %in% "HOMICÍDIO" | CAUSA_JURIDICA %in% "IGNORADA") |>
   select(SEXO, IDADE)
 
@@ -148,7 +148,7 @@ df_atendimento <- data.frame(ANO = c(2015,2016,2017, 2018, 2019, 2020, 2021, 202
                              ATENDIMENTO = c(8518,8176,8244,7786, 6838, 4672, 3649, 3054, nrow(numero_de_casos_geral)))
 
 df_atendimento1 <- data.frame(ANO = c(2015,2016,2017, 2018, 2019, 2020, 2021, 2022, format(Sys.Date()-365*1, "%Y")),
-                              ADOLESCENTES = c(5718, 5456, 4854, 4520, 4022, 2680, 2102, 1848, nrow(banco_sem_mba_snr)))
+                              ADOLESCENTES = c(5718, 5456, 4854, 4520, 4022, 2680, 2102, 1848, nrow(banco_SNR)))
 
 
 df_atendimento = full_join(df_atendimento,df_atendimento1,by="ANO")

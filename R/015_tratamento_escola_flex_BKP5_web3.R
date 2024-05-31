@@ -578,6 +578,10 @@ colnames(banco_ESCOLA_decisao_bkp)[3]<-'PERCENTUAL'
 #para script rmd:
 banco_ESCOLA_decisao_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_decisao_bkp$PERCENTUAL))
 banco_ESCOLA_decisao_bkp_rmd = tail(banco_ESCOLA_decisao_bkp,5)
+
+banco_ESCOLA_decisao_bkp_rmd1 =
+  banco_ESCOLA_decisao_bkp |>
+  filter(grepl("^REMISSÃO|ARQUIVAMENTO$", banco_ESCOLA_decisao_bkp))
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem

@@ -58,7 +58,7 @@ ggplot(banco_incidencia_bkp, aes(x = banco_incidencia_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 1000))
+  scale_y_continuous(limits=c(0, 1010))
 ggsave("GRAFICO[2,].png", width=10, height=8, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -136,7 +136,7 @@ ggplot(df_snr_regional_residencia_bkp, aes(x = df_snr_regional_residencia_bkp, y
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 320))
-ggsave("GRAFICO[5,].png", width=10, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[5,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -148,7 +148,7 @@ ggsave("GRAFICO[5,].png", width=10, height=4, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_MBA_idade_MBA, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_MBA_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[6,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "MBAs cumpridos",
@@ -171,8 +171,8 @@ ggsave("GRAFICO[6,].png", width=13, height=5, pointsize=12, dpi = 512)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 #salvar png
-ggpie(df_snr_sexo_MBA,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_MBA_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "out", lab.font = list(color = "black", face = "plain"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -204,14 +204,14 @@ ggplot(df_snr_regional_residencia_MBA_bkp, aes(x = df_snr_regional_residencia_MB
   labs(title = (str_c(GRAFICO[8,],": Regional de Residência, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "MBAs cumpridos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "REGIONAL", y = "")  +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 32))
-ggsave("GRAFICO[8,].png", width=10, height=4, pointsize=12, dpi = 512)
+  scale_y_continuous(limits=c(0, 33))
+ggsave("GRAFICO[8,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -238,7 +238,7 @@ ggplot(MOTIVO_MBA_bkp, aes(x = MOTIVO_MBA_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 95))
+  scale_y_continuous(limits=c(0, 96))
 ggsave("GRAFICO[9,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -284,7 +284,7 @@ ggsave("GRAFICO[10,].png", width=12, height=6, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade_HOMICIDIO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_HOMICIDIO_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[11,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "HOMICÍDIO",
@@ -310,8 +310,8 @@ ggsave("GRAFICO[11,].png", width=13, height=5, pointsize=12, dpi = 512)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 #salvar png
-ggpie(df_sexo_HOMICIDIO,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -341,7 +341,7 @@ ggsave("GRAFICO[12,].png", width=6, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade_ROUBO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_ROUBO_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[13,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "ROUBO",
@@ -366,8 +366,8 @@ ggsave("GRAFICO[13,].png", width=13, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggpie(df_sexo_ROUBO,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_ROUBO_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "QUANTIDADE",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -397,7 +397,7 @@ ggsave("GRAFICO[14,].png", width=6, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade_FURTO, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_FURTO_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[15,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "FURTO",
@@ -422,8 +422,8 @@ ggsave("GRAFICO[15,].png", width=13, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggpie(df_sexo_FURTO,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_FURTO_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -453,7 +453,7 @@ ggsave("GRAFICO[16,].png", width=6, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade_USO_DE_DROGAS, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[17,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "POSSE DE DROGAS PARA USO PESSOAL",
@@ -478,8 +478,8 @@ ggsave("GRAFICO[17,].png", width=13, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggpie(df_sexo_USO_DE_DROGAS,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "in", lab.font = list(color = "white", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -509,7 +509,7 @@ ggsave("GRAFICO[18,].png", width=6, height=5, pointsize=12, dpi = 512)
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-ggplot(df_snr_sexo_idade_TRAFICO_DE_DROGAS, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
+ggplot(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza, aes(fill=SEXO, y=QUANTIDADE, x=IDADE)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[19,],": Idade e Sexo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "TRAFICO DE DROGAS",
@@ -535,8 +535,8 @@ ggsave("GRAFICO[19,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggpie(df_sexo_TRAFICO_DE_DROGAS,
-      x= "QUANTIDADE", label = "PERCENTUAL",
+ggpie(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza,
+      x= "QUANTIDADE", label = "PERCENTUAL2",
       lab.pos = "out", lab.font = list(color = "black", face = "bold"),
       lab.adjust = 0,
       fill = "SEXO", color = "white", face="bold",
@@ -569,14 +569,14 @@ ggplot(data=RACA_COR_bkp,
   labs(title = (str_c(GRAFICO[21,],": Raça/Cor, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Dados socioeconômicos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "", y = "RAÇA/COR") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=10)
   #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[21,].png", width=14, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[21,].png", width=14, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -593,14 +593,14 @@ ggplot(data=ESTADO_CIVIL_bkp,
   labs(title = (str_c(GRAFICO[22,],": Estado Civil, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Dados socioeconômicos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "", y = "ESTADO CIVIL") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=10)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[22,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[22,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -617,14 +617,14 @@ ggplot(data=POSSUI_FILHOS_bkp,
   labs(title = (str_c(GRAFICO[23,],": Adolescente Pai ou Mãe, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Dados socioeconômicos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "", y = "POSSUI FILHOS?") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[23,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[23,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -642,14 +642,14 @@ ggplot(data=ESTA_GRAVIDA_bkp,
   labs(title = (str_c(GRAFICO[24,],": Adolescente Grávida, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Dados socioeconômicos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "", y = "ESTÁ GRÁVIDA?") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[24,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[24,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -665,14 +665,14 @@ ggplot(data=POSSUI_DOC_bkp,
   labs(title = (str_c(GRAFICO[25,],": Documentação, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Dados socioeconômicos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "", y = "DOCUMENTOS") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[25,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[25,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -722,14 +722,14 @@ ggplot(data=NATUREZA_ESCOLA_bkp,
   labs(title = (str_c(GRAFICO[27,],": Natureza da Escola, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Dados socioeconômicos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "", y = "NATUREZA DA ESCOLA") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[27,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[27,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -746,14 +746,14 @@ ggplot(data=TRABALHA_ATUALMENTE_bkp,
   labs(title = (str_c(GRAFICO[28,],": Trabalho atual, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Dados socioeconômicos",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
-       x = "", y = "TRABALHO ATUAL") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[28,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[28,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -786,7 +786,7 @@ ggplot(RENDA_MENSAL_bkp, aes(x = RENDA_MENSAL_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 140))
-ggsave("GRAFICO[29,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[29,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -821,7 +821,7 @@ ggplot(RENDA_FAMILIAR_bkp, aes(x = RENDA_FAMILIAR_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 185))
-ggsave("GRAFICO[30,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[30,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -853,7 +853,7 @@ ggplot(TIPO_MORADIA_bkp, aes(x = TIPO_MORADIA_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 470))
-ggsave("GRAFICO[31,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[31,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -889,7 +889,7 @@ ggplot(NATUREZA_MORADIA_bkp, aes(x = NATUREZA_MORADIA_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 356))
-ggsave("GRAFICO[32,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[32,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -925,7 +925,7 @@ ggplot(DROGAS_USO_bkp, aes(x = DROGAS_USO_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 318))
-ggsave("GRAFICO[33,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[33,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -963,7 +963,7 @@ ggplot(BANCO_MEDIDAS_bkp, aes(x = BANCO_MEDIDAS_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 620))
-ggsave("GRAFICO[34,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[34,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -995,7 +995,7 @@ ggplot(so_decisao_bkp, aes(x = so_decisao_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 620))
-ggsave("GRAFICO[35,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[35,].png", width=10, height=7, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1026,7 +1026,7 @@ ggplot(intervalo_decisao_bkp, aes(x = intervalo_decisao_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 1490))
-ggsave("GRAFICO[36,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[36,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1057,7 +1057,7 @@ ggplot(so_sentenca_bkp, aes(x = so_sentenca_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 245))
-ggsave("GRAFICO[37,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[37,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1088,7 +1088,7 @@ ggplot(intervalo_sentenca_bkp, aes(x = intervalo_sentenca_bkp, y = QUANTIDADE)) 
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 500))
-ggsave("GRAFICO[38,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[38,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1151,14 +1151,14 @@ ggplot(data=ESCOLARIDADE_banco_escola_bkp,
   labs(title = (str_c(GRAFICO[41,],": Escolaridade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Ato infracional nas escolas",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
-       x = "", y = "ESCOLARIDADE") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "plain"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[41,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[41,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -1185,7 +1185,7 @@ ggplot(banco_ESCOLA_incidencia_bkp, aes(x = banco_ESCOLA_incidencia_bkp, y = QUA
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 45))
-ggsave("GRAFICO[42,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[42,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1235,7 +1235,7 @@ ggplot(banco_ESCOLA_decisao_bkp, aes(x = banco_ESCOLA_decisao_bkp, y = QUANTIDAD
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 90))
-ggsave("GRAFICO[44,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[44,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1285,7 +1285,7 @@ ggplot(banco_ESCOLA_regional_residencia_bkp, aes(x = banco_ESCOLA_regional_resid
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 30))
-ggsave("GRAFICO[46,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[46,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1335,7 +1335,7 @@ ggplot(banco_ESCOLA_regional_ato_bkp, aes(x = banco_ESCOLA_regional_ato_bkp, y =
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 31))
-ggsave("GRAFICO[48,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[48,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1418,7 +1418,7 @@ ggplot(banco_JR_raca_bkp, aes(x = banco_JR_raca_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 26))
-ggsave("GRAFICO[51,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[51,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1445,8 +1445,8 @@ ggplot(banco_JR_escolaridade_bkp, aes(x = banco_JR_escolaridade_bkp, y = QUANTID
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 16))
-ggsave("GRAFICO[52,].png", width=10, height=8, pointsize=12, dpi = 512)
+  scale_y_continuous(limits=c(0, 15.5))
+ggsave("GRAFICO[52,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1474,7 +1474,7 @@ ggplot(banco_JR_natureza_escola_bkp, aes(x = banco_JR_natureza_escola_bkp, y = Q
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 47))
-ggsave("GRAFICO[53,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[53,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1502,7 +1502,7 @@ ggplot(banco_JR_trabalho_atual_bkp, aes(x = banco_JR_trabalho_atual_bkp, y = QUA
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 37))
-ggsave("GRAFICO[54,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[54,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1530,7 +1530,7 @@ ggplot(banco_JR_natureza_trabalho_bkp, aes(x = banco_JR_natureza_trabalho_bkp, y
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 7))
-ggsave("GRAFICO[55,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[55,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1558,7 +1558,7 @@ ggplot(banco_JR_renda_mensal_bkp, aes(x = banco_JR_renda_mensal_bkp, y = QUANTID
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 11))
-ggsave("GRAFICO[56,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[56,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1586,7 +1586,7 @@ ggplot(banco_JR_estado_civil_bkp, aes(x = banco_JR_estado_civil_bkp, y = QUANTID
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 49))
-ggsave("GRAFICO[57,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[57,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1614,7 +1614,7 @@ ggplot(banco_JR_estado_civil_pais_bkp, aes(x = banco_JR_estado_civil_pais_bkp, y
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 27))
-ggsave("GRAFICO[58,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[58,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1642,7 +1642,7 @@ ggplot(banco_JR_uso_drogas_bkp, aes(x = banco_JR_uso_drogas_bkp, y = QUANTIDADE)
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 10))
-ggsave("GRAFICO[59,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[59,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1670,7 +1670,7 @@ ggplot(banco_JR_medidaspro_bkp, aes(x = banco_JR_medidaspro_bkp, y = QUANTIDADE)
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 17))
-ggsave("GRAFICO[60,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[60,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1698,7 +1698,7 @@ ggplot(banco_JR_decisao_bkp, aes(x = banco_JR_decisao_bkp, y = QUANTIDADE)) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 9))
-ggsave("GRAFICO[61,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[61,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -1726,7 +1726,7 @@ ggplot(banco_JR_incidencia_bkp, aes(x = banco_JR_incidencia_bkp, y = QUANTIDADE)
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 17.5))
-ggsave("GRAFICO[62,].png", width=10, height=8, pointsize=12, dpi = 512)
+ggsave("GRAFICO[62,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #dev.off()
@@ -1774,7 +1774,7 @@ ggplot(data=banco_curso_adolescente_CEDIPRO_bkp, aes(x=banco_curso_adolescente_C
   labs(title = (str_c(GRAFICO[64,],": Cursos, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "CURSOS", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
@@ -1846,14 +1846,14 @@ ggplot(data=ESCOLARIDADE_banco_matriculados_CEDIPRO_bkp,
   labs(title = (str_c(GRAFICO[67,],": Escolaridade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos matriculados",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "", y = "ESCOLARIDADE") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[67,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[67,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -1874,11 +1874,11 @@ ggplot(data=REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp, aes(x=REGIONAL_
   labs(title = (str_c(GRAFICO[68,],": Regional Residencial, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos matriculados",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "REGIONAL", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[68,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[68,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 INCIDENCIA_banco_matriculados_CEDIPRO_bkp$INCIDENCIA_banco_matriculados_CEDIPRO_bkp = factor(INCIDENCIA_banco_matriculados_CEDIPRO_bkp$INCIDENCIA_banco_matriculados_CEDIPRO_bkp)
@@ -1896,11 +1896,11 @@ ggplot(data=INCIDENCIA_banco_matriculados_CEDIPRO_bkp, aes(x=INCIDENCIA_banco_ma
   labs(title = (str_c(GRAFICO[69,],": Incidência, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos matriculados",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "ATO INFRACIONAL", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[69,].png", width=8, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[69,].png", width=8, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -1919,11 +1919,11 @@ ggplot(data=REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp, aes(x=REGIONAL_ATO_banc
   labs(title = (str_c(GRAFICO[70,],": Regional Ato, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos matriculados",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "REGIONAL", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[70,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[70,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 
@@ -1944,11 +1944,11 @@ ggplot(data=PROTETIVAS_banco_matriculados_CEDIPRO_bkp, aes(x=PROTETIVAS_banco_ma
   labs(title = (str_c(GRAFICO[71,],": Medidas Protetivas, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos matriculados",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "REGIONAL", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[71,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[71,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 
@@ -1969,11 +1969,11 @@ ggplot(data=DECISAO_banco_matriculados_CEDIPRO_bkp, aes(x=DECISAO_banco_matricul
   labs(title = (str_c(GRAFICO[72,],": Decisão, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos matriculados",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "DECISÃO", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[72,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[72,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 
@@ -2049,14 +2049,14 @@ ggplot(data=ESCOLARIDADE_banco_desistencia_CEDIPRO_bkp,
   labs(title = (str_c(GRAFICO[75,],": Escolaridade, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "", y = "ESCOLARIDADE") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5, face = "bold"),
         plot.caption =element_text(hjust = 0.5)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   scale_x_continuous(n.breaks=5)
 #scale_x_continuous(limits=c(0, 90))
-ggsave("GRAFICO[75,].png", width=15, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[75,].png", width=15, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -2078,11 +2078,11 @@ ggplot(data=REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp, aes(x=REGIONAL_R
   labs(title = (str_c(GRAFICO[76,],": Regional Residencial, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "REGIONAL", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[76,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[76,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 INCIDENCIA_banco_desistencia_CEDIPRO_bkp$INCIDENCIA_banco_desistencia_CEDIPRO_bkp = factor(INCIDENCIA_banco_desistencia_CEDIPRO_bkp$INCIDENCIA_banco_desistencia_CEDIPRO_bkp)
@@ -2100,11 +2100,11 @@ ggplot(data=INCIDENCIA_banco_desistencia_CEDIPRO_bkp, aes(x=INCIDENCIA_banco_des
   labs(title = (str_c(GRAFICO[77,],": Incidência, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "DECISÃO", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[77,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[77,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -2123,11 +2123,11 @@ ggplot(data=REGIONAL_ATO_banco_desistencia_CEDIPRO_bkp, aes(x=REGIONAL_ATO_banco
   labs(title = (str_c(GRAFICO[78,],": Regional Ato, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "REGIONAL", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[78,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[78,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 
@@ -2148,11 +2148,11 @@ ggplot(data=PROTETIVAS_banco_desistencia_CEDIPRO_bkp, aes(x=PROTETIVAS_banco_des
   labs(title = (str_c(GRAFICO[79,],": Medidas Protetivas, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "REGIONAL", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[79,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[79,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 
@@ -2173,11 +2173,11 @@ ggplot(data=DECISAO_banco_desistencia_CEDIPRO_bkp, aes(x=DECISAO_banco_desistenc
   labs(title = (str_c(GRAFICO[80,],": Decisão, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "DECISÃO", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[80,].png", width=7, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[80,].png", width=7, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 
@@ -2209,11 +2209,11 @@ ggplot(data=banco_curso_parente_CEDIPRO_bkp, aes(x=banco_curso_parente_CEDIPRO_b
   labs(title = (str_c(GRAFICO[81,],": Incidência, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "DECISÃO", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5),
         plot.caption =element_text(hjust = 0.5)  )
-ggsave("GRAFICO[81,].png", width=8, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[81,].png", width=8, height=6, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -2237,14 +2237,14 @@ ggplot(CAUSA_JURIDICA_let_bkp, aes(x = CAUSA_JURIDICA_let_bkp, y = QUANTIDADE)) 
   labs(title = (str_c(GRAFICO[82,],": Letalidade por causas externas, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "Letalidade",
        caption = "FONTE: INSTITUTO MÉDICO LEGAL",
-       x = "CAUSA JURÍDICA", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=10)
-  scale_y_continuous(limits=c(0, 85))
-ggsave("GRAFICO[82,].png", width=9.5, height=4, pointsize=12, dpi = 512)
+  scale_y_continuous(limits=c(0, 82))
+ggsave("GRAFICO[82,].png", width=9.5, height=6, pointsize=12, dpi = 512)
 
 
 #dev.off()
@@ -2266,14 +2266,14 @@ ggplot(soma_intervalo_idade_HOMICIDIO_let_bkp, aes(x = soma_intervalo_idade_HOMI
   labs(title = (str_c(GRAFICO[83,],": Incidência de óbitos por homicídio, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "Letalidade",
        caption = "FONTE: INSTITUTO MÉDICO LEGAL",
-       x = "FAIXA ETÁRIA", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 300))
-ggsave("GRAFICO[83,].png", width=9.5, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[83,].png", width=9.5, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2294,14 +2294,14 @@ ggplot(soma_intervalo_idade_IGNORADA_let_bkp, aes(x = soma_intervalo_idade_IGNOR
   labs(title = (str_c(GRAFICO[84,],": Incidência de óbitos por causa ignorada, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "Letalidade",
        caption = "FONTE: INSTITUTO MÉDICO LEGAL",
-       x = "FAIXA ETÁRIA", y = "")  +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 1410))
-ggsave("GRAFICO[84,].png", width=10, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[84,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2448,21 +2448,21 @@ ggsave("GRAFICO[89,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
-ggplot(data=passagem_cia_GERAL_HOM_IGN_LET, aes(x=CAUSA_JURIDICA, y=QUANTIDADE, fill=PASSAGEM_CIABH)) +
-  geom_bar(stat="identity", position=position_dodge())+
-  scale_color_brewer(palette="Set1")+
-  theme_minimal()+
-  geom_text(aes(label=QUANTIDADE), vjust=1.6, color="white", fontface = "bold",
-            position = position_dodge(0.9), size=3.5)+
+ggplot(passagem_cia_GERAL_HOM_IGN_LET, aes(fill=CAUSA_JURIDICA, y=QUANTIDADE, x=PASSAGEM_CIABH)) +
+  geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[90,],": Óbitos por causas violentas e Passagem CIABH, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "LETALIDADE",
        caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
-       x = "", y = "", fill = "PASSAGEM CIABH") +
+       x = "", y = "",
+       fill = "PASSAGEM CIABH") +
   theme(plot.title = element_text(hjust = 0.5, face="bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, face="plain", size = 12),
-        plot.caption =element_text(hjust = 0.5, size = 12)  )
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  theme(legend.position = "right") +
+  geom_text(aes(label=QUANTIDADE), vjust=0, color="red", fontface = "plain",
+            position = position_dodge(0.9), size=3)
 
-ggsave("GRAFICO[90,].png", width=11.5, height=5, pointsize=12, dpi = 512)
+ggsave("GRAFICO[90,].png", width=13, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
@@ -2549,14 +2549,14 @@ ggplot(banco_RACA_COR_HOMICIDIO_let_bkp, aes(x = banco_RACA_COR_HOMICIDIO_let_bk
   labs(title = (str_c(GRAFICO[94,],": Raça/cor, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "Letalidade",
        caption = "FONTE: INSTITUTO MÉDICO LEGAL",
-       x = "RAÇA/COR", y = "")  +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 22))
-ggsave("GRAFICO[94,].png", width=10, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[94,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2581,14 +2581,14 @@ ggplot(banco_PROCEDENCIA_LET_bkp, aes(x = banco_PROCEDENCIA_LET_bkp, y = QUANTID
   labs(title = (str_c(GRAFICO[95,],": Localidade do óbito, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "Letalidade",
        caption = "FONTE: INSTITUTO MÉDICO LEGAL",
-       x = "LOCAL DA MORTE", y = "")  +
+       x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 18))
-ggsave("GRAFICO[95,].png", width=10, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[95,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2611,14 +2611,14 @@ ggplot(tempo_medio_geral_OBITO_TAB_02_bkp, aes(x = tempo_medio_geral_OBITO_TAB_0
   labs(title = (str_c(GRAFICO[96,],": Tempo entre última entrada CIABH e óbito")),
        subtitle = (str_c("Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"))),
        caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
-       x = "", y = "TEMPO") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 15))
-ggsave("GRAFICO[96,].png", width=10, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[96,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2641,14 +2641,14 @@ ggplot(tempo_medio_geral_CIABH_TAB_02_bkp, aes(x = tempo_medio_geral_CIABH_TAB_0
   labs(title = (str_c(GRAFICO[97,],": Tempo entre a primeira e a última entrada")),
        subtitle = (str_c("Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"))),
        caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
-       x = "", y = "TEMPO") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 15))
-ggsave("GRAFICO[97,].png", width=10, height=4, pointsize=12, dpi = 512)
+  scale_y_continuous(limits=c(0, 13.5))
+ggsave("GRAFICO[97,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2671,14 +2671,14 @@ ggplot(banco_NUMERO_ENTRADAS_let_bkp, aes(x = banco_NUMERO_ENTRADAS_let_bkp, y =
   labs(title = (str_c(GRAFICO[98,],": Entradas")),
        subtitle = (str_c("Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"))),
        caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
-       x = "ENTRADAS", y = "") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 25))
-ggsave("GRAFICO[98,].png", width=10, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[98,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2724,14 +2724,14 @@ ggplot(BANCO_MEDIDAS_LET_bkp, aes(x = BANCO_MEDIDAS_LET_bkp, y = QUANTIDADE)) +
   labs(title = (str_c(GRAFICO[100,],": Medidas Protetivas, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Letalidade",
        caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
-       x = "", y = "MEDIDAS") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 19))
-ggsave("GRAFICO[100,].png", width=10, height=4, pointsize=12, dpi = 512)
+  scale_y_continuous(limits=c(0, 18.5))
+ggsave("GRAFICO[100,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
@@ -2754,14 +2754,14 @@ ggplot(BANCO_DECISAO_LET_bkp, aes(x = BANCO_DECISAO_LET_bkp, y = QUANTIDADE)) +
   labs(title = (str_c(GRAFICO[101,],": Decisões aplicadas, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "Letalidade",
        caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
-       x = "", y = "DECISÃO") +
+       x = "", y = "") +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, size = 12),
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
   scale_y_continuous(limits=c(0, 48))
-ggsave("GRAFICO[101,].png", width=10, height=4, pointsize=12, dpi = 512)
+ggsave("GRAFICO[101,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################

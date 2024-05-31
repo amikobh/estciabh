@@ -18,10 +18,10 @@ knitr::include_graphics('imagens/TABELA[52,].png')
 ```
 
 ## Idade e sexo
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[49,].png')
 ```
-Os autores de atos infracionais encaminhados para a Justiça Restaurativa, em sua maioria, possuem idade entre `r df_snr_sexo_idade_JR_bkp_rmark[1,1]` e `r df_snr_sexo_idade_JR_bkp_rmark[6,1]` anos. Note-se que a data de encaminhamento do adolescente ao programa de Justiça Restaurativa pode não ser idêntica à que diz respeito ao cometimento do ato infracional. 
+Os autores de atos infracionais encaminhados para a Justiça Restaurativa, em sua maioria, possuem idade entre `r banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` e `r banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd)-1,1]`. Note-se que a data de encaminhamento do adolescente ao programa de Justiça Restaurativa pode não ser idêntica à que diz respeito ao cometimento do ato infracional. 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[50,].png')
 ```
@@ -98,7 +98,7 @@ knitr::include_graphics('imagens/GRAFICO[54,].png')
 knitr::include_graphics('imagens/TABELA[57,].png')
 ```
 
-Entrevistados quanto a natureza do trabalho, `r sum(NATUREZA_DO_TRABALHO_jr_rmark$QUANTIDADE)` adolescentes encaminhados para a Justiça Restaurativa declararam que trabalham, conforme exposto na tabela e gráfico em tela.
+Entrevistados quanto a natureza do trabalho, `r banco_JR_trabalho_atual_bkp_rmd[nrow(banco_JR_trabalho_atual_bkp_rmd)-2,2]` adolescentes encaminhados para a Justiça Restaurativa declararam que trabalham, conforme exposto na tabela e gráfico em tela.
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
@@ -160,7 +160,7 @@ knitr::include_graphics('imagens/GRAFICO[58,].png')
 knitr::include_graphics('imagens/TABELA[61,].png')
 ```
 
-Da tabela apresentada é possível extrair como se dá o uso de drogas entre os adolescentes encaminhados para a Justiça Restaurativa, conforme responderam na entrevista. Dos `r nrow(banco_jr)` casos encaminhados, `r nrow(BANCO_USO_DROGAS_bkp)` adolescentes responderam que usam drogas. Ressalte-se que um adolescente pode usar mais de um tipo de droga.
+Da tabela apresentada é possível extrair como se dá o uso de drogas entre os adolescentes encaminhados para a Justiça Restaurativa, conforme responderam na entrevista. Ressalte-se que um adolescente pode usar mais de um tipo de droga.
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
@@ -181,7 +181,7 @@ knitr::include_graphics('img_nao_apagar/art101eca.png')
 \leavevmode
 \newline
 
-Dos `r nrow(BANCO_MEDIDAS_jr_total)` casos encaminhados para a Justiça Restaurativa, `r nrow(BANCO_MEDIDAS_jr_sim)` foram objetos de aplicação de medidas protetivas. Ressalte-se que mais de uma medida pode ser aplicada a determinado adolescente.
+Dos `r banco_JR_total_casos[nrow(banco_JR_total_casos)-0,1]` casos encaminhados para a Justiça Restaurativa, `r sum(banco_JR_medidaspro_bkp$QUANTIDADE)` foram objetos de aplicação de medidas protetivas. Ressalte-se que mais de uma medida pode ser aplicada a determinado adolescente.
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
@@ -189,7 +189,7 @@ knitr::include_graphics('imagens/TABELA[62,].png')
 ```
 \newpage
 
-O gráfico a seguir aponta que a medida relacionada ao `r BANCO_MEDIDAS_jr_rmark[1,1]` foi a que mais se aplicou no ano em estudo atingindo o índice de `r BANCO_MEDIDAS_jr_rmark[1,3]`%. As medidas do `r BANCO_MEDIDAS_jr_rmark[2,1]` e `r BANCO_MEDIDAS_jr_rmark[3,1]` seguiram-na no ranking de medidas aplicadas.
+O gráfico a seguir aponta que a medida relacionada ao `r banco_JR_medidaspro_bkp_rmd[nrow(banco_JR_medidaspro_bkp_rmd)-0,1]` foi a que mais se aplicou no ano em estudo atingindo o índice de `r banco_JR_medidaspro_bkp_rmd[nrow(banco_JR_medidaspro_bkp_rmd)-0,3]`. As medidas do `r banco_JR_medidaspro_bkp_rmd[nrow(banco_JR_medidaspro_bkp_rmd)-1,1]` e `r banco_JR_medidaspro_bkp_rmd[nrow(banco_JR_medidaspro_bkp_rmd)-2,1]` seguiram-na no ranking de medidas aplicadas.
 
 \leavevmode
 \newline
@@ -205,7 +205,7 @@ knitr::include_graphics('imagens/GRAFICO[60,].png')
 knitr::include_graphics('imagens/TABELA[63,].png')
 ```
 
-Da tabela e gráfico apresentado é possível extrair as decisões proferidas nos processos que constam  encaminhados para a Justiça Restaurativa. Dos `r nrow(BANCO_MEDIDAS_SOCIOEDU_jr_total)` casos encaminhados, `r nrow(BANCO_MEDIDAS_SOCIOEDU_jr_sim)` foram objetos de aplicação de medidas socioeducativas.
+Da tabela e gráfico apresentado é possível extrair as decisões proferidas nos processos que constam  encaminhados para a Justiça Restaurativa.
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
@@ -219,7 +219,7 @@ knitr::include_graphics('imagens/GRAFICO[61,].png')
 knitr::include_graphics('imagens/TABELA[64,].png')
 ```
 
-Apresenta-se a incidência de atos infracionais relacionados aos processos encaminhados para a Justiça Restaurativa. Sublinha-se que o ato `r banco_incidencia_jr_rmark[1,1]` é o que possui maior índice seguido dos atos `r banco_incidencia_jr_rmark[2,1]` e `r banco_incidencia_jr_rmark[3,1]`.
+Apresenta-se a incidência de atos infracionais relacionados aos processos encaminhados para a Justiça Restaurativa. Sublinha-se que o ato `r banco_JR_incidencia_bkp_rmd[nrow(banco_JR_incidencia_bkp_rmd)-0,1]` é o que possui maior índice seguido dos atos `r banco_JR_incidencia_bkp_rmd[nrow(banco_JR_incidencia_bkp_rmd)-1,1]` e `r banco_JR_incidencia_bkp_rmd[nrow(banco_JR_incidencia_bkp_rmd)-2,1]`.
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}

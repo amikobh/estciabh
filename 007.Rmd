@@ -10,7 +10,7 @@ knitr::include_graphics('imagens/TABELA[9,].png')
 
 ### Dia da Semana
 
-`r df_dia_semana_banco_HOMICIDIO_rmark[1,1]` e `r df_dia_semana_banco_HOMICIDIO_rmark[2,1]` são os dias que mais concentram as ocorrências de homicídio, praticado por adolescentes, em Belo Horizonte.
+`r df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd)-0,1]` e `r df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd)-1,1]` são os dias que mais concentram as ocorrências de homicídio, praticado por adolescentes, em Belo Horizonte.
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[10,].png')
@@ -23,13 +23,13 @@ knitr::include_graphics('imagens/TABELA[10,].png')
 knitr::include_graphics('imagens/TABELA[11,].png')
 ```
 
-As regionais `r df_regional_banco_HOMICIDIO_rmark[1,1]` e `r df_regional_banco_HOMICIDIO_rmark[2,1]` acusam os maiores índices de ocorrência no ano em estudo.
+As regionais `r df_regional_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_regional_banco_HOMICIDIO_gt_bkp_rmd)-0,1]` e `r df_regional_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_regional_banco_HOMICIDIO_gt_bkp_rmd)-1,1]` acusam os maiores índices de ocorrência no ano em estudo.
 \newpage
 
 ### Idade e Sexo    
 
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[11,].png')
 ```
 
@@ -71,7 +71,7 @@ knitr::include_graphics('imagens/TABELA[12,].png')
 
 ### Dia da Semana
 
-`r df_dia_semana_banco_ROUBO_rmark[1,1]`,  `r df_dia_semana_banco_ROUBO_rmark[2,1]` e `r df_dia_semana_banco_ROUBO_rmark[3,1]` são os dias que mais concentram as ocorrências de roubo, praticado por adolescentes, em Belo Horizonte.
+`r df_dia_semana_banco_ROUBO_gt_bkp_rmd[nrow(df_dia_semana_banco_ROUBO_gt_bkp_rmd)-0,1]`,  `r df_dia_semana_banco_ROUBO_gt_bkp_rmd[nrow(df_dia_semana_banco_ROUBO_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_ROUBO_gt_bkp_rmd[nrow(df_dia_semana_banco_ROUBO_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de roubo, praticado por adolescentes, em Belo Horizonte.
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[13,].png')
@@ -84,12 +84,12 @@ knitr::include_graphics('imagens/TABELA[13,].png')
 knitr::include_graphics('imagens/TABELA[14,].png')
 ```
 
-As regionais `r df_regional_banco_ROUBO_rmark[1,1]`, `r df_regional_banco_ROUBO_rmark[2,1]` e `r df_regional_banco_ROUBO_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+As regionais `r df_regional_banco_ROUBO_gt_bkp_rmd[nrow(df_regional_banco_ROUBO_gt_bkp_rmd)-0,1]`, `r df_regional_banco_ROUBO_gt_bkp_rmd[nrow(df_regional_banco_ROUBO_gt_bkp_rmd)-1,1]` e `r df_regional_banco_ROUBO_gt_bkp_rmd[nrow(df_regional_banco_ROUBO_gt_bkp_rmd)-2,1]` acusam os maiores índices de ocorrência no ano em estudo.
 \newpage
 
 ### Idade e Sexo
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[13,].png')
 ```
 
@@ -132,7 +132,7 @@ knitr::include_graphics('imagens/TABELA[15,].png')
 
 ### Dia da semana
 
-`r df_dia_semana_banco_FURTO_rmark[1,1]`, `r df_dia_semana_banco_FURTO_rmark[2,1]` e `r df_dia_semana_banco_FURTO_rmark[3,1]` são os dias que mais concentram as ocorrências de furto, praticado por adolescentes, em Belo Horizonte.
+`r df_dia_semana_banco_FURTO_gt_bkp_rmd[nrow(df_dia_semana_banco_FURTO_gt_bkp_rmd)-0,1]`, `r df_dia_semana_banco_FURTO_gt_bkp_rmd[nrow(df_dia_semana_banco_FURTO_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_FURTO_gt_bkp_rmd[nrow(df_dia_semana_banco_FURTO_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de furto, praticado por adolescentes, em Belo Horizonte.
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[16,].png')
@@ -146,13 +146,13 @@ knitr::include_graphics('imagens/TABELA[16,].png')
 knitr::include_graphics('imagens/TABELA[17,].png')
 ```
 
-As regionais `r df_regional_banco_FURTO_rmark[1,1]`, `r df_regional_banco_FURTO_rmark[2,1]` e `r df_regional_banco_FURTO_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+As regionais `r df_regional_banco_FURTO_gt_bkp_rmd[nrow(df_regional_banco_FURTO_gt_bkp_rmd)-0,1]`, `r df_regional_banco_FURTO_gt_bkp_rmd[nrow(df_regional_banco_FURTO_gt_bkp_rmd)-1,1]` e `r df_regional_banco_FURTO_gt_bkp_rmd[nrow(df_regional_banco_FURTO_gt_bkp_rmd)-2,1]` acusam os maiores índices de ocorrência no ano em estudo.
 \newpage
 
 ### Idade e Sexo    
 
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[15,].png')
 ```
 
@@ -193,7 +193,7 @@ knitr::include_graphics('imagens/TABELA[18,].png')
 
 ### Dia da semana
 
-`r df_dia_semana_banco_USO_DE_DROGAS_rmark[1,1]`, `r df_dia_semana_banco_USO_DE_DROGAS_rmark[2,1]` e `r df_dia_semana_banco_USO_DE_DROGAS_rmark[3,1]` são os dias que mais concentram as ocorrências de posse de drogas para uso pessoal, praticado por adolescentes, em Belo Horizonte.
+`r df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd)-0,1]`, `r df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de posse de drogas para uso pessoal, praticado por adolescentes, em Belo Horizonte.
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[19,].png')
@@ -207,12 +207,12 @@ knitr::include_graphics('imagens/TABELA[19,].png')
 knitr::include_graphics('imagens/TABELA[20,].png')
 ```
 
-As regionais `r df_regional_banco_USO_DE_DROGAS_rmark[1,1]`, `r df_regional_banco_USO_DE_DROGAS_rmark[2,1]` e `r df_regional_banco_USO_DE_DROGAS_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+As regionais `r df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd)-0,1]`, `r df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd)-1,1]` e `r df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd)-2,1]` acusam os maiores índices de ocorrência no ano em estudo.
 \newpage
 
 ### Idade e Sexo
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[17,].png')
 ```
 
@@ -253,7 +253,7 @@ knitr::include_graphics('imagens/TABELA[21,].png')
 
 ### Dia da semana
 
-`r df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark[1,1]`, `r df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark[2,1]` e `r df_dia_semana_banco_TRAFICO_DE_DROGAS_rmark[3,1]` são os dias que mais concentram as ocorrências de tráfico de drogas, praticado por adolescentes, em Belo Horizonte.
+`r df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-0,1]`, `r df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de tráfico de drogas, praticado por adolescentes, em Belo Horizonte.
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[22,].png')
@@ -267,12 +267,12 @@ knitr::include_graphics('imagens/TABELA[22,].png')
 knitr::include_graphics('imagens/TABELA[23,].png')
 ```
 
-As regionais `r df_regional_banco_TRAFICO_DE_DROGAS_rmark[1,1]`, `r df_regional_banco_TRAFICO_DE_DROGAS_rmark[2,1]` e `r df_regional_banco_TRAFICO_DE_DROGAS_rmark[3,1]` acusam os maiores índices de ocorrência no ano em estudo.
+As regionais `r df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-0,1]`, `r df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-1,1]` e `r df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-2,1]` acusam os maiores índices de ocorrência no ano em estudo.
 \newpage
 
 ### Idade e Sexo
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[19,].png')
 ```
 

@@ -39,7 +39,7 @@ knitr::include_graphics('imagens/GRAFICO[64,].png')
 \newpage
 
 ### Idade e sexo
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[65,].png')
 ```
 Os adolescentes matriculados no CEDIPRO, em sua maioria, são do sexo masculino com idade entre `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[9,1]` e `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[11,1]` anos.
@@ -154,7 +154,7 @@ knitr::include_graphics('imagens/GRAFICO[72,].png')
 
 ## Adolecentes encaminhados ao CEDIPRO e desistentes da matrícula
 ### Idade e sexo
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[73,].png')
 ```
 Os adolescentes encaminhados ao CEDIPRO, que desistiram da matrícula, são do sexo masculino.

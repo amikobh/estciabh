@@ -107,22 +107,15 @@ colnames(so_decisao_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #########################################################################################################
 
-#script para o bookdown
+#########################################################################################################
+#para script rmd:
+so_decisao_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", so_decisao_bkp$PERCENTUAL))
+so_decisao_bkp_rmd = tail(so_decisao_bkp,5)
 
-so_decisao_bkp_rmark = so_decisao_bkp
-
-so_decisao_bkp_rmark = so_decisao_bkp_rmark %>%
-  top_n(4, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-so_decisao_bkp_rmark =
-  so_decisao_bkp_rmark %>% slice(1:4)
-
-library (stringr)
-
-
+so_decisao_bkp_rmd1 =
+  so_decisao_bkp |>
+  filter(grepl("^REMISSÃO|ARQUIVAMENTO$", so_decisao_bkp))
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,

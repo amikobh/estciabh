@@ -6,7 +6,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 df_snr_regional_residencia =
-  banco_sem_mba_snr %>%
+  banco_SNR %>%
   select(REGIONAL_RESIDENCIAL)
 
 colnames(df_snr_regional_residencia)[1]<-'regional_residencial'

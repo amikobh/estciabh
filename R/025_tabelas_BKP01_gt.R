@@ -185,7 +185,7 @@ total_MBA_gt %>%
     title = md((str_c(TABELA[3,],": Quantidade de MBAs Cumpridos, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
     subtitle = "") %>%
 
-  tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(
@@ -524,7 +524,7 @@ incidencia_HOMICIDIO_gt %>%
     title = md((str_c(TABELA[9,],": Incidência homicídio, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
     subtitle = "") %>%
 
-  tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(
@@ -689,7 +689,7 @@ incidencia_ROUBO_gt %>%
     title = md((str_c(TABELA[12,],": Incidência roubo, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
     subtitle = "") %>%
 
-  tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(
@@ -854,7 +854,7 @@ incidencia_FURTO_gt %>%
     title = md((str_c(TABELA[15,],": Incidência furto, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
     subtitle = "") %>%
 
-  tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(
@@ -1021,7 +1021,7 @@ incidencia_USO_DE_DROGAS_gt %>%
     title = md((str_c(TABELA[18,],": Incidência posse de drogas para uso pessoal, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
     subtitle = "") %>%
 
-  tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(
@@ -1186,7 +1186,7 @@ incidencia_TRAFICO_DE_DROGAS_gt %>%
     title = md((str_c(TABELA[21,],": Incidência tráfico de drogas, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
     subtitle = "") %>%
 
-  tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(
@@ -2526,7 +2526,7 @@ banco_ESCOLA_total_casos %>%
     title = md((str_c(TABELA[45,],": Quantidade de casos encaminhados, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
     subtitle = "Ato infracional nas escolas") %>%
 
-  tab_source_note("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL") %>%
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
 
   tab_style(
     style = list(

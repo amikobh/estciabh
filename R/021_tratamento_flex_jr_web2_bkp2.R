@@ -1090,12 +1090,17 @@ colnames(banco_JR_uso_drogas_TABELA)[3]<-'PERCENTUAL'
 #DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
 banco_JR_medidaspro =
 
-  banco_JR_snr |>
+  banco_JR |>
   filter(TEM_MEDIDA_PROTETIVA_NESSE_PROCESSO %in% "SIM" | TEM_MEDIDA_PROTETIVA_OUTROS_.PROCESSOS %in% "SIM") |>
   pivot_longer(cols = starts_with("QUAL_MEDIDA_PROTETIVA_0"), values_to = "MEDIDA_PROTETIVA") %>%
   #select(-name) %>%
   filter(MEDIDA_PROTETIVA != "NSA") |>
   select(MEDIDA_PROTETIVA)
+
+banco_JR_medidaspro1 =
+
+  banco_JR |>
+  filter(TEM_MEDIDA_PROTETIVA_NESSE_PROCESSO %in% "SIM" | TEM_MEDIDA_PROTETIVA_OUTROS_.PROCESSOS %in% "SIM")
 #########################################################################################################
 colnames(banco_JR_medidaspro)[1]<-'banco_JR_medidaspro'
 #########################################################################################################

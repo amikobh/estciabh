@@ -8,7 +8,11 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO_puro
+banco_HOMICIDIO =
+  banco_sem_concurso |>
+  filter(ATO_INFRACIONAL %in% "HOMICÍDIO")
+
+banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO
 
 df_dia_semana_banco_HOMICIDIO_gt =
   banco_HOMICIDIO_sem_concurso %>%
@@ -102,7 +106,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO_puro
+banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO
 
 df_regional_banco_HOMICIDIO_gt =
   banco_HOMICIDIO_sem_concurso %>%
@@ -218,7 +222,12 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_ROUBO_sem_concurso <- banco_ROUBO_puro
+banco_ROUBO =
+  banco_sem_concurso |>
+  filter(ATO_INFRACIONAL %in% "ROUBO")
+
+
+banco_ROUBO_sem_concurso <- banco_ROUBO
 
 df_dia_semana_banco_ROUBO_gt =
   banco_ROUBO_sem_concurso %>%
@@ -312,7 +321,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_ROUBO_sem_concurso <- banco_ROUBO_puro
+banco_ROUBO_sem_concurso <- banco_ROUBO
 
 df_regional_banco_ROUBO_gt =
   banco_ROUBO_sem_concurso %>%
@@ -429,7 +438,11 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_FURTO_sem_concurso <- banco_FURTO_puro
+banco_FURTO =
+  banco_sem_concurso |>
+  filter(ATO_INFRACIONAL %in% "FURTO")
+
+banco_FURTO_sem_concurso <- banco_FURTO
 
 df_dia_semana_banco_FURTO_gt =
   banco_FURTO_sem_concurso %>%
@@ -523,7 +536,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_FURTO_sem_concurso <- banco_FURTO_puro
+banco_FURTO_sem_concurso <- banco_FURTO
 
 df_regional_banco_FURTO_gt =
   banco_FURTO_sem_concurso %>%
@@ -640,7 +653,11 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS_puro
+banco_USO_DE_DROGAS =
+  banco_sem_concurso |>
+  filter(ATO_INFRACIONAL %in% "POSSE DE DROGAS PARA USO PESSOAL")
+
+banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS
 
 df_dia_semana_banco_USO_DE_DROGAS_gt =
   banco_USO_DE_DROGAS_sem_concurso %>%
@@ -734,7 +751,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS_puro
+banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS
 
 df_regional_banco_USO_DE_DROGAS_gt =
   banco_USO_DE_DROGAS_sem_concurso %>%
@@ -851,7 +868,11 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS_puro
+banco_TRAFICO_DE_DROGAS =
+  banco_sem_concurso |>
+  filter(ATO_INFRACIONAL %in% "TRÁFICO DE DROGAS")
+
+banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS
 
 df_dia_semana_banco_TRAFICO_DE_DROGAS_gt =
   banco_TRAFICO_DE_DROGAS_sem_concurso %>%
@@ -945,7 +966,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS_puro
+banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS
 
 df_regional_banco_TRAFICO_DE_DROGAS_gt =
   banco_TRAFICO_DE_DROGAS_sem_concurso %>%

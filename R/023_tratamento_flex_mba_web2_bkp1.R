@@ -45,321 +45,136 @@ total_MBA_gt = total_MBA
 
 
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/mba"))
-
+#TRATAMENTO banco_MBA_snr_SEXO_IDADE
 #########################################################################################################
-#retirar nomes duplicados:snr=sem nome repetido
-#snr_banco_ESCOLA <- escola_bkp[!duplicated(data.frame(escola_bkp$NOME2, escola_bkp$NASCIMENTO)),]
-
-
-
-# Remove duplicate rows of the dataframe using variables
-snr_banco_so_com_mba = distinct(banco_so_com_mba, NOME2,NASCIMENTO,FILIACAO2, .keep_all= TRUE)
-
-
-#banco_para_amostra <-banco[!duplicated(data.frame(banco$NOME2, banco$NASCIMENTO)),]
-##write.csv(banco_para_amostra, file ="banco_para_amostra.csv",row.names=FALSE)
-
-#########################################################################################################
+banco_MBA_snr = distinct(banco_so_com_mba, NOME2, NASCIMENTO, .keep_all= TRUE)
 #########################################################################################################
 
+banco_MBA_snr_SEXO_IDADE =
 
-#########################################################################################################
-
-#banco_so_com_mba = snr_banco_so_com_mba
-
-#########################################################################################################
-#########################################################################################################
-MBA_bkp = banco_so_com_mba
-#########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/mba"))
-#########################################################################################################
-#retirar nomes duplicados:snr=sem nome repetido
-#snr_banco_so_com_mba <- MBA_bkp[!duplicated(data.frame(MBA_bkp$NOME2, MBA_bkp$NASCIMENTO)),]
-
-# Remove duplicate rows of the dataframe using variables
-#snr_banco_so_com_mba = distinct(MBA_bkp, NOME2,NASCIMENTO, .keep_all= TRUE)
-
-
-#banco_para_amostra <-banco[!duplicated(data.frame(banco$NOME2, banco$NASCIMENTO)),]
-##write.csv(banco_para_amostra, file ="banco_para_amostra.csv",row.names=FALSE)
-
-#########################################################################################################
-#########################################################################################################
-
-
-
-#########################################################################################################
-#########################################################################################################
-
-# 9 Idade e sexo adolescente atendido (colocar todos acima de 18 nos s/inf ou #valor!)
-MBA_snr = snr_banco_so_com_mba
-
-#########################################################################################################
-#########################################################################################################
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-df_snr_sexo_MBA_idade_MBA_bkp = MBA_snr %>%
+  banco_MBA_snr %>%
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO" | CAUSA_JURIDICA %in% "IGNORADA") |>
   select(SEXO, IDADE)
 
-#table(df_snr_sexo_MBA_idade_MBA_bkp$SEXO)
-
+banco_MBA_snr_SEXO_IDADE$SEXO[banco_MBA_snr_SEXO_IDADE$SEXO == ""]<- "M"
 #########################################################################################################
+banco_MBA_snr_SEXO_IDADE$SEXO = ajustar_nomes(banco_MBA_snr_SEXO_IDADE$SEXO)
 #########################################################################################################
-
-df_snr_sexo_MBA_idade_MBA_bkp$SEXO <- as.character(df_snr_sexo_MBA_idade_MBA_bkp$SEXO)
-
-df_snr_sexo_MBA_idade_MBA_bkp$SEXO[df_snr_sexo_MBA_idade_MBA_bkp$SEXO == ""]<- "M"
-#table(df_snr_sexo_MBA_idade_MBA_bkp$SEXO)
-
-df_snr_sexo_MBA_idade_MBA_bkp <- table(df_snr_sexo_MBA_idade_MBA_bkp$IDADE, df_snr_sexo_MBA_idade_MBA_bkp$SEXO, useNA ="always")
-#write.csv(df_snr_sexo_MBA_idade_MBA_bkp, file ="df_snr_sexo_MBA_idade_MBA_bkp.csv",row.names=FALSE)
-#write.csv(df_snr_sexo_MBA_idade_MBA_bkp, file ="df_snr_sexo_MBA_idade_MBA_bkp.csv",row.names=FALSE)
-#sum(df_snr_sexo_MBA_idade_MBA_bkp)
-
-df_snr_sexo_MBA_idade_MBA_bkp = data.frame(df_snr_sexo_MBA_idade_MBA_bkp)
+#encontrando parte do texto e substituindo
+banco_MBA_snr_SEXO_IDADE$SEXO[banco_MBA_snr_SEXO_IDADE$SEXO == "F"]<- "FEMININO"
+banco_MBA_snr_SEXO_IDADE$SEXO[banco_MBA_snr_SEXO_IDADE$SEXO == "M"]<- "MASCULINO"
 #########################################################################################################
+# PARA OS GRÁFICOS DE PIZZA
+banco_MBA_snr_SEXO_IDADE_pizza = banco_MBA_snr_SEXO_IDADE
 #########################################################################################################
+banco_MBA_snr_SEXO_IDADE_pizza =
+  banco_MBA_snr_SEXO_IDADE_pizza |>
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO") |>
+  count(SEXO, IDADE, sort = TRUE)
 
-
-df_snr_sexo_MBA_idade_MBA_bkp_bkp = df_snr_sexo_MBA_idade_MBA_bkp
-
-
-#df_snr_sexo_MBA_idade_MBA_bkp
-
-colnames(df_snr_sexo_MBA_idade_MBA_bkp) <- c("IDADE", "SEXO", "QUANTIDADE")
-
-#df_snr_sexo_MBA_idade_MBA_bkp
-
-df_snr_sexo_MBA_idade_MBA_bkp$IDADE <- as.character(df_snr_sexo_MBA_idade_MBA_bkp$IDADE)
-df_snr_sexo_MBA_idade_MBA_bkp$SEXO <- as.character(df_snr_sexo_MBA_idade_MBA_bkp$SEXO)
-
-
-
-df_snr_sexo_MBA_idade_MBA_bkp = filter(df_snr_sexo_MBA_idade_MBA_bkp, !QUANTIDADE == 0)
-#df_snr_sexo_MBA_idade_MBA_bkp
-
-#PREENCHER COM NA'S CELULAS VAZIAS
-#df_snr_sexo_MBA_idade_MBA_bkp$IDADE[df_snr_sexo_MBA_idade_MBA_bkp$IDADE == "SEM INFORMAÇÃO"]<- "<NA>"
-df_snr_sexo_MBA_idade_MBA_bkp$IDADE[which(is.na(df_snr_sexo_MBA_idade_MBA_bkp$IDADE))] <- "s/inf"
-#df_snr_sexo_MBA_idade_MBA_bkp
-
-
-
-
-#df_snr_sexo_MBA_idade_MBA_bkp$IDADE <- paste(df_snr_sexo_MBA_idade_MBA_bkp$IDADE, "anos", sep=" ")
-df_snr_sexo_MBA_idade_MBA_bkp$IDADE[df_snr_sexo_MBA_idade_MBA_bkp$IDADE == "s/inf anos"]<- "s/inf"
-
-df_snr_sexo_MBA_idade_MBA_bkp <- reshape(data = df_snr_sexo_MBA_idade_MBA_bkp, idvar = "IDADE", timevar = "SEXO", direction = "wide")
-df_snr_sexo_MBA_idade_MBA_bkp
-
-colnames(df_snr_sexo_MBA_idade_MBA_bkp) <- c("IDADE", "FEMININO", "MASCULINO")
-#df_snr_sexo_MBA_idade_MBA_bkp
-
-df_snr_sexo_MBA_idade_MBA_bkp$FEMININO[which(is.na(df_snr_sexo_MBA_idade_MBA_bkp$FEMININO))] <- 0
-df_snr_sexo_MBA_idade_MBA_bkp$MASCULINO[which(is.na(df_snr_sexo_MBA_idade_MBA_bkp$MASCULINO))] <- 0
-
-#df_snr_sexo_MBA_idade_MBA_bkp
-#ordenar idade
-df_snr_sexo_MBA_idade_MBA_bkp = df_snr_sexo_MBA_idade_MBA_bkp %>% arrange(IDADE)
-
-df_snr_sexo_MBA_idade_MBA_bkp$FEMININO <- as.numeric(df_snr_sexo_MBA_idade_MBA_bkp$FEMININO)
-df_snr_sexo_MBA_idade_MBA_bkp$MASCULINO <- as.numeric(df_snr_sexo_MBA_idade_MBA_bkp$MASCULINO)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
+colnames(banco_MBA_snr_SEXO_IDADE_pizza)[3]<-'QUANTIDADE'
 #########################################################################################################
-#usando a funcao criada:
-df_snr_sexo_MBA_idade_MBA_bkp$F <- round_preserve_sum(prop.table(df_snr_sexo_MBA_idade_MBA_bkp$FEMININO)*100, 2)
-df_snr_sexo_MBA_idade_MBA_bkp$M <- round_preserve_sum(prop.table(df_snr_sexo_MBA_idade_MBA_bkp$MASCULINO)*100, 2)
-#df_snr_sexo_MBA_idade_MBA_bkp
-#########################################################################################################
-colnames(df_snr_sexo_MBA_idade_MBA_bkp) <- c("IDADE", "FEM", "MAS", "F", "M")
-#df_snr_sexo_MBA_idade_MBA_bkp
-
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-df_snr_sexo_MBA_idade_MBA_bkp_rmark = df_snr_sexo_MBA_idade_MBA_bkp
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-
-#banco_incidencia_rmark %>% slice(1:3)
-df_snr_sexo_MBA_idade_MBA_bkp_rmark = filter(df_snr_sexo_MBA_idade_MBA_bkp_rmark, !IDADE == "s/inf")
-#selecionando os 3 principais e ordenando descrescente por quantidade
-df_snr_sexo_MBA_idade_MBA_bkp_rmark = df_snr_sexo_MBA_idade_MBA_bkp_rmark %>%
-  top_n(6, MAS) %>% arrange(desc(MAS))
-
-#somando
-#sum(df_snr_sexo_MBA_idade_MBA_bkp_rmark$M)
-
-#para escolher linhas e posicoes
-#df_snr_sexo_MBA_idade_MBA_bkp_rmark[2,1]
-#outra forma de calcular percentual
-#banco_incidencia = mutate(banco_incidencia,
-#                          PERCENTUAL = (QUANTIDADE / sum(QUANTIDADE))*100)
-
-#########################################################################################################
-#########################################################################################################
-
-#########################################################################################################
-
-df_snr_sexo_MBA_idade_MBA_bkp<- rbind(df_snr_sexo_MBA_idade_MBA_bkp,
-                                     data.frame(IDADE = "TOTAL",
-                                                FEM = sum(df_snr_sexo_MBA_idade_MBA_bkp$FEMININO),
-                                                F = sum(df_snr_sexo_MBA_idade_MBA_bkp$F),
-                                                MAS = sum(df_snr_sexo_MBA_idade_MBA_bkp$MASCULINO),
-                                                M = sum(df_snr_sexo_MBA_idade_MBA_bkp$M),
-                                                stringsAsFactors = FALSE))
-
-#df_snr_sexo_MBA_idade_MBA_bkp
-
-df_snr_sexo_MBA_idade_MBA_bkp =
-df_snr_sexo_MBA_idade_MBA_bkp %>%
-  select(IDADE, FEM, F, MAS, M)
-
-colnames(df_snr_sexo_MBA_idade_MBA_bkp) <- c("IDADE","FEM", "%", "MAS", "%")
-#df_snr_sexo_MBA_idade_MBA_bkp
-#########################################################################################################
-#########################################################################################################
-#salvando tabela
-#pdf(file="tabela_df_snr_sexo_MBA_idade_MBA_bkp_alternativa2.pdf", width = 5, height = 3.8, title = "tabela_df_snr_sexo_MBA_idade_MBA_bkp_alternativa")
-#setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-#GRAFICO IDADE/SEXO
-
-library(ggplot2)
-library(scales)
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-df_snr_sexo_MBA_idade_MBA = MBA_snr %>%
-  select(SEXO, IDADE)
-
-#table(df_snr_sexo_MBA_idade_MBA$SEXO)
-
-df_snr_sexo_MBA_idade_MBA$SEXO <- as.character(df_snr_sexo_MBA_idade_MBA$SEXO)
-
-df_snr_sexo_MBA_idade_MBA$SEXO[df_snr_sexo_MBA_idade_MBA$SEXO == ""]<- "M"
-#table(df_snr_sexo_MBA_idade_MBA$SEXO)
-
-df_snr_sexo_MBA_idade_MBA <- table(df_snr_sexo_MBA_idade_MBA$IDADE, df_snr_sexo_MBA_idade_MBA$SEXO, useNA ="always")
-##write.csv(df_snr_sexo_MBA_idade_MBA, file ="df_snr_sexo_MBA_idade_MBA.csv",row.names=FALSE)
-##write.csv(df_snr_sexo_MBA_idade_MBA, file ="df_snr_sexo_MBA_idade_MBA.csv",row.names=FALSE)
-#sum(df_snr_sexo_MBA_idade_MBA)
-
-df_snr_sexo_MBA_idade_MBA = data.frame(df_snr_sexo_MBA_idade_MBA)
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
-
-
-df_snr_sexo_MBA_idade_MBA_bkp = df_snr_sexo_MBA_idade_MBA
-
-
-#df_snr_sexo_MBA_idade_MBA
-
-colnames(df_snr_sexo_MBA_idade_MBA) <- c("IDADE", "SEXO", "QUANTIDADE")
-
-#df_snr_sexo_MBA_idade_MBA
-
-df_snr_sexo_MBA_idade_MBA$IDADE <- as.character(df_snr_sexo_MBA_idade_MBA$IDADE)
-df_snr_sexo_MBA_idade_MBA$SEXO <- as.character(df_snr_sexo_MBA_idade_MBA$SEXO)
-#sum(df_snr_sexo_MBA_idade_MBA$QUANTIDADE)
-
-
-df_snr_sexo_MBA_idade_MBA = filter(df_snr_sexo_MBA_idade_MBA, !QUANTIDADE == 0)
-#df_snr_sexo_MBA_idade_MBA
-
-#PREENCHER COM NA'S CELULAS VAZIAS
-#df_snr_sexo_MBA_idade_MBA$IDADE[df_snr_sexo_MBA_idade_MBA$IDADE == "SEM INFORMAÇÃO"]<- "<NA>"
-df_snr_sexo_MBA_idade_MBA$IDADE[which(is.na(df_snr_sexo_MBA_idade_MBA$IDADE))] <- "s/inf"
-#df_snr_sexo_MBA_idade_MBA
-
-
-df_snr_sexo_MBA_idade_MBA$IDADE <- paste(df_snr_sexo_MBA_idade_MBA$IDADE, "anos", sep=" ")
-df_snr_sexo_MBA_idade_MBA$IDADE[df_snr_sexo_MBA_idade_MBA$IDADE == "s/inf anos"]<- "s/inf"
-#df_snr_sexo_MBA_idade_MBA
-
-
-
-#########################################################################################################
-# GRAFICO SEXO PIZZA
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-df_snr_sexo_MBA = snr_banco_so_com_mba %>%
-  select(SEXO)
-
-table(df_snr_sexo_MBA$SEXO)
-
-#########################################################################################################
-#########################################################################################################
-
-df_snr_sexo_MBA$SEXO <- as.character(df_snr_sexo_MBA$SEXO)
-
-df_snr_sexo_MBA$SEXO[df_snr_sexo_MBA$SEXO == ""]<- "M"
-#table(df_snr_sexo_MBA$SEXO)
-
-df_snr_sexo_MBA = data.frame(table(df_snr_sexo_MBA$SEXO))
-
-colnames(df_snr_sexo_MBA) <- c("SEXO", "QUANTIDADE")
-
-#sum(df_snr_sexo_MBA$QUANTIDADE)
-
-#########################################################################################################
-#########################################################################################################
-
-
-df_snr_sexo_MBA$SEXO <- as.character(df_snr_sexo_MBA$SEXO)
-
-df_snr_sexo_MBA$SEXO[df_snr_sexo_MBA$SEXO == "F"]<- "FEMININO"
-df_snr_sexo_MBA$SEXO[df_snr_sexo_MBA$SEXO == "M"]<- "MASCULINO"
-
-df_snr_sexo_MBA_original=df_snr_sexo_MBA
-
-#########################################################################################################
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-#########################################################################################################
-#usando a funcao criada:
-#df_snr_sexo_MBA
-
-library("ggplot2")  # Data visualization
-library("dplyr")    # Data manipulation
-
-df_snr_sexo_MBA <- df_snr_sexo_MBA %>%
-  arrange(desc(QUANTIDADE)) %>%
-  mutate(PERCENTUAL = round_preserve_sum(prop.table(QUANTIDADE)*100, 2))
-
-df_snr_sexo_MBA$PERCENTUAL <- paste(df_snr_sexo_MBA$PERCENTUAL, "%", sep=" ")
-
-#df_snr_sexo_MBA
-
-
-
-#salvar pdf
 ########################################################################################################
+#SUBSTITUIR
+banco_MBA_snr_SEXO_IDADE_pizza$IDADE[which(is.na(banco_MBA_snr_SEXO_IDADE_pizza$IDADE))] <- "s/inf"
+banco_MBA_snr_SEXO_IDADE_pizza$IDADE <- paste(banco_MBA_snr_SEXO_IDADE_pizza$IDADE, "anos", sep=" ")
+banco_MBA_snr_SEXO_IDADE_pizza$IDADE[banco_MBA_snr_SEXO_IDADE_pizza$IDADE == "s/inf anos"]<- "s/inf"
+#########################################################################################################
+banco_MBA_snr_SEXO_IDADE_pizza$PERCENTUAL <- round_preserve_sum(prop.table(banco_MBA_snr_SEXO_IDADE_pizza$QUANTIDADE)*100, 2)
+#########################################################################################################
+# GRAFICO PIZZA
+banco_MBA_snr_SEXO_IDADE_graf_pizza <- ddply(banco_MBA_snr_SEXO_IDADE_pizza,
+                                             c("SEXO"),
+                                             summarise,
+                                             QUANTIDADE = sum(QUANTIDADE))
+
+banco_MBA_snr_SEXO_IDADE_graf_pizza =
+  banco_MBA_snr_SEXO_IDADE_graf_pizza |>
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
 
 
+banco_MBA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_MBA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
+#########################################################################################################
+#para script rmd:
+
+banco_MBA_snr_SEXO_IDADE_pizza_bkp <- ddply(banco_MBA_snr_SEXO_IDADE_pizza,
+                                            c("IDADE"),
+                                            summarise,
+                                            QUANTIDADE = sum(QUANTIDADE))
+
+banco_MBA_snr_SEXO_IDADE_pizza_bkp = banco_MBA_snr_SEXO_IDADE_pizza_bkp |> arrange(QUANTIDADE)
+
+banco_MBA_snr_SEXO_IDADE_pizza_bkp_rmd = tail(banco_MBA_snr_SEXO_IDADE_pizza_bkp,5)
+#########################################################################################################
+
+#########################################################################################################
+#TRATAMENTO banco_MBA_snr_SEXO_IDADE FIM
+#########################################################################################################
+#########################################################################################################
+#TRATAMENTO banco_MBA_snr_SEXO_IDADE
+#########################################################################################################
+#########################################################################################################
+
+banco_MBA_snr_SEXO_IDADE =
+
+  banco_MBA_snr %>%
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO" | CAUSA_JURIDICA %in% "IGNORADA") |>
+  select(SEXO, IDADE)
+
+banco_MBA_snr_SEXO_IDADE$SEXO[banco_MBA_snr_SEXO_IDADE$SEXO == ""]<- "M"
+
+#########################################################################################################
+banco_MBA_snr_SEXO_IDADE$SEXO = ajustar_nomes(banco_MBA_snr_SEXO_IDADE$SEXO)
+#########################################################################################################
+#encontrando parte do texto e substituindo
+banco_MBA_snr_SEXO_IDADE$SEXO[banco_MBA_snr_SEXO_IDADE$SEXO == "F"]<- "FEMININO"
+banco_MBA_snr_SEXO_IDADE$SEXO[banco_MBA_snr_SEXO_IDADE$SEXO == "M"]<- "MASCULINO"
+#########################################################################################################
+# PARA OS GRÁFICOS DE PIZZA
+banco_MBA_snr_SEXO_IDADE_pizza = banco_MBA_snr_SEXO_IDADE
+#########################################################################################################
+banco_MBA_snr_SEXO_IDADE_pizza =
+  banco_MBA_snr_SEXO_IDADE_pizza |>
+  #filter(CAUSA_JURIDICA %in% "HOMICÍDIO") |>
+  count(SEXO, IDADE, sort = TRUE)
+
+colnames(banco_MBA_snr_SEXO_IDADE_pizza)[3]<-'QUANTIDADE'
+#########################################################################################################
+########################################################################################################
+#SUBSTITUIR
+banco_MBA_snr_SEXO_IDADE_pizza$IDADE[which(is.na(banco_MBA_snr_SEXO_IDADE_pizza$IDADE))] <- "s/inf"
+banco_MBA_snr_SEXO_IDADE_pizza$IDADE <- paste(banco_MBA_snr_SEXO_IDADE_pizza$IDADE, "anos", sep=" ")
+banco_MBA_snr_SEXO_IDADE_pizza$IDADE[banco_MBA_snr_SEXO_IDADE_pizza$IDADE == "s/inf anos"]<- "s/inf"
+#########################################################################################################
+banco_MBA_snr_SEXO_IDADE_pizza$PERCENTUAL <- round_preserve_sum(prop.table(banco_MBA_snr_SEXO_IDADE_pizza$QUANTIDADE)*100, 2)
+#########################################################################################################
+# GRAFICO PIZZA
+banco_MBA_snr_SEXO_IDADE_graf_pizza <- ddply(banco_MBA_snr_SEXO_IDADE_pizza,
+                                             c("SEXO"),
+                                             summarise,
+                                             QUANTIDADE = sum(QUANTIDADE))
+
+banco_MBA_snr_SEXO_IDADE_graf_pizza =
+  banco_MBA_snr_SEXO_IDADE_graf_pizza |>
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+
+
+banco_MBA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_MBA_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
+#########################################################################################################
+#para script rmd:
+
+banco_MBA_snr_SEXO_IDADE_pizza_bkp <- ddply(banco_MBA_snr_SEXO_IDADE_pizza,
+                                            c("IDADE"),
+                                            summarise,
+                                            QUANTIDADE = sum(QUANTIDADE))
+
+banco_MBA_snr_SEXO_IDADE_pizza_bkp = banco_MBA_snr_SEXO_IDADE_pizza_bkp |> arrange(QUANTIDADE)
+
+banco_MBA_snr_SEXO_IDADE_pizza_bkp_rmd = tail(banco_MBA_snr_SEXO_IDADE_pizza_bkp,5)
+#########################################################################################################
+#########################################################################################################
+#TRATAMENTO banco_MBA_snr_SEXO_IDADE FIM
+#########################################################################################################
 #########################################################################################################
 #df_snr_regional_residencia_MBA
 #########################################################################################################
@@ -370,7 +185,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 df_snr_regional_residencia_MBA =
-  snr_banco_so_com_mba %>%
+  banco_MBA_snr %>%
   select(REGIONAL_RESIDENCIAL)
 
 colnames(df_snr_regional_residencia_MBA)[1]<-'regional_residencial'
@@ -423,6 +238,11 @@ colnames(df_snr_regional_residencia_MBA_bkp)[1]<-'df_snr_regional_residencia_MBA
 colnames(df_snr_regional_residencia_MBA_bkp)[2]<-'QUANTIDADE'
 colnames(df_snr_regional_residencia_MBA_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+#########################################################################################################
+#para script rmd:
+df_snr_regional_residencia_MBA_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_snr_regional_residencia_MBA_bkp$PERCENTUAL))
+df_snr_regional_residencia_MBA_bkp_rmd = tail(df_snr_regional_residencia_MBA_bkp,5)
+#########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
 
@@ -463,124 +283,6 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 # df_snr_regional_residencia_MBA FIM
 #########################################################################################################
-
-#########################################################################################################
-
-# TABELA_001
-MBA_snr_bkp = MBA_snr
-
-#########################################################################################################
-#########################################################################################################
-#SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
-library(dplyr)
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp = MBA_snr %>%
-  select(SEXO)
-
-#table(df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO)
-
-#########################################################################################################
-#########################################################################################################
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO <- as.character(df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO)
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO[df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO == "F"]<- "FEMININO"
-df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO[df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO == "M"]<- "MASCULINO"
-#table(df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO)
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp <- table(df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO)
-
-setwd(file.path("~/diretorio_r/estciabh/mba"))
-
-#write.csv(df_snr_sexo_MBA_idade_MBA_tab_bkp, file ="df_snr_sexo_MBA_idade_MBA_tab_bkp.csv",row.names=FALSE)
-
-#sum(df_snr_sexo_MBA_idade_MBA_tab_bkp)
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp = data.frame(df_snr_sexo_MBA_idade_MBA_tab_bkp)
-#########################################################################################################
-#########################################################################################################
-
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp_bkp = df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-colnames(df_snr_sexo_MBA_idade_MBA_tab_bkp) <- c("SEXO", "QUANTIDADE")
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO <- as.character(df_snr_sexo_MBA_idade_MBA_tab_bkp$SEXO)
-#sum(df_snr_sexo_MBA_idade_MBA_tab_bkp$QUANTIDADE)
-
-
-df_snr_sexo_MBA_idade_MBA_tab_bkp = filter(df_snr_sexo_MBA_idade_MBA_tab_bkp, !QUANTIDADE == 0)
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-#PREENCHER COM NA'S CELULAS VAZIAS
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$IDADE[which(is.na(df_snr_sexo_MBA_idade_MBA_tab_bkp$IDADE))] <- "s/inf"
-df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$IDADE <- paste(df_snr_sexo_MBA_idade_MBA_tab_bkp$IDADE, "anos", sep=" ")
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$IDADE[df_snr_sexo_MBA_idade_MBA_tab_bkp$IDADE == "s/inf anos"]<- "s/inf"
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp <- reshape(data = df_snr_sexo_MBA_idade_MBA_tab_bkp, idvar = "SEXO", timevar = "QUANTIDADE", direction = "wide")
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-#colnames(df_snr_sexo_MBA_idade_MBA_tab_bkp) <- c("IDADE", "FEM", "MAS")
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$FEM[which(is.na(df_snr_sexo_MBA_idade_MBA_tab_bkp$FEM))] <- 0
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$MAS[which(is.na(df_snr_sexo_MBA_idade_MBA_tab_bkp$MAS))] <- 0
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-#ordenar idade
-#df_snr_sexo_MBA_idade_MBA_tab_bkp = df_snr_sexo_MBA_idade_MBA_tab_bkp %>% arrange(IDADE)
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$FEM <- as.numeric(df_snr_sexo_MBA_idade_MBA_tab_bkp$FEM)
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$MAS <- as.numeric(df_snr_sexo_MBA_idade_MBA_tab_bkp$MAS)
-
-#funcao para preservar soma de 100 no processamento do round:
-round_preserve_sum <- function(x, digits = 0) {
-  up <- 10 ^ digits
-  x <- x * up
-  y <- floor(x)
-  indices <- tail(order(x-y), round(sum(x)) - sum(y))
-  y[indices] <- y[indices] + 1
-  return(y / up)
-}
-#########################################################################################################
-#usando a funcao criada:
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$F <- round_preserve_sum(prop.table(df_snr_sexo_MBA_idade_MBA_tab_bkp$FEM)*100, 2)
-#df_snr_sexo_MBA_idade_MBA_tab_bkp$M <- round_preserve_sum(prop.table(df_snr_sexo_MBA_idade_MBA_tab_bkp$MAS)*100, 2)
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-#########################################################################################################
-#df_snr_sexo_MBA_idade_MBA_tab_bkp <- df_snr_sexo_MBA_idade_MBA_tab_bkp[c("IDADE", "FEM", "F", "MAS", "M")]
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-#########################################################################################################
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp<- rbind(df_snr_sexo_MBA_idade_MBA_tab_bkp,
-#                                    data.frame(IDADE = "TOTAL",
-#                                              FEM = sum(df_snr_sexo_MBA_idade_MBA_tab_bkp$FEM),
-#                                             F = sum(df_snr_sexo_MBA_idade_MBA_tab_bkp$F),
-#                                            MAS = sum(df_snr_sexo_MBA_idade_MBA_tab_bkp$MAS),
-#                                           M = sum(df_snr_sexo_MBA_idade_MBA_tab_bkp$M),
-#                                          stringsAsFactors = FALSE))
-
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-
-#colnames(df_snr_sexo_MBA_idade_MBA_tab_bkp) <- c("IDADE", "FEM", "%", "MAS", "%")
-#df_snr_sexo_MBA_idade_MBA_tab_bkp
-#########################################################################################################
-#########################################################################################################
-###########################################################
-#salvando tabela
-#pdf(file="tabela_df_snr_sexo_MBA_idade_MBA_tab_bkp_alternativa2.pdf", width = 5, height = 3.8, title = "tabela_df_snr_sexo_MBA_idade_MBA_tab_bkp_alternativa")
-##setwd(file.path("~/diretorio_r/estciabh/imagens"))
-#########################################################################################################
-
 #########################################################################################################
 #MOTIVO_MBA
 #########################################################################################################

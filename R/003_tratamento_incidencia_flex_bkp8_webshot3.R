@@ -61,7 +61,7 @@ banco_atos_em_foco$ATO_INFRACIONAL = sub("65.ART9.*.*", "PICHAÇÃO", banco_atos
 banco_atos_em_foco$ATO_INFRACIONAL = sub(".*OUTROS.*.*", "VOUTROS", banco_atos_em_foco$ATO_INFRACIONAL)
 banco_atos_em_foco$ATO_INFRACIONAL = sub(".*ARTCPB.*.*", "VOUTROS", banco_atos_em_foco$ATO_INFRACIONAL)
 
-banco_atos_em_foco |> tabyl(ATO_INFRACIONAL)
+
 #########################################################################################################
 #########################################################################################################
 banco_atos_em_foco_ESCOLA = banco_atos_em_foco
@@ -69,6 +69,11 @@ banco_atos_em_foco_ESCOLA = banco_atos_em_foco
 banco_sem_concurso = distinct(banco_atos_em_foco, PROCESSO, name, ATO_INFRACIONAL, .keep_all= TRUE)
 
 banco_incidencia = banco_sem_concurso
+
+banco_SNR = distinct(banco_atos_em_foco, NOME2, NASCIMENTO, .keep_all= TRUE)
+
+total_de_adolescentes_encaminhados = banco_SNR
+
 
 #########################################################################################################
 
