@@ -45,7 +45,7 @@ banco_GERAL_snr_SEXO_IDADE_graf_pizza <- ddply(banco_GERAL_snr_SEXO_IDADE_pizza,
 
 banco_GERAL_snr_SEXO_IDADE_graf_pizza =
   banco_GERAL_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_GERAL_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_GERAL_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -111,7 +111,7 @@ banco_GERAL_snr_SEXO_IDADE_graf_pizza <- ddply(banco_GERAL_snr_SEXO_IDADE_pizza,
 
 banco_GERAL_snr_SEXO_IDADE_graf_pizza =
   banco_GERAL_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_GERAL_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_GERAL_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")

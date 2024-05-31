@@ -54,7 +54,7 @@ banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza <- ddply(banco_HOMICIDIO_snr_SEXO_IDAD
 
 banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza =
   banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -120,7 +120,7 @@ banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza <- ddply(banco_HOMICIDIO_snr_SEXO_IDAD
 
 banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza =
   banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_HOMICIDIO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -195,7 +195,7 @@ banco_ROUBO_snr_SEXO_IDADE_graf_pizza <- ddply(banco_ROUBO_snr_SEXO_IDADE_pizza,
 
 banco_ROUBO_snr_SEXO_IDADE_graf_pizza =
   banco_ROUBO_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_ROUBO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_ROUBO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -261,7 +261,7 @@ banco_ROUBO_snr_SEXO_IDADE_graf_pizza <- ddply(banco_ROUBO_snr_SEXO_IDADE_pizza,
 
 banco_ROUBO_snr_SEXO_IDADE_graf_pizza =
   banco_ROUBO_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_ROUBO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_ROUBO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -339,7 +339,7 @@ banco_FURTO_snr_SEXO_IDADE_graf_pizza <- ddply(banco_FURTO_snr_SEXO_IDADE_pizza,
 
 banco_FURTO_snr_SEXO_IDADE_graf_pizza =
   banco_FURTO_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_FURTO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_FURTO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -405,7 +405,7 @@ banco_FURTO_snr_SEXO_IDADE_graf_pizza <- ddply(banco_FURTO_snr_SEXO_IDADE_pizza,
 
 banco_FURTO_snr_SEXO_IDADE_graf_pizza =
   banco_FURTO_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_FURTO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_FURTO_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -483,7 +483,7 @@ banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza <- ddply(banco_USO_DE_DROGAS_snr_S
 
 banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza =
   banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -549,7 +549,7 @@ banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza <- ddply(banco_USO_DE_DROGAS_snr_S
 
 banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza =
   banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_USO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -624,7 +624,7 @@ banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza <- ddply(banco_TRAFICO_DE_DROG
 
 banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza =
   banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
@@ -690,7 +690,7 @@ banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza <- ddply(banco_TRAFICO_DE_DROG
 
 banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza =
   banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza |>
-  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2))
+  mutate(PERCENTUAL = round_preserve_sum(proportions(QUANTIDADE), 2)*100)
 
 
 banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL2 <- paste(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_graf_pizza$PERCENTUAL, "%", sep="")
