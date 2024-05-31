@@ -31,13 +31,19 @@ ajustar_nomes=function(x){
     stringr::str_replace("_$", "")                 #Substitui o caracter especiais por ""
 }
 #############################################################################################################
-# 1 PROCEDIMENTOS INICIAIS : LIMPAR OBJETOS
-
-#rm(list=ls(all=TRUE))
-
-# 2) DEFINIR DIRETÓRIO DE TRABALHO: usar Ctrl+Shift+H e escolher diretório
-
-
+#############################################################################################################
+#ACERTAR SOMA COLUNA PERCENTUAL
+#########################################################################################################
+#funcao para preservar soma de 100 no processamento do round:
+round_preserve_sum <- function(x, digits = 0) {
+  up <- 10 ^ digits
+  x <- x * up
+  y <- floor(x)
+  indices <- tail(order(x-y), round(sum(x)) - sum(y))
+  y[indices] <- y[indices] + 1
+  return(y / up)
+}
+#########################################################################################################
 #########################################################################################################
 #########################################################################################################
 # 3 CARREGANDO O BANCO PARA TRATAMENTO NO R: observar se variaveis são iguais
@@ -77,16 +83,9 @@ banco$NOME[banco$NOME == ""]<- "VAZIO"
 #excluir celulas com nomes VAZIO
 
 banco <- banco[!(banco$NOME == "VAZIO"),]
-banco_sem_na_nomes = banco
-#write.csv(banco_sem_na_nomes, file = "banco_sem_na_nomes.csv")
-rm(banco_sem_na_nomes)
 
 #PREENCHER COM NA'S CELULAS VAZIAS
 require(lubridate)
-
-head (banco %>%
-  select(NASCIMENTO, IDADE, DATA_ATO, DIA_SEMANA_ATO, DATA_AUDIENCIA_PRELIMINAR, DATA_SENTENCA), 15)
-
 
 banco$DATA_ATO[banco$DATA_ATO == ""]<- NA
 banco$DATA_ATO <- dmy(banco$DATA_ATO)
@@ -114,35 +113,24 @@ head (banco %>%
 banco$PAIS_ATO <- c("BRASIL")
 #INSERIR COLUNA IDADE
 
-head (banco %>%
-  select(NASCIMENTO, IDADE, DATA_ATO, DIA_SEMANA_ATO, DATA_AUDIENCIA_PRELIMINAR, DATA_SENTENCA, PAIS_ATO), 15)
-
-
 #CONVERTE PARA DATE (DATA_ATO JÁ CONVERTIDO LINHAS ACIMA)
 #banco$NASCIMENTO = dmy(banco$NASCIMENTO)
 banco$NASCIMENTO = dmy(banco$NASCIMENTO)
 
-head (banco %>%
-  select(NASCIMENTO, IDADE, DATA_ATO, DIA_SEMANA_ATO, DATA_AUDIENCIA_PRELIMINAR, DATA_SENTENCA, PAIS_ATO), 15)
 ## calcula o intervalo em anos
 banco$IDADE = as.period(interval(banco$NASCIMENTO, banco$DATA_ATO))
 
-head (banco %>%
-        select(NASCIMENTO, IDADE, DATA_ATO, DIA_SEMANA_ATO, DATA_AUDIENCIA_PRELIMINAR, DATA_SENTENCA, PAIS_ATO), 15)
 
 # SEPARAR SO O PRIMEIRO ITEM DE "17y 2m 28d 0H 0M 0S" GERADO PELO SCRIPT ANTERIOR.
 banco$IDADE = banco$IDADE@year
 #table(banco$IDADE, useNA ="always")
 
-head (banco %>%
-        select(NASCIMENTO, IDADE, DATA_ATO, DIA_SEMANA_ATO, DATA_AUDIENCIA_PRELIMINAR, DATA_SENTENCA, PAIS_ATO), 15)
 
 banco$NOME2 <- gsub(" ","", banco$NOME)
 banco$FILIACAO2 <- gsub(" ","", banco$FILIACAO)
 
 #EXEMPLO DE REMOVER A COLUNA
 #banco$CIDADE_ATO <- NULL
-names(banco)
 banco_novas_colunas = banco
 #write.csv(banco_novas_colunas, file = "banco_com_novas_colunas.csv")
 
@@ -156,9 +144,6 @@ banco$ATO_INFRACIONAL_ATA_02 <- as.character(banco$ATO_INFRACIONAL_ATA_02)
 banco$ATO_INFRACIONAL_ATA_03 <- as.character(banco$ATO_INFRACIONAL_ATA_03)
 # preencher celula vazia de ATO_INFRACIONAL_ATA_01 e 02 por ATO_INFRACIONAL_TERMO_01 ou 02
 
-head (banco %>%
-  select(ATO_INFRACIONAL_TERMO_01,ATO_INFRACIONAL_ATA_01, ATO_INFRACIONAL_TERMO_02, ATO_INFRACIONAL_ATA_02), 15)
-
 
 #preenchendo vazios
 
@@ -169,8 +154,8 @@ banco$ATO_INFRACIONAL_ATA_01 = ifelse(banco$ATO_INFRACIONAL_ATA_01 == "",
 banco$ATO_INFRACIONAL_ATA_02 = ifelse(banco$ATO_INFRACIONAL_ATA_02 == "",
                                       banco$ATO_INFRACIONAL_TERMO_02, banco$ATO_INFRACIONAL_ATA_02)
 
-head (banco %>%
-        select(ATO_INFRACIONAL_TERMO_01,ATO_INFRACIONAL_ATA_01, ATO_INFRACIONAL_TERMO_02, ATO_INFRACIONAL_ATA_02), 15)
+banco$ATO_INFRACIONAL_ATA_03 = ifelse(banco$ATO_INFRACIONAL_ATA_03 == "",
+                                      "VAZIO", banco$ATO_INFRACIONAL_ATA_03)
 
 #write.csv(banco, file ="banco_varialvel_ato_vazio_preenchida.csv")
 
@@ -243,46 +228,9 @@ write.csv(banco_codificado, file = "banco_codificado_ENTREGA.csv", row.names = F
 #########################################################################################################
 library(dplyr)
 #########################################################################################################
-# substituir
-table(banco$ATO_INFRACIONAL_ATA_01, useNA ="always")
-
-banco$ATO_INFRACIONAL_ATA_01 = ifelse(banco$ATO_INFRACIONAL_ATA_01 == "",
-                                      "VS/ INF", banco$ATO_INFRACIONAL_ATA_01)
-
-
-banco$ATO_INFRACIONAL_ATA_01 = ifelse(banco$ATO_INFRACIONAL_ATA_01 == "TERMO SEM INF.",
-                                      "VS/ INF", banco$ATO_INFRACIONAL_ATA_01)
-
-table(banco$ATO_INFRACIONAL_ATA_01, useNA ="always")
 #########################################################################################################
-# substituir por DESCONSIDERAR AO SOMAR: ATA SEM INF, SEM INFORMACAO, TERMO SEM INF, NSA e ETC
-
-table(banco$ATO_INFRACIONAL_ATA_02, useNA ="always")
-
-banco$ATO_INFRACIONAL_ATA_02 = ifelse(banco$ATO_INFRACIONAL_ATA_02 == "",
-                                      "DESCONSIDERAR AO SOMAR", banco$ATO_INFRACIONAL_ATA_02)
-
-
-banco$ATO_INFRACIONAL_ATA_02 = ifelse(banco$ATO_INFRACIONAL_ATA_02 == "NSA",
-                                      "DESCONSIDERAR AO SOMAR", banco$ATO_INFRACIONAL_ATA_02)
-
-table(banco$ATO_INFRACIONAL_ATA_02, useNA ="always")
-
 #########################################################################################################
-# substituir por DESCONSIDERAR AO SOMAR: CELULA VAZIA, ATA SEM INF, SEM INFORMACAO, TERMO SEM INF, NSA e ETC
-
-table(banco$ATO_INFRACIONAL_ATA_03, useNA ="always")
-
-banco$ATO_INFRACIONAL_ATA_03 = ifelse(banco$ATO_INFRACIONAL_ATA_03 == "",
-                                      "DESCONSIDERAR AO SOMAR", banco$ATO_INFRACIONAL_ATA_03)
-
-
-banco$ATO_INFRACIONAL_ATA_03 = ifelse(banco$ATO_INFRACIONAL_ATA_03 == "NSA",
-                                      "DESCONSIDERAR AO SOMAR", banco$ATO_INFRACIONAL_ATA_03)
-
-table(banco$ATO_INFRACIONAL_ATA_03, useNA ="always")
-
-#########################################################################################################
+########################################################################################################
 
 banco$ATO_INFRACIONAL_ATA_01 <- gsub(" ","", banco$ATO_INFRACIONAL_ATA_01)
 banco$ATO_INFRACIONAL_ATA_02 <- gsub(" ","", banco$ATO_INFRACIONAL_ATA_02)
@@ -391,11 +339,6 @@ banco_atos_em_foco = banco_linhas_necessarias_df_sem_mba
 #tratamento atos em foco:
 #########################################################################################################
 banco_atos_em_foco_bkp = banco_atos_em_foco
-
-head (banco_atos_em_foco %>%
-        select(NOME2, ATO_INFRACIONAL_ATA_01, ATO_INFRACIONAL_ATA_02, ATO_INFRACIONAL_ATA_03), 20)
-
-
 #########################################################################################################
 
 #########################################################################################################
@@ -413,14 +356,6 @@ banco_com_linhas_desnecessarias <- banco_sem_mba[(banco_sem_mba$SENTENCA == 'ARQ
                                                      banco_sem_mba$DECISAO == 'ABSOLVICAO'| banco_sem_mba$DECISAO == 'EXTINCAODOPROCESSO'| banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' |
                                                      banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' | banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE'  | banco_sem_mba$DECISAO == 'EXTINCAOPORPROCESSO'),]
 
-
-head (banco_com_linhas_desnecessarias %>%
-        select(DECISAO, SENTENCA), 20)
-
-head (banco_linhas_necessarias_df_sem_mba %>%
-        select(DECISAO, SENTENCA), 20)
-
-
 #########################################################################################################
 #OBSERVAÇÃO: A GERAÇÃO DO GRAFICO SE ENCONTRA NO FINAL DO SCRIPT 004_tabela_e_grafico_idade_sexo_geral_flex_bkp1 EM
 #RAZÃO DA VARIAVEL ADOLESCENTES.
@@ -429,8 +364,4 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 #########################################################################################################
 #FIM
-
-########################################################################################################
-#FIM
 #########################################################################################################
-
