@@ -33,7 +33,7 @@ As regionais `r df_regional_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_regional_banco_HO
 knitr::include_graphics('imagens/GRAFICO[11,].png')
 ```
 
-Os adolescentes autores de homicídio se encontram na faixa etária de `r df_snr_sexo_idade_HOMICIDIO_rmark[2,1]` a `r df_snr_sexo_idade_HOMICIDIO_rmark[1,1]` anos.
+Os adolescentes autores de homicídio se encontram na faixa etária de `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` a `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-1,1]`.
 \leavevmode
 \newline
 \newline
@@ -93,7 +93,7 @@ As regionais `r df_regional_banco_ROUBO_gt_bkp_rmd[nrow(df_regional_banco_ROUBO_
 knitr::include_graphics('imagens/GRAFICO[13,].png')
 ```
 
-Os adolescentes autores de roubo são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_ROUBO_rmark1[3,1]` a `r df_snr_sexo_idade_ROUBO_rmark1[1,1]` anos concentram os praticantes dos atos.
+Os adolescentes autores de roubo são, preponderantemente, do sexo masculino. A faixa etária de `r banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
 \newline
@@ -156,7 +156,7 @@ As regionais `r df_regional_banco_FURTO_gt_bkp_rmd[nrow(df_regional_banco_FURTO_
 knitr::include_graphics('imagens/GRAFICO[15,].png')
 ```
 
-Os adolescentes autores de FURTO são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_FURTO_rmark[4,1]` a `r df_snr_sexo_idade_FURTO_rmark[6,1]` anos concentram os praticantes dos atos.
+Os adolescentes autores de FURTO são, preponderantemente, do sexo masculino. A faixa etária de `r banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
 \newline
@@ -216,7 +216,7 @@ As regionais `r df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_banc
 knitr::include_graphics('imagens/GRAFICO[17,].png')
 ```
 
-Os adolescentes autores de POSSE DE DROGAS PARA USO PESSOAL são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_USO_DE_DROGAS_rmark1[3,1]` a `r df_snr_sexo_idade_USO_DE_DROGAS_rmark1[1,1]` anos concentram os praticantes dos atos.
+Os adolescentes autores de POSSE DE DROGAS PARA USO PESSOAL são, preponderantemente, do sexo masculino. A faixa etária de `r banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
 \newline
@@ -276,7 +276,7 @@ As regionais `r df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_regional_
 knitr::include_graphics('imagens/GRAFICO[19,].png')
 ```
 
-Os adolescentes autores de TRÁFICO DE DROGAS são, preponderantemente, do sexo masculino. A faixa etária de `r df_snr_sexo_idade_TRAFICO_DE_DROGAS_rmark1[3,1]` a `r df_snr_sexo_idade_TRAFICO_DE_DROGAS_rmark1[1,1]` anos concentram os praticantes dos atos.
+Os adolescentes autores de TRÁFICO DE DROGAS são, preponderantemente, do sexo masculino. A faixa etária de `r banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
 \newline

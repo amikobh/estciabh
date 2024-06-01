@@ -23,7 +23,7 @@ planejamento estratégico preventivo junto aos educadores e alunos.
 \newpage
 
 ## Total de casos encaminhados
-```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[45,].png')
 ```
 
@@ -122,7 +122,7 @@ knitr::include_graphics('imagens/GRAFICO[45,].png')
 knitr::include_graphics('imagens/TABELA[50,].png')
 ```
 
-Em Belo Horizonte, as Regionais `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-0,1]` e `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-0,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais cometidos nas escolas.
+Em Belo Horizonte, as Regionais `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-0,1]` e `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-1,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais cometidos nas escolas.
 
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}

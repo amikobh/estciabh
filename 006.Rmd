@@ -78,6 +78,6 @@ Em Belo Horizonte, a Regional `r df_regional_ATO_banco_MBA_bkp_rmd[nrow(df_regio
 knitr::include_graphics('imagens/TABELA[8,].png')
 ```
 \vspace{1cm}
-`r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-0,1]`, `df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-1,1]` e `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-2,1]` concentram os maiores índices de atos infracionais relacionados ao cumprimento do MBA.
+`r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-0,1]`, `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-1,1]` e `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-2,1]` concentram os maiores índices de atos infracionais relacionados ao cumprimento do MBA.
 
 \newpage

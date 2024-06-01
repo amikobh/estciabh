@@ -186,7 +186,7 @@ knitr::include_graphics('imagens/TABELA[74,].png')
 ```
 Os adolescentes encaminhados ao CEDIPRO, que desistiram da matrícula, residem nas regionais, conforme apontado na tabela e gráficos em tela.
 
-\vspace{2cm}
+\vspace{1cm}
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[76,].png')
 ```
@@ -201,7 +201,7 @@ knitr::include_graphics('imagens/TABELA[75,].png')
 Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO e que desistiram da matrícula. Sublinha-se que o ato `r INCIDENCIA_banco_desistencia_CEDIPRO_bkp[4,1]` é o que possui maior índice.    
 Ressalta-se que um adolescente pode responder pelo cometimento de mais de um ato infracional.
 
-\vspace{2cm}
+\vspace{1cm}
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[77,].png')
 ```
@@ -214,7 +214,7 @@ knitr::include_graphics('imagens/TABELA[76,].png')
 
 A regional `r REGIONAL_ATO_banco_desistencia_CEDIPRO_bkp[nrow(REGIONAL_ATO_banco_desistencia_CEDIPRO_bkp),1]` concentra o maior índice de incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO e que desistiram da matrícula.
 
-\vspace{2cm}
+\vspace{1cm}
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[78,].png')
 ```

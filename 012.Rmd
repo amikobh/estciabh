@@ -13,7 +13,7 @@ Os dados exibidos revelam o perfil dos adolescentes encaminhados ao atendimento 
 \newpage
 
 ## Total de casos encaminhados
-```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[52,].png')
 ```
 
