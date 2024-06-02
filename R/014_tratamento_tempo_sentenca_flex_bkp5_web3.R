@@ -4,8 +4,15 @@
 intervalo_sentenca =
   banco_sem_mba %>%
   #filter(COMPARECIMENTO_AUD_PRELIMINAR %in% "COMPARECEU") %>%
-  select(DATA_ATO, DATA_SENTENCA) |>
-  na.omit()
+  select(DATA_ATO, DATA_SENTENCA, SENTENCA)
+
+#########################################################################################################
+#resolvendo data sentença sem informação
+intervalo_sentenca$SENTENCA[intervalo_sentenca$SENTENCA == ""]<- "VAZIO"
+
+intervalo_sentenca =
+  intervalo_sentenca |>
+  filter(!SENTENCA %in% "VAZIO" & !SENTENCA %in% "SEMINFORMACAO")
 
 #########################################################################################################
 #########################################################################################################
@@ -52,6 +59,13 @@ intervalo_sentenca$INTERV_08 = ifelse((intervalo_sentenca$INTER_02 > 180 & inter
 
 intervalo_sentenca$INTERV_09 = ifelse(intervalo_sentenca$INTER_02 > 360,
                                       "MAIS DE 01 ANO", "DESCONSIDERAR")
+
+#########################################################################################################
+#ainda resolvendo data sentença sem informação
+intervalo_sentenca$SENTENCA[intervalo_sentenca$SENTENCA == ""]<- "VAZIO"
+
+intervalo_sentenca$INTERV_010 = ifelse(is.na(intervalo_sentenca$INTER_02),
+                                       "SEM INFORMAÇÃO", "DESCONSIDERAR")
 
 #########################################################################################################
 #########################################################################################################
