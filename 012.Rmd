@@ -22,6 +22,8 @@ knitr::include_graphics('imagens/TABELA[52,].png')
 knitr::include_graphics('imagens/GRAFICO[49,].png')
 ```
 Os autores de atos infracionais encaminhados para a Justiça Restaurativa, em sua maioria, possuem idade entre `r banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` e `r banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_JR_snr_SEXO_IDADE_pizza_bkp_rmd)-1,1]`. Note-se que a data de encaminhamento do adolescente ao programa de Justiça Restaurativa pode não ser idêntica à que diz respeito ao cometimento do ato infracional. 
+
+\vspace{2cm}
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[50,].png')
 ```
@@ -52,6 +54,7 @@ knitr::include_graphics('imagens/TABELA[54,].png')
 
 Entrevistados quanto a escolaridade, os adolescentes encaminhados para a Justiça Restaurativa assim declararam, conforme exposto na tabela e gráfico em tela. Note-se que a data de encaminhamento do adolescente ao programa de Justiça Restaurativa pode não ser idêntica à que diz respeito ao cometimento do ato infracional. 
 
+\vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[52,].png')
 ```

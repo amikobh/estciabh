@@ -12,14 +12,14 @@ knitr::include_graphics('imagens/TABELA[9,].png')
 
 `r df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd)-0,1]` e `r df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_dia_semana_banco_HOMICIDIO_gt_bkp_rmd)-1,1]` são os dias que mais concentram as ocorrências de homicídio, praticado por adolescentes, em Belo Horizonte.
 
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[10,].png')
 ```
-\newpage
+
 
 ### Regional da ocorrência
 
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[11,].png')
 ```
 
@@ -36,12 +36,12 @@ knitr::include_graphics('imagens/GRAFICO[11,].png')
 Os adolescentes autores de homicídio se encontram na faixa etária de `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` a `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-1,1]`.
 \leavevmode
 \newline
-\newline
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[12,].png')
 ```
 
-\newpage
+
 ### Taxa por 100.000 habitantes
 ```{r, pop_estimada, echo=FALSE}
 ```
@@ -73,14 +73,14 @@ knitr::include_graphics('imagens/TABELA[12,].png')
 
 `r df_dia_semana_banco_ROUBO_gt_bkp_rmd[nrow(df_dia_semana_banco_ROUBO_gt_bkp_rmd)-0,1]`,  `r df_dia_semana_banco_ROUBO_gt_bkp_rmd[nrow(df_dia_semana_banco_ROUBO_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_ROUBO_gt_bkp_rmd[nrow(df_dia_semana_banco_ROUBO_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de roubo, praticado por adolescentes, em Belo Horizonte.
 
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[13,].png')
 ```
-\newpage
+
 
 ### Regional da ocorrência
 
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[14,].png')
 ```
 
@@ -96,12 +96,12 @@ knitr::include_graphics('imagens/GRAFICO[13,].png')
 Os adolescentes autores de roubo são, preponderantemente, do sexo masculino. A faixa etária de `r banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ROUBO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
-\newline
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[14,].png')
 ```
 
-\newpage
+
 
 ### Taxa por 100.000 habitantes    
 
@@ -134,15 +134,14 @@ knitr::include_graphics('imagens/TABELA[15,].png')
 
 `r df_dia_semana_banco_FURTO_gt_bkp_rmd[nrow(df_dia_semana_banco_FURTO_gt_bkp_rmd)-0,1]`, `r df_dia_semana_banco_FURTO_gt_bkp_rmd[nrow(df_dia_semana_banco_FURTO_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_FURTO_gt_bkp_rmd[nrow(df_dia_semana_banco_FURTO_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de furto, praticado por adolescentes, em Belo Horizonte.
 
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[16,].png')
 ```
-\newpage
 
 ### Regional da ocorrência
-\leavevmode
-\newline
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[17,].png')
 ```
 
@@ -159,12 +158,12 @@ knitr::include_graphics('imagens/GRAFICO[15,].png')
 Os adolescentes autores de FURTO são, preponderantemente, do sexo masculino. A faixa etária de `r banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_FURTO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
-\newline
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[16,].png')
 ```
 
-\newpage
+
 ### Taxa por 100.000 habitantes
 ```{r, pop_estimada, echo=FALSE}
 ```
@@ -195,15 +194,14 @@ knitr::include_graphics('imagens/TABELA[18,].png')
 
 `r df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd)-0,1]`, `r df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de posse de drogas para uso pessoal, praticado por adolescentes, em Belo Horizonte.
 
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[19,].png')
 ```
-\newpage
+
 
 ### Regional da ocorrência
-\leavevmode
-\newline
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[20,].png')
 ```
 
@@ -219,12 +217,12 @@ knitr::include_graphics('imagens/GRAFICO[17,].png')
 Os adolescentes autores de POSSE DE DROGAS PARA USO PESSOAL são, preponderantemente, do sexo masculino. A faixa etária de `r banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
-\newline
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[18,].png')
 ```
 
-\newpage
+
 ### Taxa por 100.000 habitantes
 ```{r, pop_estimada, echo=FALSE}
 ```
@@ -255,15 +253,14 @@ knitr::include_graphics('imagens/TABELA[21,].png')
 
 `r df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-0,1]`, `r df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-1,1]` e `r df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd[nrow(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd)-2,1]` são os dias que mais concentram as ocorrências de tráfico de drogas, praticado por adolescentes, em Belo Horizonte.
 
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[22,].png')
 ```
-\newpage
+
 
 ### Regional da ocorrência
-\leavevmode
-\newline
-```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[23,].png')
 ```
 
@@ -279,12 +276,12 @@ knitr::include_graphics('imagens/GRAFICO[19,].png')
 Os adolescentes autores de TRÁFICO DE DROGAS são, preponderantemente, do sexo masculino. A faixa etária de `r banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` a `r banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_TRAFICO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` concentra os praticantes dos atos.
 \leavevmode
 \newline
-\newline
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[20,].png')
 ```
 
-\newpage
+
 ### Taxa por 100.000 habitantes
 ```{r, pop_estimada, echo=FALSE}
 ```

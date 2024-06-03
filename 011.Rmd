@@ -49,7 +49,8 @@ knitr::include_graphics('imagens/TABELA[46,].png')
 Entrevistados quanto a escolaridade, os adolescentes envolvidos em atos infracionais no
 ambiente escolar assim declararam, conforme exposto na tabela e gráfico em tela.
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+\vspace{2cm}
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[41,].png')
 ```
 \newpage
@@ -63,7 +64,7 @@ knitr::include_graphics('imagens/TABELA[47,].png')
 ```
 
 Apresenta-se a incidência de atos infracionais relacionados ao ambiente escolar. Sublinha-se que o ato `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-0,1]` é o que possui maior índice seguido dos atos `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-1,1]` e `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-2,1]`.
-
+\vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[42,].png')
 ```
@@ -110,7 +111,7 @@ knitr::include_graphics('imagens/TABELA[49,].png')
 ```
 
 Ao se analisar os dados expostos verifica-se que `r banco_ESCOLA_vitima_bkp_rmd[nrow(banco_ESCOLA_vitima_bkp_rmd)-0,1]` é a maior vítima dos atos infracionais praticados nas escolas de Belo Horizonte.
-
+\vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[45,].png')
 ```
@@ -124,7 +125,7 @@ knitr::include_graphics('imagens/TABELA[50,].png')
 
 Em Belo Horizonte, as Regionais `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-0,1]` e `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-1,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais cometidos nas escolas.
 
-
+\vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[46,].png')
 ```

@@ -67,7 +67,7 @@ knitr::include_graphics('imagens/TABELA[43,].png')
 \leavevmode
 \newline
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[44,].png')
 ```
 

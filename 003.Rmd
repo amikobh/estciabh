@@ -1,7 +1,7 @@
 # Atendimento ao adolescente autor de ato infracional
 
 Estabelece o art. 103, do Estatuto da Criança e do Adolescente (Lei 8069/1990) que é considerado ato infracional toda a conduta descrita como crime ou contravenção penal.
-A apuração dos atos infracionais é da competência da Justiça da Infância e da Juventude.
+A apuração de ato infracionail atribuido a adolescente é competência da Justiça da Infância e da Juventude.
 
 
 ## Encaminhamentos de adolescentes ao CIABH

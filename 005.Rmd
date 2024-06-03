@@ -3,6 +3,7 @@
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[3,].png')
 ```
+\vspace{2cm}
 Os autores de atos infracionais são, de forma exponencial, do sexo masculino, com idade entre `r banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` e `r banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` anos. 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[4,].png')

@@ -72,7 +72,7 @@ knitr::include_graphics('imagens/TABELA[68,].png')
 
 As regionais `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[nrow(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp),1]`, `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[10,1]` e `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[9,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CEDIPRO. Destaca-se que `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[2,3]` dos adolescentes, num total de `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[2,2]` encaminhamentos, residem nos demais municípios da Região Metropolitana.
 
-\vspace{2cm}
+\vspace{1cm}
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[68,].png')
 ```
@@ -87,7 +87,7 @@ knitr::include_graphics('imagens/TABELA[69,].png')
 Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO. Sublinha-se que o ato `r INCIDENCIA_banco_matriculados_CEDIPRO_bkp[18,1]` é o que possui maior índice.    
 Ressalta-se que um adolescente pode responder pelo cometimento de mais de um ato infracional.
 
-\vspace{2cm}
+\vspace{1cm}
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[69,].png')
 ```
@@ -100,7 +100,7 @@ knitr::include_graphics('imagens/TABELA[70,].png')
 
 As regionais `r REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp[nrow(REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp),1]`, `r REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp[9,1]` e `r REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp[8,1]` concentram os maiores índices de incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO.
 
-\vspace{2cm}
+\vspace{1cm}
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[70,].png')
 ```
@@ -267,13 +267,13 @@ knitr::include_graphics('imagens/GRAFICO[80,].png')
 \newpage
 
 ## Cursos realizados pelos familiares dos adolescentes encaminhados ao CEDIPRO
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[79,].png')
 ```
 Os cursos realizados pelos parentes dos adolescentes encaminhados ao CEDIPRO, distribuem-se conforme apresentado pela tabela.
 Nota-se que o curso mais procurado é o de `r  banco_curso_parente_CEDIPRO_bkp_rmark[1,1]`, seguido pelos cursos de `r  banco_curso_parente_CEDIPRO_bkp_rmark[2,1]`, `r  banco_curso_parente_CEDIPRO_bkp_rmark[3,1]` e `r  banco_curso_parente_CEDIPRO_bkp_rmark[4,1]`. Tais cursos concentram `r sum(banco_curso_parente_CEDIPRO_bkp_rmark$PERCENTUAL)`% do total da procura.    
 Ressalta-se que os parentes  podem realizar mais de um curso.
-
+\vspace{1cm}
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[81,].png')
 ```

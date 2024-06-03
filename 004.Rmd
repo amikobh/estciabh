@@ -1,5 +1,7 @@
 # Atos infracionais
-O gráfico a seguir apresenta a incidência de atos infracionais no ano de `r format(mondate(Sys.Date()-365*1, "%Y"))`, com um comparativo dos tipos de atos infracionais no período. Sublinha-se que, nesta ocasião, tendo em vista os atos informados, o `r banco_incidencia_bkp[nrow(banco_incidencia_bkp),1]` é o que possui o índice mais alto, seguido pelo `r banco_incidencia_bkp[nrow(banco_incidencia_bkp)-1,1]` e pelo ato infracional `r banco_incidencia_bkp[nrow(banco_incidencia_bkp)-2,1]`. Estes atos infracionais somam mais da metade do total (`r sum(banco_incidencia_bkp_rmd $PERCENTUAL2)`%).
+O gráfico a seguir expõe a incidência dos atos infracionais no ano de `r format(mondate(Sys.Date()-365*1, "%Y"))`.    
+O `r banco_incidencia_bkp[nrow(banco_incidencia_bkp),1]` apresenta o mais alto índice, seguido pelo `r banco_incidencia_bkp[nrow(banco_incidencia_bkp)-1,1]` e pelo ato infracional `r banco_incidencia_bkp[nrow(banco_incidencia_bkp)-2,1]`.    
+Sublinha-se que estes atos infracionais somam mais da metade do total (`r sum(banco_incidencia_bkp_rmd$PERCENTUAL2)`%).
 \leavevmode
 \newline
 \newline
