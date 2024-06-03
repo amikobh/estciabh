@@ -24,11 +24,16 @@ intervalo_sentenca$INTER_02 = (intervalo_sentenca$DATA_ATO) %--% (intervalo_sent
 tempo_medio_sentenca =
   intervalo_sentenca |>
   select(INTER_02) |>
-  mutate("TEMPO MÉDIO" = round(mean(intervalo_sentenca$INTER_02), 1)) |>
-  select("TEMPO MÉDIO")
+  mutate(TEMPO_MEDIO = ifelse(INTER_02 < 0, INTER_02*-1, INTER_02))
+
+  tempo_medio_sentenca =
+    tempo_medio_sentenca |>
+    mutate("TEMPO MÉDIO" = round(mean(TEMPO_MEDIO, na.rm = TRUE), 0)) |>
+    select("TEMPO MÉDIO")
+
 
 tempo_medio_sentenca =  tail(tempo_medio_sentenca, n=1)
-
+tempo_medio_sentenca = paste(tempo_medio_sentenca$`TEMPO MÉDIO`, "dias", sep = " ")
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################

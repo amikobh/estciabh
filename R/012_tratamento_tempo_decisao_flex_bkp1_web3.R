@@ -17,11 +17,11 @@ intervalo_decisao$INTER_02 = (intervalo_decisao$DATA_ATO) %--% (intervalo_decisa
 tempo_medio_decisao =
   intervalo_decisao |>
   select(INTER_02) |>
-  mutate("TEMPO MÉDIO" = round(mean(intervalo_decisao$INTER_02), 1)) |>
+  mutate("TEMPO MÉDIO" = round(mean(intervalo_decisao$INTER_02), 0)) |>
   select("TEMPO MÉDIO")
 
 tempo_medio_decisao =  tail(tempo_medio_decisao, n=1)
-
+tempo_medio_decisao = paste(tempo_medio_decisao$`TEMPO MÉDIO`, "dias", sep = " ")
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
