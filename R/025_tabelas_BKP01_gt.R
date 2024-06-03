@@ -2253,12 +2253,12 @@ tempo_medio_decisao %>%
 
   tab_style(
     style = list(
-      cell_text(weight = "bold", align = "center", size = "small")),
-    locations = cells_body(rows = nrow(tempo_medio_decisao)))%>%
+      cell_text(weight = "normal", align = "center", size = "small")),
+    locations = cells_body(rows = nrow(tempo_medio_decisao))) %>%
 
   tab_style(
     style = cell_text(weight = "bold", align = "center" ),
-    locations = cells_column_labels(columns = c(1)))%>%
+    locations = cells_column_labels(columns = c(1))) %>%
 
   # tab_style(
   #   style = cell_text(weight = "bold"),
@@ -2418,7 +2418,7 @@ tempo_medio_sentenca %>%
 
   tab_style(
     style = list(
-      cell_text(weight = "bold", align = "center", size = "small")),
+      cell_text(weight = "normal", align = "center", size = "small")),
     locations = cells_body(rows = nrow(tempo_medio_sentenca)))%>%
 
   tab_style(

@@ -21,7 +21,7 @@ tempo_medio_decisao =
   select("TEMPO MÉDIO")
 
 tempo_medio_decisao =  tail(tempo_medio_decisao, n=1)
-tempo_medio_decisao = paste(tempo_medio_decisao$`TEMPO MÉDIO`, "dias", sep = " ")
+tempo_medio_decisao$`TEMPO MÉDIO` = paste(tempo_medio_decisao$`TEMPO MÉDIO`, "dias", sep = " ")
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################

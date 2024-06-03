@@ -2448,7 +2448,7 @@ ggsave("GRAFICO[89,].png", width=13, height=5, pointsize=12, dpi = 512)
 
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
-ggplot(passagem_cia_GERAL_HOM_IGN_LET, aes(fill=CAUSA_JURIDICA, y=QUANTIDADE, x=PASSAGEM_CIABH)) +
+ggplot(passagem_cia_GERAL_HOM_IGN_LET, aes(fill=PASSAGEM_CIABH, y=QUANTIDADE, x=CAUSA_JURIDICA)) +
   geom_bar(position="dodge", stat="identity") +
   labs(title = (str_c(GRAFICO[90,],": Óbitos por causas violentas e Passagem CIABH, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "LETALIDADE",

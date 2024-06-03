@@ -512,7 +512,7 @@ setwd(file.path("~/diretorio_r/estciabh/letalidade"))
 library(dplyr)
 
 soma_intervalo_idade_HOMICIDIO_let =
-  banco_letalidade_inicial_SEM_FILTRO_IDADE_bkp %>%
+  banco_letalidade %>%
   filter (CAUSA_JURIDICA == "HOMICÍDIO")
 #########################################################################################################
 #########################################################################################################
@@ -618,7 +618,7 @@ setwd(file.path("~/diretorio_r/estciabh/letalidade"))
 library(dplyr)
 
 soma_intervalo_idade_IGNORADA_let =
-  banco_letalidade_inicial_SEM_FILTRO_IDADE_bkp %>%
+  banco_letalidade %>%
   filter (CAUSA_JURIDICA == "IGNORADA")
 #########################################################################################################
 #########################################################################################################
@@ -1219,14 +1219,16 @@ banco_iml_GERAL$CAUSA_JURIDICA <- str_replace(banco_iml_GERAL$CAUSA_JURIDICA, "S
 #banco_juntos = left_join(banco_iml_inicial_bkp, banco_juntos1, by= names(banco_iml_inicial_bkp))
 #banco_juntos = left_join(banco_iml_inicial_bkp, banco_juntos1, by= "ID_1")
 #########################################################################################################
+#SEÇÃO PASSAGEM CIABH
 #########################################################################################################
 #passagem_cia_GERAL_HOM_IGN_LET
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-passagem_cia_GERAL_HOM_IGN_LET = banco_iml_GERAL %>%
+passagem_cia_GERAL_HOM_IGN_LET = banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2<= 20) %>%
+  #filter(PASSAGEM_CIABH %in% "SIM") |>
   filter (CAUSA_JURIDICA == "HOMICÍDIO" | CAUSA_JURIDICA == "IGNORADA")  %>%
   select(CAUSA_JURIDICA, PASSAGEM_CIABH)
 
@@ -1293,8 +1295,9 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-passagem_cia_HOMICIDIO_LET = banco_iml_GERAL %>%
+passagem_cia_HOMICIDIO_LET = banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
+  #filter(PASSAGEM_CIABH %in% "SIM") |>
   filter(CAUSA_JURIDICA == "HOMICÍDIO") %>%
   select(CAUSA_JURIDICA, IDADE2, PASSAGEM_CIABH)
 
@@ -1363,8 +1366,9 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-passagem_cia_IGNORADA_LET = banco_iml_GERAL %>%
+passagem_cia_IGNORADA_LET = banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
+  #filter(PASSAGEM_CIABH %in% "SIM") |>
   filter(CAUSA_JURIDICA == "IGNORADA") %>%
   select(CAUSA_JURIDICA, IDADE2, PASSAGEM_CIABH)
 
@@ -1588,7 +1592,7 @@ sexo_LET_HOMICIDIO =
 
   banco_letalidade_12_20 %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
-  #filter (PASSAGEM_CIABH == "SIM") %>%
+  filter (PASSAGEM_CIABH == "SIM") %>%
   filter(CAUSA_JURIDICA == "HOMICÍDIO") %>%
   select(SEXO)
 
@@ -1596,7 +1600,7 @@ sexo_LET_IGNORADA =
 
   banco_letalidade_12_20 %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
-  #filter (PASSAGEM_CIABH == "SIM") %>%
+  filter (PASSAGEM_CIABH == "SIM") %>%
   filter(CAUSA_JURIDICA == "IGNORADA") %>%
   select(SEXO)
 #table(sexo_LET$SEXO)
@@ -1749,7 +1753,7 @@ library(dplyr)
 
 sexo_LET_HOMICIDIO_PASSAGEM_CIA =
 
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter (PASSAGEM_CIABH == "SIM") %>%
   filter(CAUSA_JURIDICA == "HOMICÍDIO") %>%
@@ -1757,7 +1761,7 @@ sexo_LET_HOMICIDIO_PASSAGEM_CIA =
 
 sexo_LET_IGNORADA_PASSAGEM_CIA =
 
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter (PASSAGEM_CIABH == "SIM") %>%
   filter(CAUSA_JURIDICA == "IGNORADA") %>%
@@ -1913,7 +1917,7 @@ p2_PASSAGEM_CIA =
 #########################################################################################################
 
 banco_PROCEDENCIA_LET =
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter(PASSAGEM_CIABH == "SIM"& CAUSA_JURIDICA == "HOMICÍDIO") %>%
   select(PROCEDENCIA)
@@ -2018,7 +2022,7 @@ require(lubridate)
 #########################################################################################################
 #########################################################################################################
 
-banco_COR_LET = banco_iml_GERAL %>%
+banco_COR_LET = banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter(PASSAGEM_CIABH == "SIM" & CAUSA_JURIDICA == "HOMICÍDIO") %>%
   select(COR)
@@ -2192,7 +2196,7 @@ require(lubridate)
 
 tempo_medio_geral_OBITO_TAB_01 =
 
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter(PASSAGEM_CIABH == "SIM") %>%
   filter (CAUSA_JURIDICA == "HOMICÍDIO") %>%
@@ -2231,7 +2235,7 @@ colnames(tempo_medio_geral_OBITO_TAB_01) <- c("TEMPO")
 
 #tempo_medio_geral_OBITO_TAB_01
 
-tempo_medio_geral_OBITO_TAB_01$TEMPO = paste(tempo_medio_geral_OBITO_TAB_01$TEMPO, "DIAS", sep=" ")#para plotar o sinal de porcentagem
+tempo_medio_geral_OBITO_TAB_01$TEMPO = paste(tempo_medio_geral_OBITO_TAB_01$TEMPO, "dias", sep=" ")#para plotar o sinal de porcentagem
 
 colnames(tempo_medio_geral_OBITO_TAB_01) <- c("TEMPO MÉDIO")
 
@@ -2399,7 +2403,7 @@ require(lubridate)
 
 tempo_medio_geral_CIABH_TAB_01 =
 
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter(PASSAGEM_CIABH == "SIM") %>%
   filter (CAUSA_JURIDICA == "HOMICÍDIO") %>%
@@ -2438,7 +2442,7 @@ colnames(tempo_medio_geral_CIABH_TAB_01) <- c("TEMPO")
 
 #tempo_medio_geral_CIABH_TAB_01
 
-tempo_medio_geral_CIABH_TAB_01$TEMPO = paste(tempo_medio_geral_CIABH_TAB_01$TEMPO, "DIAS", sep=" ")#para plotar o sinal de porcentagem
+tempo_medio_geral_CIABH_TAB_01$TEMPO = paste(tempo_medio_geral_CIABH_TAB_01$TEMPO, "dias", sep=" ")#para plotar o sinal de porcentagem
 
 colnames(tempo_medio_geral_CIABH_TAB_01) <- c("TEMPO MÉDIO")
 
@@ -2696,7 +2700,7 @@ colnames(banco_MEDIA_ENTRADAS_Let) <- c("MÉDIA ENTRADAS")
 #BANCO_MEDIDAS_LET
 #########################################################################################################
 BANCO_MEDIDAS_LET =
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter(PASSAGEM_CIABH == "SIM") %>%
   filter(CAUSA_JURIDICA == "HOMICÍDIO") %>%
@@ -2820,7 +2824,7 @@ colnames(BANCO_MEDIDAS_LET_TABELA)[3]<-'PERCENTUAL'
 #graf_pizza_MEDIDAS_LET
 #########################################################################################################
 graf_pizza_MEDIDAS_LET =
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   filter(PASSAGEM_CIABH %in% "SIM") %>%
   select(POSSUI_MEDIDA_PROTETIVA)
@@ -2853,7 +2857,7 @@ colnames(graf_pizza_MEDIDAS_LET)[3]<-'PERCENTUAL'
 #BANCO_DECISAO_LET
 #########################################################################################################
 BANCO_DECISAO_LET =
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
   #filter(PASSAGEM_CIABH == "SIM") %>%
   #filter(CAUSA_JURIDICA == "HOMICÍDIO") %>%
@@ -3021,9 +3025,10 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
 banco_EXTPUNIB_LET =
 
-  banco_iml_GERAL %>%
+  banco_letalidade %>%
   filter(IDADE2 >= 12 & IDADE2 <= 20) %>%
-  pivot_longer(cols = starts_with("DECISAO_APLICADA_0"), values_to = "DECISAO_APLICADA2") %>%
+  filter(PASSAGEM_CIABH %in% "SIM") |>
+  pivot_longer(cols = starts_with("DECISAO_APLICADA_"), values_to = "DECISAO_APLICADA2") %>%
   #select(-name) %>%
   filter(DECISAO_APLICADA2 != "")
 

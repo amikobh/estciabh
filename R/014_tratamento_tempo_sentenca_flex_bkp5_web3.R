@@ -33,7 +33,7 @@ tempo_medio_sentenca =
 
 
 tempo_medio_sentenca =  tail(tempo_medio_sentenca, n=1)
-tempo_medio_sentenca = paste(tempo_medio_sentenca$`TEMPO MÉDIO`, "dias", sep = " ")
+tempo_medio_sentenca$`TEMPO MÉDIO` = paste(tempo_medio_sentenca$`TEMPO MÉDIO`, "dias", sep = " ")
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
