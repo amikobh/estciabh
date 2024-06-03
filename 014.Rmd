@@ -86,6 +86,8 @@ knitr::include_graphics('imagens/GRAFICO[83,].png')
 
 ### Incidência de óbitos por causa ignorada em `r format(Sys.Date()-365*2, "%Y")`, por faixa etária
 
+\vspace{2cm}
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[82,].png')
 ```
@@ -101,6 +103,7 @@ knitr::include_graphics('imagens/GRAFICO[84,].png')
 
 ### Incidência de óbitos por homicídio entre adolescentes e jovens, Belo Horizonte e municípios limítrofes, 2018 a `r format(Sys.Date()-365*2, "%Y")`, por faixa etária
 
+\vspace{2cm}
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[83,].png')
 ```
@@ -108,13 +111,14 @@ knitr::include_graphics('imagens/TABELA[83,].png')
 Na análise da série histórica entre os anos de 2018 e 2021, os dados apontam que os óbitos por homicídio de adolescentes e jovens apresentam uma tendência de redução até 2020, com pequeno aumento em 2021. Conforme o gráfico abaixo, nas faixas etárias de 13 a 16, e de 18 a 19 anos, o número de homicídios registrados em 2021 foi maior do que o ano anterior.
 
 \vspace{2cm}
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024, fig.width=10,fig.height=11}
 knitr::include_graphics('imagens/GRAFICO[85,].png')
 ```
 \newpage
 
 ### Incidência de óbitos por causa ignorada entre adolescentes e jovens, Belo Horizonte e municípios limítrofes, 2018 a `r format(Sys.Date()-365*2, "%Y")` - faixa etária
 
+\vspace{2cm}
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[84,].png')
 ```
@@ -122,28 +126,30 @@ knitr::include_graphics('imagens/TABELA[84,].png')
 Em relação aos registros de mortes violentas de adolescentes e jovens por causa ignorada, observa-se uma tendência de aumento no período de 2018-2020, com queda de 48% em 2021, se comparado ao ano anterior. Em 2021, o maior número de registros de óbitos por causa ignorada se encontra nas faixas etárias de 19 e 20 anos, onde se concentram 55% dos casos registrados nessa categoria. 
 
 \vspace{2cm}
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[86,].png')
 ```
 \newpage
 
 ### Sexo dos adolescentes e jovens vitimados por homicídio e causa ignorada
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[85,].png')
 ```
 
 \textcolor{red}{Escrever comentários aqui}    
 
 \vspace{2cm}
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[87,].png')
 ```
 \newpage
 
 ### Raça/Cor dos adolescentes e jovens vitimados por homicídio e causa ignorada
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+\vspace{2cm}
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[86,].png')
 ```
 
@@ -152,15 +158,15 @@ knitr::include_graphics('imagens/TABELA[86,].png')
 
 
 \vspace{2cm}
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[88,].png')
 ```
 \newpage
 
 ### Comparativo entre número de óbitos por homicídio e causa ignorada entre adolescentes e jovens de 12 a 21 anos incompletos - 2018 a `r format(Sys.Date()-365*2, "%Y")`
 
-
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+\vspace{2cm}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[89,].png')
 ```
 
@@ -171,9 +177,11 @@ O gráfico acima aponta que a tendência de redução do número total de óbito
 \newpage
 
 ## Letalidade de adolescentes e jovens atendidos pelo Sistema Socioeducativo de Belo Horizonte
+\vspace{2cm}
 ### Óbitos por causas violentas e Passagem CIABH
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+\vspace{2cm}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[90,].png')
 ```
 
@@ -187,7 +195,9 @@ De acordo com o Gráfico 69, dos 83 adolescentes e jovens vítimas de homicídio
 
 ### Óbitos por homicídio e passagem CIABH, Belo Horizonte e municípios limítrofes, por faixa etária
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[91,].png')
 ```
 
@@ -199,8 +209,8 @@ Entre os adolescentes e jovens vítimas de homicídio que passaram pelo CIABH, o
 
 ### Óbitos por causa ignorada e passagem CIABH, Belo Horizonte e municípios limítrofes, por faixa etária
 
-
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+\vspace{2cm}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[92,].png')
 ```
 
@@ -218,9 +228,11 @@ As seções anteriores apresentaram comparativos entre os dados sobre mortes vio
 
 ### Óbitos por causas violentas de adolescentes e jovens, por sexo
 
+\vspace{2cm}
 Ao aplicar o recorte “passagem pelo CIABH”(Gráfico 73), observa-se que, entre adolescentes e jovens vítimas de homicídio em 2021, 100% correspondem ao sexo masculino (51). Os dados apontam que, entre adolescentes e jovens que tiveram registros de óbito por causa ignorada em 2021, 28 passaram pelo CIABH em algum momento de suas vidas. Destes, 10,71% são mulheres(03) e 89,29% homens(25).
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+\vspace{2cm}
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[93,].png')
 ```
 \newpage
@@ -256,41 +268,41 @@ knitr::include_graphics('imagens/GRAFICO[95,].png')
 
 ### Tempo médio entre a última entrada e o óbito do adolescente
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[89,].png')
 ```
 
  A tabela 64 nos mostra que o tempo médio entre a última entrada no Sistema Socioeducativo e o óbito do adolescente é de 616,9 dias (em torno de 20 meses). Embora ainda seja um período longo, em comparação com o relatório anterior, observou-se uma redução de 74 dias neste intervalo.
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[90,].png')
 ```
 
 Em relação ao tempo decorrido entre  a última passagem pelo CIABH e a data do óbito, verifica-se que a concentração principal dos registros se dá entre 01 e 02 anos, seguido pelo intervalo entre 02 e 03 anos. Quanto ao recorte temporal, observa-se que, no ano anterior, houve uma concentração maior de casos no intervalo entre 01 e 06 meses. Já em 2021, foi constatado um significativo aumento do número de óbitos ocorridos no intervalo “entre 01 e 02 anos” desde a última entrada do adolescente no CIABH: em 2020,  ocorreram 05 óbitos neste intervalo, ao passo que, em 2021, foram registrados 17 homicídios. 
 Cabe ressaltar o efeito da dimensão temporal na prevenção da letalidade juvenil. A análise da dimensão da temporalidade fornece indicativos relevantes para compreender a relação entre a data de ocorrência do óbito e a trajetória do adolescente no Sistema de Justiça e no Sistema Socioeducativo.  Embora os dados quantitativos não permitam identificar as circunstâncias e a situação do adolescente em relação ao cumprimento/descumprimento da medida socioeducativa, constituem norteadores para estudos complementares sobre a trajetória destes adolescentes e jovens no Sistema Socioeducativo, bem como para proposição de ações protetivas e de prevenção ao homicídio.
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[96,].png')
 ```
 \newpage
 
 ### Tempo médio entre a primeira e última entrada no CIABH dos adolescentes e jovens vítimas de homicídio 
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[91,].png')
 ```
 
 Os dados apresentados nas tabelas 66 e 67 tratam do intervalo de tempo observado entre a primeira e a última entrada no CIABH, fornecendo estimativas sobre a dimensão temporal da trajetória dos adolescentes e jovens vítimas de homicídio em 2021, no Sistema Socioeducativo. Vale ressaltar que esses dados são baseados nos registros das entradas no Sistema de Justiça, a partir das apreensões policiais dos adolescentes pela prática de atos infracionais, não abarcando o tempo de permanência no cumprimento de medidas socioeducativas aplicadas ao longo de sua trajetória. A análise desta última variável poderá ser realizada por meio de estudos complementares.
 A tabela 66 nos mostra que o tempo médio entre a primeira e a última entrada  no CIABH dos adolescentes e jovens vítimas de homicídio em 2021 é de 525,1 dias. Há uma diminuição quando comparado com o relatório anterior, que registrou o tempo médio de 611,9 dias. 
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[92,].png')
 ```
 
 
 Em comparação ao relatório anterior, observa-se que, em 2021,  houve um aumento na concentração de homicídios entre adolescentes e jovens que tiveram um intervalo de 0 a 01 mês entre a primeira e a última entrada no CIABH (em 2020, foram registrados  09 óbitos neste intervalo e, em 2021, 14), seguido pelo acréscimo no percentual em relação ao período de 01 e 02 anos, que passou de 15,79%, em 2020, para 25,49%, em 2021. Em relação ao ano de 2020, houve um aumento expressivo nestes dois intervalos, confirmando que há uma concentração de homicídios correlativa ao encurtamento do tempo entre a primeira e a última entrada no CIABH. 
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[97,].png')
 ```
 \newpage
@@ -325,8 +337,9 @@ As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolesce
 knitr::include_graphics('img_nao_apagar/art101eca.png')
 ```
 
+\vspace{2cm}
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[99,].png')
 ```
 
@@ -351,7 +364,7 @@ knitr::include_graphics('imagens/GRAFICO[100,].png')
 
 
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[96,].png')
 ```
 
