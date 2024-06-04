@@ -2229,7 +2229,7 @@ tempo_medio_geral_OBITO_TAB_01$INTER_02 = (tempo_medio_geral_OBITO_TAB_01$DATA_P
 tempo_medio_geral_OBITO_TAB_02 = tempo_medio_geral_OBITO_TAB_01
 #########################################################################################################
 #tabela media tempo decisao
-tempo_medio_geral_OBITO_TAB_01 = data.frame(round(mean(tempo_medio_geral_OBITO_TAB_01$INTER_02), 1))
+tempo_medio_geral_OBITO_TAB_01 = data.frame(round(mean(tempo_medio_geral_OBITO_TAB_01$INTER_02), 0))
 
 colnames(tempo_medio_geral_OBITO_TAB_01) <- c("TEMPO")
 
@@ -2436,7 +2436,7 @@ tempo_medio_geral_CIABH_TAB_01$INTER_02 = (tempo_medio_geral_CIABH_TAB_01$DATA_P
 tempo_medio_geral_CIABH_TAB_02 = tempo_medio_geral_CIABH_TAB_01
 #########################################################################################################
 #tabela media tempo decisao
-tempo_medio_geral_CIABH_TAB_01 = data.frame(round(mean(tempo_medio_geral_CIABH_TAB_01$INTER_02), 1))
+tempo_medio_geral_CIABH_TAB_01 = data.frame(round(mean(tempo_medio_geral_CIABH_TAB_01$INTER_02), 0))
 
 colnames(tempo_medio_geral_CIABH_TAB_01) <- c("TEMPO")
 
