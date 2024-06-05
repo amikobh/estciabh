@@ -488,6 +488,10 @@ setwd(file.path("~/diretorio_r/estciabh/letalidade/planilhas"))
 CAUSA_JURIDICA_let_ANTERIOR <- read.csv("CAUSA_JURIDICA_let_ANTERIOR.csv", header=TRUE, sep=",", dec=".", encoding = "UTF-8", skip = 0) ##Lendo arquivo de texto separado por vírgulas (CSV) e que usa o ponto.
 
 colnames(CAUSA_JURIDICA_let_ANTERIOR) <- c("CAUSA_JURÍDICA", "QUANTIDADE", "PERCENTUAL")
+
+#PREENCHENDO NA POR 0
+CAUSA_JURIDICA_let_ANTERIOR[is.na(CAUSA_JURIDICA_let_ANTERIOR)] <- 0
+
 colnames(CAUSA_JURIDICA_let) <- c("CAUSA_JURÍDICA", "QUANTIDADE", "PERCENTUAL")
 # Adaptando:
 #SUBSTITUIR
