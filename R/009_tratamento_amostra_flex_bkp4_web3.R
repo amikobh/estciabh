@@ -1309,9 +1309,17 @@ colnames(NATUREZA_MORADIA_TABELA)[3]<-'PERCENTUAL'
 DROGAS_USO =
 
   amostra_snr %>%
+  filter(USA_DROGAS_ATUALMENTE %in% "SIM") |>
   pivot_longer(cols = starts_with("DROGAS_USO"), values_to = "DROGAS_USO_GERAL") %>%
   #select(-name) %>%
   filter(DROGAS_USO_GERAL != "NSA")
+#########################################################################################################
+#Para script informando o quantidade de adolescentes que responderam SIM ao USA_DROGAS_ATUALMENTE
+DROGAS_USO_ATUAL =
+
+  amostra_snr %>%
+  filter(USA_DROGAS_ATUALMENTE %in% "SIM")
+
 #########################################################################################################
 
 DROGAS_USO =
