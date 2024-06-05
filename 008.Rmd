@@ -247,13 +247,13 @@ knitr::include_graphics('imagens/GRAFICO[32,].png')
 ```
 \newpage
 
-## Uso de drogas
+## Uso atual de drogas
 
 ```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[36,].png')
 ```
 
-Da tabela apresentada é possível extrair a distribuição dos adolescentes, tendo em vista o uso de drogas, conforme responderam na entrevista. Ressalte-se que um adolescente pode usar mais de um tipo de droga.
+`r nrow(DROGAS_USO_ATUAL)` adolescentes responderam que fazem uso atual de drogas. A tabela apresentada retrata como se caracteriza a utilização de drogas  por estes adolescentes. Ressalte-se que um adolescente pode usar mais de um tipo de droga.
 
 \leavevmode
 \newline
