@@ -18,8 +18,8 @@ knitr::include_graphics('imagens/GRAFICO[1,].png')
 \leavevmode
 \newline 
 
-No ano em estudo foram encaminhados para o CIABH, `r nrow(numero_de_casos_geral)` casos para atendimento. Deste universo de atendimento, `r nrow(numero_de_cumprimento_mba)` referem-se apenas a cumprimentos de mandados de busca e apreensão e `r nrow(numero_de_casos_sem_mba)` novos casos de apuração de atos infracionais. `r nrow(banco_SNR)` adolescentes – considerados individualmente – foram encaminhados como autores, em tese, de atos infracionais.
-Destes novos casos, `r nrow(numero_de_casos_sem_mba)-nrow(banco_SNR)`  dizem respeito à reentrada de adolescentes (reincidência).
+No ano em estudo foram encaminhados para o CIABH, `r nrow(numero_de_casos_geral)` casos para atendimento. Deste universo de atendimento, `r nrow(numero_de_cumprimento_mba)` referem-se apenas a cumprimentos de mandados de busca e apreensão e `r nrow(numero_de_casos_sem_mba)` novos casos de apuração de atos infracionais. `r nrow(banco_geral_SNR)` adolescentes – considerados individualmente – foram encaminhados como autores, em tese, de atos infracionais.
+Destes novos casos, `r nrow(numero_de_casos_sem_mba)-nrow(banco_geral_SNR)`  dizem respeito à reentrada de adolescentes (reincidência).
 
 
 \newpage

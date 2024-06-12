@@ -44,7 +44,7 @@ header-includes: |
   \usepackage{graphicx} % Usado para outros tipos de imagens
   \usepackage{float} % Usado para posicionamento de imagens
   \usepackage{svg}  % Eis o pacote que queremos.
- #\pagestyle{headings}
+  
 papersize: a4
 fontsize: 10pt
 linestretch: 1.2
@@ -121,26 +121,24 @@ Riza Aparecida Nery
 
 **CENTRO DE INFORMAÇÃO PARA GESTÃO INSTITUCIONAL – CEINFO/TJMG**   
 Vânia Cristina Fernandes   
-Victória Maria Quirino Gomes Gonçalves   
+Victória Maria Quirino Gomes Gonçalves    
 
+\vspace{1cm}
 **COMISSÃO DE PREVENÇÃO À LETALIDADE DE ADOLESCENTES E JOVENS**   
-Lucas Rolla - Promotor de Justiça   
-Alessandro da Silva    
-Anne Cristina Eliane de Souza da Silva   
-Elerson Márcio dos Santos   
-Eveline Correa Miranda Araújo   
-Fídias Gomes Siqueira   
-Karla Patrícia Vital Damiani   
+Lucas Rolla - Promotor de Justiça    
+Aline Pacheco Silva    
+Ana Carolina Gonçalves Ferreira    
+Anne Cristina Eliane de Souza da Silva    
+Cynthia Maria Santos Águido    
+Elerson Márcio dos Santos    
+Fabiana Santos de Oliveira Carvalho    
+Ingrid Caroline Damião Vieira    
 Maira Cristina Soares Freitas    
-Marcela Braga de Carvalho   
-Michele Gangana Duarte    
-Musso Greco   
-Raquel Amarante Nascimento   
-Paulo Batista dos Santos   
-Polyanna Helena Coelho   
+Michelle Gangana Duarte    
 Selmara Mamede Simões Ferreira    
-Vanessa Serva Maciel Gölgher    
+Vanessa Serva Maciel Golgher    
 
+\vspace{1cm}
 **EQUIPE DE ANÁLISE DE DADOS - COMISSARIADO**   
 Riza Aparecida Nery - Juíza Titular - Vara Infracional da Infância e da Juventude de Belo Horizonte    
 Clayson de Faria e Silva        
@@ -153,18 +151,22 @@ Paulo Roberto dos Santos
 
 \newpage
 
+\pagenumbering{gobble}
 \thispagestyle{empty}
 \tableofcontents
 \thispagestyle{empty}
 
 \newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{8}
 # Considerações iniciais
 
-
+\vspace{0.3cm}
 
 >“Ensina a criança no caminho em que deve andar, e, ainda quando for velha, não se desviará dele.”^[Provérbios, 22:6.]
 
-
+\vspace{0.3cm}
 É importante destacar o  artigo 227 da Constituição da Republica, que representou um novo olhar sobre a infância e adolescência, rompendo o modelo punitivista do Código de Menores.    
 
 Aprovado em julho de 1990, o Estatuto da Criança e do Adolescente - ECA, regulamentou o artigo 227 da Constituição Federal instituindo nova doutrina de garantia de direitos e proteção à Infância.    

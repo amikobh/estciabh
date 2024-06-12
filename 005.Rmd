@@ -34,5 +34,5 @@ Método de cálculo:
 ```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024, }
 knitr::include_graphics('img_nao_apagar/equacao_por_cem_mil.png')
 ```
-O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((sum(banco_incidencia_atual$QUANTIDADE)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes.
+O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((sum(banco_incidencia_geral_atual$QUANTIDADE)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes.
 \newpage
