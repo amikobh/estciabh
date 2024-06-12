@@ -1,68 +1,109 @@
-# A letalidade de adolescentes e jovens e o sistema socioeducativo
+# A violência letal contra adolescentes e jovens e o Sistema Socioeducativo
 \leavevmode
 \newline
 
-Estudos recentes sobre letalidade (Atlas da Violência 2021^[BRASIL. Atlas da Violência 2021 / Daniel Cerqueira et al., — São Paulo: FBSP, 2021. Disponível em: <https://forumseguranca.org.br/atlas-da-violencia>/ Acesso em 31 mar 2023.] e Anuário Brasileiro de Segurança Pública 2022^[BRASIL. Anuário Brasileiro de Segurança Pública 2022 / Samira Bueno; Renato Sérgio de Lima et al., - São Paulo: FBSP, 2022. Disponível em: <https://forumseguranca.org.br/anuario-brasileiro-seguranca-publica/> Acesso em 31 mar 2023.]) apontam que a violência constitui a principal causa de morte dos jovens no Brasil. Embora os levantamentos do Atlas da Violência 2021 indiquem uma redução de 24,3% no número de homicídios de jovens em 2019, se comparado a 2018, o percentual de óbitos entre jovens ainda continua expressivo: 51,3% dos 45.503 homicídios ocorridos no Brasil em 2019 correspondem à faixa etária entre 15 e 29 anos, o que equivale à média de 64 jovens assassinados por dia no país. 
+Neste capítulo, trataremos dos dados de óbitos de adolescentes e jovens, buscando compreender sua incidência no campo socioeducativo. No cenário mundial, adolescentes e jovens do sexo masculino, na faixa etária entre 15 e 29 anos, permanecem entre os que apresentam maior risco de serem vítimas de homicídios. Não diferente, no Brasil, a violência ainda é a principal causa de morte entre homens jovens.   
 
-A incidência do fenômeno da letalidade juvenil permanece maior entre pessoas negras (pretos e pardos, conforme classificação do IBGE^[IBGE -  Instituto Brasileiro de Geografia e Estatística. Desigualdades Sociais por cor ou raça no Brasil. Violência: tabela 5.7. Disponível em: <https://www.ibge.gov.br/estatisticas/sociais/populacao/25844-desigualdades-sociais-por-cor-ou-raca.html> Acesso em 31 mar 2023.]), que,  em 2019, representaram 77% das vítimas de homicídios no país. Destaca-se, ainda, a diferença entre as taxas de homicídio entre negros e não-negros: de acordo com o Atlas da Violência 2021, a taxa de violência letal de pessoas negras (29,2 homicídios para cada 100.000 habitantes)  foi 162% maior que a mesma taxa para pessoas não-negras (11,2/100.000). O mesmo foi observado em relação ao assassinato de mulheres negras, que corresponderam a 66% do total de mulheres vítimas de violência letal no Brasil, em 2019, sendo a taxa de homicídio 64% maior, se comparadas às mulheres não-negras.
-
-Nessa mesma análise, o Anuário Brasileiro de Segurança Pública 2022 apontou que, em 2021, 2.307 adolescentes entre 12 e 17 anos foram vítimas de homicídio, sendo que mais de 80% das vítimas eram negras, do sexo masculino e foram assassinadas mediante uso de armas de fogo.  
- 
-A realidade brasileira descrita pelos dados acima aponta para a necessidade de enfrentamento da naturalização da morte precoce e violenta de adolescentes e jovens, trazendo para a agenda pública o debate sobre a visibilidade do fenômeno e o fortalecimento de ações preventivas de valorização e proteção à vida. Com essa perspectiva, o Fórum Permanente do Sistema de Atendimento Socioeducativo de Belo Horizonte^[O Fórum Permanente do Sistema de Atendimento Socioeducativo de Belo Horizonte é um espaço de discussão e controle social  criado para acompanhar a execução do Sistema Socioeducativo de Belo Horizonte, seus desdobramentos, demandas e impactos sociais. O Fórum busca promover ações e articulações que favoreçam uma política de atendimento  humana, transparente e eficiente. Disponível em: <https://forumsocioeducativobh.org/> Acesso em 31 mar 2023.], por meio da Comissão de Prevenção à Letalidade de Adolescentes e Jovens, desenvolve ações de sensibilização e mobilização de diversos atores, com o objetivo de construir ações de co-responsabilidade pela proteção à vida desse público.
-
-Para o desenvolvimento deste trabalho, a Comissão realizou a leitura da incidência da letalidade juvenil no espaço-tempo do Sistema Socioeducativo, a partir do cruzamento do banco de dados policiais sobre homicídios de jovens ocorridos em Belo Horizonte e municípios limítrofes, com o banco de informações do Centro Integrado de Atendimento ao Adolescente Autor de Ato Infracional de Belo Horizonte^[O CIABH, tem por objetivo atender ao adolescente autor de ato infracional, tanto na área da apuração da prática de atos  infracionais, quanto na aplicação e execução das medidas socioeducativas, através da integração operacional das instituições públicas que compõem o sistema de Justiça juvenil. Disponível em: <https://www.tjmg.jus.br/portal-tjmg/institucional/infancia-e-juventude/#.ZB9v0nbMK70>] (CIABH), a ﬁm de identiﬁcar, dentre os adolescentes e jovens vítimas de morte por causas violentas, aqueles que, em algum momento, passaram  pelo Sistema Socioeducativo. Ressalta-se que esse levantamento visa fomentar reﬂexões sobre o que mantém a vida dos nossos jovens e sobre as oportunidades de intervenção das redes de proteção social para prevenir a letalidade de adolescentes e jovens atendidos pelo Sistema Socioeducativo.
-
-As análises deste Relatório têm como fonte os dados de letalidade de adolescentes e jovens por causas violentas constantes nos laudos periciais necroscópicos e em outros documentos relevantes, os quais são sistematizados em banco de dados e disponibilizados pelo Instituto Médico Legal Dr. André Roquette / Polícia Civil do Estado de Minas Gerais (IMLAR), que, desde 2022, passou a integrar a Comissão de Prevenção à Letalidade.
-
-Cabe realçar que a Polícia Civil de Minas Gerais utiliza diversas plataformas digitais para desenvolver suas atividades finalísticas, que são empregadas, também, no IMLAR. Dentre elas destacam-se: 
-
-1.	Registro de Eventos de Defesa Social (REDS): site utilizado para o registro inicial dos eventos de defesa social (boletins de ocorrência);
-2.	Sistema de Informação de Policial (SIP): para armazenamento e consulta de dados cadastrais de veículos e de indivíduos, vinculados ou não ao Sistema Prisional; 
-3.	Sistema de Informatização e Gerenciamento dos Atos de Polícia Judiciária (PCNet): ambiente de trabalho usado para gestão do Inquérito Policial. Nele, os Médicos Legistas de Minas Gerais emitem seus laudos periciais.
-
-Apesar de cumprirem o papel que lhes é precípuo, os softwares supracitados carecem de funções voltadas para gestão da Medicina Legal. A fim de suprir essas necessidades, o IMLAR vem desenvolvendo um software, desde meados de 2020, implementado em novembro desse mesmo ano, e aperfeiçoado desde então, para integrar as informações dos sistemas mencionados e agregar informações gerenciais locais pertinentes. Trata-se do software GPO - Gestão de Perícias Oficiais, com o qual tem-se realizado a sistematização da coleta de informações atinentes à medicina legal, com obtenção automática  de dados dos outros sistemas policiais. Como exemplo, cita-se a extração do conteúdo de boletins de ocorrência do REDS para completar informações, via importação, referente a casos atendidos no IMLAR, mediante categorização automática, o que foi crucial para a melhoria da informação sobre a “causa jurídica de morte” ora apresentada.  Isso permitiu avanços mais que meramente gerenciais, pois propiciou uma análise das informações referentes às perícias em pessoas vivas ou mortas, fornecendo dados para a construção de indicadores não só a respeito da atividade policial, como também em áreas afins como violência doméstica, mortalidade no trânsito e violência contra crianças e adolescentes, entre outras.
-
-Dessa maneira, observou-se grande potencial de compartilhamento de dados periciais com outros órgãos, o que tem demonstrado grande impacto social por trazer informações antes não disponíveis. É bem discutida a deficiência de informação sobre dados de violência no Brasil. Embora de causa multifatorial, a deficiência de integração dos diversos sistemas de informação dos órgãos que abordam a violência é um limitante crítico^[Bordoni PHC, Bordoni LS, Silva JM, Drumond EF. Utilização do método de captura-recaptura de casos para a melhoria do registro dos acidentes de trabalho fatais em Belo Horizonte, Minas Gerais, 2011. Epidemiol Serv Saúde. 2016; 25(1):85-94. Disponível em: <https://www.scielo.br/j/ress/a/CDgCWJCYRB7cywGTQzxFYtC/?lang=pt>.
-Rodrigues AB, Santana VS. Acidentes de trabalho fatais em Palmas, Tocantins, Brasil: oportunidades perdidas de informação. Rev Bras Saúde Ocup. 2019; 44:e8. Disponível em: <http://dx.doi.org/10.1590/2317-6369000017817>.]. Como a abordagem da violência é multidisciplinar (policial, saúde, jurídica etc), cada órgão produz seus dados de forma isolada (subestimados), com diagnósticos situacionais enviesados, não demonstrando a real complexidade/gravidade do problema. O linkage de banco de dados desses órgãos trará dados mais fidedignos, e melhores diagnósticos da situação atual de violência, o que certamente será de grande valia para a melhoria de Políticas Públicas, mais direcionadas^[Caetano R. Sistema de Informação de Agravos de Notificação (Sinan). In: Ministério Da Saúde, Organização Pan-Americana Da Saúde, Fundação Oswaldo Cruz (BR). A experiência brasileira em sistemas de informação em saúde - Volume 2. Falando sobre os sistemas de informação em saúde no Brasil Série B. Textos Básicos de Saúde. Brasília: Editora do Ministério da Saúde; 2009. p 41-64. Disponível em: <http://bvsms.saude.gov.br/bvs/publicacoes/experiencia_brasileira_sistemas_saude_volume2.pdf>].
-
-A partir desta base de dados, em continuidade ao trabalho iniciado em 2022, a Comissão de Prevenção à Letalidade de Adolescentes e Jovens, em parceria com a Vara Infracional da Infância e Juventude de Belo Horizonte, apresenta, neste Relatório, a análise da incidência do fenômeno da letalidade juvenil junto ao público atendido pelo Sistema Socioeducativo de Belo Horizonte, considerando como recorte adolescentes e jovens vítimas de homicídio em 2021, em Belo Horizonte e municípios limítrofes da Região Metropolitana de Belo Horizonte - RMBH (Contagem, Nova Lima, Ribeirão das Neves, Sabará, Santa Luzia e Vespasiano). Ressalta-se que a inclusão do capítulo sobre letalidade juvenil no Relatório Estatístico Anual do CIABH constitui um passo de suma relevância para a política de atendimento socioeducativo, permitindo a construção de uma série histórica que favorece o monitoramento do fenômeno e orienta a construção de ações de prevenção à letalidade e promoção da vida de adolescentes e jovens atendidos.
-
-Neste Relatório, foi considerado para análise o recorte etário de 12 a 21 anos incompletos, que corresponde à faixa etária atendida pelo Sistema Socioeducativo, conforme estipulado pelas normativas legais (Lei 8069/90 - Estatuto da Criança e do Adolescente/ECA^[Lei Nº 8.069, de 13 de julho de 1990 - ECA 
-<http://www.planalto.gov.br/ccivil_03/leis/l8069.htm>] e SINASE^[Sistema Nacional de Atendimento Socioeducativo. Para acesso a lei do SINASE na íntegra <http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12594.htm>] - Sistema Nacional de Atendimento Socioeducativo). Esse recorte contempla, também, uma parcela da população - indivíduos com idade de 15 a 21 anos - que o Estatuto da Juventude (Lei 12.852/2013) estabelece como jovens (15 e 29 anos) . Nesse sentido, quando não conﬂitar com as normas de proteção integral do adolescente previstas no ECA, aplica-se também o Estatuto da Juventude como um orientador de análise e formulação de políticas públicas.
-
-Já o recorte espacial - Belo Horizonte e municípios limítrofes da RMBH - se explica pela observação da incidência de óbitos por causas violentas ocorridos em municípios vizinhos ao local de residência das vítimas. A ampliação dessa categoria, por meio da inclusão de parte dos municípios da RMBH, permitiu veriﬁcar como essa variável se apresenta no universo de adolescentes e jovens que são atendidos pelo CIABH. A seleção dos Municípios (Contagem, Nova Lima, Ribeirão das Neves, Sabará, Santa Luzia e Vespasiano) foi baseada também na disponibilidade de dados do IMLAR, considerando os municípios que referenciam os óbitos de causas violentas ou suspeitas para a avaliação pericial na referida Unidade Policial. Nessa seleção, a Comissão considerou, ainda, os municípios que contam com políticas públicas voltadas à proteção social de adolescentes e jovens, o que favorece o acesso a dados qualitativos sobre o fenômeno do homicídio nesse recorte etário, como o Programa de Controle de Homicídios - Fica Vivo!^[<http://www.seguranca.mg.gov.br/2013-07-09-19-17-59/2020-05-12-22-29-51/programas-e-acoes>] e o Programa de Acompanhamento ao Egresso das Medidas Socioeducativas de Semiliberdade e Internação em Minas Gerais - Se Liga^[<http://www.seguranca.mg.gov.br/component/gmg/page/3074-programa-se-liga>], que compõem a Diretoria de Proteção da Juventude, executados pela Subsecretaria de Prevenção à Criminalidade (SUPEC)^[<http://www.seguranca.mg.gov.br/2013-07-09-19-17-59/a-prevencao>], vinculada à Secretaria de Estado de Justiça e Segurança Pública de Minas Gerais (SEJUSP).
-
-
-
-Em relação aos dados do IMLAR referentes às mortes violentas, as análises deste Relatório se basearam na categoria “Causa Jurídica da Morte”, que representa a circunstância de óbito não natural (intencionalidade) constante no campo 49 da Declaração de Óbito. Tal informação é obtida a partir de registros preliminares referentes ao óbito, repassados ao Setor de Serviço Social na entrada do corpo no IMLAR, sendo tal setor o responsável pela compilação, em sistema interno. Não corresponde, portanto, ao resultado da apuração policial, o que se dá somente após a conclusão do Inquérito. De acordo com Genival Veloso França,
+Conforme o Atlas da Violência 2023^[CERQUEIRA, Daniel; BUENO, Samira (coord.). **Atlas da violência 2023**. Brasília: Ipea; FBSP, 2023.]:
 
 \vspace{1cm}
 
->(...) é muito natural que os médicos peritos oficiais ou inoficiais que firmam o diagnóstico de causa mortis por ação violenta resistam em assinalar no atestado o tipo de causa jurídica: suicídio, homicídio ou acidente, pois ele não tem nenhum conhecimento sobre a circunstância em que se deu o óbito e lhes faltam os resultados de exames solicitados. As informações que eles têm são muito vagas e provêm das que constam dos boletins de ocorrência e isso nem sempre representa a verdade que se apura no final do inquérito policial. (...).^[FRANÇA, Genival Veloso. **MEDICINA LEGAL**. 10ª ed. Rio de Janeiro: Guanabara Koogan, 2015.]
+>Em 2021, de cada cem jovens entre 15 e 29 anos que morreram no país por qualquer causa, 49 foram vítimas de violência letal. Dos 47.847 homicídios ocorridos no Brasil em 2021, 50,6% vitimaram jovens entre 15 e 29 anos. São 24.217 jovens que tiveram suas vidas interrompidas prematuramente, com uma média de 66 jovens assassinados por dia no país. (CERQUEIRA; BUENO, 2023, p. 22).    
+
+\vspace{1cm}
+
+De acordo com o Anuário Brasileiro de Segurança Pública^[FÓRUM BRASILEIRO DE SEGURANÇA PÚBLICA (FBSP). 17º Anuário Brasileiro de Segurança Pública. São Paulo: Fórum Brasileiro de Segurança Pública, 2023. Disponível em: <https://forumseguranca.org.br/wp-content/uploads/2023/07/anuario-2023.pdf>.], o Brasil registrou 47.452 mortes violentas intencionais (MVI)^[De acordo com o Anuário de Segurança Pública (FBSP, 2023), esta categoria foi criada pelo Fórum Brasileiro de Segurança Pública (FBSP), e se refere às vítimas de homicídio doloso (incluindo feminicídios e policiais assassinados), roubos seguidos de morte, lesão corporal seguida de morte e as mortes decorrentes de intervenções policiais.  ] em 2022. Ainda que nesse ano a taxa de mortalidade tenha ficado em 23,4 por grupo de 100 mil habitantes, constata-se um  recuo de 2,2% em relação ao ano de 2021.    
 
 
-As categorias listadas na variável “causa jurídica da morte”são: acidente; homicídio; suicídio; morte natural e causa ignorada. Óbitos de causas naturais são assim classificados após a avaliação pericial e conclusão de que o óbito, apesar de ter entrado no Instituto como suspeito de ter sido decorrente de violência, é de origem clínica. Já a causa indeterminada ou “ignorada” corresponde aos óbitos por causas externas para os quais não foram recebidas informações sobre a intencionalidade da ação. Essa circunstância abriga óbitos por homicídios, tendo-se estimado, segundo o Atlas da Violência do IPEA 2021, que 73,9% do total de causas de intencionalidade ignorada correspondem a homicídios não classiﬁcados como tais. Quanto às mortes de causas naturais, elas não devem ser atestadas pelo IMLAR, contudo, alguns casos ainda aportam ao Instituto, especialmente se são suspeitos de terem decorrido de ato violento, sendo classiﬁcados como óbitos de causa natural após a exclusão da hipótese de estarem relacionados às causas externas pelos legistas.
 
-Considerando estes elementos, o Relatório está dividido em três seções. A Seção 13.1 trata da incidência de mortes por causas externas envolvendo a população adolescente e jovem (12 a 21 anos incompletos), no recorte temporal e espacial considerado. As perguntas que direcionaram as análises desta Seção foram:
+Reduzindo o recorte geográfico e direcionando a discussão para o estado de Minas Gerais, observa-se, porém, um aumento do número de homicídios no mesmo período: segundo informações do levantamento anual de mortes violentas intencionais (MVI) e taxa de elucidação, divulgadas pelo Observatório de Segurança Pública (SEJUSP-MG)^[MINAS GERAIS. Polícia Civil do Estado de Minas Gerais. Diretoria de Estatística e Análise Criminal da Superintendência de Informações e Inteligência Policial (DECDACrim/SIIP/PCMG). **Relatório Estatístico: Mortes Violentas Intencionais (MVI) e Taxa de Elucidação do 2º semestre de 2022. 2023.** Disponível em:
+<https://www.seguranca.mg.gov.br/images/2023/Outubro/RELATRIO%20-%20Art.%204-A%20da%20Lei%20n%2013772-2000%20-%202%20Semestre%20de%202022.pdf>], entre 2021 e 2022, nota-se que a taxa de homicídios no estado apresentou aumento de 3,93% por grupo de 100 mil habitantes. Em 2021, Minas Gerais contabilizou 2.699 homicídios e em 2022, esse número subiu para 2.805. Não obstante, nessa mesma categoria do mencionado relatório estatístico produzido pela Diretoria de Estatística e Análise Criminal da Superintendência de Informações e Inteligência Policial da Polícia Civil do Estado/MG (DECDACrim/SIIP/PCMG), Minas Gerais registrou queda na taxa das demais violências letais
+^[As demais violências categorizadas para fins do levantamento mencionado no relatório são: Latrocínio; Lesão corporal seguida de morte; Tortura seguida de morte, Maus-tratos seguido de morte; Infanticídio; Extorsão seguida de morte; Extorsão mediante sequestro seguida de morte; Abandono de incapaz com resultado morte; Estupro seguido de morte; Estupro de vulnerável seguido de morte.], sendo de 135 em 2021 e 107 em 2022.    
 
-* Dentre os adolescentes e jovens que morreram em 2021, por causas externas, em Belo Horizonte e em municípios limítrofes da RMBH, quantos morreram por homicídio?
-* Dentre os adolescentes e jovens que morreram em 2021, quantos tiveram óbito por causa ignorada?
+Apesar da redução apresentada nas análises acima descritas, alguns marcadores sociais persistem por meio das violências cunhadas pelas diferenças raciais, de gênero, geracionais e regionais que caracterizam quem são e onde vivem as vítimas da violência letal (Anuário,  2023). Nesse filtro, afeto ao perfil étnico-racial das vítimas, o Plano Juventude Negra Viva (PJNV)^[BRASIL. **Plano Juventude Negra Viva**. 2024. Disponível em: <https://www.gov.br/igualdaderacial/pt-br/assuntos/plano-juventude-negra-viva/2024_Plano_Juventude_Negra_Viva_.pdf>. Acesso em 31mai 2024] publicado em 2024 destaca o levantamento realizado pelo Fórum Brasileiro de Segurança Pública, a partir do monitoramento de dados sobre violência letal. Os dados citados apontam que, no decênio 2012-2022, a vitimização de pessoas negras por homicídio correspondeu a 72% do total de registros. Destaca-se, ainda, a diferença entre as taxas de homicídio entre negros e não-negros. No período considerado, observa-se uma queda de 26,5% em relação à incidência de homicídios entre pessoas brancas. Por outro lado, verifica-se que, no mesmo intervalo, os homicídios de pessoas negras aumentaram em 7,5%.    
 
-A Seção 13.2 trata da incidência da letalidade no público de adolescentes e jovens atendidos pelo Sistema Socioeducativo de Belo Horizonte.
+Neste panorama, agrega-se a análise realizada pelo Anuário Brasileiro de Segurança Pública (2022) e mencionada no PJNV 2024, tocante à aplicação do recorte etário e de gênero, nos números da violência letal contra a população negra:
 
-Na Seção 13.3, consideramos os dados referentes aos óbitos por homicídio de adolescentes e jovens de 12 a 21 anos incompletos, a partir do cruzamento com o banco de dados do CIA/Vara Infracional. A pergunta norteadora nesta seção é:
+\vspace{1cm}
 
-* Como se configura o fenômeno da letalidade por homicídio entre adolescentes e jovens que tiveram passagem pelo Sistema de Justiça/Sistema Socioeducativo?
+>Adolescentes negros são 87,8% das vítimas de homicídio no Brasil. Os dados apontam para uma necropolítica que vitimiza jovens negros em larga escala. Estes números são resultado de uma sociedade que se constrói a partir do racismo e que ainda necessita preservar o direito mais básico e de maior relevância para uma democracia, a vida de seu povo, sem perder de vista outras garantias para a manutenção das condições da dignidade humana. (BRASIL, 2024, p. 44)    
+
+\vspace{1cm}
+
+**Uma agenda mais que urgente**    
+
+
+Conforme apresentado no Atlas da Violência de 2023, a série histórica de dados indica uma redução da letalidade juvenil nos últimos anos. Contudo, trata-se de uma redução tímida considerando a precocidade das vidas perdidas, de modo que o genocídio da juventude negra - juvenicídio negro - permanece sendo um problema a ser enfrentado por nossa sociedade, pois se trata de uma tragédia humana.   
+
+
+Importante lembrar, também, que antes mesmo de constatado o óbito, esses jovens passaram por um processo de morte simbólica, como destaca o Atlas da Violência  de 2023:    
+
+\vspace{1cm}
+
+>A morte simbólica desses jovens veio muito antes da morte física. No caminho, perderam-se talentos não realizados, que deixaram de contribuir para a cidadania, para a cultura, os esportes e a ciência do país, entre outras atividades. No momento em que o Brasil passa pela maior transição demográfica de sua história, rumo ao envelhecimento da população, o descompromisso com a juventude está comprometendo o futuro da nação. (CERQUEIRA; BUENO, 2023, p.24)    
+
+\vspace{1cm}
+O  compromisso da agenda pública com o enfrentamento e a prevenção da letalidade da juventude brasileira, marcadamente negra e periférica, precisa ser contínuo e deve abarcar: ações preventivas; fomento de políticas públicas para adolescentes e jovens; expansão e fortalecimento das iniciativas já reconhecidas de prevenção às violências; oferta de políticas de aprendizagem, qualificação profissional e inserção no mercado de trabalho, que considerem as fragilidades postas no âmbito da educação, uma vez já constatada a defasagem e/ou evasão escolar; acesso à saúde, ao esporte, ao lazer e à cultura. Importante considerar, ainda, que a atuação das forças policiais se mantém pautada na seletividade das abordagens, de modo que a juventude negra e periférica segue sendo alvo nas operações policiais, o que enseja também o investimento público em mudanças profundas que impactem a cultura institucional.    
+
+Faz-se necessário, também, a constituição e o fortalecimento de espaços de controle social, e que estes consigam reunir os atores dos sistemas de justiça, segurança pública, de garantias de direitos e políticas públicas, que tenham a proteção à vida de adolescentes e jovens como uma pauta transversal e perene.    
+
+Nessa perspectiva, o Fórum Permanente do Sistema de Atendimento Socioeducativo de Belo Horizonte^[O Fórum Permanente do Sistema de Atendimento Socioeducativo de Belo Horizonte é um espaço de discussão e controle social criado para acompanhar a execução do Sistema Socioeducativo de Belo Horizonte, seus desdobramentos, demandas e impactos sociais. O Fórum busca promover ações e articulações que favoreçam uma política de atendimento humana, transparente e eficiente. Organiza-se por meio de comissões temáticas e reuniões plenárias periódicas. Disponível em: <https://forumsocioeducativobh.org/> Acesso em 31 mar 2023.], por meio da Comissão de Prevenção à Letalidade de Adolescentes e Jovens, vem desenvolvendo ações de sensibilização, mobilização e reconhecimento de diversos atores e iniciativas, com o objetivo de construir práticas de co-responsabilidade pela proteção à vida desse público. Sob esta ótica, a Comissão propõe, neste capítulo, a leitura da incidência da violência letal contra adolescentes e jovens no espaço-tempo do Sistema Socioeducativo, a partir do cruzamento de dados de homicídios de jovens ocorridos em determinado recorte temporal, em Belo Horizonte e municípios limítrofes, em interseção com o banco de informações do Centro Integrado de Atendimento ao Adolescente Autor de Ato Infracional de Belo Horizonte (CIA BH), a fim de identificar, dentre os(as) adolescentes e jovens vítimas de violência letal, aqueles(as) que, em algum momento, passaram pelo Sistema Socioeducativo.     
+
+A Comissão  de Prevenção  à Letalidade de Adolescentes e Jovens vem destacar, ainda, a importância do mapeamento de informações étnico-raciais entre as estatísticas de violência. Os dados desagregados por raça/cor auxiliam na realização de diagnósticos sociais, na construção de indicadores mais próximos da realidade de grupos racializados e na proposição de estratégias de prevenção à letalidade de adolescentes e jovens negros. Partindo da compreensão de que as pesquisas que trazem informações populacionais universalizadas acabam por compactuar com os processos de invisibilização de grupos historicamente vulnerabilizados e silenciados, os principais estudos sobre violência e letalidade no Brasil vem apresentando, cada vez mais, os dados desagregados por raça/cor. Esse movimento precisa ser replicado no campo das medidas socioeducativas e da promoção de direitos das crianças e adolescentes, de modo a fomentar o debate e a construção de políticas públicas para o enfrentamento e a prevenção do genocídio da juventude negra no Brasil.    
+
+A exemplo de anos anteriores, mais uma vez, este relatório aponta o quesito raça como um marcador com taxas de mortalidade elevadas e sem uma perspectiva de redução. Em qualquer categoria analisada, tem-se o percentual de pretos e pardos como maioria ao se tratar de letalidade. Tal constatação insere a pauta da racialização da letalidade juvenil na agenda pública, de forma urgente e imprescindível, a fim de entender, combater e superar as profundas desigualdades raciais no país.    
+
+Ademais, racializar a discussão sobre a letalidade - assim como o encarceramento - de jovens negros, aponta para o reconhecimento e enfrentamento do racismo estrutural, garante visibilidade para as disparidades socioeconômicas, estimula o debate público e responsabiliza as instituições atinentes, bem como estimula a formulação de políticas de combate mais assertivas.    
+
+Na mesma perspectiva, visando lançar luzes sobre o racismo estrutural e institucional que permeia o campo da socioeducação, o Fórum Permanente do Sistema de Atendimento Socioeducativo de Belo Horizonte elegeu como tema transversal para o ano de 2024 o enfrentamento ao racismo e a promoção de práticas antirracistas. Além disso, instituiu a Comissão de Práticas Antirracistas e vem promovendo espaços de discussão, desconstrução e construções de extrema relevância para a garantia de direitos dos(as) adolescentes e jovens negros e negras que transitam pelo Sistema de Justiça Infracional, pela rede de proteção e pelas medidas socioeducativas em Belo Horizonte.    
+
+
+**Nota metodológica**    
+
+
+Este capítulo parte da análise dos dados de letalidade de adolescentes e jovens por causas violentas constantes nos laudos periciais necroscópicos e em outros documentos relevantes, os quais são sistematizados em banco de dados e disponibilizados pelo Instituto Médico Legal Dr. André Roquette / Polícia Civil do Estado de Minas Gerais (IMLAR). O fortalecimento da parceria entre a Comissão de Prevenção à Letalidade de Adolescentes e Jovens e o IMLAR realçou o grande potencial no compartilhamento de dados periciais com outros órgãos, demonstrando importante impacto social por trazer informações antes indisponíveis.    
+
+A deficiência de informação sobre dados de violência no Brasil tem como limitante crítico a fragilidade de integração dos diversos sistemas de informação (saúde, justiça, segurança e afins) dos órgãos que tratam do tema^[Bordoni PHC, Bordoni LS, Silva JM, Drumond EF. Utilização do método de captura-recaptura de casos para a melhoria do registro dos acidentes de trabalho fatais em Belo Horizonte, Minas Gerais, 2011. **Epidemiol Serv Saúde**. 2016; 25(1):85-94. Disponível em: <https://www.scielo.br/j/ress/a/CDgCWJCYRB7cywGTQzxFYtC/?lang=pt>. Rodrigues AB, Santana VS. Acidentes de trabalho fatais em Palmas, Tocantins, Brasil: oportunidades perdidas de informação. **Rev Bras Saúde Ocup**. 2019; 44:e8. Disponível em: <http://dx.doi.org/10.1590/2317-6369000017817>.]. O emprego do linkage apresenta-se como estratégia para a qualificação de informações cruciais, de diferentes sistemas de dados, para a compreensão de homicídios. A iniciativa permite administrar as limitações nos registros para a melhoria da completude de variáveis comuns e alcance de análises mais acuradas sobre as mortes. O Atlas da Violência 2023 revela a série de “homicídios ocultos”^[Termo utilizado pelos autores.], erroneamente classificados como Mortes Violentas por Causas Indeterminadas (neste relatório descritas como óbitos por causa ignorada), demonstrando a relevância da integração de informações de diferentes bases para o refinamento das estatísticas e observância de variações para avaliação de políticas públicas. Diante disso, cabe destacar a suplementação de fontes de dados como estratégia fundamental para a orientação das políticas públicas de prevenção à letalidade, promoção e proteção à vida e controle de homicídios.    
+
+Feito esse destaque sobre a importância da integração entre os sistemas e dados de diversos atores afetos ao tema das violências, cumpre ressaltar que, desde o ano de 2021, a Comissão de Prevenção à Letalidade de Adolescentes e Jovens, em parceria com a Vara Infracional da Infância e Juventude de Belo Horizonte e o IMLAR vem contribuindo com o Relatório Estatístico do CIA-BH, por meio do capítulo que analisa a incidência do fenômeno da letalidade juvenil junto ao público atendido pelo Sistema Socioeducativo de Belo Horizonte.    
+
+Ressaltamos que a inclusão do capítulo sobre letalidade juvenil no Relatório Estatístico Anual do CIA BH constitui um passo de suma relevância para a política de atendimento socioeducativo, permitindo a construção de uma série histórica que favorece o monitoramento do fenômeno e orienta a construção de ações de prevenção à letalidade e promoção da vida de adolescentes e jovens atendidos(as), fomentando reflexões sobre o que mantém os(as) nossos(as) jovens vivos(as).    
+
+No presente relatório, apresentam-se dados sobre adolescentes e jovens vítimas de homicídio em 2022, em Belo Horizonte e municípios limítrofes da Região Metropolitana de Belo Horizonte - RMBH. A seleção dos municípios foi baseada na disponibilidade de dados do IMLAR, considerando os municípios que referenciam os óbitos de causas violentas ou suspeitas para a avaliação pericial na referida Unidade Policial^[No recorte espacial deste Relatório, foram considerados os seguintes  municípios limítrofes da Região Metropolitana de Belo Horizonte: Contagem, Nova Lima, Ribeirão das Neves, Sabará, Santa Luzia e Vespasiano.  Embora os municípios de Ibirité e Brumadinho sejam também limítrofes a Belo Horizonte, não integraram as análises, pois não são referenciados junto ao IML-AR, mas à unidade do IML em Betim. cuja base de dados não se encontra atualmente disponível.].    
+
+O recorte espacial - Belo Horizonte e municípios limítrofes da RMBH - se explica pela observação da incidência de óbitos por causas violentas ocorridos em municípios vizinhos ao local de residência das vítimas. A ampliação dessa categoria permitiu verificar como essa variável se apresenta no universo de adolescentes e jovens que são atendidos pelo CIA BH. Nessa seleção, a Comissão considerou, ainda, os municípios que contam com políticas públicas voltadas à proteção social de adolescentes e jovens, o que favorece o acesso a dados qualitativos sobre o fenômeno do homicídio nesse recorte etário, como o Programa de Proteção à Criança e Adolescente Ameaçados de Morte - PPCAAM, vinculado à Subsecretaria de Direitos Humanos (SEDESE)^[O PPCAAM foi criado em 2003 e instituído pelo Decreto 6.231/2007 e foi posteriormente regulamentado pelo Decreto nº 9.579, de 22 de novembro de 2018, abrangendo os artigos 109 a 125. A iniciativa visa prevenir a letalidade infanto-juvenil  e a preservação da vida de crianças e adolescentes expostos a iminente ameaça de morte, garantindo proteção integral e reintegração segura na sociedade em novos territórios.]; o Programa de Controle de Homicídios - Fica Vivo!
+^[<http://www.seguranca.mg.gov.br/2013-07-09-19-17-59/2020-05-12-22-29-51/programas-e-acoes>]e o Programa de Acompanhamento ao Egresso das Medidas Socioeducativas de Semiliberdade e Internação em Minas Gerais - Se Liga^[<http://www.seguranca.mg.gov.br/component/gmg/page/3074-programa-se-liga>], que compõem a Diretoria de Políticas de Prevenção Social à Criminalidade para a Juventude da Subsecretaria de Prevenção Social à Criminalidade (SUPEC)^[<http://www.seguranca.mg.gov.br/2013-07-09-19-17-59/a-prevencao>] vinculada à Secretaria de Estado de Justiça e Segurança Pública de Minas Gerais (SEJUSP).    
+
+Nas análises realizadas, foi considerado o recorte de 12 a 21 anos incompletos, que corresponde à faixa etária atendida pelo Sistema Socioeducativo, conforme estipulado pelas normativas legais (Estatuto da Criança e do Adolescente - ECA^[Lei Nº 8.069, de 13 de julho de 1990. **Estatuto da Criança e do Adolescentes - ECA**. Disponível em: <http://www.planalto.gov.br/ccivil_03/leis/l8069.htm>] e o Sistema Nacional de Atendimento Socioeducativo - SINASE^[Lei Nº 12.594, de 18 de janeiro de 2012. **Sistema Nacional de Atendimento Socioeducativo - SINASE**. Disponível em: <http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12594.htm>]). Esse recorte contempla, também, uma parcela da população - indivíduos com idade de 15 a 21 anos - que o Estatuto da Juventude (Lei 12.852/2013) estabelece como jovens (15 e 29 anos) . Nesse sentido, quando não conflitar com as normas de proteção integral do adolescente previstas no ECA, aplica-se também o Estatuto da Juventude como um orientador de análise e formulação de políticas públicas.    
+
+Em relação aos dados do IMLAR sobre mortes violentas, as análises deste capítulo se basearam na categoria “Causa Jurídica da Morte”, que representa a circunstância de óbito não natural (intencionalidade) constante no campo 49 da Declaração de Óbito. Tal informação é obtida a partir de registros preliminares referentes ao óbito, repassados ao Setor de Serviço Social na entrada do corpo no IMLAR, sendo tal setor o responsável pela compilação em sistema interno. Não corresponde, portanto, ao resultado da apuração policial, o que se dá somente após a conclusão do inquérito.    
+
+As categorias listadas na variável “causa jurídica da morte” são: acidente; homicídio; suicídio; morte natural e causa ignorada. Óbitos de causas naturais são assim classificados após a avaliação pericial e conclusão de que o óbito, apesar de ter entrado no Instituto como suspeito de ter sido decorrente de violência, é de origem clínica. Tais óbitos não devem ser atestados pelo IMLAR, contudo, alguns casos ainda aportam no Instituto, especialmente se houver suspeita de que decorrem de ato violento, sendo classificados como óbitos de causa natural após a exclusão da hipótese de estarem relacionados às causas externas pelos legistas.    
+
+Já a causa indeterminada ou “ignorada” corresponde aos óbitos por causas externas para os quais não foram recebidas informações sobre a intencionalidade da ação. O Atlas da Violência de 2023 apresentou avanços no campo da melhor apuração e devida sistematização dos “homicídios ocultos”. Trata-se de uma metodologia de análise dos microdados de óbitos, baseada em modelos estatísticos específicos, que vem sendo desenvolvida para que a qualificação e a análise da prevalência de homicídios tenham a vinculação mais assertiva sobre a causa.    
+
+\vspace{1cm}
+
+>Com base na metodologia apresentada, estimou-se em 49.413 o total de homicídios classificados como Mortes Violentas por Causa Indeterminada (MVCIs) que teriam condições de ter sua intencionalidade estabelecida. Ou seja, entre 2011 e 2021, o Estado foi incapaz de identificar como homicídio parcela que corresponde a 39,1% dos óbitos tratados como MVCI. (CERQUEIRA; BUENO, p.15, 2023)    
+
+\vspace{1cm}
+
+A partir do exposto, o capítulo está dividido em três seções. A seção 14.1 tratará da incidência de mortes por causas externas envolvendo a população adolescente e jovem (12 a 21 anos incompletos), no recorte temporal e espacial considerado. As perguntas que direcionaram as análises dessa seção foram: a) dentre os adolescentes e jovens que morreram por causas externas em 2022, em Belo Horizonte e em municípios limítrofes da RMBH, quantos morreram por homicídio? b) e quantos tiveram óbito por causa ignorada?    
+
+
+A seção 14.2 tratará da incidência da violência letal de adolescentes e jovens atendidos(as) pelo Sistema Socioeducativo de Belo Horizonte. E, por fim, na seção 14.3, serão considerados os dados referentes aos óbitos por homicídio de adolescentes e jovens de 12 a 21 anos incompletos, a partir do cruzamento com o banco de dados do CIA-BH/Vara Infracional. A pergunta norteadora nesta seção é: como se configura o fenômeno da letalidade por homicídio entre adolescentes e jovens que tiveram passagem pelo Sistema de Justiça/Sistema Socioeducativo?    
 
 \newpage
 
-## Letalidade por causas externas - adolescentes e jovens, Belo Horizonte e municípios limítrofes em `r format(Sys.Date()-365*2, "%Y")`
+## Letalidade de adolescentes e jovens por causas externas em Belo Horizonte e municípios limítrofes em `r format(Sys.Date()-365*2, "%Y")`
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[80,].png')
 ```
 
-Em comparação ao levantamento realizado no relatório anterior^[MINAS GERAIS. Relatório Estatístico: Vara Infracional Da Infância e da Juventude. Tribunal de Justiça do Estado de Minas Gerais. Belo Horizonte: 2022. Disponível em <https://www.tjmg.jus.br/data/files/C5/C1/5B/F2/515F28108B95BD286ECB08A8/relatorio_ciabh_novo_2021%20_1_.pdf>. Último acesso em 04 abr 2023.], observa-se uma redução no número absoluto de óbitos por causas externas ocorridos entre adolescentes e jovens (12 a 21 anos incompletos), em Belo Horizonte e municípios limítrofes: em 2020, foram registrados 262 óbitos, ao passo que em 2021, 208 adolescentes e jovens morreram por causas externas, o que corresponde a uma redução de 20,6%. Os dados apontam que o homicídio constituiu, em 2021, a principal causa de morte entre adolescentes e jovens, uma vez que 39,90% dos óbitos ocorridos no ano avaliado decorreram dessa circunstância. Observa-se que o percentual de óbitos categorizados como “causa ignorada” correspondeu a 33,17% do total, o que representa uma redução em relação ao constatado em 2020 (51,53%). Embora o número de óbitos por causa ignorada ainda seja expressivo, ressalta-se que essa redução representa um importante avanço em relação à qualidade dos registros sobre violência, o que contribui para a qualificação das análises e do monitoramento do fenômeno da letalidade.
+O número absoluto de óbitos por causas externas ocorridos entre adolescentes e jovens (12 a 21 anos incompletos), em Belo Horizonte e municípios limítrofes, manteve a trajetória de queda observada no comparativo entre 2020 e 2021 demonstrada no relatório anterior^[MINAS GERAIS. **Relatório Estatístico**: Vara Infracional Da Infância e da Juventude. Tribunal de Justiça do Estado de Minas Gerais. Belo Horizonte: 2022. Disponível em: <https://www.tjmg.jus.br/data/files/C5/C1/5B/F2/515F28108B95BD286ECB08A8/relatorio_ciabh_novo_2021%20_1_.pdf>. Último acesso em 04 abr 2024.]. Em 2021, foram registrados 208 óbitos. Esse contingente sofreu redução de 12,01% em 2022, quando 183 óbitos de adolescentes e jovens foram registrados.    
+
+Em 2022, 43,17% do total das mortes de adolescentes e jovens foi categorizada como homicídio, o que evidencia que esta permanece como principal causa de morte na faixa etária pesquisada. Segundo o levantamento, houve um aumento no número de acidentes no período, saltando de 17,79%, em 2021, para 24,04% do total das mortes em 2022. Os dados mostram ainda uma diminuição no percentual de óbitos registrados como “causa ignorada”, que reduziram de 69, em 2021, para 38, em 2022, o que aponta para esforços empreendidos para a qualificação dos processos de trabalho das entidades envolvidas na produção das informações sobre óbitos.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[82,].png')
@@ -75,9 +116,9 @@ knitr::include_graphics('imagens/GRAFICO[82,].png')
 knitr::include_graphics('imagens/TABELA[81,].png')
 ```
 
-Os dados apontam que, em 2021, foram registrados 592 homicídios em Belo Horizonte e municípios limítrofes da RMBH, número maior do que o observado em 2020 (472) (aumento de 25,4%). A distribuição percentual entre as faixas etárias se aproxima do levantamento realizado no ano anterior, concentrando-se na faixa etária com 29 anos ou mais (49,66%).
-Embora o número absoluto de homicídios entre adolescentes e jovens (entre 12 e 20 anos) tenha se mantido próximo ao observado em 2020 (79), observa-se que entre jovens de 21 a 29 anos houve um aumento de 36,1% em 2021, o que aponta para a importância do investimento em políticas públicas voltadas para essa faixa etária. 
-Conforme apontado no Atlas da Violência 2021, este agravo é a principal causa de morte entre jovens. Do total de homicídios registrados no Brasil em 2019, 51,3% ocorreram na faixa etária entre 15 e 29 anos. Os dados desta seção se aproximam desse quadro. Em 2021, 49,15% das vítimas de homicídios ocorridos em Belo Horizonte e municípios limítrofes da RMBH eram adolescentes e jovens entre 12 e 29 anos. 
+Conforme informações do IMLAR, em 2022, foram contabilizados 576 homicídios em Belo Horizonte e municípios limítrofes da RMBH, o que representa uma redução de 2,7% em relação aos 592 casos registrados em 2021. A distribuição percentual entre as faixas etárias manteve-se semelhante ao levantamento anterior, concentrando-se principalmente na faixa etária de 29 anos ou mais (44,62%). Destaca-se, como diferencial em relação ao ano anterior, o aumento na concentração de homicídios entre crianças de 0 a 11 anos, passando de 7 casos em 2021 para 16 casos em 2022, o que corresponde a um aumento de 85,7%. Também houve um aumento na concentração de homicídios entre jovens de 21 a 29 anos, com 208 casos em 2021 e 224 casos em 2022, refletindo um aumento de 7,7%.    
+
+Como já destacado, o Anuário Brasileiro de Segurança Pública de 2023 aponta que, em 2022, a violência foi a principal causa de morte entre os jovens no Brasil, sendo que 50,3% das vítimas de mortes violentas intencionais (MVI) eram adolescentes e jovens com idade entre 12 e 29 anos (p. 32). Os dados contidos nesta seção corroboram tal realidade. Em 2022, 52,60% (303) das vítimas de homicídios em Belo Horizonte e municípios adjacentes da RMBH eram adolescentes e jovens entre 12 e 29 anos, representando um aumento de 1,06 pontos percentuais em relação a 2021, quando esse grupo correspondia a 49,15% (291). Considerando o número absoluto de crianças, adolescentes e jovens assassinados em 2022 (319), o percentual chega a 55,38% do total de óbitos por homicídio. Esses dados evidenciam a necessidade de maior investimento em políticas públicas direcionadas para essas faixas etárias.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[83,].png')
@@ -86,15 +127,15 @@ knitr::include_graphics('imagens/GRAFICO[83,].png')
 
 ### Incidência de óbitos por causa ignorada em `r format(Sys.Date()-365*2, "%Y")`, por faixa etária
 
-\vspace{2cm}
+\vspace{1cm}
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[82,].png')
 ```
 
-Em 2021, foram registrados 1585 óbitos por causas externas em Belo Horizonte e municípios limítrofes, categorizados com causalidade ignorada. Observa-se uma redução do número absoluto de registros de mortes violentas por causa ignorada, que passou de 1921, em 2020, para 1585 em 2021, o que corresponde a uma redução de 17,49%.
+O número absoluto de óbitos por causa ignorada ocorridos em Belo Horizonte e municípios limítrofes manteve a trajetória de queda observada no comparativo entre 2020 e 2021 demonstrada no relatório anterior. Em 2021 foram registrados 1585 óbitos. Esse contingente sofreu redução de 4,79% em relação a 2022, quando 1509 óbitos foram registrados. Ainda que a categoria apresente redução, o que aponta para uma melhora na produção de dados sobre óbitos, a imprecisão na definição da causa da morte impacta na definição de políticas públicas de prevenção e enfrentamento à letalidade de adolescentes e jovens.    
 
-Por outro lado, os dados apontam que este número ainda prevalece em relação ao número de óbitos registrados como homicídio no mesmo período: somando-se as duas categorizações (homicídio e mortes violentas por causa ignorada), observa-se que, do total de registros, 72,8% são categorizados com causalidade ignorada, e 27,19% como homicídio (ver  Tabela 58). No entanto, essa diferença não se replica em todas as faixas etárias: em 2021, nas faixas etárias de 12 a 20 anos e de 21 a 29 anos, o número de registros de homicídio prevalece sobre o de mortes violentas por causa ignorada.
+Em relação ao total de óbitos categorizados como “causa ignorada” em 2022, observa-se que 12,30% corresponde à faixa etária de 12 a 29 anos. Importante destacar que a intencionalidade da morte modifica-se conforme faixa etária, com predomínio de óbitos por homicídios entre os adolescentes e jovens de 12 a 29 anos (43,17% em 2022, conforme tabela 72), o que indica a vulnerabilidade e exposição às violências relacionadas a trajetórias de envolvimento com a criminalidade, entre outros eventos negativos. O fato desses óbitos serem previsíveis e preveníveis evidencia a importância da qualificação dos dados sobre óbitos por causas externas para fundamentar medidas de redução das mortes, promoção da vida e da segurança. 
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[84,].png')
@@ -108,7 +149,9 @@ knitr::include_graphics('imagens/GRAFICO[84,].png')
 knitr::include_graphics('imagens/TABELA[83,].png')
 ```
 
-Na análise da série histórica entre os anos de 2018 e 2021, os dados apontam que os óbitos por homicídio de adolescentes e jovens apresentam uma tendência de redução até 2020, com pequeno aumento em 2021. Conforme o gráfico abaixo, nas faixas etárias de 13 a 16, e de 18 a 19 anos, o número de homicídios registrados em 2021 foi maior do que o ano anterior.
+Na análise da série histórica entre os anos de 2018 e 2022, os dados indicam uma tendência de redução nos óbitos por homicídio de adolescentes e jovens até 2020, seguida por um pequeno aumento em 2021 e um retorno aos níveis observados em 2020 no ano de 2022, conforme ilustrado no gráfico abaixo.    
+
+Apesar dos dados apontarem para uma tendência de manutenção dos patamares relacionados aos óbitos por homicídios de adolescentes e jovens de 12 a 20 anos, como apontado no gráfico, nota-se que houve aumento na faixa etária entre 17 e 19 anos, em relação ao ano anterior.
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024, fig.width=10,fig.height=11}
@@ -123,7 +166,7 @@ knitr::include_graphics('imagens/GRAFICO[85,].png')
 knitr::include_graphics('imagens/TABELA[84,].png')
 ```
 
-Em relação aos registros de mortes violentas de adolescentes e jovens por causa ignorada, observa-se uma tendência de aumento no período de 2018-2020, com queda de 48% em 2021, se comparado ao ano anterior. Em 2021, o maior número de registros de óbitos por causa ignorada se encontra nas faixas etárias de 19 e 20 anos, onde se concentram 55% dos casos registrados nessa categoria. 
+Em relação aos registros de óbitos de adolescentes e jovens por causa ignorada, observa-se uma tendência de aumento no período de 2018 a 2020, com queda de 48% em 2021, se comparado ao ano anterior. No comparativo entre os anos de 2021 e 2022, houve redução de 44,92%. Em 2022, o maior número de registros de óbitos por causa ignorada se encontra nas faixas etárias de 18 e 20 anos, onde se concentram 47,36% dos casos registrados nessa categoria.  
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
@@ -131,14 +174,22 @@ knitr::include_graphics('imagens/GRAFICO[86,].png')
 ```
 \newpage
 
-### Sexo dos adolescentes e jovens vitimados por homicídio e causa ignorada
+### Sexo dos(as) adolescentes e jovens vitimados(as) por homicídio e causa ignorada
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[85,].png')
 ```
 
-\textcolor{red}{Escrever comentários aqui}    
+Entre os(as) adolescentes e jovens vítimas de morte violenta em 2022 (homicídio e causa ignorada), somam-se 117 óbitos, sendo 106 do sexo masculino (90,6% do total de adolescentes e jovens vitimados por homicídio e causa ignorada) e 11 do sexo feminino (9,4%).    
+
+Em relação aos homicídios, houve o registro de 76 óbitos do sexo masculino (96,2% do total de homicídios de adolescentes e jovens) e 03 do sexo feminino (3,8%).    
+
+Referente às mortes categorizadas com causalidade ignorada, foram registrados 30 óbitos do sexo masculino (78,94% do total de óbitos por causa ignorada) e 08 do sexo feminino (21,05%).    
+
+Tendo em vista que a proporção entre homens e mulheres na população juvenil é praticamente igual, tais dados reforçam a prevalência de mortes violentas intencionais entre adolescentes e jovens do sexo masculino, como já demonstrado no Atlas da Violência de 2023.    
+
+Ressalte-se que, assim como exposto no Relatório Estatístico da Vara Infracional da Infância e Juventude de BH de 2022, entre adolescentes e jovens do sexo feminino, mantém-se maior número de mortes por causa ignorada, quando comparadas com o número de homicídios (entre 11 óbitos, 72,72% foram categorizados como causalidade ignorada), conforme ilustra o gráfico a seguir.
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
@@ -153,7 +204,11 @@ knitr::include_graphics('imagens/GRAFICO[87,].png')
 knitr::include_graphics('imagens/TABELA[86,].png')
 ```
 
-\textcolor{red}{Escrever comentários aqui}
+Entre os(as) 117 adolescentes e jovens vitimados(as) por homicídio e causa ignorada em Belo Horizonte e municípios limítrofes no ano de 2022, 94 eram negros(as)^[A categorização dos dados de raça/cor fornecidos pelo IMLAR é realizada por heteroidentificação.] (80,34%). Considerando apenas os homicídios, que totalizaram 79, a Tabela 78 mostra que 66 adolescentes/jovens vitimados(as) eram negros(as) (83,54%) e, dentre os 38 óbitos categorizados com causa ignorada, 28 foram de adolescentes/jovens negros(as) (73,68%). Cabe esclarecer que a categoria “ignorado/prejudicado” refere-se a casos em que se tornou impossível a identificação da característica étnico-racial.    
+
+Como demonstrado nos relatórios dos anos anteriores, também em 2022 constatou-se a concentração elevada de homicídios e mortes por causa ignorada entre adolescentes e jovens negros e negras (soma de pretos e pardos, segundo a classificação do IBGE). Apesar, portanto, da redução do número de óbitos em geral, mantém-se a dinâmica do genocídio da juventude negra, com a preponderância dos corpos negros dentre os(as) adolescentes e jovens vítimas de mortes violentas.    
+
+Este quadro corrobora o recorte étnico-racial da violência letal contra a juventude no país, o que vem sendo demonstrado reiteradamente pelo Atlas da Violência. No cenário nacional, em 2021, o registro de homicídios de pessoas negras liderou o ranking de mortes violentas, respondendo por 77,1% dos mortos, com uma taxa de 31,0 homicídios para cada 100 mil habitantes desse grupo populacional, contra a taxa de 10,8 para pessoas não negras (soma de amarelos, brancos e indígenas) (CERQUEIRA; BUENO, 2023, p.53).
 
 
 
@@ -163,7 +218,7 @@ knitr::include_graphics('imagens/GRAFICO[88,].png')
 ```
 \newpage
 
-### Comparativo entre número de óbitos por homicídio e causa ignorada entre adolescentes e jovens de 12 a 21 anos incompletos - 2018 a `r format(Sys.Date()-365*2, "%Y")`
+### Comparativo entre número de óbitos por homicídio e causa ignorada entre adolescentes e jovens de 12 a 21 anos incompletos - no período de 2018 a `r format(Sys.Date()-365*2, "%Y")`
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
@@ -172,28 +227,38 @@ knitr::include_graphics('imagens/GRAFICO[89,].png')
 
 \vspace{2cm}
 
-O gráfico acima aponta que a tendência de redução do número total de óbitos por causas externas entre adolescentes e jovens se mantém em 2021. Observa-se que, nos anos de 2019 e 2020, houve um número maior de registros de mortes violentas por causa ignorada, entre adolescentes e jovens, se comparado ao número de homicídios nessa faixa etária. Em 2021, observa-se o inverso, conforme já apontado em seções anteriores deste Relatório, com o número de homicídios superando o número de registros por causa ignorada. Isso pode sugerir, de forma alinhada com a hipótese levantada no Atlas da Violência 2021, que registros de homicídios poderiam estar “perdidos” dentre as causas de morte de intenção indeterminada e, com a melhoria na qualificação dessa informação, houve o “resgate” desses casos. Os dados ora apresentados podem sugerir, portanto, não um aumento real da violência, mas um possível reflexo da melhoria da informação e da qualidade de dados. O acompanhamento da série histórica poderá, no futuro, trazer maiores explicações para o fenômeno.
+O gráfico acima aponta que a tendência de redução do número total de óbitos por causas externas entre adolescentes e jovens se manteve em 2022. Em 2021, o número total de registros de óbitos por homicídio e causa ignorada nessa faixa etária foi 152, ao passo que, em 2022, foi reduzido para 117.    
+
+Observa-se que, nos anos de 2019 e 2020, houve um número maior de registros de mortes violentas por causa ignorada, entre adolescentes e jovens, se comparado ao número de homicídios nessa faixa etária. Em 2021 e 2022, nota-se o inverso, conforme já apontado anteriormente, com o número de homicídios superando o número de registros por causa ignorada.    
+
+A redução expressiva da parcela de óbitos por causa ignorada em 2022, bem como a diminuição deste indicador nos últimos anos, pode sugerir uma maior preocupação com a qualificação dos dados, assim como a melhoria do investimento técnico, culminando em análises mais assertivas acerca dos fenômenos violentos letais em Belo Horizonte e municípios limítrofes. Este cenário de evolução da clareza sobre a intencionalidade dos óbitos revela uma tendência positiva para os diagnósticos, formulações e potencialização de políticas públicas, favorecendo intervenções em aspectos sensíveis, sobretudo nos relacionados às juventudes e ao Sistema Socioeducativo.
 
 \newpage
 
 ## Letalidade de adolescentes e jovens atendidos pelo Sistema Socioeducativo de Belo Horizonte
-\vspace{2cm}
+\vspace{1cm}
 ### Óbitos por causas violentas e Passagem CIABH
 
-\vspace{2cm}
+\vspace{1cm}
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[90,].png')
 ```
 
 \vspace{2cm}
 
-Nesta seção, será avaliado o cruzamento de dados sobre letalidade com a variável “passagem pelo Sistema Socioeducativo”. Os dados acima apontam que 152 adolescentes e jovens foram vítimas de morte por causas violentas em 2021 ( 83 por homicídio e 69 por causa ignorada).  Deste total,  79 (51%) tiveram passagem pelo Centro Integrado de Atendimento ao Adolescente Autor de Ato Infracional em algum momento de sua vida.  
-Ressalta-se que, entre aqueles que tiveram passagem pelo CIABH,  o número de homicídios (51) supera o de óbitos por causa ignorada (28), observando-se o inverso entre aqueles que não apresentaram passagem pelo Sistema. 
-De acordo com o Gráfico 69, dos 83 adolescentes e jovens vítimas de homicídio em 2021, em Belo Horizonte e municípios limítrofes da RMBH, 61,4%  passaram pelo Sistema Socioeducativo.
+Nesta seção, faremos o cruzamento de dados de letalidade de adolescentes e jovens com a variável "passagem pelo Sistema Socioeducativo". Os dados acima apontam que 117 adolescentes e jovens foram vítimas de mortes violentas em 2022, sendo 79 por homicídio e 38 por causa ignorada.    
+
+Dentre estes 117 adolescentes e jovens, 45 (38,46%) tiveram passagem pelo CIA BH ao menos uma vez ao longo da vida. Em relação à causalidade do óbito, verifica-se a prevalência de homicídios: desses 45 adolescentes e jovens que passaram pelo Sistema Socioeducativo, 37 foram vitimados por homicídio e 08 por causa ignorada.    
+
+Os dados indicam que, entre os 79 adolescentes e jovens vítimas de homicídio em 2022, em Belo Horizonte e municípios limítrofes, a maior parte não apresentou passagens pelo CIA, ao contrário do observado no ano anterior: em 2021, 61,4% dos adolescentes vítimas de homicídio tinham passado pelo Sistema Socioeducativo em algum momento de suas vidas, ao passo que, em 2022, esse percentual caiu para 47%.    
+
+Este quadro remete à importância de pensar a rede de proteção para além do Sistema Socioeducativo, com implicações para outros atores do território de vivência dos(as) adolescentes e da rede de serviços na oferta de proteção desses sujeitos.    
+
+Ressaltamos, ainda, a importância de estudos complementares que possibilitem mapear o histórico de eventual inserção dos(as) adolescentes vítimas de homicídio em outros serviços da rede de proteção, especialmente se considerarmos o contexto pandêmico que incidiu sobre os anos de 2020 a 2022, com impactos significativos sobre a situação de vulnerabilidade social deste público e de suas famílias.
 
 \newpage
 
-### Óbitos por homicídio e passagem CIABH, Belo Horizonte e municípios limítrofes, por faixa etária
+### Óbitos por homicídio e passagem pelo CIA-BH, por faixa etária
 
 \vspace{2cm}
 
@@ -203,11 +268,15 @@ knitr::include_graphics('imagens/GRAFICO[91,].png')
 
 \vspace{2cm}
 
-Entre os adolescentes e jovens vítimas de homicídio que passaram pelo CIABH, observa-se um crescimento do número de óbitos a partir dos 16 anos, sendo que a maior parte dos homicídios ocorreu aos 19 anos de idade. Na faixa etária de 13 a 15 anos, foram registrados 08 adolescentes vítimas de homicídio em 2021, dos quais 03 passaram pelo Sistema Socioeducativo.
+Entre os adolescentes e jovens vítimas de homicídio que tiveram passagem pelo CIA BH, observa-se que há registros de óbitos a partir de 16 anos, com maior incidência na faixa etária de 19 anos.    
+
+Por outro lado, entre aqueles que não passaram pelo Sistema Socioeducativo, os dados apontam registros de óbitos por homicídio em faixa etária mais precoce -  a partir de 12 anos, com aumento progressivo entre 17 e 19 anos.    
+
+Na faixa etária de 12 a 16 anos, foram registrados 13 adolescentes vítimas de homicídio em 2022. Destes, 03 passaram pelo Sistema Socioeducativo. Esse dado reforça a importância do fortalecimento da rede de proteção, com ações preventivas, junto a esses(as)  adolescentes, que estão no início dessa fase da vida (12 a 15 anos). 
 
 \newpage
 
-### Óbitos por causa ignorada e passagem CIABH, Belo Horizonte e municípios limítrofes, por faixa etária
+### Óbitos por causa ignorada e passagem pelo CIA-BH, por faixa etária
 
 \vspace{2cm}
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
@@ -216,36 +285,42 @@ knitr::include_graphics('imagens/GRAFICO[92,].png')
 
 \vspace{2cm}
 
-Entre os adolescentes e jovens vítimas de morte violenta por causa ignorada em 2021, houve o registro de 05 óbitos entre 13 e 15 anos, dos quais somente 01 apresentou passagem pelo CIABH. Com exceção da faixa etária de 17 anos, em todas as demais observa-se que a maioria dos adolescentes e  jovens que morreram nessa circunstância não passou pelo Sistema Socioeducativo. Entre os que não tiveram passagem, as faixas etárias de 19 e 20 anos concentram os maiores índices de morte por causa ignorada registrados.
+Os dados apontam que, em todas as faixas etárias, a maior parte dos adolescentes e jovens vítimas de morte violenta por causa ignorada não apresentou passagem pelo Sistema Socioeducativo. A maior incidência de óbitos nessas circunstâncias ocorreu nas faixas etárias de 17, 18 e 20 anos.    
+
+Entre 12 e 16 anos, houve o registro de 10 óbitos, dos quais somente 02 apresentaram passagem pelo CIA-BH em algum momento da vida. Conclui-se, assim, que os dados sobre a letalidade de adolescentes e jovens precisam ser pautados por diversos atores da rede de atendimento, para além do Sistema Socioeducativo. 
 
 \newpage
 
-## Adolescentes e Jovens vítimas de homicídio com passagem pelo CIABH
+## Adolescentes e jovens vítimas de homicídio com passagem pelo CIA-BH
 
-As seções anteriores apresentaram comparativos entre os dados sobre mortes violentas de adolescentes e jovens por homicídio e causa ignorada. A partir da Seção 13.3, serão analisadas as configurações do fenômeno da letalidade entre adolescentes e jovens vítimas de homicídio em 2021, que apresentaram passagem pelo Sistema Socioeducativo em algum momento de sua vida. Será abordada a distribuição dos dados por sexo, raça/cor e localidade do óbito. Em seguida, serão apresentadas análises sobre a dimensão da temporalidade e, por fim, sobre as principais medidas socioeducativas e protetivas aplicadas aos adolescentes durante sua trajetória no Sistema Socioeducativo. 
+As seções anteriores apresentaram comparativos entre dados sobre violência letal de adolescentes e jovens por homicídio e causa ignorada. A partir desta seção, serão analisadas as configurações do fenômeno da letalidade por homicídio, especificamente entre adolescentes e jovens que apresentaram passagem pelo Sistema Socioeducativo em algum momento de suas vidas. Será abordada a distribuição dos dados por sexo, raça/cor e localidade do óbito. Em seguida, serão apresentadas análises sobre a dimensão da temporalidade e, por fim, sobre as principais medidas socioeducativas e protetivas aplicadas aos (às) adolescentes e jovens durante sua trajetória no Sistema Socioeducativo.
 
 \newpage
 
-### Óbitos por causas violentas de adolescentes e jovens, por sexo
+### Óbitos por homicídio de adolescentes e jovens, por sexo, com passagem pelo Sistema Socioeducativo
 
 \vspace{2cm}
-Ao aplicar o recorte “passagem pelo CIABH”(Gráfico 73), observa-se que, entre adolescentes e jovens vítimas de homicídio em 2021, 100% correspondem ao sexo masculino (51). Os dados apontam que, entre adolescentes e jovens que tiveram registros de óbito por causa ignorada em 2021, 28 passaram pelo CIABH em algum momento de suas vidas. Destes, 10,71% são mulheres(03) e 89,29% homens(25).
+Conforme já destacado pelo Atlas da Violência de 2023, é um fato global que adolescentes e jovens do sexo masculino, entre 15 e 29 anos, são os que mais apresentam risco de serem vítimas de homicídio, ao passo que a proporção entre homens e mulheres jovens é bastante próxima. Tal cenário se repete entre os adolescentes e jovens vitimados em Belo Horizonte e municípios limítrofes, como mostra o Gráfico 93.    
+
+Dentre os(as) 37 adolescentes e jovens com passagem pelo CIABH que foram vítimas de homicídio, apenas um óbito (2,7%) se refere a adolescente do sexo feminino e os demais 36 (97,3%) se referem a adolescentes/jovens do sexo masculino.
 
 \vspace{2cm}
-```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[93,].png')
 ```
 \newpage
 
-### Características étnico-raciais
+### Características étnico-raciais de adolescentes e jovens vítimas de homicídio em 2022, com passagem pelo Sistema Socioeducativo
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[87,].png')
 ```
 
-Entre os adolescentes e jovens vítimas de homicídio em 2021, que tiveram passagem pelo Sistema Socioeducativo/Sistema de Justiça, houve um aumento médio de 38% no total de óbitos em relação ao ano anterior: em 2020, 38 adolescentes e jovens vítimas de homicídio em Belo Horizonte e municípios limítrofes apresentaram passagem pelo CIABH, ao passo que, em 2021, este número passou para 51 adolescentes. Além desse acréscimo, em comparação com o ano de 2020^[MINAS GERAIS. Relatório Estatístico: Vara Infracional Da Infância e da Juventude. Tribunal de Justiça do Estado de Minas Gerais. Belo Horizonte: 2021. Disponível em <https://www.tjmg.jus.br/data/files/C5/C1/5B/F2/515F28108B95BD286ECB08A8/relatorio_ciabh_novo_2021%20_1_.pdf>. Último acesso em 04 abr 2023.], verifica-se que a concentração elevada de homicídios permanece nas categorias “preta” e  “parda”^[Cabe ressaltar que a convenção do IBGE, no Brasil, define como negro quem se autodeclara preto ou pardo, pois a população negra é o somatório de pretos e pardos.  Ressaltamos que nestes dados de raça/cor fornecidos pelo IMLAR, a categorização é realizada por heteroidentificação.], que juntas correspondem a 80,39% do total. Este quadro corrobora o recorte étnico-racial da violência letal contra adolescentes e jovens no país: conforme os relatórios anteriores e mapas que identificam a letalidade juvenil, a predominância de homicídios atinge majoritariamente adolescentes e jovens negros (pretos e pardos), do sexo masculino. 
+No ano de 2022, dentre os(as) 37 adolescentes e jovens vítimas de homicídio que tiveram passagem pelo Sistema Socioeducativo, 32 eram negros(as), percentual ainda maior do que o apresentado na seção 14.1.6, que considerava a totalidade de adolescentes e jovens vítimas de mortes violentas, independente da passagem pelo Sistema Socioeducativo.    
 
-Além disso, cabe ressaltar neste subitem a inclusão da categoria “ignorado/prejudicado”, quando se torna impossível a identificação da característica étnico-racial.  
+Conforme já apresentado, do total de 117 adolescentes e jovens vitimados por homicídio e causa ignorada em Belo Horizonte e municípios limítrofes no ano de 2022, 94 eram pessoas negras (80,34%). Considerando apenas os homicídios, que totalizaram 79, 66 eram negros (83,54%) e, por fim, dentre os 37 homicídios de adolescentes e jovens com passagem pelo Sistema Socioeducativo,  86,48% (32 óbitos) eram negros (Tabela 79)^[A categorização dos dados de raça/cor fornecidos pelo IMLAR é realizada por heteroidentificação.].    
+
+Notório, pois, o aumento do percentual de pessoas negras quando somados esses dois fenômenos: a passagem pelo Sistema Socioeducativo e a vitimização por morte violenta.  
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[94,].png')
@@ -253,12 +328,14 @@ knitr::include_graphics('imagens/GRAFICO[94,].png')
 
 \newpage
 
-### Localidade do Óbito
+### Localidade do óbito de adolescentes e jovens vítimas de homicídio em 2022, com passagem pelo Sistema Socioeducativo
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[88,].png')
 ```
-Este item passa a compor a série de dados deste relatório a partir da parceria com o IMLAR, possibilitando a identificação do local em que ocorreram as mortes violentas de adolescentes e jovens no ano de 2021. O destaque é para o maior número de ocorrências registradas em via pública (58,82%), seguida de unidade hospitalar ou de saúde. Este quadro apresenta convergência com os dados do Anuário Brasileiro de Segurança Pública 2022^[BRASIL. Anuário Brasileiro de Segurança Pública 2022 / Samira Bueno; Renato Sérgio de Lima et al., - São Paulo: FBSP, 2022. Disponível em: <https://forumseguranca.org.br/anuario-brasileiro-seguranca-publica/>], que indicam a prevalência da ocorrência de óbitos em via pública entre adolescentes de 12 a 17 anos, diferentemente dos homicídios entre crianças, que ocorrem, em sua maioria, em ambiente residencial.
+Os dados sobre a localidade do óbito passaram a compor o relatório do CIA-BH no ano de 2023, a partir da parceria com o IMLAR, possibilitando a identificação dos locais onde ocorreram mortes violentas de adolescentes e jovens com passagem pelo Sistema Socioeducativo.    
+
+A Tabela 80 apresenta a quantidade e o percentual de óbitos de adolescentes e jovens com passagem pelo Sistema Socioeducativo, por localidade do óbito, ocorridos no ano de 2022. Destacam-se as ocorrências registradas em vias públicas (45,94% em 2022), que também eram a maioria no relatório anterior (58,82% em 2021), seguidas das ocorrências em unidade de saúde. O Anuário Brasileiro de Segurança Pública de 2023 chama atenção para o fato de que, em relação ao local da ocorrência de mortes violentas intencionais (MVI) entre crianças (0 a 12 anos incompletos), o percentual de registros dentro das residências é de 65,4% e, na via pública, de 15,4%. No que se refere às vítimas entre 12 e 17 anos, tais percentuais se invertem: os registros em vias públicas sobem para 59,4% do total e os ocorridos nas residências caem para 15,8%.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[95,].png')
@@ -266,41 +343,45 @@ knitr::include_graphics('imagens/GRAFICO[95,].png')
 
 \newpage
 
-### Tempo médio entre a última entrada e o óbito do adolescente
+### Tempo médio entre a última entrada e o óbito do(a) adolescente
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[89,].png')
 ```
 
- A tabela 64 nos mostra que o tempo médio entre a última entrada no Sistema Socioeducativo e o óbito do adolescente é de 616,9 dias (em torno de 20 meses). Embora ainda seja um período longo, em comparação com o relatório anterior, observou-se uma redução de 74 dias neste intervalo.
+ A análise da dimensão da temporalidade fornece indicativos relevantes para compreender a relação entre a data de ocorrência do óbito e a trajetória do(a) adolescente no Sistema de Justiça e no Sistema Socioeducativo. Embora os dados quantitativos não permitam identificar as circunstâncias e a situação do(a) adolescente em relação ao cumprimento/descumprimento da medida socioeducativa, constituem norteadores para estudos complementares sobre a trajetória de adolescentes e jovens no Sistema Socioeducativo, bem como para proposição de ações protetivas e de preventivas.    
+ 
+A Tabela 81 mostra que, entre os(as) adolescentes e jovens vítimas de homicídio em 2022, com passagem pelo CIA-BH, o tempo médio entre a última entrada no Sistema Socioeducativo e o óbito foi de 1342.9 dias (em torno de 44 meses), pouco mais do que o dobro do intervalo observado no ano anterior. 
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[90,].png')
 ```
 
-Em relação ao tempo decorrido entre  a última passagem pelo CIABH e a data do óbito, verifica-se que a concentração principal dos registros se dá entre 01 e 02 anos, seguido pelo intervalo entre 02 e 03 anos. Quanto ao recorte temporal, observa-se que, no ano anterior, houve uma concentração maior de casos no intervalo entre 01 e 06 meses. Já em 2021, foi constatado um significativo aumento do número de óbitos ocorridos no intervalo “entre 01 e 02 anos” desde a última entrada do adolescente no CIABH: em 2020,  ocorreram 05 óbitos neste intervalo, ao passo que, em 2021, foram registrados 17 homicídios. 
-Cabe ressaltar o efeito da dimensão temporal na prevenção da letalidade juvenil. A análise da dimensão da temporalidade fornece indicativos relevantes para compreender a relação entre a data de ocorrência do óbito e a trajetória do adolescente no Sistema de Justiça e no Sistema Socioeducativo.  Embora os dados quantitativos não permitam identificar as circunstâncias e a situação do adolescente em relação ao cumprimento/descumprimento da medida socioeducativa, constituem norteadores para estudos complementares sobre a trajetória destes adolescentes e jovens no Sistema Socioeducativo, bem como para proposição de ações protetivas e de prevenção ao homicídio.
+Os dados apontam, ainda, que a maior parte dos óbitos por homicídio entre adolescentes e jovens registrados em 2022, ocorreu a partir de 03 anos depois da última apreensão e passagem pelo Sistema Socioeducativo, intervalo maior do que o observado no ano anterior.    
 
-```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
+Quanto ao recorte temporal, houve uma concentração maior de casos no intervalo acima de 04 anos, correspondendo a 37,84%  do total de registros. Ressaltamos que, em 2021, a maior concentração de óbitos ocorreu no intervalo entre 01 e 02 anos após a última entrada no CIA-BH.
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[96,].png')
 ```
 \newpage
 
-### Tempo médio entre a primeira e última entrada no CIABH dos adolescentes e jovens vítimas de homicídio 
+### Tempo médio entre a primeira e última entrada no CIA-BH de adolescentes e jovens vítimas de homicídio
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[91,].png')
 ```
 
-Os dados apresentados nas tabelas 66 e 67 tratam do intervalo de tempo observado entre a primeira e a última entrada no CIABH, fornecendo estimativas sobre a dimensão temporal da trajetória dos adolescentes e jovens vítimas de homicídio em 2021, no Sistema Socioeducativo. Vale ressaltar que esses dados são baseados nos registros das entradas no Sistema de Justiça, a partir das apreensões policiais dos adolescentes pela prática de atos infracionais, não abarcando o tempo de permanência no cumprimento de medidas socioeducativas aplicadas ao longo de sua trajetória. A análise desta última variável poderá ser realizada por meio de estudos complementares.
-A tabela 66 nos mostra que o tempo médio entre a primeira e a última entrada  no CIABH dos adolescentes e jovens vítimas de homicídio em 2021 é de 525,1 dias. Há uma diminuição quando comparado com o relatório anterior, que registrou o tempo médio de 611,9 dias. 
+Os dados apresentados nas tabelas 83 e 84 tratam do intervalo de tempo observado entre a primeira e a última entrada no CIA-BH, fornecendo estimativas sobre a dimensão temporal da trajetória no Sistema Socioeducativo dos(as) adolescentes e jovens vítimas de homicídio em 2022. Vale ressaltar que esses dados são baseados nos registros das entradas no Sistema de Justiça, a partir das apreensões policiais de adolescentes pela prática de atos infracionais, não abarcando o tempo de permanência no cumprimento de medidas socioeducativas aplicadas ao longo de sua trajetória. A análise desta última variável poderá ser realizada por meio de estudos complementares.    
+
+A tabela 83 nos aponta que o tempo médio entre a primeira e a última entrada no CIA-BH dos(as) adolescentes e jovens vítimas de homicídio em 2022 é de 562,8 dias (18 meses). Esse intervalo se aproxima do observado no relatório anterior, que registrou o tempo médio de 525,1 dias (17 meses).
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[92,].png')
 ```
 
 
-Em comparação ao relatório anterior, observa-se que, em 2021,  houve um aumento na concentração de homicídios entre adolescentes e jovens que tiveram um intervalo de 0 a 01 mês entre a primeira e a última entrada no CIABH (em 2020, foram registrados  09 óbitos neste intervalo e, em 2021, 14), seguido pelo acréscimo no percentual em relação ao período de 01 e 02 anos, que passou de 15,79%, em 2020, para 25,49%, em 2021. Em relação ao ano de 2020, houve um aumento expressivo nestes dois intervalos, confirmando que há uma concentração de homicídios correlativa ao encurtamento do tempo entre a primeira e a última entrada no CIABH. 
+A maior parte dos(as) adolescentes vítimas de homicídio em 2022 apresentou  um intervalo de até 01 mês entre a primeira e a última passagem pelo CIA BH (35,14%), ou seja, tiveram uma curta trajetória no Sistema Socioeducativo. Em seguida, temos os intervalos entre 01 e 02 anos, com 24,32% dos casos e entre 02 e 03 anos, com 21,62%. Essa distribuição se encontra próxima ao observado no ano anterior e ressalta a  importância da qualificação do atendimento inicial, da acolhida e da implementação de intervenções protetivas desde o primeiro encontro com o(a) adolescente.
 
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[97,].png')
@@ -313,13 +394,13 @@ knitr::include_graphics('imagens/GRAFICO[97,].png')
 knitr::include_graphics('imagens/TABELA[93,].png')
 ```
 
-A tabela 68 aponta para uma redução na média de entradas no CIABH quando comparada com o relatório anterior: em 2020, os adolescentes vítimas de homicídio em Belo Horizonte e municípios limítrofes, com passagem pelo Sistema Socioeducativo, tiveram, em média, 5,4 entradas no CIABH ao longo de sua trajetória, ao passo que, em 2021, essa média passou para 3,5 entradas. 
+A tabela 85 aponta para um aumento da média de entradas no CIA-BH quando comparada com o relatório anterior: em 2021, os(as) adolescentes vítimas de homicídio em Belo Horizonte e municípios limítrofes, com passagem pelo Sistema Socioeducativo, tiveram, em média, 3,5 entradas no CIA-BH ao longo de sua trajetória, ao passo que, em 2022, essa média passou para 6,1 entradas. 
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[94,].png')
 ```
 
-Ao analisar a tabela 69, verifica-se que a maior parte dos adolescentes vítimas de homicídio em 2021, que passaram pelo Sistema Socioeducativo, apresentaram entre 01 e 05 entradas no CIABH ao longo de sua trajetória. Observa-se contudo que, em comparação com o ano anterior,  houve um aumento expressivo de registros neste intervalo: entre os adolescentes vítimas de homicídio em 2020, 65,71% (23 adolescentes) tiveram entre 01 e 05 entradas no Sistema Socioeducativo; enquanto que, entre os homicídios ocorridos em 2021, 80,39% se encontram neste intervalo, conforme descrito no gráfico abaixo (41).
+Com base nos dados acima, verifica-se que, dentre os(as) adolescentes vítimas de homicídio em 2022 que passaram pelo Sistema Socioeducativo, a maior parte apresentou entre 01 e 05 entradas no CIA-BH ao longo de sua trajetória (62,16%). Reforça-se, a partir dessa análise, a importância da qualificação da escuta e intervenções preventivas desde o início da trajetória dos(as) adolescentes atendidos pelo Sistema Socioeducativo.
 
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[98,].png')
@@ -330,6 +411,7 @@ knitr::include_graphics('imagens/GRAFICO[98,].png')
 #### Especificação das medidas protetivas
 
 As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente:
+
 \leavevmode
 \newline
 
@@ -337,7 +419,7 @@ As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolesce
 knitr::include_graphics('img_nao_apagar/art101eca.png')
 ```
 
-\vspace{2cm}
+Em relação à aplicação de medidas protetivas, o Gráfico 99 mostra que entre os(as) adolescentes e jovens vítimas de homicídio em 2022 e que tiveram passagem pelo CIA BH, 40,54% também tiveram, em sua trajetória, a aplicação de medidas de proteção previstas no Estatuto da Criança e do Adolescente (art. 101), aplicáveis sempre que os direitos reconhecidos na referida lei forem ameaçados ou violados (art.98).
 
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[99,].png')
@@ -347,16 +429,22 @@ knitr::include_graphics('imagens/GRAFICO[99,].png')
 
 
 
-```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='55%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[95,].png')
 ```
 
-O Gráfico 79 aponta que, dentre os adolescentes e jovens vítimas de homicídio em 2021, que passaram pelo CIABH, 33,33% receberam medidas de proteção ao longo de sua trajetória no Sistema Socioeducativo. Dentre as medidas aplicadas, prevalece a medida protetiva do artigo 101, III, do Estatuto da Criança e do Adolescente, referente ao encaminhamento dos adolescentes para inclusão escolar, seguida pelas medidas protetivas referentes à saúde(art. 101, V).
+Conforme consta na Tabela 87, foram aplicadas 52 medidas protetivas a adolescentes e jovens que foram vítimas de homicídio em 2022. Importante esclarecer que tais dados não se referem a número de indivíduos, mas sim ao número de medidas protetivas aplicadas ao longo da trajetória dos(as) adolescentes e jovens vítimas de homicídio em 2022, com entrada no Sistema Socioeducativo, haja vista que, a cada adolescente pode ser aplicada mais de uma medida socioeducativa ao longo de sua trajetória.    
+
+As medidas protetivas podem ser aplicadas logo após a apreensão ou ao longo da trajetória socioeducativa e de vida do(a) adolescente. A medida protetiva mais aplicada refere-se ao artigo 101, III do Estatuto da Criança e do Adolescente, concernente ao encaminhamento dos(as) adolescentes para inclusão escolar, seguida pelas medidas protetivas atinentes à saúde (art. 101, V).    
 
 
-```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+```{r echo=FALSE, out.width='65%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[100,].png')
 ```
+
+
+Nesse sentido, mostra-se de extrema relevância a realização de outros estudos que possam aprofundar as análises quanto à desproteção social e às medidas protetivas aplicadas aos(às) adolescentes e jovens com passagem pelo Sistema Socioeducativo. Faz-se necessário compreender e avaliar se esses(as) adolescentes e jovens foram alcançados anteriormente pelo Sistema de Garantia de Direitos e pela rede de proteção social, bem como qualificar e/ou reordenar as estratégias de atuação preventiva. Importa, também, entender se a família foi inserida e se é acompanhada pelas políticas públicas, bem como seu percurso nas redes protetivas do território. Debruçar sobre esta análise será fundamental para a construção de estratégias e ações mais assertivas pelo Sistema de Garantia de Direitos e o Sistema Socioeducativo, por meio de uma atuação intersetorial e interinstitucionalidade, buscando superar a fragmentação das ações, considerando a trajetória dos(as) adolescentes, jovens e famílias.
+
 
 \newpage
 
@@ -368,15 +456,21 @@ knitr::include_graphics('imagens/GRAFICO[100,].png')
 knitr::include_graphics('imagens/TABELA[96,].png')
 ```
 
-Ressalta-se que os dados desta seção se referem ao número de decisões judiciais aplicadas ao longo da trajetória dos adolescentes e jovens no Sistema Socioeducativo, e não ao número de indivíduos. Cada adolescente pode receber mais de uma medida socioeducativa ou de proteção ao longo de sua trajetória. O objetivo das análises é apresentar a prevalência das medidas aplicadas por meio das decisões judiciais da Vara Infracional, neste caso, no recorte específico analisado nesta seção.
+A tabela 88  apresenta a quantidade de decisões judiciais que os(as)adolescentes e jovens receberam de acordo com o recorte específico da letalidade. Diante desses dados, conseguimos aferir o percentual da correlação entre mortes e medidas aplicadas e a representatividade que cada categoria assume. Importante destacar que os dados se referem ao número de decisões judiciais aplicadas ao longo da trajetória dos(as) adolescentes e jovens vítimas de homicídio em 2022, com entrada no Sistema Socioeducativo, e não ao número de indivíduos, haja vista que, cada adolescente pode receber mais de uma medida socioeducativa ao longo de sua trajetória.    
 
-Com base nos dados do Gráfico abaixo, observa-se que, entre adolescentes e jovens vítimas de homicídio em 2021, prevalece a concessão de remissão, seguida pela aplicação de medidas socioeducativas em meio aberto - Liberdade Assistida e PSC, distribuição próxima ao observado no relatório anterior.  
+Salienta-se, ainda, que o relatório anterior contemplava 10 categorias de decisões e, na análise atual, são 14, com a incorporação de novas categorias, a saber: Carta Devolvida, Extinção por Prescrição, Extinção Punibilidade por Morte e Remissão Extintiva e/e Exclusão Processual.    
+
+
 
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[101,].png')
 ```
 
+
+Pela análise da tabela 88, assim como do gráfico 101, é possível afirmar que a Remissão Extintiva e/e Advertência ocupou o lugar de maior incidência na aplicação, seguida pela Remissão Extintiva. A Remissão Extintiva e/e Exclusão Processual que foi incluída nesta análise apresenta um valor significativo, ocupando o quarto lugar conforme o gráfico abaixo, enquanto no ano anterior esta categoria sequer constava nas análises. Outro ponto a se destacar é o lugar da medida de Internação neste relatório, que ocupa o sexto lugar com um percentual de 6,06% e, no ano anterior, figurava como a medida menos aplicada (10ª e última posição), com o percentual de 3,31%.    
+
+Por fim, destaca-se a prevalência da concessão de Remissões e da aplicação de medida socioeducativa de Liberdade Assistida dentro do escopo com valores acima de 10%. Percebeu-se, também, que diante da entrada de novas categorias, o desenho analítico referente ao ano de 2022 apresentou uma distribuição diferente da registrada em 2021. Contudo, nos últimos dois anos as categorias Remissão e Liberdade Assistida continuam sendo aplicadas com maior frequência.
 
 \newpage
 
