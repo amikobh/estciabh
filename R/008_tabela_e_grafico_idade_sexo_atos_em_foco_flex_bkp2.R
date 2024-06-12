@@ -6,7 +6,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #TRATAMENTO banco_HOMICIDIO_snr_SEXO_IDADE
 #########################################################################################################
 banco_HOMICIDIO_snr =
-  banco_SNR |>
+  banco_geral_sem_concurso |>
   filter(ATO_INFRACIONAL %in% "HOMICÍDIO")
 #########################################################################################################
 incidencia_HOMICIDIO_gt = data.table(nrow(banco_HOMICIDIO))
@@ -145,7 +145,7 @@ banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd = tail(banco_HOMICIDIO_snr_SEXO_IDA
 
 
 banco_ROUBO_snr =
-  banco_SNR |>
+  banco_geral_SNR |>
   filter(ATO_INFRACIONAL %in% "ROUBO")
 #########################################################################################################
 #########################################################################################################
@@ -289,7 +289,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 
 
 banco_FURTO_snr =
-  banco_SNR |>
+  banco_geral_SNR |>
   filter(ATO_INFRACIONAL %in% "FURTO")
 #########################################################################################################
 #########################################################################################################
@@ -433,7 +433,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 
 
 banco_USO_DE_DROGAS_snr =
-  banco_SNR |>
+  banco_geral_SNR |>
   filter(ATO_INFRACIONAL %in% "POSSE DE DROGAS PARA USO PESSOAL")
 #########################################################################################################
 #########################################################################################################
@@ -574,7 +574,7 @@ banco_USO_DE_DROGAS_snr_SEXO_IDADE_pizza_bkp_rmd = tail(banco_USO_DE_DROGAS_snr_
 
 
 banco_TRAFICO_DE_DROGAS_snr =
-  banco_SNR |>
+  banco_geral_SNR |>
   filter(ATO_INFRACIONAL %in% "TRÁFICO DE DROGAS")
 #########################################################################################################
 #########################################################################################################

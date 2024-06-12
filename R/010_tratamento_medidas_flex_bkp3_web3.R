@@ -5,7 +5,7 @@
 #DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
 BANCO_MEDIDAS =
 
-  banco_sem_mba |>
+  banco_tratado |>
   filter(MEDIDA_PROTETIVA %in% "SIM") |>
   pivot_longer(cols = starts_with("QUAL_MEDIDA_PROTETIVA_0"), values_to = "BANCO_MEDIDAS_GERAL") %>%
   #select(-name) %>%

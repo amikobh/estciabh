@@ -2,7 +2,7 @@
 #intervalo_sentenca
 #########################################################################################################
 intervalo_sentenca =
-  banco_sem_mba %>%
+  banco_tratado %>%
   #filter(COMPARECIMENTO_AUD_PRELIMINAR %in% "COMPARECEU") %>%
   select(DATA_ATO, DATA_SENTENCA, SENTENCA)
 

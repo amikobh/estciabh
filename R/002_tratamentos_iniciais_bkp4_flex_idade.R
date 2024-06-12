@@ -101,9 +101,9 @@ banco$DATA_SENTENCA <- dmy(banco$DATA_SENTENCA)
 banco$DIA_SEMANA_ATO <- format.Date((banco$DATA_ATO), "%A")
 banco$DIA_SEMANA_AUDIENCIA_PRELIMINAR <- format.Date((banco$DATA_AUDIENCIA_PRELIMINAR), "%A")
 
-head (banco %>%
-        select(NASCIMENTO, IDADE, DATA_ATO, DIA_SEMANA_ATO, DATA_AUDIENCIA_PRELIMINAR, DIA_SEMANA_AUDIENCIA_PRELIMINAR,
-               DATA_SENTENCA), 15)
+#head (banco %>%
+   #     select(NASCIMENTO, IDADE, DATA_ATO, DIA_SEMANA_ATO, DATA_AUDIENCIA_PRELIMINAR, DIA_SEMANA_AUDIENCIA_PRELIMINAR,
+    #           DATA_SENTENCA), 15)
 
 
 
@@ -257,7 +257,7 @@ banco_bkp = banco
 ##BANCO COM LINHAS QUE PRECISAM SER ELIMINADAS
 banco$SENTENCA <- gsub(" ","", banco$SENTENCA)
 
-banco_linhas_desnecessarias <- subset (banco, SENTENCA %in% c('DUPLICIDADE', 'NAOLOCALIZADOSISCOM', 'VITIMA'))
+banco_linhas_descartadas <- subset (banco, SENTENCA %in% c('DUPLICIDADE', 'NAOLOCALIZADOSISCOM', 'VITIMA'))
 #write.csv(banco_linhas_desnecessarias, file = "banco_linhas_desnecessarias.csv")
 ##BANCO SEM AS LINHAS QUE PRECISAM SER ELIMINADAS
 banco <- banco[!(banco$SENTENCA == 'DUPLICIDADE' | banco$SENTENCA == 'NAOLOCALIZADOSISCOM'| banco$SENTENCA == 'VITIMA'),]
@@ -266,12 +266,10 @@ banco <- banco[!(banco$SENTENCA == 'DUPLICIDADE' | banco$SENTENCA == 'NAOLOCALIZ
 #write.csv(banco, file ="banco_sem_linhas_desnecessarias.csv")
 #banco$NOME2 <- gsub(" ","", banco$NOME)
 #banco$FILIACAO2 <- gsub(" ","", banco$FILIACAO)
-table(banco$SE_TEM_MBA)
 #write.csv(banco, file = "banco_conferencia_mba.csv")
-table(banco$ATO_INFRACIONAL_TERMO_01)
+#table(banco$ATO_INFRACIONAL_TERMO_01)
 
 banco$SE_TEM_MBA <- gsub(" ","", banco$SE_TEM_MBA)
-table(banco$SE_TEM_MBA)
 
 #########################################################
 #########################################################
@@ -282,7 +280,7 @@ banco$SE_TEM_MBA[banco$SE_TEM_MBA == "SM"]<- "SIM"
 banco$SE_TEM_MBA[banco$SE_TEM_MBA == "MBA"]<- "SIM"
 banco$SE_TEM_MBA[banco$SE_TEM_MBA == "SE_TEM_MBA"]<- "SIM"
 
-table(banco$SE_TEM_MBA)
+#table(banco$SE_TEM_MBA)
 #########################################################
 #########################################################
 #########################################################
@@ -309,17 +307,17 @@ banco_so_com_mba <-banco[(banco$SE_TEM_MBA == "SIM" & banco$ATO_INFRACIONAL_TERM
 numero_de_cumprimento_mba <- banco_so_com_mba
 write.csv(banco_so_com_mba, file ="banco_so_com_mba.csv",row.names=FALSE)
 #########################################################################################################
-head (banco_so_com_mba %>%
-        select(SE_TEM_MBA, ATO_INFRACIONAL_TERMO_01), 15)
+#head (banco_so_com_mba %>%
+#     select(SE_TEM_MBA, ATO_INFRACIONAL_TERMO_01), 15)
 
-head (banco_sem_mba %>%
-        select(SE_TEM_MBA, ATO_INFRACIONAL_TERMO_01), 15)
+#head (banco_sem_mba %>%
+# select(SE_TEM_MBA, ATO_INFRACIONAL_TERMO_01), 15)
 #excluindo linhas. Usar este banco para calcular numero adolescentes atendidos X atos praticados (incidencia)?
 #para saber reentradas. ver com o Marcelo
 banco_sem_mba$SENTENCA <- gsub(" ","", banco_sem_mba$SENTENCA)
 banco_sem_mba$DECISAO <- gsub(" ","", banco_sem_mba$DECISAO)
 
-banco_linhas_necessarias_df_sem_mba <- banco_sem_mba[!(banco_sem_mba$SENTENCA == 'ARQUIVAMENTO'| banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA'|
+banco_tratado <- banco_sem_mba[!(banco_sem_mba$SENTENCA == 'ARQUIVAMENTO'| banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA'|
                                               banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADE'| banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE'|
                                               banco_sem_mba$SENTENCA == 'REMESSACOMARCACOMPETENTE'| banco_sem_mba$SENTENCA == 'REMETIDOSAUTOSJ.COMPETENTE' |
                                               banco_sem_mba$SENTENCA == 'ABSOLVICAO'| banco_sem_mba$SENTENCA == 'EXTINCAODOPROCESSO'| banco_sem_mba$SENTENCA == 'EXTINCAOPORMORTE' |
@@ -330,32 +328,34 @@ banco_linhas_necessarias_df_sem_mba <- banco_sem_mba[!(banco_sem_mba$SENTENCA ==
                                               banco_sem_mba$DECISAO == 'REMESSACOMARCACOMPETENTE'| banco_sem_mba$DECISAO == 'REMETIDOSAUTOSJ.COMPETENTE' |
                                               banco_sem_mba$DECISAO == 'ABSOLVICAO'| banco_sem_mba$DECISAO == 'EXTINCAODOPROCESSO'| banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' |
                                               banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' | banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE'  | banco_sem_mba$DECISAO == 'EXTINCAOPORPROCESSO'),]
-#write.csv(banco_linhas_necessarias_df_sem_mba, file ="banco_linhas_necessarias_df_sem_mba.csv",row.names=FALSE)
-##write.csv(banco_linhas_necessarias_df_sem_mba, file ="banco_linhas_necessarias_df_sem_mba.csv")
+
+
+
+banco_sem_tratamento <- banco_sem_mba[(banco_sem_mba$SENTENCA == 'ARQUIVAMENTO'| banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA'|
+                                                         banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADE'| banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE'|
+                                                         banco_sem_mba$SENTENCA == 'REMESSACOMARCACOMPETENTE'| banco_sem_mba$SENTENCA == 'REMETIDOSAUTOSJ.COMPETENTE' |
+                                                         banco_sem_mba$SENTENCA == 'ABSOLVICAO'| banco_sem_mba$SENTENCA == 'EXTINCAODOPROCESSO'| banco_sem_mba$SENTENCA == 'EXTINCAOPORMORTE' |
+                                                         banco_sem_mba$SENTENCA == 'EXTINCAOPORMORTE' | banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE'  |
+                                                         banco_sem_mba$SENTENCA == 'EXTINCAOPORPRESCRICAO' | banco_sem_mba$SENTENCA == 'EXTINCAOPORPROCESSO' |
+                                                         banco_sem_mba$DECISAO == 'ARQUIVAMENTO'|
+                                                         banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADE'| banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE'|
+                                                         banco_sem_mba$DECISAO == 'REMESSACOMARCACOMPETENTE'| banco_sem_mba$DECISAO == 'REMETIDOSAUTOSJ.COMPETENTE' |
+                                                         banco_sem_mba$DECISAO == 'ABSOLVICAO'| banco_sem_mba$DECISAO == 'EXTINCAODOPROCESSO'| banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' |
+                                                         banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' | banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE'  | banco_sem_mba$DECISAO == 'EXTINCAOPORPROCESSO'),]
+
+
+setwd(file.path("~/diretorio_r/estciabh/planilhas/"))
+
+write.csv(banco_tratado, file ="banco_tratado.csv",row.names=FALSE)
+write.csv(banco_sem_tratamento, file ="banco_sem_tratamento.csv")
 
 #salvar para tratamento atos em foco
-banco_atos_em_foco = banco_linhas_necessarias_df_sem_mba
+banco_atos_em_foco = banco_tratado
 #########################################################################################################
 #tratamento atos em foco:
 #########################################################################################################
 banco_atos_em_foco_bkp = banco_atos_em_foco
 #########################################################################################################
-
-#########################################################################################################
-
-#########################################################################################################
-banco_com_linhas_desnecessarias <- banco_sem_mba[(banco_sem_mba$SENTENCA == 'ARQUIVAMENTO'| banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA'|
-                                                     banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADE'| banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE'|
-                                                     banco_sem_mba$SENTENCA == 'REMESSACOMARCACOMPETENTE'| banco_sem_mba$SENTENCA == 'REMETIDOSAUTOSJ.COMPETENTE' |
-                                                     banco_sem_mba$SENTENCA == 'ABSOLVICAO'| banco_sem_mba$SENTENCA == 'EXTINCAODOPROCESSO'| banco_sem_mba$SENTENCA == 'EXTINCAOPORMORTE' |
-                                                     banco_sem_mba$SENTENCA == 'EXTINCAOPORMORTE' | banco_sem_mba$SENTENCA == 'REMESSAAOJUIZOCOMPETENTE'  |
-                                                     banco_sem_mba$SENTENCA == 'EXTINCAOPORPRESCRICAO' | banco_sem_mba$SENTENCA == 'EXTINCAOPORPROCESSO' |
-                                                     banco_sem_mba$DECISAO == 'ARQUIVAMENTO'|
-                                                     banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE-MAIORIDADE'| banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE'|
-                                                     banco_sem_mba$DECISAO == 'REMESSACOMARCACOMPETENTE'| banco_sem_mba$DECISAO == 'REMETIDOSAUTOSJ.COMPETENTE' |
-                                                     banco_sem_mba$DECISAO == 'ABSOLVICAO'| banco_sem_mba$DECISAO == 'EXTINCAODOPROCESSO'| banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' |
-                                                     banco_sem_mba$DECISAO == 'EXTINCAOPORMORTE' | banco_sem_mba$DECISAO == 'REMESSAAOJUIZOCOMPETENTE'  | banco_sem_mba$DECISAO == 'EXTINCAOPORPROCESSO'),]
-
 #########################################################################################################
 #OBSERVAÇÃO: A GERAÇÃO DO GRAFICO SE ENCONTRA NO FINAL DO SCRIPT 004_tabela_e_grafico_idade_sexo_geral_flex_bkp1 EM
 #RAZÃO DA VARIAVEL ADOLESCENTES.

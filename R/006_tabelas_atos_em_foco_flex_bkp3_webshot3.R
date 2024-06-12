@@ -4,8 +4,8 @@
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#banco_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
-banco_HOMICIDIO = banco_sem_concurso
+#banco_geral_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
+banco_HOMICIDIO = banco_geral_sem_concurso
 table(banco_HOMICIDIO$ATO_INFRACIONAL)
 #banco_HOMICIDIO = filter(banco_HOMICIDIO, ATO_INFRACIONAL_ATA_01 == "HOMICÍDIO" |
  #                                      ATO_INFRACIONAL_ATA_02 == "HOMICÍDIO" |
@@ -79,8 +79,8 @@ incidencia_HOMICIDIO_gt = incidencia_HOMICIDIO
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#banco_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
-banco_ROUBO = banco_sem_concurso
+#banco_geral_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
+banco_ROUBO = banco_geral_sem_concurso
 
 #banco_ROUBO = filter(banco_ROUBO, ATO_INFRACIONAL_ATA_01 == "ROUBO" |
 #                                      ATO_INFRACIONAL_ATA_02 == "ROUBO" |
@@ -164,8 +164,8 @@ incidencia_ROUBO_gt = incidencia_ROUBO
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#banco_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
-banco_FURTO = banco_sem_concurso
+#banco_geral_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
+banco_FURTO = banco_geral_sem_concurso
 
 #banco_FURTO = filter(banco_FURTO, ATO_INFRACIONAL_ATA_01 == "FURTO" |
 #                                      ATO_INFRACIONAL_ATA_02 == "FURTO" |
@@ -235,8 +235,8 @@ incidencia_FURTO_gt = incidencia_FURTO
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#banco_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
-banco_USO_DE_DROGAS = banco_sem_concurso
+#banco_geral_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
+banco_USO_DE_DROGAS = banco_geral_sem_concurso
 
 #banco_USO_DE_DROGAS = filter(banco_USO_DE_DROGAS, ATO_INFRACIONAL_ATA_01 == "USO_DE_DROGAS" |
 #                                      ATO_INFRACIONAL_ATA_02 == "USO_DE_DROGAS" |
@@ -306,8 +306,8 @@ incidencia_USO_DE_DROGAS_gt = incidencia_USO_DE_DROGAS
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#banco_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
-banco_TRAFICO_DE_DROGAS = banco_sem_concurso
+#banco_geral_sem_concurso <- banco_linhas_necessarias_df_sem_mba[!duplicated(data.frame(banco_linhas_necessarias_df_sem_mba$PROCESSO, banco_linhas_necessarias_df_sem_mba$ATO_INFRACIONAL_ATA_01)),]
+banco_TRAFICO_DE_DROGAS = banco_geral_sem_concurso
 
 #banco_TRAFICO_DE_DROGAS = filter(banco_TRAFICO_DE_DROGAS, ATO_INFRACIONAL_ATA_01 == "TRAFICO_DE_DROGAS" |
 #                                      ATO_INFRACIONAL_ATA_02 == "TRAFICO_DE_DROGAS" |

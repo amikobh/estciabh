@@ -9,7 +9,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 banco_HOMICIDIO =
-  banco_sem_concurso |>
+  banco_geral_sem_concurso |>
   filter(ATO_INFRACIONAL %in% "HOMICÍDIO")
 
 banco_HOMICIDIO_sem_concurso <- banco_HOMICIDIO
@@ -223,7 +223,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 banco_ROUBO =
-  banco_sem_concurso |>
+  banco_geral_sem_concurso |>
   filter(ATO_INFRACIONAL %in% "ROUBO")
 
 
@@ -439,7 +439,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 banco_FURTO =
-  banco_sem_concurso |>
+  banco_geral_sem_concurso |>
   filter(ATO_INFRACIONAL %in% "FURTO")
 
 banco_FURTO_sem_concurso <- banco_FURTO
@@ -654,7 +654,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 banco_USO_DE_DROGAS =
-  banco_sem_concurso |>
+  banco_geral_sem_concurso |>
   filter(ATO_INFRACIONAL %in% "POSSE DE DROGAS PARA USO PESSOAL")
 
 banco_USO_DE_DROGAS_sem_concurso <- banco_USO_DE_DROGAS
@@ -869,7 +869,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 banco_TRAFICO_DE_DROGAS =
-  banco_sem_concurso |>
+  banco_geral_sem_concurso |>
   filter(ATO_INFRACIONAL %in% "TRÁFICO DE DROGAS")
 
 banco_TRAFICO_DE_DROGAS_sem_concurso <- banco_TRAFICO_DE_DROGAS

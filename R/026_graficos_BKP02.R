@@ -36,17 +36,17 @@ ggsave("GRAFICO[1,].png", width=10, height=5, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-SINAL <- paste(banco_incidencia_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
+SINAL <- paste(banco_incidencia_geral_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
 #pdf(file="grafico_banco_incidencia_bkp_alternativo.pdf", title = "grafico_banco_incidencia_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
 library(forcats)
 
-banco_incidencia_bkp =
-  banco_incidencia_bkp |>
-  mutate(banco_incidencia_bkp = fct_reorder(banco_incidencia_bkp, QUANTIDADE))
+banco_incidencia_geral_bkp =
+  banco_incidencia_geral_bkp |>
+  mutate(banco_incidencia_geral_bkp = fct_reorder(banco_incidencia_geral_bkp, QUANTIDADE))
 
-ggplot(banco_incidencia_bkp, aes(x = banco_incidencia_bkp, y = QUANTIDADE)) +
+ggplot(banco_incidencia_geral_bkp, aes(x = banco_incidencia_geral_bkp, y = QUANTIDADE)) +
   geom_bar(stat = "identity", fill="#bb1e23") +
   coord_flip() +
   labs(title = (str_c(GRAFICO[2,],": Incidência Atos Infracionais, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
@@ -58,7 +58,7 @@ ggplot(banco_incidencia_bkp, aes(x = banco_incidencia_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 1010))
+  scale_y_continuous(limits=c(0, 1000))
 ggsave("GRAFICO[2,].png", width=10, height=8, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -2517,17 +2517,33 @@ ggsave("GRAFICO[92,].png", width=13, height=5, pointsize=12, dpi = 512)
 #OBS: GRÁFICOS p1 e p2 no script 022_letalidade
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-p <- plot_grid(p1, p2)
+#p <- plot_grid(p1, p2)
 
-title <- ggdraw() + draw_label(str_c(GRAFICO[93,],": Óbitos de adolescente e jovens (12 a 20 anos) por homicídio e causa ignorada, Sexo, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y")), fontface='bold')
-subtitle <- ggdraw() + draw_label("Letalidade", size = 12)
+#title <- ggdraw() + draw_label(str_c(GRAFICO[93,],": Óbitos de adolescente e jovens (12 a 20 anos) por homicídio e causa ignorada, Sexo, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y")), fontface='bold')
+#subtitle <- ggdraw() + draw_label("Letalidade", size = 12)
 #caption <- ggdraw() + draw_label("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL", fontface=NULL)
 
-p3 = plot_grid(title, subtitle, p, ncol=1, rel_heights=c(0.1, 0.1, 1)) # rel_heights values control title margins
-ggdraw(add_sub(p3, "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL", size = 12))
+#p3 = plot_grid(title, subtitle, p, ncol=1, rel_heights=c(0.1, 0.1, 1)) # rel_heights values control title margins
+#ggdraw(add_sub(p3, "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL", size = 12))
 
-ggsave("GRAFICO[93,].pdf", width=16, height=6.9, pointsize=12, dpi = 512)
-ggsave("GRAFICO[93,].png", width=16, height=6.9, pointsize=12, dpi = 512)
+ggpie(sexo_LET_HOMICIDIO,
+      x= "QUANTIDADE", label = "QUANTIDADE",
+      lab.pos = "in", lab.font = list(color = "white", face = "bold"),
+      lab.adjust = 0,
+      fill = "SEXO", color = "white", face="bold",
+      palette = "Set1") +
+  theme(legend.position = "right",
+        legend.text = element_text(size = 8, face = "bold"),
+        plot.title = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
+        plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12),
+        plot.caption = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
+  labs(caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
+       subtitle = "Letalidade", fill = "SEXO") +
+  ggtitle((str_c(GRAFICO[93,],": Óbitos por homicídio de adolescentes e jovens, por sexo, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"))))
+ggsave("GRAFICO[93,].png", width=9, height=5, pointsize=12, dpi = 512)
+
+#ggsave("GRAFICO[93,].pdf", width=16, height=6.9, pointsize=12, dpi = 512)
+#ggsave("GRAFICO[93,].png", width=16, height=6.9, pointsize=12, dpi = 512)
 #dev.off()
 #########################################################################################################
 #########################################################################################################

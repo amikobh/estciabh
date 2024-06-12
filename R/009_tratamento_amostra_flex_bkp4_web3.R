@@ -11,7 +11,7 @@ setwd(file.path("~/diretorio_r/estciabh/amostra"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
-banco_amostra = banco_sem_mba %>%
+banco_amostra = banco_tratado %>%
   select(NOME2, IDADE, SEXO, NASCIMENTO, DATA_ATO, N_QUEST,                         DATA_APLICACAO,
          ENTRVISTADOR,                    RACA_COR,                        ESTADO_CIVIL,                    POSSUI_FILHOS,
          QUANTOS,                         ESTA.GRAVIDA,                    POSSUI_DOC_01,                   POSSUI_DOC_02,

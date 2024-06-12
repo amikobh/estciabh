@@ -2,7 +2,7 @@
 #so_sentenca
 #########################################################################################################
 so_sentenca =
-  banco_sem_mba %>%
+  banco_tratado %>%
   #filter(COMPARECIMENTO_AUD_PRELIMINAR %in% "COMPARECEU") %>%
   select(SENTENCA)
 

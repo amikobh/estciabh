@@ -17,7 +17,7 @@ round_preserve_sum <- function(x, digits = 0) {
   return(y / up)
 }
 #########################################################################################################
-banco_ESCOLA = banco_atos_em_foco_ESCOLA
+banco_ESCOLA = banco_incidencia_geral_ESCOLA
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 write.csv(banco_ESCOLA, file = "banco_ESCOLA_inicial.csv", row.names = TRUE)

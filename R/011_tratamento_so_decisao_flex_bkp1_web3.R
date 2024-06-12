@@ -2,7 +2,7 @@
 #so_decisao
 #########################################################################################################
 so_decisao =
-  banco_sem_mba %>%
+  banco_tratado %>%
   filter(COMPARECIMENTO_AUD_PRELIMINAR %in% "COMPARECEU") %>%
   select(DECISAO)
 

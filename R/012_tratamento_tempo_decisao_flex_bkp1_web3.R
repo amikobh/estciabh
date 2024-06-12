@@ -2,7 +2,7 @@
 #intervalo_decisao
 #########################################################################################################
 intervalo_decisao =
-  banco_sem_mba %>%
+  banco_tratado %>%
   filter(COMPARECIMENTO_AUD_PRELIMINAR %in% "COMPARECEU") %>%
   select(DATA_ATO, DATA_AUDIENCIA_PRELIMINAR) |>
   na.omit()
