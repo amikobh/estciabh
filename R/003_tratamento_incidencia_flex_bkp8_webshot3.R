@@ -68,7 +68,7 @@ banco_incidencia_geral_ESCOLA = banco_incidencia_geral
 
 banco_geral_sem_concurso = distinct(banco_incidencia_geral, PROCESSO, name, ATO_INFRACIONAL, .keep_all= TRUE)
 
-banco_geral_SNR = distinct(banco_incidencia_geral, NOME2, NASCIMENTO, .keep_all= TRUE)
+banco_geral_SNR = distinct(banco_incidencia_geral, NOME2, NASCIMENTO, FILIACAO2, .keep_all= TRUE)
 
 
 banco_geral_SNR_com_filiacao = distinct(banco_incidencia_geral, NOME2, NASCIMENTO, FILIACAO2, .keep_all= TRUE)
