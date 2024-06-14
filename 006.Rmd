@@ -2,9 +2,11 @@
 \leavevmode
 \newline
 
-É a diligência que tem por fim procurar o adolescente que se deseja encontrar para trazê-lo à presença da autoridade judiciária com competência da Justiça da Infância e da Juventude.
-O mandado de busca e apreensão (MBA) pode ser expedido tanto na fase processual de conhecimento^[Art. 184, § 3º, Lei Nº 8.069, de 13 de julho de 1990 - ECA 
-<http://www.planalto.gov.br/ccivil_03/leis/l8069.htm>] quanto na de execução^[Art. 47, Lei Nº 12.594, de 18 janeiro de 2012 - SINASE <http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12594.htm>] das medidas socioeducativas.
+Mandado de busca e apreensão é a diligência que tem por fim procurar o adolescente que se deseja encontrar para trazê-lo à presença da autoridade judiciária com competência da Justiça da Infância e da Juventude. Pode ser expedido tanto na fase processual de conhecimento^[Art. 184, § 3º, Lei Nº 8.069, de 13 de julho de 1990 - ECA 
+<http://www.planalto.gov.br/ccivil_03/leis/l8069.htm>] quanto na de execução^[Art. 47, Lei Nº 12.594, de 18 janeiro de 2012 - SINASE <http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12594.htm>] das medidas socioeducativas.    
+No ano em estudo, `r nrow(banco_mba_com_ato)` adolescentes foram encaminhados ao CIABH por conta da expedição de MBA:  `r nrow(banco_mba_com_ato)-nrow(banco_so_com_mba)` com cometimento de novo ato infracional e `r nrow(banco_so_com_mba)` sem cometimento de novo ato infracional.
+
+
 
 \newpage
 
