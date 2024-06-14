@@ -71,7 +71,7 @@ incidencia_comparada %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[1,],": Incidência Atos Infracionais, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y"), " e ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[1,],": Incidência Atos Infracionais, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"), " e ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -182,7 +182,7 @@ total_MBA_gt %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[3,],": Quantidade de MBAs Cumpridos, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[3,],": Quantidade de MBAs Cumpridos, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -521,7 +521,7 @@ incidencia_HOMICIDIO_gt %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[9,],": Incidência homicídio, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[9,],": Incidência homicídio, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -686,7 +686,7 @@ incidencia_ROUBO_gt %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[12,],": Incidência roubo, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[12,],": Incidência roubo, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -851,7 +851,7 @@ incidencia_FURTO_gt %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[15,],": Incidência furto, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[15,],": Incidência furto, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -1018,7 +1018,7 @@ incidencia_USO_DE_DROGAS_gt %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[18,],": Incidência posse de drogas para uso pessoal, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[18,],": Incidência posse de drogas para uso pessoal, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -1183,7 +1183,7 @@ incidencia_TRAFICO_DE_DROGAS_gt %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[21,],": Incidência tráfico de drogas, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[21,],": Incidência tráfico de drogas, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -2523,7 +2523,7 @@ banco_ESCOLA_total_casos %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[45,],": Quantidade de casos encaminhados, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[45,],": Quantidade de casos encaminhados, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "Ato infracional nas escolas") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -2918,7 +2918,7 @@ banco_JR_total_casos %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[52,],": Quantidade de casos encaminhados, Belo Horizonte, ", format(Sys.Date()-365*2, "%Y")))),
+    title = md((str_c(TABELA[52,],": Quantidade de casos encaminhados, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -5073,13 +5073,13 @@ tempo_medio_geral_OBITO_TAB_01 %>%
   #   columns = c(4),
   #   rows = `VAR%` < 0 )) %>%
 
-tab_options(
-  data_row.padding = px(1),
-  table.font.size = 12,
-  #heading.title.font.size = 20,
-  heading.align = "center",
-  #heading.title.font.size = "small",
-  heading.subtitle.font.size = "small",) %>%
+  tab_options(
+    data_row.padding = px(1),
+    table.font.size = 12,
+    #heading.title.font.size = 20,
+    heading.align = "center",
+    #heading.title.font.size = "small",
+    heading.subtitle.font.size = "small",) %>%
 
   # fmt_number(
   #columns = 3) %>%
@@ -5182,13 +5182,13 @@ tempo_medio_geral_CIABH_TAB_01 %>%
   #   columns = c(4),
   #   rows = `VAR%` < 0 )) %>%
 
-tab_options(
-  data_row.padding = px(1),
-  table.font.size = 12,
-  #heading.title.font.size = 20,
-  heading.align = "center",
-  #heading.title.font.size = "small",
-  heading.subtitle.font.size = "small",) %>%
+  tab_options(
+    data_row.padding = px(1),
+    table.font.size = 12,
+    #heading.title.font.size = 20,
+    heading.align = "center",
+    #heading.title.font.size = "small",
+    heading.subtitle.font.size = "small",) %>%
 
   # fmt_number(
   #columns = 3) %>%
@@ -5291,13 +5291,13 @@ banco_MEDIA_ENTRADAS_Let %>%
   #   columns = c(4),
   #   rows = `VAR%` < 0 )) %>%
 
-tab_options(
-  data_row.padding = px(1),
-  table.font.size = 12,
-  #heading.title.font.size = 20,
-  heading.align = "center",
-  #heading.title.font.size = "small",
-  heading.subtitle.font.size = "small",) %>%
+  tab_options(
+    data_row.padding = px(1),
+    table.font.size = 12,
+    #heading.title.font.size = 20,
+    heading.align = "center",
+    #heading.title.font.size = "small",
+    heading.subtitle.font.size = "small",) %>%
 
   # fmt_number(
   #columns = 3) %>%
