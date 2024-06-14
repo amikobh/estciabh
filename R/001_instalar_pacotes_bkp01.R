@@ -29,6 +29,9 @@ if(!require(pdftools)){install.packages("pdftools", dependencies = TRUE); requir
 if(!require(tm)){install.packages("tm", dependencies = TRUE); require(tm)}
 if(!require(kableExtra)){install.packages("kableExtra", dependencies = TRUE); require(kableExtra)}
 if(!require(openxlsx)){install.packages("openxlsx", dependencies = TRUE); require(openxlsx)}
+if(!require(arsenal)){install.packages("arsenal", dependencies = TRUE); require(arsenal)}
+
+
 
 conflicts_prefer(dplyr::filter)
 conflicts_prefer(dplyr::summarise)
