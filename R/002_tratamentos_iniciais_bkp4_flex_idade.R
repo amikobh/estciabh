@@ -129,6 +129,8 @@ banco$IDADE = banco$IDADE@year
 banco$NOME2 <- gsub(" ","", banco$NOME)
 banco$FILIACAO2 <- gsub(" ","", banco$FILIACAO)
 
+banco <- banco[!(banco$NOME2 == "AAPURAR"),]
+
 #EXEMPLO DE REMOVER A COLUNA
 #banco$CIDADE_ATO <- NULL
 banco_novas_colunas = banco
@@ -303,7 +305,10 @@ numero_de_casos_sem_mba <- banco_sem_mba
 
 # 2.1 SEPARANDO BANCO COM MBA PUROS (CUMPRIMENTO DE MANDADO DE BUSCA E APREENS?O). Observar a falta do "!".
 
+#mba puro
 banco_so_com_mba <-banco[(banco$SE_TEM_MBA == "SIM" & banco$ATO_INFRACIONAL_TERMO_01 == "MBA"),]
+#mba com novo ato
+banco_mba_com_ato <- banco |> filter(SE_TEM_MBA %in% "SIM")
 numero_de_cumprimento_mba <- banco_so_com_mba
 write.csv(banco_so_com_mba, file ="banco_so_com_mba.csv",row.names=FALSE)
 #########################################################################################################
