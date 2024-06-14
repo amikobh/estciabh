@@ -1335,7 +1335,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###DECISAO_banco_matriculados_CEDIPRO
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
+setwd(file.path("~/diretorio_r/estciabh/cedipro"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -1562,7 +1562,7 @@ colnames(PROTETIVAS_banco_matriculados_CEDIPRO)[3]<-'PERCENTUAL'
 #########################################################################################################
 ###REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
+setwd(file.path("~/diretorio_r/estciabh/cedipro"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -1641,7 +1641,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###REGIONAL_ATO_banco_matriculados_CEDIPRO
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
+setwd(file.path("~/diretorio_r/estciabh/cedipro"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -2758,7 +2758,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###DECISAO_banco_desistencia_CEDIPRO
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
+setwd(file.path("~/diretorio_r/estciabh/cedipro"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -2985,7 +2985,7 @@ colnames(PROTETIVAS_banco_desistencia_CEDIPRO)[3]<-'PERCENTUAL'
 #########################################################################################################
 ###REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
+setwd(file.path("~/diretorio_r/estciabh/cedipro"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -3064,7 +3064,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###REGIONAL_ATO_banco_desistencia_CEDIPRO
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
+setwd(file.path("~/diretorio_r/estciabh/cedipro"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)

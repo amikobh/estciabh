@@ -12,28 +12,28 @@ setwd(file.path("~/diretorio_r/estciabh"))
 #rm(list=ls(all=TRUE)): SEM USAR SCRIPT.E sim, este:
 
 #########################################################################################################
-#banco_so_com_mba <- read.csv("banco_so_com_mba.csv",header=TRUE, sep="|", encoding = "UTF-8", skip = 2) ##Lendo arquivo de texto separado por vírgulas (CSV) e que usa o ponto.
+#banco_mba_com_ato <- read.csv("banco_mba_com_ato.csv",header=TRUE, sep="|", encoding = "UTF-8", skip = 2) ##Lendo arquivo de texto separado por vírgulas (CSV) e que usa o ponto.
 
-banco_so_com_mba <- as_tibble(banco_so_com_mba)
+banco_mba_com_ato <- as_tibble(banco_mba_com_ato)
 
 
 
-banco_so_com_mba_bkp = banco_so_com_mba
+banco_mba_com_ato_bkp = banco_mba_com_ato
 #########################################################################################################
 #filtrar data
-#banco_so_com_mba = banco_so_com_mba %>%
+#banco_mba_com_ato = banco_mba_com_ato %>%
   #filter(DATA_DO_ENCAMINHAMENTO_DO_JUIZ >= (str_c(format(Sys.Date()-365*1, "%Y"), "-01-01")) &
           # DATA_DO_ENCAMINHAMENTO_DO_JUIZ <= (str_c(format(Sys.Date()-365*1, "%Y"), "-12-31")))
   #filter(DATA_DO_ENCAMINHAMENTO_DO_JUIZ >= (str_c(format(Sys.Date()-365*2, "%Y"), "-01-01")) & DATA_DO_ENCAMINHAMENTO_DO_JUIZ <= (str_c(format(Sys.Date()-365*2, "%Y"), "-12-31")))
 
-#banco_so_com_mba = banco_so_com_mba %>%
+#banco_mba_com_ato = banco_mba_com_ato %>%
   #filter(DATA_DO_RECEBIMENTO_NO_SETOR >= (str_c(format(Sys.Date()-365*1, "%Y"), "-01-01")) &
           # DATA_DO_RECEBIMENTO_NO_SETOR <= (str_c(format(Sys.Date()-365*1, "%Y"), "-12-31")))
 #########################################################################################################
 
 #########################################################################################################
 #tabela total_MBA
-total_MBA = data.frame(nrow(banco_so_com_mba))
+total_MBA = data.frame(nrow(banco_mba_com_ato))
 
 colnames(total_MBA) <- c("QUANTIDADE DE MBAs CUMPRIDOS")
 
@@ -47,7 +47,7 @@ total_MBA_gt = total_MBA
 #########################################################################################################
 #TRATAMENTO banco_MBA_snr_SEXO_IDADE
 #########################################################################################################
-banco_MBA_snr = distinct(banco_so_com_mba, NOME2, NASCIMENTO, .keep_all= TRUE)
+banco_MBA_snr = distinct(banco_mba_com_ato, NOME2, NASCIMENTO, .keep_all= TRUE)
 #########################################################################################################
 
 banco_MBA_snr_SEXO_IDADE =
@@ -293,7 +293,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 MOTIVO_MBA =
-  banco_so_com_mba %>%
+  banco_mba_com_ato %>%
   select(MOTIVO_MBA)
 
 #colnames(MOTIVO_MBA)[1]<-'regional_residencial'
@@ -370,7 +370,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 library(dplyr)
 
 banco_ato_MBA =
-  banco_so_com_mba |>
+  banco_mba_com_ato |>
   select(ATO_INFRACIONAL_MBA)
 
 banco_ato_MBA$ATO_INFRACIONAL_MBA = gsub(" ","", banco_ato_MBA$ATO_INFRACIONAL_MBA)
@@ -880,17 +880,17 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 df_regional_ATO_banco_MBA =
-  banco_so_com_mba %>%
+  banco_mba_com_ato %>%
   select(REGIONAL_ATO)
 
 colnames(df_regional_ATO_banco_MBA)[1]<-'REGIONAL_ATO'
 
 #########################################################################################################
 #encontrando parte do texto e substituindo
-df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("/MG", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("/MG", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "OUTRA CIDADE MG"
 df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("RMBH", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
 df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("RIBEIRAO DAS NEVES", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "REGIÃO METROPOLITANA"
-df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("CATAGUASES", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "UOUTRA CIDADE MG"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("CATAGUASES", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "OUTRA CIDADE MG"
 df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("CIDADE DE BRASILIA/DF", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "VOUTRO ESTADO"
 df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("N/DISP", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
 df_regional_ATO_banco_MBA$REGIONAL_ATO[agrep("INFORMACAO", df_regional_ATO_banco_MBA$REGIONAL_ATO)] <- "ZSEM INFORMAÇÃO"
@@ -943,6 +943,17 @@ colnames(df_regional_ATO_banco_MBA_bkp)[1]<-'df_regional_ATO_banco_MBA_bkp'
 colnames(df_regional_ATO_banco_MBA_bkp)[2]<-'QUANTIDADE'
 colnames(df_regional_ATO_banco_MBA_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+
+# Adaptando:
+#SUBSTITUIR
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "PAMPULHA"]<- "UPAMPULHA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "VENDA NOVA"]<- "VVENDA NOVA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "REGIÃO METROPOLITANA"]<- "WREGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "OUTRA CIDADE MG"]<- "XOUTRA CIDADE MG"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "OUTRO ESTADO"]<- "YOUTRO ESTADO"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "SEM INFORMAÇÃO"]<- "ZSEM INFORMAÇÃO"
+
+#########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
 
@@ -953,19 +964,18 @@ df_regional_ATO_banco_MBA =
   janitor::adorn_totals() %>%
   adorn_pct_formatting(digits = 2)
 #########################################################################################################
+#########################################################################################################
 
 # Adaptando:
 #SUBSTITUIR
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "UPAMPULHA"]<- "PAMPULHA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "VVENDA NOVA"]<- "VENDA NOVA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "WREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "XOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
+df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "YOUTRO ESTADO"]<- "OUTRO ESTADO"
 df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
-df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "ZREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
-df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "OESTEPAMPULHA"]<- "PAMPULHA"
-df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "PVENDA NOVA"]<- "VENDA NOVA"
-df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "QREGIÃO METROPOLITANA"]<- "REGIÃO METROPOLITANA"
-df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
-df_regional_ATO_banco_MBA$REGIONAL_ATO[df_regional_ATO_banco_MBA$REGIONAL_ATO == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
-
-
+#########################################################################################################
 colnames(df_regional_ATO_banco_MBA)[1]<-'REGIONAL'
 colnames(df_regional_ATO_banco_MBA)[2]<-'QUANTIDADE'
 colnames(df_regional_ATO_banco_MBA)[3]<-'PERCENTUAL'
@@ -994,7 +1004,7 @@ setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 library(dplyr)
 
 df_DIA_SEMANA_banco_MBA =
-  banco_so_com_mba %>%
+  banco_mba_com_ato %>%
   select(DIA_SEMANA_ATO)
 
 colnames(df_DIA_SEMANA_banco_MBA)[1]<-'DIA_SEMANA'
