@@ -210,7 +210,7 @@ ggplot(df_snr_regional_residencia_MBA_bkp, aes(x = df_snr_regional_residencia_MB
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 33))
+  scale_y_continuous(limits=c(0, 46))
 ggsave("GRAFICO[8,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -238,7 +238,7 @@ ggplot(MOTIVO_MBA_bkp, aes(x = MOTIVO_MBA_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 96))
+  scale_y_continuous(limits=c(0, 120))
 ggsave("GRAFICO[9,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -266,7 +266,7 @@ ggplot(banco_ato_MBA_bkp, aes(x = banco_ato_MBA_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 86))
+  scale_y_continuous(limits=c(0, 114))
 ggsave("GRAFICO[10,].png", width=12, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -2388,7 +2388,7 @@ setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 p_SEXO_HOM_IGN_let <- plot_grid(p1_banco_SEXO_HOMICIDIO_LETALIDADE_pizza, p2_banco_SEXO_IGNORADA_LETALIDADE_pizza)
 
-title <- ggdraw() + draw_label(str_c(GRAFICO[87,],": Sexo dos adolescente e jovens vitimados por homicídio e causa ignorada, Sexo, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y")), fontface='bold')
+title <- ggdraw() + draw_label(str_c(GRAFICO[87,],": Sexo dos adolescente e jovens vitimados por homicídio e causa ignorada, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y")), fontface='bold')
 subtitle <- ggdraw() + draw_label("Letalidade", size = 12)
 #caption <- ggdraw() + draw_label("FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL", fontface=NULL)
 
@@ -2450,7 +2450,7 @@ ggsave("GRAFICO[89,].png", width=13, height=5, pointsize=12, dpi = 512)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 ggplot(passagem_cia_GERAL_HOM_IGN_LET, aes(fill=PASSAGEM_CIABH, y=QUANTIDADE, x=CAUSA_JURIDICA)) +
   geom_bar(position="dodge", stat="identity") +
-  labs(title = (str_c(GRAFICO[90,],": Óbitos por causas violentas e Passagem CIABH, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
+  labs(title = (str_c(GRAFICO[90,],": Óbitos por causas violentas e passagem pelo CIABH, Belo Horizonte e municípios limítrofes, ", format(Sys.Date()-365*2, "%Y"))),
        subtitle = "LETALIDADE",
        caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL",
        x = "", y = "",
