@@ -478,7 +478,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###banco_ESCOLA_decisao
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/escola"))
+setwd(file.path("~/diretorio_r/estciabh/ESCOLA"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
