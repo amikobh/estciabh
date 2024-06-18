@@ -39,7 +39,7 @@ e: 5,0%
 
 
 
-Tamanho amostral indicado: 451    
+Tamanho amostral indicado: 500    
 Total de questionários aplicados: `r nrow(amostra_snr)`    
 O tamanho da amostra coletada, nos garante, com 99% de confiança, que a proporção amostral está afastada da verdadeira em no máximo 5%.   
 
