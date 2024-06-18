@@ -238,7 +238,7 @@ ggplot(MOTIVO_MBA_bkp, aes(x = MOTIVO_MBA_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 120))
+  scale_y_continuous(limits=c(0, (MOTIVO_MBA_bkp[nrow(MOTIVO_MBA_bkp),2])+3))
 ggsave("GRAFICO[9,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
