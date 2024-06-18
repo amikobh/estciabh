@@ -2,7 +2,7 @@
 title: |
   | \vspace{5cm} \LARGE RELATÓRIO ESTATÍSTICO
 subtitle: "VARA INFRACIONAL DA INFÂNCIA E DA JUVENTUDE"
-date: Belo Horizonte `r format(Sys.Date()-365, "%Y")` # Para pegar automaticamente a data do computador 
+date: Belo Horizonte `r format(Sys.Date()-365, "%Y")` # Para pegar automaticamente a data do computador
 output: bookdown::pdf_book
 documentclass: scrartcl
 latex_engine: xelatex
@@ -39,12 +39,12 @@ header-includes: |
   \usepackage{indentfirst}
   \usepackage{blindtext}
   \counterwithin{figure}{section}
-  \counterwithin{table}{section}  
+  \counterwithin{table}{section}
   \usepackage{chngcntr}
   \usepackage{graphicx} % Usado para outros tipos de imagens
   \usepackage{float} % Usado para posicionamento de imagens
   \usepackage{svg}  % Eis o pacote que queremos.
-  
+
 papersize: a4
 fontsize: 10pt
 linestretch: 1.2
@@ -52,7 +52,7 @@ toc: false
 toc-depth: 100
 secnumdepth: 100
 lof: false
-lot: false  
+lot: false
 description: |
   This is a minimal example of using the bookdown package to write a book.
   set in the _output.yml file.
@@ -89,9 +89,9 @@ PRESIDENTE
 \end{center}
 \begin{center}
 José Arthur de Carvalho Pereira Filho
-\end{center}    
+\end{center}
 \begin{center}
-\end{center}    
+\end{center}
 \leavevmode
 \newline
 \begin{center}
@@ -102,7 +102,7 @@ JUÍZA TITULAR
 \end{center}
 \begin{center}
 Riza Aparecida Nery
-\end{center}    
+\end{center}
 
 \leavevmode
 \newline
@@ -117,37 +117,37 @@ Riza Aparecida Nery
 \newline
 \newline
 \vspace{5cm}
-**ELABORAÇÃO**    
+**ELABORAÇÃO**
 
-**CENTRO DE INFORMAÇÃO PARA GESTÃO INSTITUCIONAL – CEINFO/TJMG**   
-Vânia Cristina Fernandes   
-Victória Maria Quirino Gomes Gonçalves    
-
-\vspace{1cm}
-**COMISSÃO DE PREVENÇÃO À LETALIDADE DE ADOLESCENTES E JOVENS**   
-Lucas Rolla - Promotor de Justiça    
-Aline Pacheco Silva    
-Ana Carolina Gonçalves Ferreira    
-Anne Cristina Eliane de Souza da Silva    
-Cynthia Maria Santos Águido    
-Elerson Márcio dos Santos    
-Fabiana Santos de Oliveira Carvalho    
-Ingrid Caroline Damião Vieira    
-Maira Cristina Soares Freitas    
-Michelle Gangana Duarte    
-Selmara Mamede Simões Ferreira    
-Vanessa Serva Maciel Golgher    
+**CENTRO DE INFORMAÇÃO PARA GESTÃO INSTITUCIONAL – CEINFO/TJMG**
+Vânia Cristina Fernandes
+Victória Maria Quirino Gomes Gonçalves
 
 \vspace{1cm}
-**EQUIPE DE ANÁLISE DE DADOS - COMISSARIADO**   
-Riza Aparecida Nery - Juíza Titular - Vara Infracional da Infância e da Juventude de Belo Horizonte    
-Clayson de Faria e Silva        
-Denisson Glória Magleau    
-Elerson Márcio dos Santos       
-Marcelo Paulo Nogueira Pereira   
-Maria Rita de Cássia Generoso   
-Patrícia Passos Silva   
-Paulo Roberto dos Santos  
+**COMISSÃO DE PREVENÇÃO À LETALIDADE DE ADOLESCENTES E JOVENS**
+Lucas Rolla - Promotor de Justiça
+Aline Pacheco Silva
+Ana Carolina Gonçalves Ferreira
+Anne Cristina Eliane de Souza da Silva
+Cynthia Maria Santos Águido
+Elerson Márcio dos Santos
+Fabiana Santos de Oliveira Carvalho
+Ingrid Caroline Damião Vieira
+Maira Cristina Soares Freitas
+Michelle Gangana Duarte
+Selmara Mamede Simões Ferreira
+Vanessa Serva Maciel Golgher
+
+\vspace{1cm}
+**EQUIPE DE ANÁLISE DE DADOS - COMISSARIADO**
+Riza Aparecida Nery - Juíza Titular - Vara Infracional da Infância e da Juventude de Belo Horizonte
+Clayson de Faria e Silva
+Denisson Glória Magleau
+Elerson Márcio dos Santos
+Marcelo Paulo Nogueira Pereira
+Maria Rita de Cássia Generoso
+Patrícia Passos Silva
+Paulo Roberto dos Santos
 
 \newpage
 
@@ -162,90 +162,53 @@ Paulo Roberto dos Santos
 \setcounter{page}{8}
 # Considerações iniciais
 
-\vspace{0.3cm}
-
->“Ensina a criança no caminho em que deve andar, e, ainda quando for velha, não se desviará dele.”^[Provérbios, 22:6.]
 
 \vspace{0.3cm}
-É importante destacar o  artigo 227 da Constituição da Republica, que representou um novo olhar sobre a infância e adolescência, rompendo o modelo punitivista do Código de Menores.    
 
-Aprovado em julho de 1990, o Estatuto da Criança e do Adolescente - ECA, regulamentou o artigo 227 da Constituição Federal instituindo nova doutrina de garantia de direitos e proteção à Infância.    
+É importante destacar o  artigo 227 da Constituição da Republica, que representou um novo olhar sobre a infância e adolescência, rompendo o modelo punitivista do Código de Menores.
 
-O Estatuto reiterou a necessidade de prioridade absoluta e definiu os menores de 18 anos como sujeitos de direitos, reconhecendo a condição peculiar de desenvolvimento e formação em que se encontra.    
+Aprovado em julho de 1990, o Estatuto da Criança e do Adolescente - ECA, regulamentou o artigo 227 da Constituição Federal instituindo nova doutrina de garantia de direitos e proteção à Infância.
 
-Até a adolescência tem-se um período de mudanças físicas e emocionais, que significa a perda da condição de criança para o mundo adulto, uma fase caracterizada pela transição em vários domínios do desenvolvimento, seja biológico, cognitivo ou social; por conflitos internos e lutos que exigem do adolescente a elaboração e a ressignificação de sua identidade, imagem corporal, relação com a família e com a sociedade.    
+O Estatuto reiterou a necessidade de prioridade absoluta e definiu os menores de 18 anos como sujeitos de direitos, reconhecendo a condição peculiar de desenvolvimento e formação em que se encontra.
 
-Muitos adolescentes neste momento de maior vulnerabilidade, na busca de si mesmo e na necessidade de ser aceito em suas relações sociais, se veem envolvidos em situações de risco.    
+Até a adolescência tem-se um período de mudanças físicas e emocionais, que significa a perda da condição de criança para o mundo adulto, uma fase caracterizada pela transição em vários domínios do desenvolvimento, seja biológico, cognitivo ou social; por conflitos internos e lutos que exigem do adolescente a elaboração e a ressignificação de sua identidade, imagem corporal, relação com a família e com a sociedade.
 
-O Estatuto afirma que os adolescentes em razão de sua conduta infracional são passíveis de sofrerem a intervenção do poder público e da justiça para que cumpram medidas de proteção e socioeducativas. As medidas de proteção se aplicam nas situações onde é possível constatar a condição de vulnerabilidade e risco e as medidas socioeducativas - de inegável conteúdo aflitivo e retributivo - se o menor for autor de ato infracional.    
+Muitos adolescentes neste momento de maior vulnerabilidade, na busca de si mesmo e na necessidade de ser aceito em suas relações sociais, se veem envolvidos em situações de risco.
+
+O Estatuto afirma que os adolescentes em razão de sua conduta infracional são passíveis de sofrerem a intervenção do poder público e da justiça para que cumpram medidas de proteção e socioeducativas. As medidas de proteção se aplicam nas situações onde é possível constatar a condição de vulnerabilidade e risco e as medidas socioeducativas - de inegável conteúdo aflitivo e retributivo - se o menor for autor de ato infracional.
 
 Tais medidas, de proteção e socioeducativas, seguem o Princípio da Atenção Integral disposto no
 Estatuto da Criança e do Adolescente, e formam uma espécie de balizamento legal para que a aplicação de
-tratamento para os menoristas seja estimulado pela Justiça.    
+tratamento para os menoristas seja estimulado pela Justiça.
 
 Com o intuito de aprimorar o trabalho realizado na Vara Infracional da Infância e da Juventude de
 Belo Horizonte, foi elaborado um trabalho circunstanciado de estatística anual, para melhor visibilidade e
-aplicação de políticas públicas de prevenção.    
+aplicação de políticas públicas de prevenção.
 
 As propostas de prevenção devem estar em sintonia com as necessidades da população local,
 conhecendo as peculiaridades de cada comunidade. Felizmente os novos conhecimentos trouxeram novas
 maneiras de enfrentar o problema da delinquência infanto juvenil, que não seja somente a repressão, como
-no passado.    
+no passado.
 
 As ações de prevenção devem assumir uma natureza abrangente, e por essa razão a comunidade
 precisa estar preparada e integrada para agir, porque cada pessoa tem um papel fundamental a desempenhar,
 fazendo-se necessário juntar o saber popular ao saber acadêmico e ao saber político para construir um saber
-comum que servirá de base para realização de projetos e trabalhos futuros.    
+comum que servirá de base para realização de projetos e trabalhos futuros.
 
 Conforme a legislação atual, é possível oferecer novas formas de trabalho com o infrator,
 oferecendo-lhe alternativas mais benéficas e eficazes para o fim da reeducação e ressocialização do
-indivíduo.    
+indivíduo.
 
 Diante desse pensamento é possível perceber que é necessário muito mais do que proibir, e sim
 buscar ações plausíveis e eficazes que envolvam a sociedade nos seus mais variados segmentos, uma vez que
-cada um tem sua parcela de responsabilidade, afinal os danos causados afetam toda a população.    
+cada um tem sua parcela de responsabilidade, afinal os danos causados afetam toda a população.
 
 
 \begin{center}
 RIZA APARECIDA NERY
 
-JUÍZA TITULAR 
+JUÍZA TITULAR
 
 VARA INFRACIONAL DA INFÂNCIA E DA JUVENTUDE DE BELO HORIZONTE\end{center}
 \newpage
 
-
-
-# Apresentação
-\vspace{1cm}
-
->"Num momento em que se abre uma polêmica nacional, referente à redução da imputabilidade penal, inclusive com inúmeros projetos de lei em tramitação; num momento ainda em que a insegurança da sociedade, cada vez mais assustada com o aumento da criminalidade e da violência, gera discussões calorosas, acirradas e radicais sobre as soluções para o problema, há que se ter, antes de decisões possivelmente paliativas e equivocadas, uma visão mais ampla e profunda das características do adolescente infrator e do ato por ele cometido" (VIEIRA, 1999, p. 16)^[VIEIRA, Henriqueta Scharf. Perfil do adolescente infrator no Estado de Santa Catarina. **Cadernos do Ministério Público**. Florianópolis: nº 03, Assessoria de Imprensa da Procuradoria Geral de Justiça, 1999].
-
-\vspace{1cm}
-
-Sabemos que a opinião pública muito se baseia em informações transmitidas através da mídia, que com frequência alerta para o aumento da violência. Há, no entanto, alguns equívocos com relação à incidência criminal. O primeiro deles é a tentativa de se fazer pensar nos adolescentes infratores como responsáveis pelo aumento desses índices. Outro equívoco é a ideia de que nada acontece com os adolescentes que cometem ato infracional, formando uma visão preconceituosa e totalmente deturpada e viciada contra estes.
-
-O sistema legal implantado pelo Estatuto da Criança e do Adolescente contempla um modelo de responsabilidade juvenil, que afirma que estes jovens com idades entre 12 e 18 anos são sujeitos de direitos e de responsabilidades. O mesmo diploma legal prevê que, em caso de cometimento de infração, estes jovens poderão ser sancionados com medidas socioeducativas, inclusive privativas de liberdade. A natureza dessas medidas, além do caráter sancionatório, é prevalentemente pedagógica. O fato de não serem aplicadas ao adolescente em conflito com a lei as penas previstas na legislação penal não o torna irresponsável por seus atos.
-
-O encarceramento de adolescentes em penitenciárias proposto por muitas pessoas é uma medida simplista para um problema tão complexo que é a crise do atual modelo de segurança pública em todo o país, e nem de longe se afigura como capaz de solucionar a questão.
-
-É sobretudo necessário que se desenvolva um conhecimento estruturado da realidade sobre o envolvimento desses adolescentes em conflito com a lei, para que possamos elaborar estratégias e formular políticas públicas no âmbito, principalmente, da escolarização e profissionalização, fatores preponderantes no envolvimento desses jovens na prática de ilícitos.
-
-Dessa forma, esta análise de informações e dados tem por finalidade primordial fornecer elementos para a elaboração de políticas públicas a serem eficazmente implementadas na vida desses jovens, de modo a se evitar a cooptação destes para o cometimento de ilícitos.
-
-De início será apresentado o cenário do envolvimento de adolescentes com ocorrências infracionais, atendidos pela Vara Infracional da Infância e da Juventude de Belo Horizonte. Em destaque, analisamos os atos infracionais mais praticados pelos adolescentes, como o roubo, o furto, o tráfico e uso de drogas ilícitas.
-
-Em prosseguimento, cuidar-se-ão das informações sobre aspectos socioeconômicos.
-
-Em seguida, tem-se sob análise as medidas protetivas aplicadas bem como o quantitativo das decisões judiciais e o tempo para seu proferimento, a partir da data da prática do ato e, por derradeiro, apresentam-se os indicadores dos atos infracionais praticados em ambiente escolar.
-
-\begin{center}
-
-VALÉRIA DA SILVA RODRIGUES QUEIROZ
-
-DESEMBARGADORA
-
-SUPERINTENDENTE DA COORDENADORIA DA INFÂNCIA E DA JUVENTUDE
-\end{center}
-
-\newpage
