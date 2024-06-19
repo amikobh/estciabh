@@ -107,7 +107,7 @@ knitr::include_graphics('imagens/GRAFICO[70,].png')
 \newpage
 
 ### Medidas protetivas
-#### Especificação das medidas protetivas
+
 
 As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente:
 \leavevmode
@@ -221,7 +221,7 @@ knitr::include_graphics('imagens/GRAFICO[78,].png')
 \newpage
 
 ### Medidas protetivas
-#### Especificação das medidas protetivas
+
 
 As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente:
 \leavevmode
