@@ -88,7 +88,33 @@ TRIBUNAL DE JUSTIÇA DO ESTADO DE MINAS GERAIS
 PRESIDENTE
 \end{center}
 \begin{center}
-José Arthur de Carvalho Pereira Filho
+Desembargador José Arthur de Carvalho Pereira Filho
+\end{center}
+\begin{center}
+\end{center}
+\leavevmode
+\newline
+\begin{center}
+TRIBUNAL DE JUSTIÇA DO ESTADO DE MINAS GERAIS
+\end{center}
+\begin{center}
+CORREGEDOR-GERAL
+\end{center}
+\begin{center}
+Desembargador Luiz Carlos de Azevedo Corrêa Junior
+\end{center}
+\begin{center}
+\end{center}
+\leavevmode
+\newline
+\begin{center}
+COORDENADORIA DA INFÂNCIA E DA JUVENTUDE - COINJ
+\end{center}
+\begin{center}
+SUPERINTENDENTE
+\end{center}
+\begin{center}
+Desembargadora Alice de Souza Birchal
 \end{center}
 \begin{center}
 \end{center}
@@ -119,35 +145,35 @@ Riza Aparecida Nery
 \vspace{5cm}
 **ELABORAÇÃO**
 
-**CENTRO DE INFORMAÇÃO PARA GESTÃO INSTITUCIONAL – CEINFO/TJMG**
-Vânia Cristina Fernandes
+**CENTRO DE INFORMAÇÃO PARA GESTÃO INSTITUCIONAL – CEINFO/TJMG**    
+Vânia Cristina Fernandes    
 Victória Maria Quirino Gomes Gonçalves
 
 \vspace{1cm}
-**COMISSÃO DE PREVENÇÃO À LETALIDADE DE ADOLESCENTES E JOVENS**
-Lucas Rolla - Promotor de Justiça
-Aline Pacheco Silva
-Ana Carolina Gonçalves Ferreira
-Anne Cristina Eliane de Souza da Silva
-Cynthia Maria Santos Águido
-Elerson Márcio dos Santos
-Fabiana Santos de Oliveira Carvalho
-Ingrid Caroline Damião Vieira
-Maira Cristina Soares Freitas
-Michelle Gangana Duarte
-Selmara Mamede Simões Ferreira
-Vanessa Serva Maciel Golgher
+**COMISSÃO DE PREVENÇÃO À LETALIDADE DE ADOLESCENTES E JOVENS**    
+Lucas Rolla - Promotor de Justiça    
+Aline Pacheco Silva    
+Ana Carolina Gonçalves Ferreira    
+Anne Cristina Eliane de Souza da Silva    
+Cynthia Maria Santos Águido    
+Elerson Márcio dos Santos    
+Fabiana Santos de Oliveira Carvalho    
+Ingrid Caroline Damião Vieira    
+Maira Cristina Soares Freitas    
+Michelle Gangana Duarte    
+Selmara Mamede Simões Ferreira    
+Vanessa Serva Maciel Golgher    
 
 \vspace{1cm}
-**EQUIPE DE ANÁLISE DE DADOS - COMISSARIADO**
-Riza Aparecida Nery - Juíza Titular - Vara Infracional da Infância e da Juventude de Belo Horizonte
-Clayson de Faria e Silva
-Denisson Glória Magleau
-Elerson Márcio dos Santos
-Marcelo Paulo Nogueira Pereira
-Maria Rita de Cássia Generoso
-Patrícia Passos Silva
-Paulo Roberto dos Santos
+**EQUIPE DE ANÁLISE DE DADOS - COMISSARIADO**    
+Riza Aparecida Nery - Juíza Titular - Vara Infracional da Infância e da Juventude de Belo Horizonte    
+Clayson de Faria e Silva    
+Denisson Glória Magleau    
+Elerson Márcio dos Santos    
+Marcelo Paulo Nogueira Pereira     
+Maria Rita de Cássia Generoso     
+Patrícia Passos Silva     
+Paulo Roberto dos Santos    
 
 \newpage
 

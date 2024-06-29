@@ -367,6 +367,42 @@ incidencia_TRAFICO_DE_DROGAS_gt = incidencia_TRAFICO_DE_DROGAS
 
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
+atos_em_foco =
+  banco_incidencia_geral_bkp |>
+  filter(banco_incidencia_geral_bkp %in% "HOMICÍDIO" | banco_incidencia_geral_bkp %in% "ROUBO" |
+           banco_incidencia_geral_bkp %in% "FURTO" | banco_incidencia_geral_bkp %in% "POSSE DE DROGAS PARA USO PESSOAL" |
+           banco_incidencia_geral_bkp %in% "TRÁFICO DE DROGAS")
+#########################################################################################################
+# Adaptando:
+#SUBSTITUIR
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "HOMICÍDIO"]<- "AHOMICÍDIO"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "ROUBO"]<- "BROUBO"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "FURTO"]<- "CFURTO"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "POSSE DE DROGAS PARA USO PESSOAL"]<- "DPOSSE DE DROGAS PARA USO PESSOAL"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "TRÁFICO DE DROGAS"]<- "ETRÁFICO DE DROGAS"
+#########################################################################################################
+atos_em_foco =
+  atos_em_foco |>
+  arrange(banco_incidencia_geral_bkp)
+#########################################################################################################
+# Adaptando:
+#SUBSTITUIR
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "AHOMICÍDIO"]<- "HOMICÍDIO"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "BROUBO"]<- "ROUBO"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "CFURTO"]<- "FURTO"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "DPOSSE DE DROGAS PARA USO PESSOAL"]<- "POSSE DE DROGAS PARA USO PESSOAL"
+atos_em_foco$banco_incidencia_geral_bkp[atos_em_foco$banco_incidencia_geral_bkp == "ETRÁFICO DE DROGAS"]<- "TRÁFICO DE DROGAS"
+#########################################################################################################
+colnames(atos_em_foco)[1]<-'ATO'
+colnames(atos_em_foco)[2]<-'INCIDÊNCIA'
+#########################################################################################################
+atos_em_foco_rmd = atos_em_foco
+#########################################################################################################
+#acrescentando linha com total
+atos_em_foco$PERCENTUAL = NULL
+atos_em_foco$PERCENTUAL2 = NULL
+#########################################################################################################
 
 #########################################################################################################
 

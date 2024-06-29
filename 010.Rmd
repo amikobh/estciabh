@@ -1,11 +1,20 @@
 # Decisões
 
+
+O presente capítulo faz referência às decisões processuais proferidas.    
+Estas decisões ocorrem tanto nas audiências preliminares quanto em momento processual delas distinto.    
+A audiência preliminar é a primeira audiência que acolhe o adolescente com a finalidade de apuração da autoria do ato infracional. É constituída pela presença do Juiz, do Promotor de Justiça, do Defensor Público e dos pais ou responsáveis legais do adolescente.
+
+\leavevmode
+\newline
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[38,].png')
 ```
 
-## Decisões em audiência preliminar
+## Decisões em audiências preliminares
 
+\leavevmode
+\newline
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[39,].png')
 ```
@@ -43,7 +52,7 @@ knitr::include_graphics('imagens/GRAFICO[36,].png')
 
 \newpage
 
-## Decisão após audiência preliminar
+## Decisões após audiências preliminares
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[42,].png')

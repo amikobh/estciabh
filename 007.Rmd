@@ -1,7 +1,28 @@
-# Atos em foco
+# Atos infracionais em foco
 
-A partir deste ponto, explicitar-se-ão as características dos atos infracionais homicídio, roubo, furto e tráfico de drogas.
+Nesta parte, se analisa, em destaque, os atos infracionais homicídio, roubo, furto, posse de drogas para uso pessoal e tráfico de drogas. A tabela e o gráfico que seguem apontam a incidência destes atos.
 
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[8,].png')
+```
+
+\leavevmode
+\newline
+
+De se notar que o conjunto destes atos representa `r sum(atos_em_foco_rmd$PERCENTUAL2)`% do total dos atos infracionais praticados no ano em estudo.
+
+\leavevmode
+\newline
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[10,].png')
+```
+
+
+\newpage
 ## Homicídio
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
@@ -33,7 +54,7 @@ As regionais `r df_regional_banco_HOMICIDIO_gt_bkp_rmd[nrow(df_regional_banco_HO
 knitr::include_graphics('imagens/GRAFICO[11,].png')
 ```
 
-Os adolescentes autores de homicídio se encontram na faixa etária de `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` a `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-1,1]`.
+A maioria dos adolescentes autores de homicídio se encontram na faixa etária de `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-1,1]` a `r banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_HOMICIDIO_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]`.
 \leavevmode
 \newline
 

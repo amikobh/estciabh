@@ -27,8 +27,8 @@ A Equipe de ANÁLISE DE DADOS, que se incorpora ao Comissariado Infracional, da 
 
 Para a desincumbência de seu trabalho, a aludida equipe se vale do software R. R é uma linguagem e um ambiente de desenvolvimento integrado, para cálculos estatísticos e gráficos. O código fonte do R está disponível sob a licença GNU GPL e as versões binárias pré-compiladas são fornecidas para Windows, Macintosh, e muitos sistemas operacionais Unix/Linux. A linguagem R é largamente usada entre estatísticos e em Universidades.    
 
-A estruturação do capítulo 8 contou com o trabalho do Centro de Informação para Gestão Institucional – CEINFO/TJMG.    
+A estruturação do capítulo 7 contou com o trabalho do Centro de Informação para Gestão Institucional – CEINFO/TJMG.    
 
-A construção do capítulo 14 valeu-se do trabalho da Comissão de Prevenção à Letalidade de Adolescentes e Jovens, integrante do Fórum
+A construção do capítulo 13 valeu-se do trabalho da Comissão de Prevenção à Letalidade de Adolescentes e Jovens, integrante do Fórum
 Permanente do Sistema de Atendimento Socioeducativo de Belo Horizonte. 
 \newpage

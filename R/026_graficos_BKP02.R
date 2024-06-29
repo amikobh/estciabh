@@ -210,7 +210,7 @@ ggplot(df_snr_regional_residencia_MBA_bkp, aes(x = df_snr_regional_residencia_MB
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 46))
+  scale_y_continuous(limits=c(0, (df_snr_regional_residencia_MBA_bkp[nrow(df_snr_regional_residencia_MBA_bkp),2])+1))
 ggsave("GRAFICO[8,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -242,23 +242,26 @@ ggplot(MOTIVO_MBA_bkp, aes(x = MOTIVO_MBA_bkp, y = QUANTIDADE)) +
 ggsave("GRAFICO[9,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
+
+#ATOS EM FOCO: HOMICÍDIO
 #########################################################################################################
 #########################################################################################################
-SINAL <- paste(banco_ato_MBA_bkp$PERCENTUAL)#para plotar o sinal de porcentagem
-#pdf(file="grafico_banco_ato_MBA_bkp_alternativo.pdf", title = "grafico_banco_ato_MBA_bkp", width = 10, height = 8)
+#########################################################################################################
+SINAL <- paste(atos_em_foco_rmd$INCIDÊNCIA)#para plotar o sinal de porcentagem
+#pdf(file="grafico_atos_em_foco_rmd_alternativo.pdf", title = "grafico_atos_em_foco_rmd", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
 library(forcats)
 
-banco_ato_MBA_bkp =
-  banco_ato_MBA_bkp |>
-  mutate(banco_ato_MBA_bkp = fct_reorder(banco_ato_MBA_bkp, QUANTIDADE))
+atos_em_foco_rmd =
+  atos_em_foco_rmd |>
+  mutate(atos_em_foco_rmd = fct_reorder(ATO, INCIDÊNCIA))
 
-ggplot(banco_ato_MBA_bkp, aes(x = banco_ato_MBA_bkp, y = QUANTIDADE)) +
+ggplot(atos_em_foco_rmd, aes(x = atos_em_foco_rmd, y = INCIDÊNCIA)) +
   geom_bar(stat = "identity", fill="#bb1e23") +
   coord_flip() +
-  labs(title = (str_c(GRAFICO[10,],": Atos infracionais atribuídos aos adolescentes encaminhados por MBA, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
-       subtitle = "MBAs cumpridos",
+  labs(title = (str_c(GRAFICO[10,],": Incidência atos em foco, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+       #subtitle = "MBAs cumpridos",
        caption = "FONTE: VARA INFRACIONAL/COMISSARIADO",
        x = "", y = "")  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
@@ -266,15 +269,12 @@ ggplot(banco_ato_MBA_bkp, aes(x = banco_ato_MBA_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 114))
+  scale_y_continuous(limits=c(0, 990))
 ggsave("GRAFICO[10,].png", width=12, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
 #########################################################################################################
 #########################################################################################################
-#ATOS EM FOCO: HOMICÍDIO
-#########################################################################################################
-
 
 #########################################################################################################
 #########################################################################################################
@@ -702,7 +702,7 @@ ggplot(SERIE_ATUAL_OU_ULTIMA_CURSADA_bkp, aes(x = SERIE_ATUAL_OU_ULTIMA_CURSADA_
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 165))
+  scale_y_continuous(limits=c(0, (SERIE_ATUAL_OU_ULTIMA_CURSADA_bkp[nrow(SERIE_ATUAL_OU_ULTIMA_CURSADA_bkp),2])+1))
 ggsave("GRAFICO[26,].png", width=10, height=8, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -785,7 +785,7 @@ ggplot(RENDA_MENSAL_bkp, aes(x = RENDA_MENSAL_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 140))
+  scale_y_continuous(limits=c(0, (RENDA_MENSAL_bkp[nrow(RENDA_MENSAL_bkp),2])+1))
 ggsave("GRAFICO[29,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -820,7 +820,7 @@ ggplot(RENDA_FAMILIAR_bkp, aes(x = RENDA_FAMILIAR_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 185))
+  scale_y_continuous(limits=c(0, (RENDA_FAMILIAR_bkp[nrow(RENDA_FAMILIAR_bkp),2])+2))
 ggsave("GRAFICO[30,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -852,7 +852,7 @@ ggplot(TIPO_MORADIA_bkp, aes(x = TIPO_MORADIA_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 470))
+  scale_y_continuous(limits=c(0, (TIPO_MORADIA_bkp[nrow(TIPO_MORADIA_bkp),2])+1))
 ggsave("GRAFICO[31,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -924,7 +924,7 @@ ggplot(DROGAS_USO_bkp, aes(x = DROGAS_USO_bkp, y = QUANTIDADE)) +
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 318))
+  scale_y_continuous(limits=c(0, (DROGAS_USO_bkp[nrow(DROGAS_USO_bkp),2])+1))
 ggsave("GRAFICO[33,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -985,7 +985,7 @@ so_decisao_bkp =
 ggplot(so_decisao_bkp, aes(x = so_decisao_bkp, y = QUANTIDADE)) +
   geom_bar(stat = "identity", fill="#bb1e23") +
   coord_flip() +
-  labs(title = (str_c(GRAFICO[35,],": Decisão em Audiência Preliminar, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+  labs(title = (str_c(GRAFICO[35,],": Decisões em audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        #subtitle = "Adolescentes por MEDIDAs Infracionais",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
        x = "", y = "")  +
@@ -1047,7 +1047,7 @@ so_sentenca_bkp =
 ggplot(so_sentenca_bkp, aes(x = so_sentenca_bkp, y = QUANTIDADE)) +
   geom_bar(stat = "identity", fill="#bb1e23") +
   coord_flip() +
-  labs(title = (str_c(GRAFICO[37,],": Sentenças, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
+  labs(title = (str_c(GRAFICO[37,],": Decisões após as audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        #subtitle = "Adolescentes por MEDIDAs Infracionais",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD",
        x = "", y = "")  +
@@ -1087,7 +1087,7 @@ ggplot(intervalo_sentenca_bkp, aes(x = intervalo_sentenca_bkp, y = QUANTIDADE)) 
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 500))
+  scale_y_continuous(limits=c(0, (intervalo_sentenca_bkp[nrow(intervalo_sentenca_bkp),2])+2))
 ggsave("GRAFICO[38,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -1184,7 +1184,7 @@ ggplot(banco_ESCOLA_incidencia_bkp, aes(x = banco_ESCOLA_incidencia_bkp, y = QUA
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 45))
+  scale_y_continuous(limits=c(0, (banco_ESCOLA_incidencia_bkp[nrow(banco_ESCOLA_incidencia_bkp),2])+1))
 ggsave("GRAFICO[42,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -1557,7 +1557,7 @@ ggplot(banco_JR_renda_mensal_bkp, aes(x = banco_JR_renda_mensal_bkp, y = QUANTID
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 11))
+  scale_y_continuous(limits=c(0, (banco_JR_renda_mensal_bkp[nrow(banco_JR_renda_mensal_bkp),2])+0.2))
 ggsave("GRAFICO[56,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -1641,7 +1641,7 @@ ggplot(banco_JR_uso_drogas_bkp, aes(x = banco_JR_uso_drogas_bkp, y = QUANTIDADE)
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 10))
+  scale_y_continuous(limits=c(0, (banco_JR_uso_drogas_bkp[nrow(banco_JR_uso_drogas_bkp),2])+0.1))
 ggsave("GRAFICO[59,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -2063,26 +2063,31 @@ ggsave("GRAFICO[75,].png", width=15, height=6, pointsize=12, dpi = 512)
 
 #########################################################################################################
 #########################################################################################################
+
 REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp$REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp = factor(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp$REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp)
 #SINAL <- paste(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp$PERCENTUAL, "%", sep=" ")#para plotar o sinal de porcentagem
 SINAL <- REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp$PERCENTUAL#para plotar o sinal de porcentagem
 #pdf(file="grafico_REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp_alternativo.pdf", title = "grafico_REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp", width = 10, height = 8)
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #salvar png
-ggplot(data=REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp, aes(x=REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp, y=QUANTIDADE, fill = NULL)) +
-  geom_bar(stat="identity", fill="#bb1e23")+
-  coord_flip()+
-  ylim(0, sum(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp[nrow(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp),2]+0.2)) +
-  scale_x_discrete(limits = REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp$REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp)+
-  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
+
+
+ggplot(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp, aes(x = REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp, y = QUANTIDADE)) +
+  geom_bar(stat = "identity", fill="#bb1e23") +
+  coord_flip() +
   labs(title = (str_c(GRAFICO[76,],": Regional Residencial, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y"))),
        subtitle = "Projeto CEDIPRO: alunos desistentes",
        caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD/CEDIPRO",
-       x = "", y = "") +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
-        plot.subtitle = element_text(hjust = 0.5),
-        plot.caption =element_text(hjust = 0.5)  )
+       x = "", y = "")  +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
+        plot.subtitle = element_text(hjust = 0.5, size = 12),
+        plot.caption =element_text(hjust = 0.5, size = 12)  ) +
+  geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23", size = 3) +
+  #scale_y_continuous(n.breaks=5)
+  scale_y_continuous(limits=c(0, (REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp[nrow(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp),2])+0.1))
 ggsave("GRAFICO[76,].png", width=7, height=6, pointsize=12, dpi = 512)
+
+#dev.off()
 #dev.off()
 #########################################################################################################
 INCIDENCIA_banco_desistencia_CEDIPRO_bkp$INCIDENCIA_banco_desistencia_CEDIPRO_bkp = factor(INCIDENCIA_banco_desistencia_CEDIPRO_bkp$INCIDENCIA_banco_desistencia_CEDIPRO_bkp)
@@ -2272,7 +2277,7 @@ ggplot(soma_intervalo_idade_HOMICIDIO_let_bkp, aes(x = soma_intervalo_idade_HOMI
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 300))
+  scale_y_continuous(limits=c(0, (soma_intervalo_idade_HOMICIDIO_let_bkp[nrow(soma_intervalo_idade_HOMICIDIO_let_bkp),2])+5.5))
 ggsave("GRAFICO[83,].png", width=9.5, height=6, pointsize=12, dpi = 512)
 
 #dev.off()
@@ -2300,7 +2305,7 @@ ggplot(soma_intervalo_idade_IGNORADA_let_bkp, aes(x = soma_intervalo_idade_IGNOR
         plot.caption =element_text(hjust = 0.5, size = 12)  ) +
   geom_text(aes(label = SINAL), hjust = 0, nudge_x = 0.05, colour= "#bb1e23") +
   #scale_y_continuous(n.breaks=5)
-  scale_y_continuous(limits=c(0, 1410))
+  scale_y_continuous(limits=c(0, (soma_intervalo_idade_IGNORADA_let_bkp[nrow(soma_intervalo_idade_IGNORADA_let_bkp),2])+22))
 ggsave("GRAFICO[84,].png", width=10, height=6, pointsize=12, dpi = 512)
 
 #dev.off()

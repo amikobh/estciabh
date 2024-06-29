@@ -83,7 +83,7 @@ knitr::include_graphics('imagens/GRAFICO[43,].png')
 ```
 \newpage
 
-## Decisões
+## Decisões em audiências preliminares
 \leavevmode
 \newline
 

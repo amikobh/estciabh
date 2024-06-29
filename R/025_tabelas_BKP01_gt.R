@@ -337,62 +337,7 @@ MOTIVO_MBA %>%
   gtsave(
     "TABELA[5,].png", expand = 10)
 #########################################################################################################
-#########################################################################################################
-#TABELA GT
-#SALVANDO PNG:
-setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
-
-banco_ato_MBA %>%
-  gt() %>%
-
-  tab_header(
-    title = md((str_c(TABELA[6,],": Atos infracionais atribuídos aos adolescentes encaminhados por MBA, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
-    subtitle = "") %>%
-
-  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
-
-  tab_style(
-    style = list(
-      cell_text(weight = "bold", size = "small")),
-    locations = cells_body(rows = nrow(banco_ato_MBA))) %>%
-
-  #tab_style(
-  # style = cell_text(weight = "bold", align = "center" ),
-  # locations = cells_column_labels(columns = c(2:3)))%>%
-
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = cells_column_labels(columns = c(1:3)))%>%
-
-  tab_style(
-    style = cell_text(align = "right"),
-    locations = cells_column_labels(columns = c(2:3)))%>%
-
-  #  tab_style(
-  # style = cell_text(align = "center"),
-  # locations = cells_body(
-  # columns = c(2))) %>%
-
-  tab_options(
-    data_row.padding = px(1),
-    table.font.size = 12,
-    #heading.title.font.size = 20,
-    heading.align = "center",
-    #heading.title.font.size = "small",
-    heading.subtitle.font.size = "small",) %>%
-
-  # fmt_number(
-  #columns = 3) %>%
-
-  #cols_align(align = "center",
-  #          columns = 1:2) %>%
-  #summary_rows(fns = list(TOTAL = "sum"),
-  #  columns = c(2, 3))
-
-  gtsave(
-    "TABELA[6,].png", expand = 10)
-#########################################################################################################
 #########################################################################################################
 #TABELA GT
 
@@ -405,7 +350,7 @@ df_regional_ATO_banco_MBA %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[7,],": Regional cometimento ato infracional, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[6,],": Regional do local de cumprimento, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "MBAs") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -449,7 +394,7 @@ df_regional_ATO_banco_MBA %>%
   #  columns = c(2, 3))
 
   gtsave(
-    "TABELA[7,].png", expand = 10)
+    "TABELA[6,].png", expand = 10)
 #########################################################################################################
 #########################################################################################################
 #TABELA GT
@@ -460,7 +405,7 @@ df_DIA_SEMANA_banco_MBA %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[8,],": Dia da semana, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[7,],": Dia da semana, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "MBAs") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -504,7 +449,7 @@ df_DIA_SEMANA_banco_MBA %>%
   #  columns = c(2, 3))
 
   gtsave(
-    "TABELA[8,].png", expand = 10)
+    "TABELA[7,].png", expand = 10)
 
 
 #########################################################################################################
@@ -512,8 +457,63 @@ df_DIA_SEMANA_banco_MBA %>%
 #########################################################################################################
 #TRATAMENTO_HOMICIDIO
 #########################################################################################################
+#########################################################################################################
 #TABELA GT
 #SALVANDO PNG:
+setwd(file.path("~/diretorio_r/estciabh/imagens"))
+
+
+atos_em_foco %>%
+  gt() %>%
+
+  tab_header(
+    title = md((str_c(TABELA[8,],": Incidência atos em foco, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
+    subtitle = "") %>%
+
+  tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
+
+  #tab_style(
+  # style = list(
+  #   cell_text(weight = "bold", size = "small")),
+  # locations = cells_body(rows = nrow(atos_em_foco))) %>%
+
+  #tab_style(
+  # style = cell_text(weight = "bold", align = "center" ),
+  # locations = cells_column_labels(columns = c(2:3)))%>%
+
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(columns = c(1:2)))%>%
+
+  tab_style(
+    style = cell_text(align = "right"),
+    locations = cells_column_labels(columns = c(2)))%>%
+
+  #  tab_style(
+  # style = cell_text(align = "center"),
+  # locations = cells_body(
+  # columns = c(2))) %>%
+
+  tab_options(
+    data_row.padding = px(1),
+    table.font.size = 12,
+    #heading.title.font.size = 20,
+    heading.align = "center",
+    #heading.title.font.size = "small",
+    heading.subtitle.font.size = "small",) %>%
+
+  # fmt_number(
+  #columns = 3) %>%
+
+  #cols_align(align = "center",
+  #          columns = 1:2) %>%
+  #summary_rows(fns = list(TOTAL = "sum"),
+  #  columns = c(2, 3))
+
+  gtsave(
+    "TABELA[8,].png", expand = 10)
+#########################################################################################################
+
 setwd(file.path("~/diretorio_r/estciabh/imagens"))
 
 
@@ -2190,7 +2190,7 @@ so_decisao_TABELA %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[39,],": Decisão em Audiência Preliminar, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[39,],": Decisões em audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%
@@ -2355,7 +2355,7 @@ so_sentenca_TABELA %>%
   gt() %>%
 
   tab_header(
-    title = md((str_c(TABELA[42,],": Sentenças, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
+    title = md((str_c(TABELA[42,],": Decisões após as audiências preliminares, Belo Horizonte, ", format(Sys.Date()-365*1, "%Y")))),
     subtitle = "") %>%
 
   tab_source_note("FONTE: VARA INFRACIONAL/SUASE/DOPCAD") %>%

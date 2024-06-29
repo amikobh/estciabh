@@ -39,9 +39,11 @@ banco_ESCOLA =
   filter(!NOME_ESCOLA %in% "VAZIO")
 
 #########################################################################################################
+banco_ESCOLA_bkp = banco_ESCOLA
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/ESCOLA"))
 #########################################################################################################
+write_ods(banco_ESCOLA, "banco_ESCOLA.ods")
 #########################################################################################################
 #tabela total_casos_ESCOLA
 banco_ESCOLA_total_casos = data.frame(nrow(banco_ESCOLA))
@@ -50,7 +52,64 @@ colnames(banco_ESCOLA_total_casos) <- c("QUANTIDADE DE CASOS ENCAMINHADOS")
 #########################################################################################################
 # Remove duplicate rows of the dataframe using variables
 banco_ESCOLA_snr = distinct(banco_ESCOLA, NOME2, NASCIMENTO, .keep_all= TRUE)
+#########################################################################################################
+#########################################################################################################
+#DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
+banco_ESCOLA =
 
+  banco_ESCOLA %>%
+  pivot_longer(cols = starts_with("ATO_INFRACIONAL_ATA"), values_to = "ATO_INFRACIONAL") %>%
+  #select(-name) %>%
+  filter(!ATO_INFRACIONAL %in% "NSA" & !ATO_INFRACIONAL %in% "TERMOSEMINF." & !ATO_INFRACIONAL %in% "VAZIO")
+
+#########################################################################################################
+#########################################################################################################
+#substituição especifica de artigo deve anteceder a genérica: vide as primeiras linhas e latrocinio e roubo:
+
+banco_ESCOLA$ATO_INFRACIONAL = sub("28.ART11.*.*", "POSSE DE DROGAS PARA USO PESSOAL", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("34.ART11.*.*", "TRÁFICO DE DROGAS (ASSOCIAÇÃO)", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("35.ART11.*.*", "TRÁFICO DE DROGAS (ASSOCIAÇÃO)", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub(".*ART11.343.*.*", "TRÁFICO DE DROGAS", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub(".*ART10.826.*.*", "PORTE/POSSE DE ARMA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub(".*ARTCTB.*.*", "CRIME DE TRÂNSITO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("121.ART.*.*", "HOMICÍDIO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("121C/C14.*.*", "HOMICÍDIO (TENTATIVA)", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("129.*.*", "LESÃO CORPORAL", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("129§.*.*", "LESÃO CORPORAL", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("137.*.*", "RIXA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("140.ART.*.*", "RIXA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("140§*.*", "RIXA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("147.*.*", "AMEAÇA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("148.ART.*.*", "SEQUESTRO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("155.ART.*.*", "FURTO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("155C/C.*.*", "FURTO (TENTATIVA)", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("157.ART.*.*", "ROUBO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("157C/C.*.*", "ROUBO (TENTATIVA)", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("157§3.*.*", "LATROCÍNIO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("157§.*.*", "ROUBO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("163.ART.*.*", "DANO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("171.ART.*.*", "ESTELIONATO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("180.ART.*.*", "RECEPTAÇÃO", banco_ESCOLA$ATO_INFRACIONAL)
+#banco_ESCOLA$ATO_INFRACIONAL = sub("19.ART.*.*", "PORTE ARMA (LCP)", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("21.ART.*.*", "VIAS DE FATO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("213.ART.*.*", "ESTUPRO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("215.ART.*.*", "VIOLAÇÃO SEXUAL MEDIANTE FRAUDE", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("215-A.*.*", "IMPORTUNAÇÃO SEXUAL", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("217-A.*.*", "ESTUPRO DE VULNERÁVEL", banco_ESCOLA$ATO_INFRACIONAL)
+#banco_ESCOLA$ATO_INFRACIONAL = sub("311.ARTCPB.*.*", "ADULTERAÇÃO DE SINAL IDENTIFICADOR DE VEÍCULO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("329.ART.*.*", "RESISTÊNCIA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("330.ART.*.*", "DESOBEDIÊNCIA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("331.ART.*.*", "DESACATO", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("65.ART9.*.*", "PICHAÇÃO", banco_ESCOLA$ATO_INFRACIONAL)
+
+#substituindo os restantes em outros
+banco_ESCOLA$ATO_INFRACIONAL = sub(".*OUTROS.*.*", "VOUTROS", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS", banco_ESCOLA$ATO_INFRACIONAL)
+
+
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
 #banco sem concurso de pessoas
 banco_ESCOLA_sem_concurso <- banco_ESCOLA[!duplicated(data.frame(banco_ESCOLA$PROCESSO, banco_ESCOLA$ATO_INFRACIONAL)),]
 #########################################################################################################
@@ -332,6 +391,7 @@ colnames(ESCOLARIDADE_banco_escola_TABELA)[3]<-'PERCENTUAL'
 #########################################################################################################
 #banco_ESCOLA_incidencia
 #########################################################################################################
+
 #########################################################################################################
 
 banco_ESCOLA_incidencia =
@@ -383,7 +443,7 @@ banco_ESCOLA_incidencia =
 # Adaptando:
 #SUBSTITUIR
 banco_ESCOLA_incidencia$ATO_INFRACIONAL[banco_ESCOLA_incidencia$ATO_INFRACIONAL == "VS/INF"]<- "SEM INFORMAÇÃO"
-
+banco_ESCOLA_incidencia$ATO_INFRACIONAL[banco_ESCOLA_incidencia$ATO_INFRACIONAL == "VOUTROS"]<- "OUTROS"
 
 colnames(banco_ESCOLA_incidencia)[1]<-'ATO INFRACIONAL'
 colnames(banco_ESCOLA_incidencia)[2]<-'QUANTIDADE'
@@ -484,7 +544,7 @@ setwd(file.path("~/diretorio_r/estciabh/ESCOLA"))
 library(dplyr)
 
 banco_ESCOLA_decisao =
-  banco_ESCOLA |>
+  banco_ESCOLA_bkp |>
   select(DECISAO)
 #########################################################################################################
 colnames(banco_ESCOLA_decisao)[1]<-'decisao'
@@ -623,8 +683,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 #########################################################################################################
 #DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
-banco_ESCOLA_vitima =
-  banco_ESCOLA |>
+banco_ESCOLA_vitima = banco_ESCOLA_sem_concurso |>
   select(-name)
 
 banco_ESCOLA_vitima =

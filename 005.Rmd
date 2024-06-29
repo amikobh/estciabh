@@ -15,7 +15,7 @@ knitr::include_graphics('imagens/GRAFICO[4,].png')
 knitr::include_graphics('imagens/TABELA[2,].png')
 ```
 
-Em Belo Horizonte, as Regionais `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-1,1]`, `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-2,1]` e `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-3,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais. Destaca-se que `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-0,2]` adolescentes atendidos, residem nos demais municípios da Região Metropolitana. `r df_snr_regional_residencia[11,2]` adolescentes, são de outras cidades do interior de Minas Gerais e `r df_snr_regional_residencia[12,2]` é oriundo de outro estado.
+Em Belo Horizonte, as Regionais `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-1,1]`, `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-2,1]` e `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-3,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais. Destaca-se que `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-0,2]` adolescentes atendidos, residem nos demais municípios da Região Metropolitana. `r df_snr_regional_residencia[11,2]` adolescentes são de outras cidades do interior de Minas Gerais e `r df_snr_regional_residencia[12,2]` é oriundo de outro estado.
 
 \vspace{1cm}
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}

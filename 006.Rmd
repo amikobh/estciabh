@@ -33,7 +33,7 @@ knitr::include_graphics('imagens/TABELA[4,].png')
 ```
 \vspace{1cm}
 
-Em Belo Horizonte, as Regionais `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-1,1]`, `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-2,1]` e `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-3,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CIABH por MBA. Destaca-se que `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-0,2]` adolescentes residem nos demais municípios da Região Metropolitana.
+Em Belo Horizonte, as regionais `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-1,1]`, `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-2,1]`, `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-3,1]` e `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-4,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CIABH por MBA. Destaca-se que `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-0,2]` adolescentes residem nos demais municípios da Região Metropolitana.
 
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
@@ -54,32 +54,19 @@ Os motivos da expedição dos mandados de busca e apreensão são indicados, con
 knitr::include_graphics('imagens/GRAFICO[9,].png')
 ```
 \newpage
-## Atos infracionais relacionados aos MBAs
 
-
-
-```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[6,].png')
-```
-\vspace{1cm}
-Apresenta-se os atos infracionais relacionados ao cuprimento dos mandados de busca e apreensão. Sublinha-se que o ato `r banco_ato_MBA_bkp[nrow(banco_ato_MBA_bkp)-0,1]` é o que possui maior índice seguido do ato `r banco_ato_MBA_bkp[nrow(banco_ato_MBA_bkp)-1,1]`.
-\vspace{1cm}
-```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[10,].png')
-```
-\newpage
-## Regional do ato infracional relacionado ao cumprimento do MBA
+## Regional do local de cumprimento do MBA
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[7,].png')
+knitr::include_graphics('imagens/TABELA[6,].png')
 ```
 \vspace{1cm}
 Em Belo Horizonte, a Regional `r df_regional_ATO_banco_MBA_bkp_rmd[nrow(df_regional_ATO_banco_MBA_bkp_rmd)-0,1]` concentra o maior índice relacionado ao cumprimento de MBA.
 
-## Dia da semana do cometimento do ato infracional relacionado ao cumprimento do MBA
+## Dia da semana do cumprimento do MBA
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[8,].png')
+knitr::include_graphics('imagens/TABELA[7,].png')
 ```
 \vspace{1cm}
 `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-0,1]`, `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-1,1]` e `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-2,1]` concentram os maiores índices de atos infracionais relacionados ao cumprimento do MBA.

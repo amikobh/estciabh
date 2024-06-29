@@ -9,11 +9,14 @@ banco_atos_em_foco$ATO_INFRACIONAL_ATA_01 <- gsub(" ","", banco_atos_em_foco$ATO
 banco_atos_em_foco$ATO_INFRACIONAL_ATA_02 <- gsub(" ","", banco_atos_em_foco$ATO_INFRACIONAL_ATA_02)
 banco_atos_em_foco$ATO_INFRACIONAL_ATA_03 <- gsub(" ","", banco_atos_em_foco$ATO_INFRACIONAL_ATA_03)
 #########################################################################################################
+#########################################################################################################
+banco_incidencia_geral_ESCOLA = banco_atos_em_foco
+#########################################################################################################
 #DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
 banco_incidencia_geral =
 
   banco_atos_em_foco %>%
-  pivot_longer(cols = starts_with("ATO_INFRACIONAL_ATA"), values_to = "ATO_INFRACIONAL") %>%
+  pivot_longer(cols = starts_with("ATO_INFRACIONAL_ATA"), values_to = "ATO_INFRACIONAL") |>
   #select(-name) %>%
   filter(!ATO_INFRACIONAL %in% "NSA" & !ATO_INFRACIONAL %in% "TERMOSEMINF." & !ATO_INFRACIONAL %in% "VAZIO")
 
@@ -63,13 +66,11 @@ banco_incidencia_geral$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS", banco_incid
 
 
 #########################################################################################################
-#########################################################################################################
-banco_incidencia_geral_ESCOLA = banco_incidencia_geral
+
 
 banco_geral_sem_concurso = distinct(banco_incidencia_geral, PROCESSO, name, ATO_INFRACIONAL, .keep_all= TRUE)
 
 banco_geral_SNR = distinct(banco_incidencia_geral, NOME2, NASCIMENTO, FILIACAO2, .keep_all= TRUE)
-
 
 banco_geral_SNR_com_filiacao = distinct(banco_incidencia_geral, NOME2, NASCIMENTO, FILIACAO2, .keep_all= TRUE)
 
