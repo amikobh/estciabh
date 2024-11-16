@@ -5,11 +5,11 @@ setwd(file.path("~/diretorio_r/estciabh/R"))#configurar diretorio
 #########################################################################################################
 if(!require(conflicted)){install.packages("conflicted", dependencies = TRUE); require(conflicted)}
 if(!require(Rcpp)){install.packages("Rcpp", dependencies = TRUE); require(Rcpp)}
-if(!require(tidyverse)){install.packages("tidyverse", dependencies = TRUE); require(tidyverse)}
 if(!require(readODS)){install.packages("readODS", dependencies = TRUE); require(readODS)}
 if(!require(data.table)){install.packages("data.table", dependencies = TRUE); require(data.table)}
 if(!require(plyr)){install.packages("plyr", dependencies = TRUE); require(plyr)}
 if(!require(abjutils)){install.packages("abjutils", dependencies = TRUE); require(abjutils)}
+if(!require(tidyverse)){install.packages("tidyverse", dependencies = TRUE); require(tidyverse)}
 if(!require(ggplot2)){install.packages("ggplot2", dependencies = TRUE); require(ggplot2)}
 if(!require(gt)){install.packages("gt", dependencies = TRUE); require(gt)}
 if(!require(ggpubr)){install.packages("ggpubr", dependencies = TRUE); require(ggpubr)}
@@ -30,7 +30,10 @@ if(!require(tm)){install.packages("tm", dependencies = TRUE); require(tm)}
 if(!require(kableExtra)){install.packages("kableExtra", dependencies = TRUE); require(kableExtra)}
 if(!require(openxlsx)){install.packages("openxlsx", dependencies = TRUE); require(openxlsx)}
 if(!require(arsenal)){install.packages("arsenal", dependencies = TRUE); require(arsenal)}
-
+if(!require(sf)){install.packages("sf", dependencies = TRUE); require(sf)}
+if(!require(readr)){install.packages("readr", dependencies = TRUE); require(readr)}
+if(!require(viridis)){install.packages("viridis", dependencies = TRUE); require(viridis)}
+if(!require(geobr)){install.packages("geobr", dependencies = TRUE); require(geobr)}
 
 
 conflicts_prefer(dplyr::filter)
