@@ -34,7 +34,7 @@ if(!require(sf)){install.packages("sf", dependencies = TRUE); require(sf)}
 if(!require(readr)){install.packages("readr", dependencies = TRUE); require(readr)}
 if(!require(viridis)){install.packages("viridis", dependencies = TRUE); require(viridis)}
 if(!require(geobr)){install.packages("geobr", dependencies = TRUE); require(geobr)}
-
+if(!require(stringr)){install.packages("stringr", dependencies = TRUE); require(stringr)}
 
 conflicts_prefer(dplyr::filter)
 conflicts_prefer(dplyr::summarise)

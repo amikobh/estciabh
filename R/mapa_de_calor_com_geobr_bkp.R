@@ -1,5 +1,5 @@
 # Instalar pacotes necessários (caso não tenha instalado)
-install.packages(c("ggplot2", "sf", "geobr", "viridis", "dplyr"))
+#install.packages(c("ggplot2", "sf", "geobr", "viridis", "dplyr"))
 library(ggplot2)
 library(sf)
 library(geobr)

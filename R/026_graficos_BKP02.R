@@ -2380,7 +2380,8 @@ p2_banco_SEXO_IGNORADA_LETALIDADE_pizza =
         legend.text = element_text(size = 8, face = "bold"),
         plot.title = element_text(hjust = 0.5, vjust = 0.5, face="bold", size = 12),
         plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
-  #plot.caption = element_text(hjust = 0.5, vjust = 0.5, size = 12)) +
+  plot.subtitle = element_text(hjust = 0.5, vjust = 0.5, size = 12) +
+  labs(caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL", subtitle = "Letalidade") +
   # labs(caption = "FONTE: VARA INFRACIONAL/INSTITUTO MÉDICO LEGAL", subtitle = "Letalidade") +
   ggtitle("CAUSA IGNORADA")
 #ggsave("GRAFICO_068_sexo_idade_LET_pizza.png", width=9, height=5, pointsize=12, dpi = 512)
