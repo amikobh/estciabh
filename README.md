@@ -159,3 +159,5 @@ gerar_tabela_gt(df_snr_regional_residencia, "Tabela Exemplo", "tabela_exemplo.pn
 - Se o dataframe já está carregado como `df_snr_regional_residencia`, basta passar para a função com o título e o nome do arquivo de saída desejado.
 
 Isso torna o processo mais flexível, e você pode reutilizar a função para gerar tabelas similares com diferentes datasets e parâmetros de formatação.
+
+Verificado em 24/02/25.
