@@ -7,7 +7,7 @@ A apuração de ato infracionail atribuido a adolescente é competência da Just
 ## Encaminhamentos de adolescentes ao CIABH
 
 
-O gráfico a seguir expõe a evolução dos atendimentos aos adolescentes envolvidos em ocorrências infracionais durante os últimos anos.  
+O gráfico a seguir expõe a evolução dos atendimentos aos adolescentes envolvidos em ocorrências infracionais durante os últimos anos.
 
 \leavevmode
 \newline
@@ -16,7 +16,7 @@ O gráfico a seguir expõe a evolução dos atendimentos aos adolescentes envolv
 knitr::include_graphics('imagens/GRAFICO[1,].png')
 ```
 \leavevmode
-\newline 
+\newline
 
 No ano em estudo foram encaminhados para o CIABH, `r nrow(numero_de_casos_geral)` casos para atendimento. Deste universo de atendimento, `r nrow(numero_de_cumprimento_mba)` referem-se apenas a cumprimentos de mandados de busca e apreensão e `r nrow(numero_de_casos_sem_mba)` novos casos de apuração de atos infracionais. `r nrow(banco_geral_SNR)` adolescentes – considerados individualmente – foram encaminhados como autores, em tese, de atos infracionais.
 Destes novos casos, `r nrow(numero_de_casos_sem_mba)-nrow(banco_geral_SNR)`  dizem respeito à reentrada de adolescentes (reincidência).

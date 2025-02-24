@@ -35,6 +35,11 @@ if(!require(readr)){install.packages("readr", dependencies = TRUE); require(read
 if(!require(viridis)){install.packages("viridis", dependencies = TRUE); require(viridis)}
 if(!require(geobr)){install.packages("geobr", dependencies = TRUE); require(geobr)}
 if(!require(stringr)){install.packages("stringr", dependencies = TRUE); require(stringr)}
+if(!require(tinytex)){install.packages("tinytex", dependencies = TRUE); require(tinytex)}
+if(!require(rticles)){install.packages("rticles", dependencies = TRUE); require(rticles)}
+if(!require(palmerpenguins)){install.packages("palmerpenguins", dependencies = TRUE); require(palmerpenguins)}
+if(!require(quarto)){install.packages("quarto", dependencies = TRUE); require(quarto)}
+if(!require(chromote)){install.packages("chromote", dependencies = TRUE); require(chromote)}
 
 conflicts_prefer(dplyr::filter)
 conflicts_prefer(dplyr::summarise)
