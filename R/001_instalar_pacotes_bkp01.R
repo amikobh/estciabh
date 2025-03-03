@@ -40,6 +40,9 @@ if(!require(rticles)){install.packages("rticles", dependencies = TRUE); require(
 if(!require(palmerpenguins)){install.packages("palmerpenguins", dependencies = TRUE); require(palmerpenguins)}
 if(!require(quarto)){install.packages("quarto", dependencies = TRUE); require(quarto)}
 if(!require(chromote)){install.packages("chromote", dependencies = TRUE); require(chromote)}
+if(!require(fuzzyjoin)){install.packages("fuzzyjoin", dependencies = TRUE); require(fuzzyjoin)}
+
+
 
 conflicts_prefer(dplyr::filter)
 conflicts_prefer(dplyr::summarise)
