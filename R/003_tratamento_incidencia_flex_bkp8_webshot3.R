@@ -68,7 +68,7 @@ banco_incidencia_geral$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS", banco_incid
 #########################################################################################################
 
 
-banco_geral_sem_concurso = distinct(banco_incidencia_geral, PROCESSO, name, ATO_INFRACIONAL, .keep_all= TRUE)
+banco_geral_sem_concurso = distinct(banco_incidencia_geral, DATA_ATO, PROCESSO, ATO_INFRACIONAL, .keep_all= TRUE)
 
 banco_geral_SNR = distinct(banco_incidencia_geral, NOME2, NASCIMENTO, FILIACAO2, .keep_all= TRUE)
 

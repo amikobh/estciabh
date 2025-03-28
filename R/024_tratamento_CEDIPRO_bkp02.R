@@ -1,4 +1,18 @@
 #########################################################################################################
+#############################################################################################################
+#FUNCAO TIRAR ACENTOS E ETC
+#########################################################################################################
+ajustar_nomes=function(x){
+  x%>%
+    stringr::str_trim() %>%                        #Remove espaços em branco sobrando
+    stringr::str_to_upper() %>%                    #Converte todas as strings para minusculo (lower para minusculo)
+    rm_accent() %>%                                #Remove os acentos com a funcao criada acima
+    stringr::str_replace_all("[/' '.()]", "") %>% #Substitui os caracteres especiais por "_"
+    stringr::str_replace_all("_+", "") %>%        #Substitui os caracteres especiais por ""
+    stringr::str_replace("_$", "")                 #Substitui o caracter especiais por ""
+}
+#############################################################################################################
+#############################################################################################################
 #########################################################################################################
 # 1 CARREGANDO O banco_cedipro PARA TRATAMENTO NO R: observar se variaveis são iguais
 #Ao salvar o banco_cedipro como .csv escolher separador ":"
@@ -67,10 +81,10 @@ str( banco_cedipro %>%
        select(starts_with("data")))
 
 ## calcula o intervalo em anos (idade)
-banco_cedipro$idade2 = as.period(interval(banco_cedipro$nascimento, banco_cedipro$data_ato))
+banco_cedipro$idade = as.period(interval(banco_cedipro$nascimento, banco_cedipro$data_ato))
 
 # SEPARAR SO O PRIMEIRO ITEM DE "17y 2m 28d 0H 0M 0S" GERADO PELO SCRIPT ANTERIOR.
-banco_cedipro$idade2 = banco_cedipro$idade2@year
+banco_cedipro$idade = banco_cedipro$idade@year
 
 
 #excluir celulas com alunos VAZIO
@@ -425,7 +439,7 @@ banco_matriculados_CEDIPRO =
 
   banco_cedipro %>%
   filter(!tipo_de_aluno == "VITIMA") %>%
-  filter(!tem_cedipro == "SIM")
+  filter(tem_cedipro == "SIM")
 
 
 #########################################################################################################
@@ -442,9 +456,9 @@ banco_parente_CEDIPRO =
 
 banco_parente_CEDIPRO =
   banco_parente_CEDIPRO %>%
-  pivot_longer(cols = starts_with("cedipro_parente_0"), values_to = "CEDIPRO_PARENTE") %>%
+  pivot_longer(cols = starts_with("curso_cedipro_parente"), values_to = "CEDIPRO_PARENTE") %>%
   #select(-name) %>%
-  filter(CEDIPRO_PARENTE != "")
+  filter(CEDIPRO_PARENTE != "NSA")
 
 #########################################################################################################
 # banco_parente_CEDIPRO FIM
@@ -519,7 +533,7 @@ df_snr_banco_matriculados_CEDIPRO = distinct(banco_matriculados_CEDIPRO, nome, n
 #########################################################################################################
 #########################################################################################################
 
-# 9 Idade e sexo adolescente atendido (colocar todos acima de 18 nos S/Informação ou #valor!)
+# 9 idade e sexo adolescente atendido (colocar todos acima de 18 nos S/Informação ou #valor!)
 df_snr_banco_matriculados_CEDIPRO_bkp = df_snr_banco_matriculados_CEDIPRO
 
 #########################################################################################################
@@ -581,8 +595,8 @@ df_snr_sexo_idade_banco_matriculados_CEDIPRO$idade[df_snr_sexo_idade_banco_matri
 df_snr_sexo_idade_banco_matriculados_CEDIPRO <- reshape(data = df_snr_sexo_idade_banco_matriculados_CEDIPRO, idvar = "idade", timevar = "sexo", direction = "wide")
 df_snr_sexo_idade_banco_matriculados_CEDIPRO
 
-#colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("IDADE", "MASCULINO") #sem feminino
-colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("IDADE", "FEMININO", "MASCULINO")
+#colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("idade", "MASCULINO") #sem feminino
+colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("idade", "FEMININO", "MASCULINO")
 df_snr_sexo_idade_banco_matriculados_CEDIPRO
 
 df_snr_sexo_idade_banco_matriculados_CEDIPRO$FEMININO[which(is.na(df_snr_sexo_idade_banco_matriculados_CEDIPRO$FEMININO))] <- 0
@@ -599,10 +613,10 @@ df_snr_sexo_idade_banco_matriculados_CEDIPRO
 df_snr_sexo_idade_banco_matriculados_CEDIPRO2 = df_snr_sexo_idade_banco_matriculados_CEDIPRO #salvando para proximo modelo de tabela
 #########################################################################################################
 df_snr_sexo_idade_banco_matriculados_CEDIPRO<- rbind(df_snr_sexo_idade_banco_matriculados_CEDIPRO,
-                                                     data.frame(IDADE = "TOTAL",
-                                                                FEMININO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$FEMININO),
-                                                                MASCULINO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$MASCULINO),
-                                                                stringsAsFactors = FALSE))
+                                                      data.frame(idade = "TOTAL",
+                                                                 FEMININO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$FEMININO),
+                                                                 MASCULINO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$MASCULINO),
+                                                                 stringsAsFactors = FALSE))
 
 df_snr_sexo_idade_banco_matriculados_CEDIPRO
 #########################################################################################################
@@ -626,7 +640,7 @@ df_snr_sexo_idade_banco_matriculados_CEDIPRO
 #pdf(file="TABELA_003_df_snr_sexo_idade_banco_matriculados_CEDIPRO_geral_alternativa.pdf", width = 3.5, height = 3.2, title = "tabela_df_snr_sexo_idade_banco_matriculados_CEDIPRO_geral_alternativa")
 ##setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #svg(filename="TABELA_002_idade_e_sexo.svg", width=5, height=3.5, pointsize=12)
-#df_snr_sexo_idade_banco_matriculados_CEDIPRO +  labs(title = "TABELA 2: Idade e Sexo, Belo Horizonte, 2021",
+#df_snr_sexo_idade_banco_matriculados_CEDIPRO +  labs(title = "TABELA 2: idade e Sexo, Belo Horizonte, 2021",
 #                         caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD") +
 #theme(plot.title = element_text(hjust = 0.5, vjust = 0, face="bold"),
 #     plot.caption =element_text(hjust = 0.5, vjust = 1)  )
@@ -657,8 +671,8 @@ df_snr_sexo_idade_banco_matriculados_CEDIPRO$M <- round_preserve_sum(prop.table(
 
 df_snr_sexo_idade_banco_matriculados_CEDIPRO
 #########################################################################################################
-df_snr_sexo_idade_banco_matriculados_CEDIPRO <- df_snr_sexo_idade_banco_matriculados_CEDIPRO[c("IDADE", "FEMININO", "F", "MASCULINO", "M")]
-#df_snr_sexo_idade_banco_matriculados_CEDIPRO <- df_snr_sexo_idade_banco_matriculados_CEDIPRO[c("IDADE", "MASCULINO", "M")] #sem feminino
+df_snr_sexo_idade_banco_matriculados_CEDIPRO <- df_snr_sexo_idade_banco_matriculados_CEDIPRO[c("idade", "FEMININO", "F", "MASCULINO", "M")]
+#df_snr_sexo_idade_banco_matriculados_CEDIPRO <- df_snr_sexo_idade_banco_matriculados_CEDIPRO[c("idade", "MASCULINO", "M")] #sem feminino
 df_snr_sexo_idade_banco_matriculados_CEDIPRO
 
 #########################################################################################################
@@ -673,7 +687,7 @@ df_snr_sexo_idade_banco_matriculados_CEDIPRO_rmark = df_snr_sexo_idade_banco_mat
 
 #banco_incidencia_rmark %>% slice(1:3)
 
-#selecionando os 3 principais e ordenando descrescente por quantidade
+#selecionando os 3 principais e ordenando descrescente por QUANTIDADE
 df_snr_sexo_idade_banco_matriculados_CEDIPRO_rmark = df_snr_sexo_idade_banco_matriculados_CEDIPRO_rmark %>%
   top_n(3, MASCULINO) %>% arrange(desc(MASCULINO))
 
@@ -689,23 +703,23 @@ df_snr_sexo_idade_banco_matriculados_CEDIPRO_rmark[2,1]
 #########################################################################################################
 #########################################################################################################
 
-df_snr_sexo_idade_banco_matriculados_CEDIPRO$IDADE <- paste(df_snr_sexo_idade_banco_matriculados_CEDIPRO$IDADE, "anos", sep=" ")
+df_snr_sexo_idade_banco_matriculados_CEDIPRO$idade <- paste(df_snr_sexo_idade_banco_matriculados_CEDIPRO$idade, "anos", sep=" ")
 
 #########################################################################################################
 #########################################################################################################
 
 df_snr_sexo_idade_banco_matriculados_CEDIPRO<- rbind(df_snr_sexo_idade_banco_matriculados_CEDIPRO,
-                                                     data.frame(IDADE = "TOTAL",
-                                                                FEMININO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$FEMININO),
-                                                                F = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$F),
-                                                                MASCULINO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$MASCULINO),
-                                                                M = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$M),
-                                                                stringsAsFactors = FALSE))
+                                                      data.frame(idade = "TOTAL",
+                                                                 FEMININO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$FEMININO),
+                                                                 F = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$F),
+                                                                 MASCULINO = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$MASCULINO),
+                                                                 M = sum(df_snr_sexo_idade_banco_matriculados_CEDIPRO$M),
+                                                                 stringsAsFactors = FALSE))
 
 df_snr_sexo_idade_banco_matriculados_CEDIPRO
 
-colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("IDADE", "FEM", "%", "MAS", "%")
-#colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("IDADE", "MAS", "%")
+colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("idade", "FEM", "%", "MAS", "%")
+#colnames(df_snr_sexo_idade_banco_matriculados_CEDIPRO) <- c("idade", "MAS", "%")
 df_snr_sexo_idade_banco_matriculados_CEDIPRO
 #########################################################################################################
 #require(ggpubr)
@@ -716,7 +730,7 @@ df_snr_sexo_idade_banco_matriculados_CEDIPRO
 #setwd(file.path("~/diretorio_r/estciabh/imagens"))
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#GRAFICO IDADE/SEXO
+#GRAFICO idade/SEXO
 #########################################################################################################
 #########################################################################################################
 
@@ -985,7 +999,7 @@ ESCOLARIDADE_banco_matriculados_CEDIPRO_TABELA$ESCOLARIDADE_banco_matriculados_C
 #########################################################################################################
 # Adaptando:
 
-colnames(ESCOLARIDADE_banco_matriculados_CEDIPRO_TABELA)[1]<-'ESCOLARIDADE'
+colnames(ESCOLARIDADE_banco_matriculados_CEDIPRO_TABELA)[1]<-'ESCOLARidade'
 colnames(ESCOLARIDADE_banco_matriculados_CEDIPRO_TABELA)[2]<-'QUANTIDADE'
 colnames(ESCOLARIDADE_banco_matriculados_CEDIPRO_TABELA)[3]<-'PERCENTUAL'
 
@@ -1059,7 +1073,7 @@ INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_
 
 
 INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL == "311.ARTCTB",
-                                                               "CRIME DE TRÂNSITO (VELOCIDADE INCOMPATÍVEL)", INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL)
+                                                               "CRIME DE TRÂNSITO (VELOCidade INCOMPATÍVEL)", INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL)
 
 
 
@@ -1074,7 +1088,7 @@ INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_
 INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL == "CRIME DE TRÂNSITO (ENTREGAR DIREÇÃO A NÃO HABILITADO)",
                                                                "CRIME DE TRÂNSITO", INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL)
 
-INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL == "CRIME DE TRÂNSITO (VELOCIDADE INCOMPATÍVEL)",
+INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL == "CRIME DE TRÂNSITO (VELOCidade INCOMPATÍVEL)",
                                                                "CRIME DE TRÂNSITO", INCIDENCIA_banco_matriculados_CEDIPRO$ATO_INFRACIONAL)
 #########################################################################################################
 #########################################################################################################
@@ -1567,7 +1581,7 @@ DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$de
 #DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "PSC"]<-	"REMISSAO c/c PSC"
 #DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "PSC/LA"]<-	"REMISSAO c/c LA/PSC"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORidade"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMESSACOMARCACOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMETIDOSAUTOSJ.COMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMISSAOEXTINTIVA"]<-	"REMISSÃO EXTINTIVA"
@@ -1598,7 +1612,7 @@ DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$de
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "RETORNOAOCUMPRIMENTODELA/PSC"]<-	"RETORNO A LA/PSC"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "RETORNOAOCUMPRIMENTODEL.A"]<-	"RETORNO A LA"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "EXTINCAOPORPRESCRICAO"]<-	"EXTINÇÃO POR PRESCRIÇÃO"
-DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
+DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORidadeCONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMISSAO SUSPENSIVA c/c LA"]<-	"REMISSÃO c/c LA"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMISSAO SUSPENSIVA c/c PSC"]<-	"REMISSÃO c/c PSC"
 DECISAO_banco_matriculados_CEDIPRO$decisao[DECISAO_banco_matriculados_CEDIPRO$decisao == "REMISSAOSUSPENSIVA/PSC/LA"]<-	"REMISSÃO c/c LA"
@@ -1942,7 +1956,7 @@ df_snr_banco_desistencia_CEDIPRO = distinct(banco_desistencia_CEDIPRO, nome, nas
 #########################################################################################################
 #########################################################################################################
 
-# 9 Idade e sexo adolescente atendido (colocar todos acima de 18 nos S/Informação ou #valor!)
+# 9 idade e sexo adolescente atendido (colocar todos acima de 18 nos S/Informação ou #valor!)
 df_snr_banco_desistencia_CEDIPRO_bkp = df_snr_banco_desistencia_CEDIPRO
 
 #########################################################################################################
@@ -2004,11 +2018,11 @@ df_snr_sexo_idade_banco_desistencia_CEDIPRO$idade[df_snr_sexo_idade_banco_desist
 df_snr_sexo_idade_banco_desistencia_CEDIPRO <- reshape(data = df_snr_sexo_idade_banco_desistencia_CEDIPRO, idvar = "idade", timevar = "sexo", direction = "wide")
 df_snr_sexo_idade_banco_desistencia_CEDIPRO
 
-colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("IDADE", "MASCULINO") #sem feminino
-#colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("IDADE", "FEMININO", "MASCULINO")
+#colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("idade", "MASCULINO") #sem feminino
+colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("idade", "FEMININO", "MASCULINO")
 df_snr_sexo_idade_banco_desistencia_CEDIPRO
 
-#df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO[which(is.na(df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO))] <- 0
+df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO[which(is.na(df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO))] <- 0
 df_snr_sexo_idade_banco_desistencia_CEDIPRO$MASCULINO[which(is.na(df_snr_sexo_idade_banco_desistencia_CEDIPRO$MASCULINO))] <- 0
 
 
@@ -2022,10 +2036,10 @@ df_snr_sexo_idade_banco_desistencia_CEDIPRO
 df_snr_sexo_idade_banco_desistencia_CEDIPRO2 = df_snr_sexo_idade_banco_desistencia_CEDIPRO #salvando para proximo modelo de tabela
 #########################################################################################################
 df_snr_sexo_idade_banco_desistencia_CEDIPRO<- rbind(df_snr_sexo_idade_banco_desistencia_CEDIPRO,
-                                                    data.frame(IDADE = "TOTAL",
-                                                               #FEMININO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO),
-                                                               MASCULINO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$MASCULINO),
-                                                               stringsAsFactors = FALSE))
+                                                     data.frame(idade = "TOTAL",
+                                                                FEMININO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO),
+                                                                MASCULINO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$MASCULINO),
+                                                                stringsAsFactors = FALSE))
 
 df_snr_sexo_idade_banco_desistencia_CEDIPRO
 #########################################################################################################
@@ -2049,7 +2063,7 @@ df_snr_sexo_idade_banco_desistencia_CEDIPRO
 #pdf(file="TABELA_003_df_snr_sexo_idade_banco_desistencia_CEDIPRO_geral_alternativa.pdf", width = 3.5, height = 3.2, title = "tabela_df_snr_sexo_idade_banco_desistencia_CEDIPRO_geral_alternativa")
 ##setwd(file.path("~/diretorio_r/estciabh/imagens"))
 #svg(filename="TABELA_002_idade_e_sexo.svg", width=5, height=3.5, pointsize=12)
-#df_snr_sexo_idade_banco_desistencia_CEDIPRO +  labs(title = "TABELA 2: Idade e Sexo, Belo Horizonte, 2021",
+#df_snr_sexo_idade_banco_desistencia_CEDIPRO +  labs(title = "TABELA 2: idade e Sexo, Belo Horizonte, 2021",
 #                         caption = "FONTE: VARA INFRACIONAL/SUASE/DOPCAD") +
 #theme(plot.title = element_text(hjust = 0.5, vjust = 0, face="bold"),
 #     plot.caption =element_text(hjust = 0.5, vjust = 1)  )
@@ -2080,8 +2094,8 @@ df_snr_sexo_idade_banco_desistencia_CEDIPRO$M <- round_preserve_sum(prop.table(d
 
 df_snr_sexo_idade_banco_desistencia_CEDIPRO
 #########################################################################################################
-#df_snr_sexo_idade_banco_desistencia_CEDIPRO <- df_snr_sexo_idade_banco_desistencia_CEDIPRO[c("IDADE", "FEMININO", "F", "MASCULINO", "M")]
-df_snr_sexo_idade_banco_desistencia_CEDIPRO <- df_snr_sexo_idade_banco_desistencia_CEDIPRO[c("IDADE", "MASCULINO", "M")] #sem feminino
+#df_snr_sexo_idade_banco_desistencia_CEDIPRO <- df_snr_sexo_idade_banco_desistencia_CEDIPRO[c("idade", "FEMININO", "F", "MASCULINO", "M")]
+df_snr_sexo_idade_banco_desistencia_CEDIPRO <- df_snr_sexo_idade_banco_desistencia_CEDIPRO[c("idade", "MASCULINO", "M")] #sem feminino
 df_snr_sexo_idade_banco_desistencia_CEDIPRO
 
 #########################################################################################################
@@ -2096,7 +2110,7 @@ df_snr_sexo_idade_banco_desistencia_CEDIPRO_rmark = df_snr_sexo_idade_banco_desi
 
 #banco_incidencia_rmark %>% slice(1:3)
 
-#selecionando os 3 principais e ordenando descrescente por quantidade
+#selecionando os 3 principais e ordenando descrescente por QUANTIDADE
 df_snr_sexo_idade_banco_desistencia_CEDIPRO_rmark = df_snr_sexo_idade_banco_desistencia_CEDIPRO_rmark %>%
   top_n(3, MASCULINO) %>% arrange(desc(MASCULINO))
 
@@ -2112,23 +2126,23 @@ df_snr_sexo_idade_banco_desistencia_CEDIPRO_rmark[2,1]
 #########################################################################################################
 #########################################################################################################
 
-df_snr_sexo_idade_banco_desistencia_CEDIPRO$IDADE <- paste(df_snr_sexo_idade_banco_desistencia_CEDIPRO$IDADE, "anos", sep=" ")
+df_snr_sexo_idade_banco_desistencia_CEDIPRO$idade <- paste(df_snr_sexo_idade_banco_desistencia_CEDIPRO$idade, "anos", sep=" ")
 
 #########################################################################################################
 #########################################################################################################
 
 df_snr_sexo_idade_banco_desistencia_CEDIPRO<- rbind(df_snr_sexo_idade_banco_desistencia_CEDIPRO,
-                                                    data.frame(IDADE = "TOTAL",
-                                                               #FEMININO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO),
-                                                               #F = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$F),
-                                                               MASCULINO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$MASCULINO),
-                                                               M = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$M),
-                                                               stringsAsFactors = FALSE))
+                                                     data.frame(idade = "TOTAL",
+                                                                #FEMININO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$FEMININO),
+                                                                #F = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$F),
+                                                                MASCULINO = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$MASCULINO),
+                                                                M = sum(df_snr_sexo_idade_banco_desistencia_CEDIPRO$M),
+                                                                stringsAsFactors = FALSE))
 
 df_snr_sexo_idade_banco_desistencia_CEDIPRO
 
-#colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("IDADE", "FEM", "%", "MAS", "%")
-colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("IDADE", "MAS", "%")
+#colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("idade", "FEM", "%", "MAS", "%")
+colnames(df_snr_sexo_idade_banco_desistencia_CEDIPRO) <- c("idade", "MAS", "%")
 df_snr_sexo_idade_banco_desistencia_CEDIPRO
 #########################################################################################################
 #require(ggpubr)
@@ -2139,7 +2153,7 @@ df_snr_sexo_idade_banco_desistencia_CEDIPRO
 #setwd(file.path("~/diretorio_r/estciabh/imagens"))
 setwd(file.path("~/diretorio_r/estciabh/planilhas"))
 #########################################################################################################
-#GRAFICO IDADE/SEXO
+#GRAFICO idade/SEXO
 #########################################################################################################
 #########################################################################################################
 
@@ -2408,7 +2422,7 @@ ESCOLARIDADE_banco_desistencia_CEDIPRO_TABELA$ESCOLARIDADE_banco_desistencia_CED
 #########################################################################################################
 # Adaptando:
 
-colnames(ESCOLARIDADE_banco_desistencia_CEDIPRO_TABELA)[1]<-'ESCOLARIDADE'
+colnames(ESCOLARIDADE_banco_desistencia_CEDIPRO_TABELA)[1]<-'ESCOLARidade'
 colnames(ESCOLARIDADE_banco_desistencia_CEDIPRO_TABELA)[2]<-'QUANTIDADE'
 colnames(ESCOLARIDADE_banco_desistencia_CEDIPRO_TABELA)[3]<-'PERCENTUAL'
 
@@ -2482,7 +2496,7 @@ INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_d
 
 
 INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL == "311.ARTCTB",
-                                                              "CRIME DE TRÂNSITO (VELOCIDADE INCOMPATÍVEL)", INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL)
+                                                              "CRIME DE TRÂNSITO (VELOCidade INCOMPATÍVEL)", INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL)
 
 
 
@@ -2497,7 +2511,7 @@ INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_d
 INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL == "CRIME DE TRÂNSITO (ENTREGAR DIREÇÃO A NÃO HABILITADO)",
                                                               "CRIME DE TRÂNSITO", INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL)
 
-INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL == "CRIME DE TRÂNSITO (VELOCIDADE INCOMPATÍVEL)",
+INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL = ifelse(INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL == "CRIME DE TRÂNSITO (VELOCidade INCOMPATÍVEL)",
                                                               "CRIME DE TRÂNSITO", INCIDENCIA_banco_desistencia_CEDIPRO$ATO_INFRACIONAL)
 #########################################################################################################
 #########################################################################################################
@@ -2990,7 +3004,7 @@ DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$deci
 #DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "PSC"]<-	"REMISSAO c/c PSC"
 #DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "PSC/LA"]<-	"REMISSAO c/c LA/PSC"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
-DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADE"]<-	"REMESSA AO JUÍZO COMPETENTE"
+DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORidade"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMESSACOMARCACOMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMETIDOSAUTOSJ.COMPETENTE"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMISSAOEXTINTIVA"]<-	"REMISSÃO EXTINTIVA"
@@ -3021,7 +3035,7 @@ DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$deci
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "RETORNOAOCUMPRIMENTODELA/PSC"]<-	"RETORNO A LA/PSC"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "RETORNOAOCUMPRIMENTODEL.A"]<-	"RETORNO A LA"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "EXTINCAOPORPRESCRICAO"]<-	"EXTINÇÃO POR PRESCRIÇÃO"
-DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORIDADECONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
+DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMESSAAOJUIZOCOMPETENTE-MAIORidadeCONSTATADA"]<-	"REMESSA AO JUÍZO COMPETENTE"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMISSAO SUSPENSIVA c/c LA"]<-	"REMISSÃO c/c LA"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMISSAO SUSPENSIVA c/c PSC"]<-	"REMISSÃO c/c PSC"
 DECISAO_banco_desistencia_CEDIPRO$decisao[DECISAO_banco_desistencia_CEDIPRO$decisao == "REMISSAOSUSPENSIVA/PSC/LA"]<-	"REMISSÃO c/c LA"
@@ -3341,3 +3355,4 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 #TRATAMENTO banco_desistencia_CEDIPRO FIM
 #########################################################################################################
+

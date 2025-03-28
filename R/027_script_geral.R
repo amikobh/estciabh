@@ -34,16 +34,34 @@ source('015_tratamento_escola_flex_BKP5_web3.R')
 #Sys.sleep(5)
 source('021_tratamento_flex_jr_web2_bkp2.R')
 #Sys.sleep(5)
-source('022_letalidade_flex_BKP05_web4.R')
-#Sys.sleep(5)
 source('023_tratamento_flex_mba_web2_bkp1.R')
 #Sys.sleep(1)
-source('024_tratamento_CEDIPRO.R')
+source('024_tratamento_CEDIPRO_bkp02.R')
+#Sys.sleep(5)
+source('028_corre_legal_bkp03.R')
 #Sys.sleep(8)
-source('025_tabelas_BKP02_gt.R')
+#Sys.sleep(5)
+source('022_letalidade_flex_BKP05_web4.R')
+source('025_tabelas_BKP03_gt.R')
 #Sys.sleep(5)
 source('026_graficos_BKP03.R')
 #Sys.sleep(5)
 
 setwd("/home/amikobh/diretorio_r/estciabh")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+
+
+# shutdown_script.R
+
+# Função para desligar o computador
+shutdown_computer <- function() {
+  # Comando para desligar o sistema
+  command <- "sudo shutdown -h now"
+
+  # Executar o comando no sistema operacional
+  cat("Desligando o computador...\n")
+  system(command)
+}
+
+# Chamar a função de desligamento
+shutdown_computer()

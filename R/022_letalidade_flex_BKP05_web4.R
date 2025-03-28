@@ -254,8 +254,8 @@ banco_PARA_CAI = banco_iml_inicial_atualizado
 #########################################################################################################
 #filtrar data (considerando ano em curso, *1= 1 ano atrás. *2= 2 anos atrás e assim sucessivamente)
 banco_PARA_CAI = banco_PARA_CAI %>%
-  filter(ENTRADA2 >= (str_c(format(Sys.Date()-365*2, "%Y"), "-01-01")) &
-           ENTRADA2 <= (str_c(format(Sys.Date()-365*2, "%Y"), "-12-31")))
+  filter(ENTRADA2 >= (str_c(format(Sys.Date()-365*3, "%Y"), "-01-01")) &
+           ENTRADA2 <= (str_c(format(Sys.Date()-365*3, "%Y"), "-12-31")))
 #########################################################################################################
 #########################################################################################################
 banco_PARA_CAI_SEM_municipios_limitrofes =
@@ -374,8 +374,8 @@ banco_letalidade =
 #     ENTRADA2 <= (str_c(format(Sys.Date()-365*2, "%Y"), "-12-31")))
 
 #filtrando quando não funciona o script filter acima
-banco_letalidade<-subset(banco_letalidade,ENTRADA2 >= (str_c(format(Sys.Date()-365*2, "%Y"), "-01-01")) &
-                           ENTRADA2 <= (str_c(format(Sys.Date()-365*2, "%Y"), "-12-31")))
+banco_letalidade<-subset(banco_letalidade,ENTRADA2 >= (str_c(format(Sys.Date()-365*3, "%Y"), "-01-01")) &
+                           ENTRADA2 <= (str_c(format(Sys.Date()-365*3, "%Y"), "-12-31")))
 
 #########################################################################################################
 library(abjutils)
@@ -806,9 +806,9 @@ setwd(file.path("~/diretorio_r/estciabh/letalidade"))
 # INSERIR LINHA TOTAL
 #PARA O GRAFICO DE BARRAS:
 tab_letalidade_geral_12_20_HOMICIDIO_bkp <- reshape(data = banco_ATUAL_FAIXA_ETARIA_HOMICIDIO, idvar = "IDADE",
-                                                    varying = c('2018', '2019', '2020', '2021', '2022'),
+                                                    varying = c('2018', '2019', '2020', '2021', '2023'),
                                                     v.name=c("QUANTIDADE"),
-                                                    times = c('2018', '2019', '2020', '2021', '2022'),
+                                                    times = c('2018', '2019', '2020', '2021', '2023'),
                                                     direction = "long")
 
 
@@ -826,7 +826,7 @@ tab_letalidade_geral_12_20_HOMICIDIO <- rbind(banco_ATUAL_FAIXA_ETARIA_HOMICIDIO
                                                          '2019' = sum(banco_ATUAL_FAIXA_ETARIA_HOMICIDIO$'2019'),
                                                          '2020' = sum(banco_ATUAL_FAIXA_ETARIA_HOMICIDIO$'2020'),
                                                          '2021' = sum(banco_ATUAL_FAIXA_ETARIA_HOMICIDIO$'2021'),
-                                                         '2022' = sum(banco_ATUAL_FAIXA_ETARIA_HOMICIDIO$'2022'),
+                                                         '2023' = sum(banco_ATUAL_FAIXA_ETARIA_HOMICIDIO$'2023'),
                                                          stringsAsFactors = FALSE))
 
 
@@ -923,9 +923,9 @@ write.csv(banco_ANO_VINDOURO_IGNORADA, file = "banco_ANO_VINDOURO_IGNORADA.csv")
 setwd(file.path("~/diretorio_r/estciabh/letalidade"))
 
 tab_letalidade_geral_12_20_IGNORADA_bkp <- reshape(data = banco_ATUAL_FAIXA_ETARIA_IGNORADA, idvar = "IDADE",
-                                                   varying = c('2018', '2019', '2020', '2021', '2022'),
+                                                   varying = c('2018', '2019', '2020', '2021', '2023'),
                                                    v.name=c("QUANTIDADE"),
-                                                   times = c('2018', '2019', '2020', '2021', '2022'),
+                                                   times = c('2018', '2019', '2020', '2021', '2023'),
                                                    direction = "long")
 
 
@@ -941,7 +941,7 @@ tab_letalidade_geral_12_20_IGNORADA <- rbind(banco_ATUAL_FAIXA_ETARIA_IGNORADA,
                                                         '2019' = sum(banco_ATUAL_FAIXA_ETARIA_IGNORADA$'2019'),
                                                         '2020' = sum(banco_ATUAL_FAIXA_ETARIA_IGNORADA$'2020'),
                                                         '2021' = sum(banco_ATUAL_FAIXA_ETARIA_IGNORADA$'2021'),
-                                                        '2022' = sum(banco_ATUAL_FAIXA_ETARIA_IGNORADA$'2022'),
+                                                        '2023' = sum(banco_ATUAL_FAIXA_ETARIA_IGNORADA$'2023'),
                                                         stringsAsFactors = FALSE))
 ########################################################################################################
 #########################################################################################################

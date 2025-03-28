@@ -41,9 +41,10 @@ if(!require(palmerpenguins)){install.packages("palmerpenguins", dependencies = T
 if(!require(quarto)){install.packages("quarto", dependencies = TRUE); require(quarto)}
 if(!require(chromote)){install.packages("chromote", dependencies = TRUE); require(chromote)}
 if(!require(fuzzyjoin)){install.packages("fuzzyjoin", dependencies = TRUE); require(fuzzyjoin)}
+if(!require(tesseract)){install.packages("tesseract", dependencies = TRUE); require(tesseract)}
+if(!require(parallel)){install.packages("parallel", dependencies = TRUE); require(parallel)}
 
-
-
+conflicts_prefer(dplyr::rename)
 conflicts_prefer(dplyr::filter)
 conflicts_prefer(dplyr::summarise)
 conflicts_prefer(dplyr::arrange)
@@ -52,6 +53,8 @@ conflicts_prefer(tidygeocoder::geocode)
 conflicts_prefer(dplyr::desc)
 conflicts_prefer(combinat::combn)
 conflicts_prefer(dplyr::count)
+conflicts_prefer(lubridate::dmy)
+conflicts_prefer(lubridate::ymd)
 
 ##if(!require(ggplot)){install.packages("ggplot", dependencies = TRUE); require(ggplot)}
 #if(!require(lubridate)){install.packages("lubridate", dependencies = TRUE); require(lubridate)}
@@ -87,3 +90,4 @@ setwd(file.path("~/diretorio_r/estciabh/R"))#configurar diretorio
 #FIM
 #########################################################################################################
 #TESTE
+

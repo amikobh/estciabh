@@ -63,14 +63,13 @@ banco_cedipro <- banco_cedipro %>%
   )
 
 # Verificar a estrutura do dataframe após a modificação
-str( banco_cedipro %>%
-       select(starts_with("data")))
+str(banco_cedipro)
 
 ## calcula o intervalo em anos (idade)
-banco_cedipro$idade2 = as.period(interval(banco_cedipro$nascimento, banco_cedipro$data_ato))
+banco_cedipro$idade = as.period(interval(banco_cedipro$nascimento, banco_cedipro$data_ato))
 
 # SEPARAR SO O PRIMEIRO ITEM DE "17y 2m 28d 0H 0M 0S" GERADO PELO SCRIPT ANTERIOR.
-banco_cedipro$idade2 = banco_cedipro$idade2@year
+banco_cedipro$idade = banco_cedipro$idade@year
 
 
 #excluir celulas com alunos VAZIO
@@ -99,30 +98,6 @@ colnames(banco_adl_encaminhado_bkp)[1]<-'banco_adl_encaminhado_bkp'
 colnames(banco_adl_encaminhado_bkp)[2]<-'QUANTIDADE'
 colnames(banco_adl_encaminhado_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-banco_adl_encaminhado_bkp_rmark = banco_adl_encaminhado_bkp
-
-banco_adl_encaminhado_bkp_rmark = banco_adl_encaminhado_bkp_rmark %>%
-  top_n(4, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-banco_adl_encaminhado_bkp_rmark =
-  banco_adl_encaminhado_bkp_rmark %>% slice(1:4)
-
-library (stringr)
-
-#replace "%" with "" in the percentual column
-banco_adl_encaminhado_bkp_rmark$PERCENTUAL <- str_replace (banco_adl_encaminhado_bkp_rmark$PERCENTUAL, "%", "")
-banco_adl_encaminhado_bkp_rmark$PERCENTUAL = as.numeric(banco_adl_encaminhado_bkp_rmark$PERCENTUAL)
-
-#########################################################################################################
-#########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
 
@@ -143,12 +118,11 @@ colnames(banco_adl_encaminhado)[3]<-'PERCENTUAL'
 #############################################################################################################
 #banco_adl_encaminhado FIM
 #########################################################################################################
+
+
 #############################################################################################################
 #banco_curso_adolescente_CEDIPRO encaminhado
 #########################################################################################################
-#
-#names(banco_cedipro)
-
 # Carregar o pacote necessário
 library(dplyr)
 
@@ -167,15 +141,11 @@ banco_cedipro <- banco_cedipro %>%
 banco_curso_adolescente_CEDIPRO = banco_cedipro |>
   filter(tem_cedipro %in% "SIM")
 
-
-# Para juntando variáveis numa só:
-
 banco_curso_adolescente_CEDIPRO =
-  banco_cedipro %>%
-  pivot_longer(cols = starts_with("curso_cedipro_adl"), values_to = "CURSO_CEDIPRO") %>%
+  banco_curso_adolescente_CEDIPRO %>%
+  pivot_longer(cols = starts_with("curso_cedipro_adl"), values_to = "curso_cedipro_adl") %>%
   #select(-name) %>%
-  filter(CURSO_CEDIPRO != "" & CURSO_CEDIPRO != "NSA")
-
+  filter(curso_cedipro_adl != "" & curso_cedipro_adl != "NSA")
 
 #########################################################################################################
 # salvando para gráfico
@@ -183,7 +153,7 @@ banco_curso_adolescente_CEDIPRO_bkp = banco_curso_adolescente_CEDIPRO
 
 banco_curso_adolescente_CEDIPRO_bkp =
   banco_curso_adolescente_CEDIPRO_bkp %>%
-  janitor::tabyl(CURSO_CEDIPRO) %>%
+  janitor::tabyl(curso_cedipro_adl) %>%
   arrange(n) %>%
   #arrange(desc(n)) %>%
   #janitor::adorn_totals() %>%
@@ -195,36 +165,12 @@ colnames(banco_curso_adolescente_CEDIPRO_bkp)[1]<-'banco_curso_adolescente_CEDIP
 colnames(banco_curso_adolescente_CEDIPRO_bkp)[2]<-'QUANTIDADE'
 colnames(banco_curso_adolescente_CEDIPRO_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-banco_curso_adolescente_CEDIPRO_bkp_rmark = banco_curso_adolescente_CEDIPRO_bkp
-
-banco_curso_adolescente_CEDIPRO_bkp_rmark = banco_curso_adolescente_CEDIPRO_bkp_rmark %>%
-  top_n(4, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-banco_curso_adolescente_CEDIPRO_bkp_rmark =
-  banco_curso_adolescente_CEDIPRO_bkp_rmark %>% slice(1:4)
-
-library (stringr)
-
-#replace "%" with "" in the percentual column
-banco_curso_adolescente_CEDIPRO_bkp_rmark$PERCENTUAL <- str_replace (banco_curso_adolescente_CEDIPRO_bkp_rmark$PERCENTUAL, "%", "")
-banco_curso_adolescente_CEDIPRO_bkp_rmark$PERCENTUAL = as.numeric(banco_curso_adolescente_CEDIPRO_bkp_rmark$PERCENTUAL)
-
-#########################################################################################################
-#########################################################################################################
-#########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
 
 banco_curso_adolescente_CEDIPRO =
   banco_curso_adolescente_CEDIPRO %>%
-  janitor::tabyl(CURSO_CEDIPRO) %>%
+  janitor::tabyl(curso_cedipro_adl) %>%
   arrange(desc(n)) %>%
   janitor::adorn_totals() %>%
   adorn_pct_formatting(digits = 2)
@@ -243,27 +189,24 @@ colnames(banco_curso_adolescente_CEDIPRO)[3]<-'PERCENTUAL'
 #banco_curso_parente_CEDIPRO encaminhado
 #########################################################################################################
 #
-# Filtrar linhas onde cedipro_parente_01 ou cedipro_parente_02 contém "SIM" e e adol SIM
-banco_curso_parente_CEDIPRO <- banco_cedipro %>%
-  filter((cedipro_parente_01 %in% "SIM" | cedipro_parente_02 %in% "SIM") &
-           tem_cedipro %in% "SIM")
 # Para juntando variáveis numa só:
 
 banco_curso_parente_CEDIPRO =
-  banco_curso_parente_CEDIPRO %>%
-  pivot_longer(cols = starts_with("curso_cedipro_parente"), values_to = "CURSO_CEDIPRO") %>%
+  banco_cedipro %>%
+  pivot_longer(cols = starts_with("curso_cedipro_parente"), values_to = "curso_cedipro_parente") %>%
   #select(-name) %>%
-  filter(CURSO_CEDIPRO != "" & CURSO_CEDIPRO != "NSA")
+  filter(curso_cedipro_parente != "" ng)
 
 
 #########################################################################################################
+
 #########################################################################################################
 # salvando para gráfico
 banco_curso_parente_CEDIPRO_bkp = banco_curso_parente_CEDIPRO
 
 banco_curso_parente_CEDIPRO_bkp =
   banco_curso_parente_CEDIPRO_bkp %>%
-  janitor::tabyl(CURSO_CEDIPRO) %>%
+  janitor::tabyl(curso_cedipro_parente) %>%
   arrange(n) %>%
   #janitor::adorn_totals() %>%
   adorn_pct_formatting(digits = 2)
@@ -302,8 +245,8 @@ banco_curso_parente_CEDIPRO_bkp_rmark$PERCENTUAL = as.numeric(banco_curso_parent
 
 banco_curso_parente_CEDIPRO =
   banco_curso_parente_CEDIPRO %>%
-  janitor::tabyl(CURSO_CEDIPRO) %>%
-  arrange(CURSO_CEDIPRO) %>%
+  janitor::tabyl(curso_cedipro_parente) %>%
+  arrange(curso_cedipro_parente) %>%
   janitor::adorn_totals() %>%
   adorn_pct_formatting(digits = 2)
 #########################################################################################################
@@ -319,91 +262,6 @@ colnames(banco_curso_parente_CEDIPRO)[3]<-'PERCENTUAL'
 #banco_curso_parente_CEDIPRO FIM
 #########################################################################################################
 #############################################################################################################
-#############################################################################################################
-#banco_curso_SO_parente_CEDIPRO encaminhado
-#########################################################################################################
-#
-# Filtrar linhas com as condições especificadas para scrip bookdown:
-# Adolescentes desistiram mas parentes não
-banco_curso_SO_parente_CEDIPRO <- banco_cedipro %>%
-  filter(
-    (cedipro_parente_01 == "SIM" | cedipro_parente_02 == "SIM") &
-      tem_cedipro != "SIM")
-# Para juntando variáveis numa só:
-
-banco_curso_SO_parente_CEDIPRO =
-  banco_curso_SO_parente_CEDIPRO %>%
-  pivot_longer(cols = starts_with("curso_cedipro_parente"), values_to = "CURSO_CEDIPRO") %>%
-  #select(-name) %>%
-  filter(CURSO_CEDIPRO != "" & CURSO_CEDIPRO != "NSA")
-
-
-
-
-#########################################################################################################
-
-#########################################################################################################
-# salvando para gráfico
-banco_curso_SO_parente_CEDIPRO_bkp = banco_curso_SO_parente_CEDIPRO
-
-banco_curso_SO_parente_CEDIPRO_bkp =
-  banco_curso_SO_parente_CEDIPRO_bkp %>%
-  janitor::tabyl(CURSO_CEDIPRO) %>%
-  arrange(n) %>%
-  #janitor::adorn_totals() %>%
-  adorn_pct_formatting(digits = 2)
-
-# Adaptando para scrip grafico:
-
-colnames(banco_curso_SO_parente_CEDIPRO_bkp)[1]<-'banco_curso_SO_parente_CEDIPRO_bkp'
-colnames(banco_curso_SO_parente_CEDIPRO_bkp)[2]<-'QUANTIDADE'
-colnames(banco_curso_SO_parente_CEDIPRO_bkp)[3]<-'PERCENTUAL'
-#########################################################################################################
-#########################################################################################################
-
-#script para o bookdown
-
-banco_curso_SO_parente_CEDIPRO_bkp_rmark = banco_curso_SO_parente_CEDIPRO_bkp
-
-banco_curso_SO_parente_CEDIPRO_bkp_rmark = banco_curso_SO_parente_CEDIPRO_bkp_rmark %>%
-  top_n(4, QUANTIDADE) %>% arrange(desc(QUANTIDADE))
-
-
-#banco_incidencia_rmark <- banco_incidencia_rmark %>%
-# arrange(desc(PERCENTUAL))
-banco_curso_SO_parente_CEDIPRO_bkp_rmark =
-  banco_curso_SO_parente_CEDIPRO_bkp_rmark %>% slice(1:4)
-
-library (stringr)
-
-#replace "%" with "" in the percentual column
-banco_curso_SO_parente_CEDIPRO_bkp_rmark$PERCENTUAL <- str_replace (banco_curso_SO_parente_CEDIPRO_bkp_rmark$PERCENTUAL, "%", "")
-banco_curso_SO_parente_CEDIPRO_bkp_rmark$PERCENTUAL = as.numeric(banco_curso_SO_parente_CEDIPRO_bkp_rmark$PERCENTUAL)
-
-#########################################################################################################
-#########################################################################################################
-# Fazer uma tabela de frequência com valores totais,
-# e porcentagem
-
-banco_curso_SO_parente_CEDIPRO =
-  banco_curso_SO_parente_CEDIPRO %>%
-  janitor::tabyl(CURSO_CEDIPRO) %>%
-  arrange(CURSO_CEDIPRO) %>%
-  janitor::adorn_totals() %>%
-  adorn_pct_formatting(digits = 2)
-#########################################################################################################
-
-# Adaptando:
-
-colnames(banco_curso_SO_parente_CEDIPRO)[1]<-'CURSO'
-colnames(banco_curso_SO_parente_CEDIPRO)[2]<-'QUANTIDADE'
-colnames(banco_curso_SO_parente_CEDIPRO)[3]<-'PERCENTUAL'
-
-#############################################################################################################
-#############################################################################################################
-#banco_curso_SO_parente_CEDIPRO FIM
-#########################################################################################################
-
 #banco_desistencia_CEDIPRO
 #############################################################################################################
 
@@ -425,7 +283,7 @@ banco_matriculados_CEDIPRO =
 
   banco_cedipro %>%
   filter(!tipo_de_aluno == "VITIMA") %>%
-  filter(!tem_cedipro == "SIM")
+  filter(!tem_cedipro == "NSA")
 
 
 #########################################################################################################
