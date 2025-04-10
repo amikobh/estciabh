@@ -58,13 +58,27 @@ library(dplyr)
 library(lubridate)
 library(stringr)
 
+
+banco_natacao = banco_natacao |>
+  select(-carimbo_de_data_hora)
+
 # 1) Mudar o nome da coluna 'data_do_treino' para 'data_da_atividade'
 banco_natacao <- banco_natacao %>%
   rename(data_da_atividade = data_do_treino,
          ids = id)
 
-banco_natacao = banco_natacao |>
-  select(-carimbo_de_data_hora)
+
+library(dplyr)
+
+# Adicionar a coluna usando mutate
+banco_natacao <- banco_natacao %>%
+  mutate(hora_da_atividade = "14:00") %>%
+  mutate(hora_da_atividade = strptime("14:00", format = "%H:%M"))
+
+banco_natacao$hora_da_atividade <- format(banco_natacao$hora_da_atividade, "%H:%M")
+
+# Visualizar o resultado
+#print(banco_natacao)
 
 
 # 2) Corrigir anos errados nas datas (se o ano for '0024' ou '1204', substituímos por '2024')
@@ -109,7 +123,7 @@ datas_com_erro <- banco_natacao %>%
   filter(str_sub(data_da_atividade, 1, 4) == "0024" | str_sub(data_da_atividade, 1, 4) == "1204")
 
 # Exibir as datas com erros
-print(datas_com_erro)
+#print(datas_com_erro)
 
 #################################################################################################################
 #TRATAMENTO banco_semiliberdade
@@ -246,6 +260,18 @@ library(dplyr)
 semiliberdade_sem_duplicadas <- semiliberdade_final %>%
   distinct(IDS, NOME, unidade, atividade2, data_da_atividade, hora_da_atividade, .keep_all = TRUE)
 
+library(dplyr)
+
+semiliberdade_sem_duplicadas <- semiliberdade_sem_duplicadas %>%
+  mutate(unidade = recode(unidade,
+                          "CSLIP" = "CASA DE SEMILIBERDADE IPIRANGA",
+                          "CSLLE" = "CASA DE SEMILIBERDADE LETÍCIA",
+                          "CSSLE" = "CASA DE SEMILIBERDADE LETÍCIA",
+                          "CSLSA" = "CASA DE SEMILIBERDADE SANTA AMÉLIA",
+                          "CSLVN" = "CASA DE SEMILIBERDADE VENDA NOVA",
+                          "CSLSL" = "CASA DE SEMILIBERDADE SÃO LUIS"
+  ))
+
 
 
 #arrumando coluna atividade2 semiliberdade_sem_duplicadas
@@ -293,11 +319,11 @@ semiliberdade_sem_duplicadas <- semiliberdade_sem_duplicadas %>%
 #atv = quantas vezes um mesmo adolecente participou das atividades?
 
 # Contar as ocorrências de cada valor único
-semiliberdade_atv <- semiliberdade_sem_duplicadas %>%
+semiliberdade_atv_CORRE <- semiliberdade_sem_duplicadas %>%
   count(IDS)
 
 # Criar faixas com base nas repetições
-semiliberdade_atv <- semiliberdade_atv %>%
+semiliberdade_atv_CORRE <- semiliberdade_atv_CORRE %>%
   mutate(faixa = case_when(
     n < 10 ~ "Menos de 10 vezes",
     n >= 10 & n <= 20 ~ "Entre 10 e 20 vezes",
@@ -306,69 +332,114 @@ semiliberdade_atv <- semiliberdade_atv %>%
   ))
 
 # Contar quantas vezes cada faixa ocorre
-faixa_semiliberdade_atv <- semiliberdade_atv %>%
+faixa_semiliberdade_atv_CORRE <- semiliberdade_atv_CORRE %>%
   count(faixa) %>%
   arrange(factor(faixa, levels = c("Menos de 10 vezes", "Entre 10 e 20 vezes", "Entre 21 e 30 vezes", "Acima de 30 vezes")))
 
 
 # Adicionar a linha de total
-faixa_semiliberdade_atv <- faixa_semiliberdade_atv %>%
+faixa_semiliberdade_atv_CORRE <- faixa_semiliberdade_atv_CORRE %>%
   bind_rows(
-    data.frame(faixa = "Total", n = sum(faixa_semiliberdade_atv$n))
+    data.frame(faixa = "Total", n = sum(faixa_semiliberdade_atv_CORRE$n))
   )
 
+colnames(faixa_semiliberdade_atv_CORRE) = c("FREQUÊNCIA", "QUANTIDADE")
 
-#print(faixa_semiliberdade_atv)
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+faixa_semiliberdade_atv_CORRE_bkp <- faixa_semiliberdade_atv_CORRE %>%
+  filter(FREQUÊNCIA != "Total") %>%
+  arrange(desc(QUANTIDADE))
+
+
+
+##print(faixa_semiliberdade_atv_CORRE)
 
 # Contagem das atividades
-tabela_atividades_semiliberdade <- table(semiliberdade_sem_duplicadas$atividade2)
+tabela_atividades_semiliberdade_CORRE <- table(semiliberdade_sem_duplicadas$atividade2)
 
 # Converter para um data frame
-tabela_atividades_semiliberdade <- as.data.frame(tabela_atividades_semiliberdade)
-colnames(tabela_atividades_semiliberdade) <- c("Atividade", "Frequencia")
+tabela_atividades_semiliberdade_CORRE <- as.data.frame(tabela_atividades_semiliberdade_CORRE)
+colnames(tabela_atividades_semiliberdade_CORRE) <- c("Atividade", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_atividades_semiliberdade$Porcentagem <- round((tabela_atividades_semiliberdade$Frequencia / sum(tabela_atividades_semiliberdade$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_atividades_semiliberdade_CORRE$PERCENTUAL <- round((tabela_atividades_semiliberdade_CORRE$Frequencia / sum(tabela_atividades_semiliberdade_CORRE$Frequencia)) * 100, 2)
 
 # Adicionar linha de total
 total_atividades <- data.frame(
   Atividade = "Total",
-  Frequencia = sum(tabela_atividades_semiliberdade$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_atividades_semiliberdade_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_atividades_semiliberdade <- rbind(tabela_atividades_semiliberdade, total_atividades)
+tabela_atividades_semiliberdade_CORRE <- rbind(tabela_atividades_semiliberdade_CORRE, total_atividades)
+
+
+colnames(tabela_atividades_semiliberdade_CORRE) = c("ATIVIDADE", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_atividades_semiliberdade_CORRE_bkp <- tabela_atividades_semiliberdade_CORRE %>%
+  filter(ATIVIDADE != "Total") %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+# Carregar o pacote
+library(dplyr)
+
+
+# Exibir o dataframe resultante
+#print(tabela_total_adls_CORRE_bkp)
+
 
 # Exibir tabela
-#print(tabela_atividades_semiliberdade)
+##print(tabela_atividades_semiliberdade_CORRE)
 
 
 # Criar coluna com os dias da semana
 semiliberdade_sem_duplicadas$dias_da_semana <- weekdays(as.Date(semiliberdade_sem_duplicadas$data_da_atividade))
 
 # Contagem dos dias da semana
-tabela_dias_semiliberdade <- table(semiliberdade_sem_duplicadas$dias_da_semana)
+tabela_dias_semiliberdade_CORRE <- table(semiliberdade_sem_duplicadas$dias_da_semana)
 
 # Converter para um data frame
-tabela_dias_semiliberdade <- as.data.frame(tabela_dias_semiliberdade)
-colnames(tabela_dias_semiliberdade) <- c("Dia_da_Semana", "Frequencia")
+tabela_dias_semiliberdade_CORRE <- as.data.frame(tabela_dias_semiliberdade_CORRE)
+colnames(tabela_dias_semiliberdade_CORRE) <- c("Dia_da_Semana", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_dias_semiliberdade$Porcentagem <- round((tabela_dias_semiliberdade$Frequencia / sum(tabela_dias_semiliberdade$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_dias_semiliberdade_CORRE$PERCENTUAL <- round((tabela_dias_semiliberdade_CORRE$Frequencia / sum(tabela_dias_semiliberdade_CORRE$Frequencia)) * 100, 2)
 
 # Adicionar linha de total
 total_dias <- data.frame(
   Dia_da_Semana = "Total",
-  Frequencia = sum(tabela_dias_semiliberdade$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_dias_semiliberdade_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_dias_semiliberdade <- rbind(tabela_dias_semiliberdade, total_dias)
+tabela_dias_semiliberdade_CORRE <- rbind(tabela_dias_semiliberdade_CORRE, total_dias)
+
+
+
+colnames(tabela_dias_semiliberdade_CORRE) = c("DIA", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_dias_semiliberdade_CORRE_bkp <- tabela_dias_semiliberdade_CORRE %>%
+  filter(DIA != "Total") %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+
+
 
 # Exibir tabela
-#print(tabela_dias_semiliberdade)
+##print(tabela_dias_semiliberdade_CORRE)
+
+
+
 
 
 
@@ -380,58 +451,82 @@ semiliberdade_sem_duplicadas$periodo_do_dia <- ifelse(
 )
 
 # Contagem dos períodos
-tabela_periodo_semiliberdade <- table(semiliberdade_sem_duplicadas$periodo_do_dia)
+tabela_periodo_semiliberdade_CORRE <- table(semiliberdade_sem_duplicadas$periodo_do_dia)
 
 # Converter para um data frame
-tabela_periodo_semiliberdade <- as.data.frame(tabela_periodo_semiliberdade)
-colnames(tabela_periodo_semiliberdade) <- c("Periodo", "Frequencia")
+tabela_periodo_semiliberdade_CORRE <- as.data.frame(tabela_periodo_semiliberdade_CORRE)
+colnames(tabela_periodo_semiliberdade_CORRE) <- c("Periodo", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_periodo_semiliberdade$Porcentagem <- round((tabela_periodo_semiliberdade$Frequencia / sum(tabela_periodo_semiliberdade$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_periodo_semiliberdade_CORRE$PERCENTUAL <- round((tabela_periodo_semiliberdade_CORRE$Frequencia / sum(tabela_periodo_semiliberdade_CORRE$Frequencia)) * 100, 2)
 
 # Reordenar as linhas: colocar "S/ INFORMAÇÃO" logo antes do total
-#if ("S/INF" %in% tabela_periodo_semiliberdade$Periodo) {
-# tabela_periodo_semiliberdade <- tabela_periodo_semiliberdade[order(tabela_periodo_semiliberdade$Periodo != "S/INF"), ]
+#if ("S/INF" %in% tabela_periodo_semiliberdade_CORRE$Periodo) {
+# tabela_periodo_semiliberdade_CORRE <- tabela_periodo_semiliberdade_CORRE[order(tabela_periodo_semiliberdade_CORRE$Periodo != "S/INF"), ]
 #}
 
 # Reordenar as linhas: colocar "MANHÃ" e "TARDE" primeiro, depois "S/INF"
-tabela_periodo_semiliberdade <- tabela_periodo_semiliberdade[order(factor(tabela_periodo_semiliberdade$Periodo, levels = c("MANHÃ", "TARDE", "S/INF"))), ]
+tabela_periodo_semiliberdade_CORRE <- tabela_periodo_semiliberdade_CORRE[order(factor(tabela_periodo_semiliberdade_CORRE$Periodo, levels = c("MANHÃ", "TARDE", "S/INF"))), ]
 
 # Adicionar linha de total
 total_periodo_semiliberdade <- data.frame(
   Periodo = "Total",
-  Frequencia = sum(tabela_periodo_semiliberdade$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_periodo_semiliberdade_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_periodo_semiliberdade <- rbind(tabela_periodo_semiliberdade, total_periodo_semiliberdade)
+tabela_periodo_semiliberdade_CORRE <- rbind(tabela_periodo_semiliberdade_CORRE, total_periodo_semiliberdade)
+
+
+colnames(tabela_periodo_semiliberdade_CORRE) = c("PERÍODO", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_periodo_semiliberdade_CORRE_bkp <- tabela_periodo_semiliberdade_CORRE %>%
+  filter(PERÍODO != "Total") %>%
+  mutate(PERCENTUAL2 = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+
 
 # Exibir tabela
-#print(tabela_periodo_semiliberdade)
+##print(tabela_periodo_semiliberdade_CORRE)
 
 # Contagem das unidades
-tabela_unidade_semiliberdade <- table(semiliberdade_sem_duplicadas$unidade)
+tabela_unidade_semiliberdade_CORRE <- table(semiliberdade_sem_duplicadas$unidade)
 
 # Converter para um data frame
-tabela_unidade_semiliberdade <- as.data.frame(tabela_unidade_semiliberdade)
-colnames(tabela_unidade_semiliberdade) <- c("Unidade", "Frequencia")
+tabela_unidade_semiliberdade_CORRE <- as.data.frame(tabela_unidade_semiliberdade_CORRE)
+colnames(tabela_unidade_semiliberdade_CORRE) <- c("Unidade", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_unidade_semiliberdade$Porcentagem <- round((tabela_unidade_semiliberdade$Frequencia / sum(tabela_unidade_semiliberdade$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_unidade_semiliberdade_CORRE$PERCENTUAL <- round((tabela_unidade_semiliberdade_CORRE$Frequencia / sum(tabela_unidade_semiliberdade_CORRE$Frequencia)) * 100, 2)
 
 # Adicionar linha de total
 total_unidade <- data.frame(
   Unidade = "Total",
-  Frequencia = sum(tabela_unidade_semiliberdade$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_unidade_semiliberdade_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_unidade_semiliberdade <- rbind(tabela_unidade_semiliberdade, total_unidade)
+tabela_unidade_semiliberdade_CORRE <- rbind(tabela_unidade_semiliberdade_CORRE, total_unidade)
+
+
+colnames(tabela_unidade_semiliberdade_CORRE) = c("UNIDADE", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_unidade_semiliberdade_CORRE_bkp <- tabela_unidade_semiliberdade_CORRE %>%
+  filter(UNIDADE != "Total") %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+
 
 # Exibir tabela
-#print(tabela_unidade_semiliberdade)
+##print(tabela_unidade_semiliberdade_CORRE)
 
 
 semiliberdade_SNR = semiliberdade_sem_duplicadas %>%
@@ -577,7 +672,16 @@ library(dplyr)
 internacao_sem_duplicadas <- internacao_final %>%
   distinct(IDS, NOME, unidade, atividade2, data_da_atividade, hora_da_atividade, .keep_all = TRUE)
 
-
+internacao_sem_duplicadas <- internacao_sem_duplicadas %>%
+  mutate(unidade = recode(unidade,
+                          "CSEH" = "CENTRO SOCIOEDUCATIVO HORTO",
+                          "CSEL" = "CENTRO SOCIOEDUCATIVO LINDEIA",
+                          "CSESC" = "CENTRO SOCIOEDUCATIVO SANTA CLARA",
+                          "CSESH" = "CENTRO SOCIOEDUCATIVO SANTA HELENA",
+                          "CSESJ" = "CENTRO SOCIOEDUCATIVO SÃO JERÔNIMO",
+                          "CEIPDB" = "CENTRO DE INTERNAÇÃO PROVISÓRIA DOM BOSCO",
+                          "CEIPSB" = "CENTRO DE INTERNAÇÃO PROVISÓRIA SÃO BENEDITO"
+  ))
 
 #arrumando coluna atividade2 internacao_sem_duplicadas
 
@@ -624,11 +728,11 @@ internacao_sem_duplicadas <- internacao_sem_duplicadas %>%
 #atv = quantas vezes um mesmo adolecente participou das atividades?
 
 # Contar as ocorrências de cada valor único
-internacao_atv <- internacao_sem_duplicadas %>%
+internacao_atv_CORRE <- internacao_sem_duplicadas %>%
   count(IDS)
 
 # Criar faixas com base nas repetições
-internacao_atv <- internacao_atv %>%
+internacao_atv_CORRE <- internacao_atv_CORRE %>%
   mutate(faixa = case_when(
     n < 10 ~ "Menos de 10 vezes",
     n >= 10 & n <= 20 ~ "Entre 10 e 20 vezes",
@@ -637,69 +741,114 @@ internacao_atv <- internacao_atv %>%
   ))
 
 # Contar quantas vezes cada faixa ocorre
-faixa_internacao_atv <- internacao_atv %>%
+faixa_internacao_atv_CORRE <- internacao_atv_CORRE %>%
   count(faixa) %>%
   arrange(factor(faixa, levels = c("Menos de 10 vezes", "Entre 10 e 20 vezes", "Entre 21 e 30 vezes", "Acima de 30 vezes")))
 
 
 # Adicionar a linha de total
-faixa_internacao_atv <- faixa_internacao_atv %>%
+faixa_internacao_atv_CORRE <- faixa_internacao_atv_CORRE %>%
   bind_rows(
-    data.frame(faixa = "Total", n = sum(faixa_internacao_atv$n))
+    data.frame(faixa = "Total", n = sum(faixa_internacao_atv_CORRE$n))
   )
 
+colnames(faixa_internacao_atv_CORRE) = c("FREQUÊNCIA", "QUANTIDADE")
 
-#print(faixa_internacao_atv)
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+faixa_internacao_atv_CORRE_bkp <- faixa_internacao_atv_CORRE %>%
+  filter(FREQUÊNCIA != "Total") %>%
+  arrange(desc(QUANTIDADE))
+
+
+
+##print(faixa_internacao_atv_CORRE)
 
 # Contagem das atividades
-tabela_atividades_internacao <- table(internacao_sem_duplicadas$atividade2)
+tabela_atividades_internacao_CORRE <- table(internacao_sem_duplicadas$atividade2)
 
 # Converter para um data frame
-tabela_atividades_internacao <- as.data.frame(tabela_atividades_internacao)
-colnames(tabela_atividades_internacao) <- c("Atividade", "Frequencia")
+tabela_atividades_internacao_CORRE <- as.data.frame(tabela_atividades_internacao_CORRE)
+colnames(tabela_atividades_internacao_CORRE) <- c("Atividade", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_atividades_internacao$Porcentagem <- round((tabela_atividades_internacao$Frequencia / sum(tabela_atividades_internacao$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_atividades_internacao_CORRE$PERCENTUAL <- round((tabela_atividades_internacao_CORRE$Frequencia / sum(tabela_atividades_internacao_CORRE$Frequencia)) * 100, 2)
 
 # Adicionar linha de total
 total_atividades <- data.frame(
   Atividade = "Total",
-  Frequencia = sum(tabela_atividades_internacao$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_atividades_internacao_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_atividades_internacao <- rbind(tabela_atividades_internacao, total_atividades)
+tabela_atividades_internacao_CORRE <- rbind(tabela_atividades_internacao_CORRE, total_atividades)
+
+
+colnames(tabela_atividades_internacao_CORRE) = c("ATIVIDADE", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_atividades_internacao_CORRE_bkp <- tabela_atividades_internacao_CORRE %>%
+  filter(ATIVIDADE != "Total") %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+# Carregar o pacote
+library(dplyr)
+
+
+# Exibir o dataframe resultante
+#print(tabela_total_adls_CORRE_bkp)
+
 
 # Exibir tabela
-#print(tabela_atividades_internacao)
+##print(tabela_atividades_internacao_CORRE)
 
 
 # Criar coluna com os dias da semana
 internacao_sem_duplicadas$dias_da_semana <- weekdays(as.Date(internacao_sem_duplicadas$data_da_atividade))
 
 # Contagem dos dias da semana
-tabela_dias_internacao <- table(internacao_sem_duplicadas$dias_da_semana)
+tabela_dias_internacao_CORRE <- table(internacao_sem_duplicadas$dias_da_semana)
 
 # Converter para um data frame
-tabela_dias_internacao <- as.data.frame(tabela_dias_internacao)
-colnames(tabela_dias_internacao) <- c("Dia_da_Semana", "Frequencia")
+tabela_dias_internacao_CORRE <- as.data.frame(tabela_dias_internacao_CORRE)
+colnames(tabela_dias_internacao_CORRE) <- c("Dia_da_Semana", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_dias_internacao$Porcentagem <- round((tabela_dias_internacao$Frequencia / sum(tabela_dias_internacao$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_dias_internacao_CORRE$PERCENTUAL <- round((tabela_dias_internacao_CORRE$Frequencia / sum(tabela_dias_internacao_CORRE$Frequencia)) * 100, 2)
 
 # Adicionar linha de total
 total_dias <- data.frame(
   Dia_da_Semana = "Total",
-  Frequencia = sum(tabela_dias_internacao$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_dias_internacao_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_dias_internacao <- rbind(tabela_dias_internacao, total_dias)
+tabela_dias_internacao_CORRE <- rbind(tabela_dias_internacao_CORRE, total_dias)
+
+
+
+colnames(tabela_dias_internacao_CORRE) = c("DIA", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_dias_internacao_CORRE_bkp <- tabela_dias_internacao_CORRE %>%
+  filter(DIA != "Total") %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+
+
 
 # Exibir tabela
-#print(tabela_dias_internacao)
+##print(tabela_dias_internacao_CORRE)
+
+
+
 
 
 
@@ -711,58 +860,82 @@ internacao_sem_duplicadas$periodo_do_dia <- ifelse(
 )
 
 # Contagem dos períodos
-tabela_periodo_internacao <- table(internacao_sem_duplicadas$periodo_do_dia)
+tabela_periodo_internacao_CORRE <- table(internacao_sem_duplicadas$periodo_do_dia)
 
 # Converter para um data frame
-tabela_periodo_internacao <- as.data.frame(tabela_periodo_internacao)
-colnames(tabela_periodo_internacao) <- c("Periodo", "Frequencia")
+tabela_periodo_internacao_CORRE <- as.data.frame(tabela_periodo_internacao_CORRE)
+colnames(tabela_periodo_internacao_CORRE) <- c("Periodo", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_periodo_internacao$Porcentagem <- round((tabela_periodo_internacao$Frequencia / sum(tabela_periodo_internacao$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_periodo_internacao_CORRE$PERCENTUAL <- round((tabela_periodo_internacao_CORRE$Frequencia / sum(tabela_periodo_internacao_CORRE$Frequencia)) * 100, 2)
 
 # Reordenar as linhas: colocar "S/ INFORMAÇÃO" logo antes do total
-#if ("S/INF" %in% tabela_periodo_internacao$Periodo) {
-# tabela_periodo_internacao <- tabela_periodo_internacao[order(tabela_periodo_internacao$Periodo != "S/INF"), ]
+#if ("S/INF" %in% tabela_periodo_internacao_CORRE$Periodo) {
+# tabela_periodo_internacao_CORRE <- tabela_periodo_internacao_CORRE[order(tabela_periodo_internacao_CORRE$Periodo != "S/INF"), ]
 #}
 
 # Reordenar as linhas: colocar "MANHÃ" e "TARDE" primeiro, depois "S/INF"
-tabela_periodo_internacao <- tabela_periodo_internacao[order(factor(tabela_periodo_internacao$Periodo, levels = c("MANHÃ", "TARDE", "S/INF"))), ]
+tabela_periodo_internacao_CORRE <- tabela_periodo_internacao_CORRE[order(factor(tabela_periodo_internacao_CORRE$Periodo, levels = c("MANHÃ", "TARDE", "S/INF"))), ]
 
 # Adicionar linha de total
 total_periodo_internacao <- data.frame(
   Periodo = "Total",
-  Frequencia = sum(tabela_periodo_internacao$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_periodo_internacao_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_periodo_internacao <- rbind(tabela_periodo_internacao, total_periodo_internacao)
+tabela_periodo_internacao_CORRE <- rbind(tabela_periodo_internacao_CORRE, total_periodo_internacao)
+
+
+colnames(tabela_periodo_internacao_CORRE) = c("PERÍODO", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_periodo_internacao_CORRE_bkp <- tabela_periodo_internacao_CORRE %>%
+  filter(PERÍODO != "Total") %>%
+  mutate(PERCENTUAL2 = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+
 
 # Exibir tabela
-#print(tabela_periodo_internacao)
+##print(tabela_periodo_internacao_CORRE)
 
 # Contagem das unidades
-tabela_unidade_internacao <- table(internacao_sem_duplicadas$unidade)
+tabela_unidade_internacao_CORRE <- table(internacao_sem_duplicadas$unidade)
 
 # Converter para um data frame
-tabela_unidade_internacao <- as.data.frame(tabela_unidade_internacao)
-colnames(tabela_unidade_internacao) <- c("Unidade", "Frequencia")
+tabela_unidade_internacao_CORRE <- as.data.frame(tabela_unidade_internacao_CORRE)
+colnames(tabela_unidade_internacao_CORRE) <- c("Unidade", "Frequencia")
 
-# Calcular porcentagem (arredondada para 2 casas decimais)
-tabela_unidade_internacao$Porcentagem <- round((tabela_unidade_internacao$Frequencia / sum(tabela_unidade_internacao$Frequencia)) * 100, 2)
+# Calcular PERCENTUAL (arredondada para 2 casas decimais)
+tabela_unidade_internacao_CORRE$PERCENTUAL <- round((tabela_unidade_internacao_CORRE$Frequencia / sum(tabela_unidade_internacao_CORRE$Frequencia)) * 100, 2)
 
 # Adicionar linha de total
 total_unidade <- data.frame(
   Unidade = "Total",
-  Frequencia = sum(tabela_unidade_internacao$Frequencia),
-  Porcentagem = 100.00  # Total sempre será 100%
+  Frequencia = sum(tabela_unidade_internacao_CORRE$Frequencia),
+  PERCENTUAL = 100.00  # Total sempre será 100%
 )
 
 # Combinar tabelas
-tabela_unidade_internacao <- rbind(tabela_unidade_internacao, total_unidade)
+tabela_unidade_internacao_CORRE <- rbind(tabela_unidade_internacao_CORRE, total_unidade)
+
+
+colnames(tabela_unidade_internacao_CORRE) = c("UNIDADE", "QUANTIDADE", "PERCENTUAL")
+
+library(dplyr)
+
+# Filtrar e ordenar em um único código
+tabela_unidade_internacao_CORRE_bkp <- tabela_unidade_internacao_CORRE %>%
+  filter(UNIDADE != "Total") %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+
 
 # Exibir tabela
-#print(tabela_unidade_internacao)
+##print(tabela_unidade_internacao_CORRE)
 
 
 internacao_SNR = internacao_sem_duplicadas %>%
@@ -818,7 +991,7 @@ semiliberdade_GERAL <- semiliberdade_GERAL %>%
 
 
 # Criar tabela de frequências cruzadas entre IDADE e SEXO
-tabela_IDADE_SEXO_semiliberdade <- semiliberdade_GERAL %>%
+tabela_IDADE_SEXO_semiliberdade_CORRE <- semiliberdade_GERAL %>%
   tabyl(IDADE, SEXO) %>%
   adorn_totals(c("row", "col")) %>% # Adicionar totais nas linhas e colunas
   adorn_percentages("col") %>% # Calcular porcentagens por coluna (SEXO)
@@ -828,24 +1001,46 @@ tabela_IDADE_SEXO_semiliberdade <- semiliberdade_GERAL %>%
 
 
 # Substituir "VS/INFORMAÇÃO" por "S/INFORMAÇÃO" na coluna 'ato'
-tabela_IDADE_SEXO_semiliberdade <- tabela_IDADE_SEXO_semiliberdade %>%
+tabela_IDADE_SEXO_semiliberdade_CORRE <- tabela_IDADE_SEXO_semiliberdade_CORRE %>%
   mutate(IDADE = gsub("Total", "TOTAL", IDADE))
 
 
 # Modificar os nomes das colunas
-colnames(tabela_IDADE_SEXO_semiliberdade) <- c("IDADE", "FEMININO", "MASCULINO", "TOTAL")
+colnames(tabela_IDADE_SEXO_semiliberdade_CORRE) <- c("IDADE", "FEMININO", "MASCULINO", "TOTAL")
 
 # Exibir a tabela
-print(tabela_IDADE_SEXO_semiliberdade)
+##print(tabela_IDADE_SEXO_semiliberdade_CORRE)
+
+# para o gráfico:
+
+tabela_IDADE_SEXO_semiliberdade_CORRE_bkp = semiliberdade_GERAL |>
+  select(IDADE, SEXO) |>
+  mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
+
+
+# Criar a coluna QUANTIDADE contando as ocorrências por IDADE e SEXO
+tabela_IDADE_SEXO_semiliberdade_CORRE_bkp <- tabela_IDADE_SEXO_semiliberdade_CORRE_bkp %>%
+  count(IDADE, SEXO, name = "QUANTIDADE")
+
+
+# para o gráfico:
+
+tabela_IDADE_SEXO_semiliberdade_CORRE_bkp1 = semiliberdade_GERAL |>
+  select(IDADE, SEXO) |>
+  mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
+
+
+# Criar a coluna QUANTIDADE contando as ocorrências por IDADE e SEXO
+tabela_IDADE_SEXO_semiliberdade_CORRE_bkp1 <- tabela_IDADE_SEXO_semiliberdade_CORRE_bkp1 %>%
+  count(SEXO, name = "QUANTIDADE") %>%
+  mutate(PERCENTUAL = round((QUANTIDADE / sum(QUANTIDADE)) * 100, 2)) %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) # Adicionar "%" à coluna PERCENTUAL
 
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
 #juntando internacao
 #########################################################################################################
-# Carregar o pacote data.table
-library(data.table)
-
 # Converter os dataframes para data.table
 setDT(internacao_SNR)
 setDT(banco_atos_em_foco_corre)
@@ -871,18 +1066,18 @@ internacao_GERAL <- internacao_GERAL %>%
 # Carregar o pacote dplyr
 library(dplyr)
 
-
 internacao_GERAL_SNR = internacao_GERAL %>%
   distinct(IDS, .keep_all = TRUE)
+
 
 # Excluir linhas onde SEXO == "SEM INFORMACAO2"
 internacao_GERAL <- internacao_GERAL %>%
   filter(SEXO != "SEM INFORMACAO2")
 
-#############################################################################################################
-#########################################################################################################
+
+
 # Criar tabela de frequências cruzadas entre IDADE e SEXO
-tabela_IDADE_SEXO_internacao <- internacao_GERAL %>%
+tabela_IDADE_SEXO_internacao_CORRE <- internacao_GERAL %>%
   tabyl(IDADE, SEXO) %>%
   adorn_totals(c("row", "col")) %>% # Adicionar totais nas linhas e colunas
   adorn_percentages("col") %>% # Calcular porcentagens por coluna (SEXO)
@@ -892,22 +1087,50 @@ tabela_IDADE_SEXO_internacao <- internacao_GERAL %>%
 
 
 # Substituir "VS/INFORMAÇÃO" por "S/INFORMAÇÃO" na coluna 'ato'
-tabela_IDADE_SEXO_internacao <- tabela_IDADE_SEXO_internacao %>%
+tabela_IDADE_SEXO_internacao_CORRE <- tabela_IDADE_SEXO_internacao_CORRE %>%
   mutate(IDADE = gsub("Total", "TOTAL", IDADE))
 
 
 # Modificar os nomes das colunas
-colnames(tabela_IDADE_SEXO_internacao) <- c("IDADE", "FEMININO", "MASCULINO", "TOTAL")
+colnames(tabela_IDADE_SEXO_internacao_CORRE) <- c("IDADE", "FEMININO", "MASCULINO", "TOTAL")
 
 # Exibir a tabela
-print(tabela_IDADE_SEXO_internacao)
+##print(tabela_IDADE_SEXO_internacao_CORRE)
+
+
+# para o gráfico:
+
+tabela_IDADE_SEXO_internacao_CORRE_bkp = internacao_GERAL |>
+  select(IDADE, SEXO) |>
+  mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
+
+
+# Criar a coluna QUANTIDADE contando as ocorrências por IDADE e SEXO
+tabela_IDADE_SEXO_internacao_CORRE_bkp <- tabela_IDADE_SEXO_internacao_CORRE_bkp %>%
+  count(IDADE, SEXO, name = "QUANTIDADE")
+
+
+# para o gráfico:
+
+tabela_IDADE_SEXO_internacao_CORRE_bkp1 = internacao_GERAL |>
+  select(IDADE, SEXO) |>
+  mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
+
+
+# Criar a coluna QUANTIDADE contando as ocorrências por IDADE e SEXO
+tabela_IDADE_SEXO_internacao_CORRE_bkp1 <- tabela_IDADE_SEXO_internacao_CORRE_bkp1 %>%
+  count(SEXO, name = "QUANTIDADE") %>%
+  mutate(PERCENTUAL = round((QUANTIDADE / sum(QUANTIDADE)) * 100, 2)) %>%
+  mutate(PERCENTUAL = paste0(PERCENTUAL, " %")) # Adicionar "%" à coluna PERCENTUAL
+
+
 
 #########################################################################################################
 #########################################################################################################
 
 
 # Criar uma tabela com as contagens de linhas
-tabela_total_adls_corre <- tribble(
+tabela_total_adls_CORRE <- tribble(
   ~GRUPO, ~QUANTIDADE,
   "SEMILIBERDADE", nrow(semiliberdade_SNR),
   "INTERNAÇÃO", nrow(internacao_SNR)
@@ -918,14 +1141,31 @@ tabela_total_adls_corre <- tribble(
 
 
 # Calculando a coluna PERCENTUAL
-tabela_total_adls_corre$PERCENTUAL <- round((tabela_total_adls_corre$QUANTIDADE / tabela_total_adls_corre$QUANTIDADE[tabela_total_adls_corre$GRUPO == "Total"]) * 100, 2)
+tabela_total_adls_CORRE$PERCENTUAL <- round((tabela_total_adls_CORRE$QUANTIDADE / tabela_total_adls_CORRE$QUANTIDADE[tabela_total_adls_CORRE$GRUPO == "Total"]) * 100, 2)
 
+colnames(tabela_total_adls_CORRE) = c("MEDIDA", "QUANTIDADE", "PERCENTUAL")
 # Exibindo o dataframe final
-print(tabela_total_adls_corre)
 
+# Filtrar e ordenar em um único código
+tabela_total_adls_CORRE_bkp <- tabela_total_adls_CORRE %>%
+  filter(MEDIDA != "Total") %>%
+  arrange(desc(QUANTIDADE))
 
+# Carregar o pacote
+library(dplyr)
 
-print(tabela_total_adls_corre)
+# Transformações utilizando dplyr
+tabela_total_adls_CORRE_bkp <- tabela_total_adls_CORRE %>%
+  # 1) Filtrar para remover a linha onde MEDIDA é "Total"
+  filter(MEDIDA != "Total") %>%
+  # 2) Criar uma nova coluna PERCENTUAL2 adicionando o caractere "%"
+  mutate(PERCENTUAL2 = paste0(PERCENTUAL, " %")) %>%
+  arrange(desc(QUANTIDADE))
+
+# Exibir o dataframe resultante
+#print(tabela_total_adls_CORRE_bkp)
+
+# #print(tabela_total_adls_CORRE)
 
 
 #########################################################################################################
@@ -1036,7 +1276,7 @@ library (stringr)
 #########################################################################################################
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 #########################################################################################################
 ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE[ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE == "VNÃO SABE"]<- "UNÃO SABE"
 #ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE[ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE == "VNÃO RESPONDEU"]<- "NÃO RESPONDEU"
@@ -1146,7 +1386,7 @@ banco_incidencia_semiliberdade_GERAL$ATO_INFRACIONAL = sub(".*OUTROS.*.*", "VOUT
 banco_incidencia_semiliberdade_GERAL$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS", banco_incidencia_semiliberdade_GERAL$ATO_INFRACIONAL)
 
 #########################################################################################################
-banco_geral_sem_concurso_semiliberdade = distinct(banco_incidencia_semiliberdade_GERAL, DATA_ATO, PROCESSO, ATO_INFRACIONAL, .keep_all= TRUE)
+banco_geral_sem_concurso_semiliberdade_CORRE = distinct(banco_incidencia_semiliberdade_GERAL, DATA_ATO, PROCESSO, ATO_INFRACIONAL, .keep_all= TRUE)
 #########################################################################################################
 banco_geral_semiliberdade_SNR = distinct(banco_incidencia_semiliberdade_GERAL, IDS, .keep_all= TRUE)
 #########################################################################################################
@@ -1155,12 +1395,12 @@ banco_geral_semiliberdade_SNR = distinct(banco_incidencia_semiliberdade_GERAL, I
 #########################################################################################################
 library(dplyr)
 
-banco_geral_sem_concurso_semiliberdade = banco_geral_sem_concurso_semiliberdade %>%
+banco_geral_sem_concurso_semiliberdade_CORRE = banco_geral_sem_concurso_semiliberdade_CORRE %>%
   select(ATO_INFRACIONAL)
 
 #########################################################################################################
 #########################################################################################################
-###banco_geral_sem_concurso_semiliberdade
+###banco_geral_sem_concurso_semiliberdade_CORRE
 #########################################################################################################
 #setwd(file.path("~/diretorio_r/estciabh/escola"))
 #########################################################################################################
@@ -1170,10 +1410,10 @@ library(dplyr)
 #########################################################################################################
 #########################################################################################################
 # salvando para gráfico
-banco_geral_sem_concurso_semiliberdade_bkp = banco_geral_sem_concurso_semiliberdade
+banco_geral_sem_concurso_semiliberdade_CORRE_bkp = banco_geral_sem_concurso_semiliberdade_CORRE
 
-banco_geral_sem_concurso_semiliberdade_bkp =
-  banco_geral_sem_concurso_semiliberdade_bkp %>%
+banco_geral_sem_concurso_semiliberdade_CORRE_bkp =
+  banco_geral_sem_concurso_semiliberdade_CORRE_bkp %>%
   janitor::tabyl(ATO_INFRACIONAL) %>%
   arrange(n) %>%
   #arrange(desc(n)) %>%
@@ -1182,28 +1422,28 @@ banco_geral_sem_concurso_semiliberdade_bkp =
 
 # Adaptando para scrip grafico:
 
-colnames(banco_geral_sem_concurso_semiliberdade_bkp)[1]<-'banco_geral_sem_concurso_semiliberdade_bkp'
-colnames(banco_geral_sem_concurso_semiliberdade_bkp)[2]<-'QUANTIDADE'
-colnames(banco_geral_sem_concurso_semiliberdade_bkp)[3]<-'PERCENTUAL'
+colnames(banco_geral_sem_concurso_semiliberdade_CORRE_bkp)[1]<-'banco_geral_sem_concurso_semiliberdade_CORRE_bkp'
+colnames(banco_geral_sem_concurso_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
+colnames(banco_geral_sem_concurso_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
-banco_geral_sem_concurso_semiliberdade_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_geral_sem_concurso_semiliberdade_bkp$PERCENTUAL))
-banco_geral_sem_concurso_semiliberdade_bkp_rmd = tail(banco_geral_sem_concurso_semiliberdade_bkp,3)
+banco_geral_sem_concurso_semiliberdade_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_geral_sem_concurso_semiliberdade_CORRE_bkp$PERCENTUAL))
+banco_geral_sem_concurso_semiliberdade_CORRE_bkp_rmd = tail(banco_geral_sem_concurso_semiliberdade_CORRE_bkp,3)
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
-banco_geral_sem_concurso_semiliberdade =
-  banco_geral_sem_concurso_semiliberdade %>%
+banco_geral_sem_concurso_semiliberdade_CORRE =
+  banco_geral_sem_concurso_semiliberdade_CORRE %>%
   janitor::tabyl(ATO_INFRACIONAL) %>%
   arrange(ATO_INFRACIONAL) %>%
   janitor::adorn_totals() %>%
   adorn_pct_formatting(digits = 2)
 #########################################################################################################
 
-colnames(banco_geral_sem_concurso_semiliberdade)[1]<-'ATO'
-colnames(banco_geral_sem_concurso_semiliberdade)[2]<-'QUANTIDADE'
-colnames(banco_geral_sem_concurso_semiliberdade)[3]<-'PERCENTUAL'
+colnames(banco_geral_sem_concurso_semiliberdade_CORRE)[1]<-'ATO'
+colnames(banco_geral_sem_concurso_semiliberdade_CORRE)[2]<-'QUANTIDADE'
+colnames(banco_geral_sem_concurso_semiliberdade_CORRE)[3]<-'PERCENTUAL'
 
 #############################################################################################################
 #########################################################################################################
@@ -1213,7 +1453,7 @@ colnames(banco_geral_sem_concurso_semiliberdade)[3]<-'PERCENTUAL'
 #########################################################################################################
 ###DECISAO_banco_semiliberdade_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -1311,7 +1551,7 @@ colnames(DECISAO_banco_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(DECISAO_banco_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 #ordenando outros para final da tabela
 DECISAO_banco_semiliberdade_CORRE$DECISAO[DECISAO_banco_semiliberdade_CORRE$DECISAO == "OUTROS"]<-	"ROUTROS"
 #########################################################################################################
@@ -1335,7 +1575,7 @@ colnames(DECISAO_banco_semiliberdade_CORRE)[3]<-'PERCENTUAL'
 # DECISAO_banco_semiliberdade_CORRE =
 #   DECISAO_banco_semiliberdade_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -1346,7 +1586,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###SENTENCA_banco_semiliberdade_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -1444,7 +1684,7 @@ colnames(SENTENCA_banco_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(SENTENCA_banco_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 #ordenando outros para final da tabela
 SENTENCA_banco_semiliberdade_CORRE$SENTENCA[SENTENCA_banco_semiliberdade_CORRE$SENTENCA == "OUTROS"]<-	"ROUTROS"
 #########################################################################################################
@@ -1468,7 +1708,7 @@ colnames(SENTENCA_banco_semiliberdade_CORRE)[3]<-'PERCENTUAL'
 # SENTENCA_banco_semiliberdade_CORRE =
 #   SENTENCA_banco_semiliberdade_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -1543,7 +1783,7 @@ colnames(PROTETIVAS_banco_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(PROTETIVAS_banco_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
 PROTETIVAS_banco_semiliberdade_CORRE =
   PROTETIVAS_banco_semiliberdade_CORRE %>%
@@ -1563,7 +1803,7 @@ colnames(PROTETIVAS_banco_semiliberdade_CORRE)[3]<-'PERCENTUAL'
 # PROTETIVAS_banco_semiliberdade_CORRE =
 #   PROTETIVAS_banco_semiliberdade_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -1574,12 +1814,19 @@ colnames(PROTETIVAS_banco_semiliberdade_CORRE)[3]<-'PERCENTUAL'
 #########################################################################################################
 ###REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
 REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE = semiliberdade_GERAL
+
+REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE <- REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE %>%
+  mutate(REGIONAL_RESIDENCIAL = case_when(
+    grepl("/MG", REGIONAL_RESIDENCIAL) ~ "OUTRA CIDADE MG",
+    grepl("METROPOLITANA", REGIONAL_RESIDENCIAL) ~ "REGIÃO METROPOLITANA",
+    TRUE ~ REGIONAL_RESIDENCIAL # Mantém os valores inalterados caso não atendam aos critérios
+  ))
 #regional_ato_geral_bkp = regional_ato_geral
 #regional_ato02 = banco_sem_mba %>%
 # select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, regional_ato, regional_ato_PROTETIVA, QUAL_regional_ato_PROTETIVA_01,
@@ -1616,7 +1863,7 @@ colnames(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
 REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE =
   REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE %>%
@@ -1642,7 +1889,7 @@ colnames(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE)[3]<-'PERCENTUAL'
 #REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE =
 #  REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -1653,7 +1900,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###REGIONAL_ATO_banco_semiliberdade_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -1696,7 +1943,7 @@ colnames(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
 REGIONAL_ATO_banco_semiliberdade_CORRE =
   REGIONAL_ATO_banco_semiliberdade_CORRE %>%
@@ -1721,7 +1968,7 @@ colnames(REGIONAL_ATO_banco_semiliberdade_CORRE)[3]<-'PERCENTUAL'
 #REGIONAL_ATO_banco_semiliberdade_CORRE =
 #  REGIONAL_ATO_banco_semiliberdade_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -1840,7 +2087,7 @@ library (stringr)
 #########################################################################################################
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 #########################################################################################################
 ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE[ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE == "VNÃO SABE"]<- "UNÃO SABE"
 #ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE[ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE == "VNÃO RESPONDEU"]<- "NÃO RESPONDEU"
@@ -1950,7 +2197,7 @@ banco_incidencia_internacao_GERAL$ATO_INFRACIONAL = sub(".*OUTROS.*.*", "VOUTROS
 banco_incidencia_internacao_GERAL$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS", banco_incidencia_internacao_GERAL$ATO_INFRACIONAL)
 
 #########################################################################################################
-banco_geral_sem_concurso_internacao = distinct(banco_incidencia_internacao_GERAL, DATA_ATO, PROCESSO, ATO_INFRACIONAL, .keep_all= TRUE)
+banco_geral_sem_concurso_internacao_CORRE = distinct(banco_incidencia_internacao_GERAL, DATA_ATO, PROCESSO, ATO_INFRACIONAL, .keep_all= TRUE)
 #########################################################################################################
 banco_geral_internacao_SNR = distinct(banco_incidencia_internacao_GERAL, IDS, .keep_all= TRUE)
 #########################################################################################################
@@ -1959,12 +2206,12 @@ banco_geral_internacao_SNR = distinct(banco_incidencia_internacao_GERAL, IDS, .k
 #########################################################################################################
 library(dplyr)
 
-banco_geral_sem_concurso_internacao = banco_geral_sem_concurso_internacao %>%
+banco_geral_sem_concurso_internacao_CORRE = banco_geral_sem_concurso_internacao_CORRE %>%
   select(ATO_INFRACIONAL)
 
 #########################################################################################################
 #########################################################################################################
-###banco_geral_sem_concurso_internacao
+###banco_geral_sem_concurso_internacao_CORRE
 #########################################################################################################
 #setwd(file.path("~/diretorio_r/estciabh/escola"))
 #########################################################################################################
@@ -1974,10 +2221,10 @@ library(dplyr)
 #########################################################################################################
 #########################################################################################################
 # salvando para gráfico
-banco_geral_sem_concurso_internacao_bkp = banco_geral_sem_concurso_internacao
+banco_geral_sem_concurso_internacao_CORRE_bkp = banco_geral_sem_concurso_internacao_CORRE
 
-banco_geral_sem_concurso_internacao_bkp =
-  banco_geral_sem_concurso_internacao_bkp %>%
+banco_geral_sem_concurso_internacao_CORRE_bkp =
+  banco_geral_sem_concurso_internacao_CORRE_bkp %>%
   janitor::tabyl(ATO_INFRACIONAL) %>%
   arrange(n) %>%
   #arrange(desc(n)) %>%
@@ -1986,28 +2233,28 @@ banco_geral_sem_concurso_internacao_bkp =
 
 # Adaptando para scrip grafico:
 
-colnames(banco_geral_sem_concurso_internacao_bkp)[1]<-'banco_geral_sem_concurso_internacao_bkp'
-colnames(banco_geral_sem_concurso_internacao_bkp)[2]<-'QUANTIDADE'
-colnames(banco_geral_sem_concurso_internacao_bkp)[3]<-'PERCENTUAL'
+colnames(banco_geral_sem_concurso_internacao_CORRE_bkp)[1]<-'banco_geral_sem_concurso_internacao_CORRE_bkp'
+colnames(banco_geral_sem_concurso_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
+colnames(banco_geral_sem_concurso_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
-banco_geral_sem_concurso_internacao_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_geral_sem_concurso_internacao_bkp$PERCENTUAL))
-banco_geral_sem_concurso_internacao_bkp_rmd = tail(banco_geral_sem_concurso_internacao_bkp,3)
+banco_geral_sem_concurso_internacao_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_geral_sem_concurso_internacao_CORRE_bkp$PERCENTUAL))
+banco_geral_sem_concurso_internacao_CORRE_bkp_rmd = tail(banco_geral_sem_concurso_internacao_CORRE_bkp,3)
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
-banco_geral_sem_concurso_internacao =
-  banco_geral_sem_concurso_internacao %>%
+banco_geral_sem_concurso_internacao_CORRE =
+  banco_geral_sem_concurso_internacao_CORRE %>%
   janitor::tabyl(ATO_INFRACIONAL) %>%
   arrange(ATO_INFRACIONAL) %>%
   janitor::adorn_totals() %>%
   adorn_pct_formatting(digits = 2)
 #########################################################################################################
 
-colnames(banco_geral_sem_concurso_internacao)[1]<-'ATO'
-colnames(banco_geral_sem_concurso_internacao)[2]<-'QUANTIDADE'
-colnames(banco_geral_sem_concurso_internacao)[3]<-'PERCENTUAL'
+colnames(banco_geral_sem_concurso_internacao_CORRE)[1]<-'ATO'
+colnames(banco_geral_sem_concurso_internacao_CORRE)[2]<-'QUANTIDADE'
+colnames(banco_geral_sem_concurso_internacao_CORRE)[3]<-'PERCENTUAL'
 
 #############################################################################################################
 #########################################################################################################
@@ -2017,7 +2264,7 @@ colnames(banco_geral_sem_concurso_internacao)[3]<-'PERCENTUAL'
 #########################################################################################################
 ###DECISAO_banco_internacao_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -2115,7 +2362,7 @@ colnames(DECISAO_banco_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(DECISAO_banco_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 #ordenando outros para final da tabela
 DECISAO_banco_internacao_CORRE$DECISAO[DECISAO_banco_internacao_CORRE$DECISAO == "OUTROS"]<-	"ROUTROS"
 #########################################################################################################
@@ -2139,7 +2386,7 @@ colnames(DECISAO_banco_internacao_CORRE)[3]<-'PERCENTUAL'
 # DECISAO_banco_internacao_CORRE =
 #   DECISAO_banco_internacao_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -2150,7 +2397,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###SENTENCA_banco_internacao_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -2248,7 +2495,7 @@ colnames(SENTENCA_banco_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(SENTENCA_banco_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 #ordenando outros para final da tabela
 SENTENCA_banco_internacao_CORRE$SENTENCA[SENTENCA_banco_internacao_CORRE$SENTENCA == "OUTROS"]<-	"ROUTROS"
 #########################################################################################################
@@ -2272,7 +2519,7 @@ colnames(SENTENCA_banco_internacao_CORRE)[3]<-'PERCENTUAL'
 # SENTENCA_banco_internacao_CORRE =
 #   SENTENCA_banco_internacao_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -2347,7 +2594,7 @@ colnames(PROTETIVAS_banco_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(PROTETIVAS_banco_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
 PROTETIVAS_banco_internacao_CORRE =
   PROTETIVAS_banco_internacao_CORRE %>%
@@ -2367,7 +2614,7 @@ colnames(PROTETIVAS_banco_internacao_CORRE)[3]<-'PERCENTUAL'
 # PROTETIVAS_banco_internacao_CORRE =
 #   PROTETIVAS_banco_internacao_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -2378,12 +2625,23 @@ colnames(PROTETIVAS_banco_internacao_CORRE)[3]<-'PERCENTUAL'
 #########################################################################################################
 ###REGIONAL_RESIDENCIAL_banco_internacao_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
 REGIONAL_RESIDENCIAL_banco_internacao_CORRE = internacao_GERAL
+
+library(dplyr)
+
+REGIONAL_RESIDENCIAL_banco_internacao_CORRE <- REGIONAL_RESIDENCIAL_banco_internacao_CORRE %>%
+  mutate(REGIONAL_RESIDENCIAL = case_when(
+    grepl("/MG", REGIONAL_RESIDENCIAL) ~ "OUTRA CIDADE MG",
+    grepl("METROPOLITANA", REGIONAL_RESIDENCIAL) ~ "REGIÃO METROPOLITANA",
+    TRUE ~ REGIONAL_RESIDENCIAL # Mantém os valores inalterados caso não atendam aos critérios
+  ))
+
+
 #regional_ato_geral_bkp = regional_ato_geral
 #regional_ato02 = banco_sem_mba %>%
 # select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, regional_ato, regional_ato_PROTETIVA, QUAL_regional_ato_PROTETIVA_01,
@@ -2420,7 +2678,7 @@ colnames(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
 REGIONAL_RESIDENCIAL_banco_internacao_CORRE =
   REGIONAL_RESIDENCIAL_banco_internacao_CORRE %>%
@@ -2446,7 +2704,7 @@ colnames(REGIONAL_RESIDENCIAL_banco_internacao_CORRE)[3]<-'PERCENTUAL'
 #REGIONAL_RESIDENCIAL_banco_internacao_CORRE =
 #  REGIONAL_RESIDENCIAL_banco_internacao_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################
@@ -2457,7 +2715,7 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 #########################################################################################################
 ###REGIONAL_ATO_banco_internacao_CORRE
 #########################################################################################################
-setwd(file.path("~/diretorio_r/estciabh/cedipro"))
+setwd(file.path("~/diretorio_r/estciabh/corre"))
 #########################################################################################################
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
@@ -2500,7 +2758,7 @@ colnames(REGIONAL_ATO_banco_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_ATO_banco_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
-# e porcentagem
+# e PERCENTUAL
 
 REGIONAL_ATO_banco_internacao_CORRE =
   REGIONAL_ATO_banco_internacao_CORRE %>%
@@ -2525,7 +2783,7 @@ colnames(REGIONAL_ATO_banco_internacao_CORRE)[3]<-'PERCENTUAL'
 #REGIONAL_ATO_banco_internacao_CORRE =
 #  REGIONAL_ATO_banco_internacao_CORRE %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
-#  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+#  mutate(PERCENTUAL = s#printf("%.2f", PERCENTUAL))
 
 
 #########################################################################################################

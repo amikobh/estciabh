@@ -1,3 +1,4 @@
+tempo_script <- system.time({
 # Import all data
 setwd("/home/amikobh/diretorio_r/estciabh/R")
 
@@ -41,27 +42,30 @@ source('024_tratamento_CEDIPRO_bkp02.R')
 source('028_corre_legal_bkp03.R')
 #Sys.sleep(8)
 #Sys.sleep(5)
-source('022_letalidade_flex_BKP05_web4.R')
-source('025_tabelas_BKP03_gt.R')
+source('022_letalidade_flex_BKP06_web4.R')
+
+})
+
+# Exibindo o tempo de execução
+print(tempo_script)
+
+tempo_graficos <- system.time({
+source('025_tabelas_BKP05_gt.R')
 #Sys.sleep(5)
 source('026_graficos_BKP03.R')
 #Sys.sleep(5)
+})
+
+# Exibindo o tempo de execução
+print(tempo_graficos)
+
+
+tempo_render <- system.time({
 
 setwd("/home/amikobh/diretorio_r/estciabh")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 
+})
 
-# shutdown_script.R
-
-# Função para desligar o computador
-shutdown_computer <- function() {
-  # Comando para desligar o sistema
-  command <- "sudo shutdown -h now"
-
-  # Executar o comando no sistema operacional
-  cat("Desligando o computador...\n")
-  system(command)
-}
-
-# Chamar a função de desligamento
-shutdown_computer()
+# Exibindo o tempo de execução
+print(tempo_render)

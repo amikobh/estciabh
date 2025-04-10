@@ -43,6 +43,8 @@ if(!require(chromote)){install.packages("chromote", dependencies = TRUE); requir
 if(!require(fuzzyjoin)){install.packages("fuzzyjoin", dependencies = TRUE); require(fuzzyjoin)}
 if(!require(tesseract)){install.packages("tesseract", dependencies = TRUE); require(tesseract)}
 if(!require(parallel)){install.packages("parallel", dependencies = TRUE); require(parallel)}
+if(!require(osmdata)){install.packages("osmdata", dependencies = TRUE); require(osmdata)}
+
 
 conflicts_prefer(dplyr::rename)
 conflicts_prefer(dplyr::filter)

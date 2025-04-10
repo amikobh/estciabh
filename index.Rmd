@@ -76,6 +76,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024, }
 knitr::include_graphics('img_nao_apagar/logociabh.png')
 ```
+
 \leavevmode
 \newline
 \newline
@@ -88,7 +89,7 @@ TRIBUNAL DE JUSTIÇA DO ESTADO DE MINAS GERAIS
 PRESIDENTE
 \end{center}
 \begin{center}
-Desembargador José Arthur de Carvalho Pereira Filho
+Desembargador Luiz Carlos de Azevedo Corrêa Junior
 \end{center}
 \begin{center}
 \end{center}
@@ -101,7 +102,7 @@ TRIBUNAL DE JUSTIÇA DO ESTADO DE MINAS GERAIS
 CORREGEDOR-GERAL
 \end{center}
 \begin{center}
-Desembargador Luiz Carlos de Azevedo Corrêa Junior
+Desembargador Estevão Lucchesi de Carvalho
 \end{center}
 \begin{center}
 \end{center}
@@ -129,10 +130,8 @@ JUÍZA TITULAR
 \begin{center}
 Riza Aparecida Nery
 \end{center}
-
 \leavevmode
 \newline
-
 \newpage
 \thispagestyle{empty}
 \leavevmode
@@ -143,37 +142,40 @@ Riza Aparecida Nery
 \newline
 \newline
 \vspace{5cm}
+
 **ELABORAÇÃO**
 
-**CENTRO DE INFORMAÇÃO PARA GESTÃO INSTITUCIONAL – CEINFO/TJMG**    
-Vânia Cristina Fernandes    
+**CENTRO DE INFORMAÇÃO PARA GESTÃO INSTITUCIONAL – CEINFO/TJMG**\
+Vânia Cristina Fernandes\
 Victória Maria Quirino Gomes Gonçalves
 
 \vspace{1cm}
-**COMISSÃO DE PREVENÇÃO À LETALIDADE DE ADOLESCENTES E JOVENS**    
-Lucas Rolla - Promotor de Justiça    
-Aline Pacheco Silva    
-Ana Carolina Gonçalves Ferreira    
-Anne Cristina Eliane de Souza da Silva    
-Cynthia Maria Santos Águido    
-Elerson Márcio dos Santos    
-Fabiana Santos de Oliveira Carvalho    
-Ingrid Caroline Damião Vieira    
-Maira Cristina Soares Freitas    
-Michelle Gangana Duarte    
-Selmara Mamede Simões Ferreira    
-Vanessa Serva Maciel Golgher    
+
+**COMISSÃO DE PREVENÇÃO À LETALIDADE DE ADOLESCENTES E JOVENS**\
+Lucas Rolla - Promotor de Justiça\
+Aline Pacheco Silva\
+Ana Carolina Gonçalves Ferreira\
+Anne Cristina Eliane de Souza da Silva\
+Cynthia Maria Santos Águido\
+Elerson Márcio dos Santos\
+Fabiana Santos de Oliveira Carvalho\
+Ingrid Caroline Damião Vieira\
+Maira Cristina Soares Freitas\
+Michelle Gangana Duarte\
+Selmara Mamede Simões Ferreira\
+Vanessa Serva Maciel Golgher
 
 \vspace{1cm}
-**EQUIPE DE ANÁLISE DE DADOS - COMISSARIADO**    
-Riza Aparecida Nery - Juíza Titular - Vara Infracional da Infância e da Juventude de Belo Horizonte    
-Clayson de Faria e Silva    
-Denisson Glória Magleau    
-Elerson Márcio dos Santos    
-Marcelo Paulo Nogueira Pereira     
-Maria Rita de Cássia Generoso     
-Patrícia Passos Silva     
-Paulo Roberto dos Santos    
+
+**EQUIPE DE ANÁLISE DE DADOS - COMISSARIADO**\
+Riza Aparecida Nery - Juíza Titular - Vara Infracional da Infância e da Juventude de Belo Horizonte\
+Clayson de Faria e Silva\
+Denisson Glória Magleau\
+Elerson Márcio dos Santos\
+Marcelo Paulo Nogueira Pereira\
+Maria Rita de Cássia Generoso\
+Patrícia Passos Silva\
+Paulo Roberto dos Santos
 
 \newpage
 
@@ -186,12 +188,12 @@ Paulo Roberto dos Santos
 
 \pagenumbering{arabic}
 \setcounter{page}{8}
-# Considerações iniciais
 
+# Considerações iniciais
 
 \vspace{0.3cm}
 
-É importante destacar o  artigo 227 da Constituição da Republica, que representou um novo olhar sobre a infância e adolescência, rompendo o modelo punitivista do Código de Menores.
+É importante destacar o artigo 227 da Constituição da Republica, que representou um novo olhar sobre a infância e adolescência, rompendo o modelo punitivista do Código de Menores.
 
 Aprovado em julho de 1990, o Estatuto da Criança e do Adolescente - ECA, regulamentou o artigo 227 da Constituição Federal instituindo nova doutrina de garantia de direitos e proteção à Infância.
 
@@ -203,32 +205,17 @@ Muitos adolescentes neste momento de maior vulnerabilidade, na busca de si mesmo
 
 O Estatuto afirma que os adolescentes em razão de sua conduta infracional são passíveis de sofrerem a intervenção do poder público e da justiça para que cumpram medidas de proteção e socioeducativas. As medidas de proteção se aplicam nas situações onde é possível constatar a condição de vulnerabilidade e risco e as medidas socioeducativas - de inegável conteúdo aflitivo e retributivo - se o menor for autor de ato infracional.
 
-Tais medidas, de proteção e socioeducativas, seguem o Princípio da Atenção Integral disposto no
-Estatuto da Criança e do Adolescente, e formam uma espécie de balizamento legal para que a aplicação de
-tratamento para os menoristas seja estimulado pela Justiça.
+Tais medidas, de proteção e socioeducativas, seguem o Princípio da Atenção Integral disposto no Estatuto da Criança e do Adolescente, e formam uma espécie de balizamento legal para que a aplicação de tratamento para os menoristas seja estimulado pela Justiça.
 
-Com o intuito de aprimorar o trabalho realizado na Vara Infracional da Infância e da Juventude de
-Belo Horizonte, foi elaborado um trabalho circunstanciado de estatística anual, para melhor visibilidade e
-aplicação de políticas públicas de prevenção.
+Com o intuito de aprimorar o trabalho realizado na Vara Infracional da Infância e da Juventude de Belo Horizonte, foi elaborado um trabalho circunstanciado de estatística anual, para melhor visibilidade e aplicação de políticas públicas de prevenção.
 
-As propostas de prevenção devem estar em sintonia com as necessidades da população local,
-conhecendo as peculiaridades de cada comunidade. Felizmente os novos conhecimentos trouxeram novas
-maneiras de enfrentar o problema da delinquência infanto juvenil, que não seja somente a repressão, como
-no passado.
+As propostas de prevenção devem estar em sintonia com as necessidades da população local, conhecendo as peculiaridades de cada comunidade. Felizmente os novos conhecimentos trouxeram novas maneiras de enfrentar o problema da delinquência infanto juvenil, que não seja somente a repressão, como no passado.
 
-As ações de prevenção devem assumir uma natureza abrangente, e por essa razão a comunidade
-precisa estar preparada e integrada para agir, porque cada pessoa tem um papel fundamental a desempenhar,
-fazendo-se necessário juntar o saber popular ao saber acadêmico e ao saber político para construir um saber
-comum que servirá de base para realização de projetos e trabalhos futuros.
+As ações de prevenção devem assumir uma natureza abrangente, e por essa razão a comunidade precisa estar preparada e integrada para agir, porque cada pessoa tem um papel fundamental a desempenhar, fazendo-se necessário juntar o saber popular ao saber acadêmico e ao saber político para construir um saber comum que servirá de base para realização de projetos e trabalhos futuros.
 
-Conforme a legislação atual, é possível oferecer novas formas de trabalho com o infrator,
-oferecendo-lhe alternativas mais benéficas e eficazes para o fim da reeducação e ressocialização do
-indivíduo.
+Conforme a legislação atual, é possível oferecer novas formas de trabalho com o infrator, oferecendo-lhe alternativas mais benéficas e eficazes para o fim da reeducação e ressocialização do indivíduo.
 
-Diante desse pensamento é possível perceber que é necessário muito mais do que proibir, e sim
-buscar ações plausíveis e eficazes que envolvam a sociedade nos seus mais variados segmentos, uma vez que
-cada um tem sua parcela de responsabilidade, afinal os danos causados afetam toda a população.
-
+Diante desse pensamento é possível perceber que é necessário muito mais do que proibir, e sim buscar ações plausíveis e eficazes que envolvam a sociedade nos seus mais variados segmentos, uma vez que cada um tem sua parcela de responsabilidade, afinal os danos causados afetam toda a população.
 
 \begin{center}
 RIZA APARECIDA NERY
@@ -237,4 +224,3 @@ JUÍZA TITULAR
 
 VARA INFRACIONAL DA INFÂNCIA E DA JUVENTUDE DE BELO HORIZONTE\end{center}
 \newpage
-

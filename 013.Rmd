@@ -1,37 +1,48 @@
 # Projetos socioeducativos
+
 \leavevmode
 \newline
 
-A Vara Infracional da Infância e da Juventude de Belo Horizonte, fomenta, estrategicamente,  projetos que  alcançam o desenvolvimento socioeducacional dos adolescentes em conflito com a lei. Tais projetos são dirigidos pela atual equipe de Juízes da Vara.    
+A Vara Infracional da Infância e da Juventude de Belo Horizonte, fomenta, estrategicamente, projetos que alcançam o desenvolvimento socioeducacional dos adolescentes em conflito com a lei. Tais projetos são dirigidos pela atual equipe de Juízes da Vara.
+
+\newpage
+
+## CEDIPRO
 
 Em parceria com o Centro de Formação Profissional Divina Providência – CEDIPRO, mantido pelo Sistema Divina Providência, a Vara Infracional oferece cursos livres para os adolescentes e, bem assim, para seus familiares (até 3º grau), cursos de formação profissional e encaminhamento para o mercado de trabalho, visando a promoção social e profissional destes jovens e seus familiares.
 
 \newpage
 
 ## Total de casos encaminhados CEDIPRO
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[65,].png')
 ```
-Os encaminhamentos para o CEDIPRO, distribuem-se conforme os grupos mencionados na tabela.   
+
+Os encaminhamentos para o CEDIPRO, distribuem-se conforme os grupos mencionados na tabela.
 
 `r banco_encaminhamento_CEDIPRO_bkp[2,3]` do total de casos se refere aos parentes encaminhados e que realizaram cursos. `r banco_encaminhamento_CEDIPRO_bkp[1,3]` diz respeito aos adolescentes que, também, realizaram cursos. Já `r banco_encaminhamento_CEDIPRO_bkp[3,3]` do total aponta para os adolescentes encaminhados e que desistiram da realização do curso.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[63,].png')
 ```
 
 \newpage
 
-### Cursos realizados pelos adolescentes Matriculados
+## Cursos realizados pelos adolescentes Matriculados
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[66,].png')
 ```
-Os cursos realizados pelos adolescentes matriculados, distribuem-se conforme apresentado pela tabela.    
-Nota-se que o curso mais procurado é o de `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),1]` representando, sozinho, `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),3]` do total.    
+
+Os cursos realizados pelos adolescentes matriculados, distribuem-se conforme apresentado pela tabela.\
+Nota-se que o curso mais procurado é o de `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),1]` representando, sozinho, `r banco_curso_adolescente_CEDIPRO_bkp[nrow(banco_curso_adolescente_CEDIPRO_bkp),3]` do total.\
 Observa-se que um adolescente pode realizar mais de um curso.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[64,].png')
 ```
@@ -39,19 +50,22 @@ knitr::include_graphics('imagens/GRAFICO[64,].png')
 \newpage
 
 ### Idade e sexo
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[65,].png')
 ```
+
 Os adolescentes matriculados no CEDIPRO, em sua maioria, são do sexo masculino com idade entre `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[9,1]` e `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[11,1]` anos.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[66,].png')
 ```
+
 \newpage
 
 ### Escolaridade
-
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[67,].png')
@@ -60,12 +74,15 @@ knitr::include_graphics('imagens/TABELA[67,].png')
 Entrevistados quanto a escolaridade, os adolescentes matriculados nos cursos do CEDIPRO assim declararam, conforme exposto na tabela e gráfico em tela.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[67,].png')
 ```
+
 \newpage
 
 ### Regional Residencial
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[68,].png')
 ```
@@ -73,9 +90,11 @@ knitr::include_graphics('imagens/TABELA[68,].png')
 As regionais `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[nrow(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp),1]`, `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[10,1]` e `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[9,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CEDIPRO. Destaca-se que `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[2,3]` dos adolescentes, num total de `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[2,2]` encaminhamentos, residem nos demais municípios da Região Metropolitana.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[68,].png')
 ```
+
 \newpage
 
 ### Incidência atos infracionais
@@ -84,16 +103,19 @@ knitr::include_graphics('imagens/GRAFICO[68,].png')
 knitr::include_graphics('imagens/TABELA[69,].png')
 ```
 
-Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO. Sublinha-se que o ato `r INCIDENCIA_banco_matriculados_CEDIPRO_bkp[18,1]` é o que possui maior índice.    
+Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO. Sublinha-se que o ato `r INCIDENCIA_banco_matriculados_CEDIPRO_bkp[18,1]` é o que possui maior índice.\
 Ressalta-se que um adolescente pode responder pelo cometimento de mais de um ato infracional.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[69,].png')
 ```
+
 \newpage
 
 ### Regional ato infracional
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[70,].png')
 ```
@@ -101,17 +123,17 @@ knitr::include_graphics('imagens/TABELA[70,].png')
 As regionais `r REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp[nrow(REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp),1]`, `r REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp[9,1]` e `r REGIONAL_ATO_banco_matriculados_CEDIPRO_bkp[8,1]` concentram os maiores índices de incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[70,].png')
 ```
+
 \newpage
 
 ### Medidas protetivas
 
+As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente: \leavevmode \newline
 
-As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente:
-\leavevmode
-\newline
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('img_nao_apagar/art101eca.png')
 ```
@@ -122,20 +144,23 @@ knitr::include_graphics('img_nao_apagar/art101eca.png')
 Para os `r nrow(banco_matriculados_CEDIPRO)` adolescentes matriculados nos cursos do CEDIPRO, foram aplicadas um total de `r sum(PROTETIVAS_banco_matriculados_CEDIPRO_bkp$QUANTIDADE)` medidas protetivas. Ressalte-se que mais de uma medida pode ser aplicada a determinado adolescente.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[71,].png')
 ```
-\newpage
 
+\newpage
 
 O gráfico a seguir aponta que a medida relacionada ao `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[6,1]` foi a que mais se aplicou no ano em estudo atingindo o índice de `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[6,3]`. As medidas do `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[5,1]` e `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[4,1]` seguiram-na no ranking de medidas aplicadas.
 
 \leavevmode
 \newline
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[71,].png')
 ```
+
 \newpage
 
 ### Decisões em audiências preliminares
@@ -147,26 +172,32 @@ knitr::include_graphics('imagens/TABELA[72,].png')
 Da tabela e gráfico apresentado é possível extrair as decisões proferidas em relação aos `r nrow(banco_matriculados_CEDIPRO)` adolescentes encaminhados e matriculados nos curso do CEDIPRO.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[72,].png')
 ```
+
 \newpage
 
 ## Adolecentes encaminhados ao CEDIPRO e desistentes da matrícula
+
 ### Idade e sexo
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[73,].png')
 ```
+
 Os adolescentes encaminhados ao CEDIPRO, que desistiram da matrícula, são do sexo masculino.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[74,].png')
 ```
+
 \newpage
 
 ### Escolaridade
-
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[73,].png')
@@ -175,21 +206,27 @@ knitr::include_graphics('imagens/TABELA[73,].png')
 Entrevistados quanto a escolaridade, os adolescentes encaminhados ao CEDIPRO, que desistiram da matrícula, assim declararam, conforme exposto na tabela e gráfico em tela.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[75,].png')
 ```
+
 \newpage
 
 ### Regional Residencial
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[74,].png')
 ```
+
 Os adolescentes encaminhados ao CEDIPRO, que desistiram da matrícula, residem nas regionais, conforme apontado na tabela e gráficos em tela.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[76,].png')
 ```
+
 \newpage
 
 ### Incidência atos infracionais
@@ -198,16 +235,19 @@ knitr::include_graphics('imagens/GRAFICO[76,].png')
 knitr::include_graphics('imagens/TABELA[75,].png')
 ```
 
-Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO e que desistiram da matrícula. Sublinha-se que o ato `r INCIDENCIA_banco_desistencia_CEDIPRO_bkp[4,1]` é o que possui maior índice.    
+Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO e que desistiram da matrícula. Sublinha-se que o ato `r INCIDENCIA_banco_desistencia_CEDIPRO_bkp[4,1]` é o que possui maior índice.\
 Ressalta-se que um adolescente pode responder pelo cometimento de mais de um ato infracional.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[77,].png')
 ```
+
 \newpage
 
 ### Regional ato infracional
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[76,].png')
 ```
@@ -215,17 +255,17 @@ knitr::include_graphics('imagens/TABELA[76,].png')
 A regional `r REGIONAL_ATO_banco_desistencia_CEDIPRO_bkp[nrow(REGIONAL_ATO_banco_desistencia_CEDIPRO_bkp),1]` concentra o maior índice de incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO e que desistiram da matrícula.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[78,].png')
 ```
+
 \newpage
 
 ### Medidas protetivas
 
+As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente: \leavevmode \newline
 
-As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente:
-\leavevmode
-\newline
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('img_nao_apagar/art101eca.png')
 ```
@@ -236,20 +276,23 @@ knitr::include_graphics('img_nao_apagar/art101eca.png')
 Para os `r nrow(banco_desistencia_CEDIPRO)` adolescentes encaminhados para os cursos do CEDIPRO e que desistiram da matrícula, foram aplicadas um total de `r sum(PROTETIVAS_banco_desistencia_CEDIPRO_bkp$QUANTIDADE)` medidas protetivas. Ressalte-se que mais de uma medida pode ser aplicada a determinado adolescente.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[77,].png')
 ```
-\newpage
 
+\newpage
 
 O gráfico a seguir aponta que a medida relacionada ao `r PROTETIVAS_banco_desistencia_CEDIPRO_bkp[3,1]` foi a que mais se aplicou no ano em estudo.
 
 \leavevmode
 \newline
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[79,].png')
 ```
+
 \newpage
 
 ### Decisões em audiências preliminares
@@ -261,23 +304,485 @@ knitr::include_graphics('imagens/TABELA[78,].png')
 Da tabela e gráfico apresentado é possível extrair as decisões proferidas em relação aos `r nrow(banco_desistencia_CEDIPRO)` adolescentes encaminhados ao CEDIPRO e que desistiram da matrícula.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[80,].png')
 ```
+
 \newpage
 
 ## Cursos realizados pelos familiares dos adolescentes encaminhados ao CEDIPRO
+
 ```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[79,].png')
 ```
-Os cursos realizados pelos parentes dos adolescentes encaminhados ao CEDIPRO, distribuem-se conforme apresentado pela tabela.
-Nota-se que o curso mais procurado é o de `r  banco_curso_parente_CEDIPRO_bkp_rmark[1,1]`, seguido pelos cursos de `r  banco_curso_parente_CEDIPRO_bkp_rmark[2,1]`, `r  banco_curso_parente_CEDIPRO_bkp_rmark[3,1]` e `r  banco_curso_parente_CEDIPRO_bkp_rmark[4,1]`. Tais cursos concentram `r sum(banco_curso_parente_CEDIPRO_bkp_rmark$PERCENTUAL)`% do total da procura.    
-Ressalta-se que os parentes  podem realizar mais de um curso.
-\vspace{1cm}
+
+Os cursos realizados pelos parentes dos adolescentes encaminhados ao CEDIPRO, distribuem-se conforme apresentado pela tabela. Nota-se que o curso mais procurado é o de `r  banco_curso_parente_CEDIPRO_bkp_rmark[1,1]`, seguido pelos cursos de `r  banco_curso_parente_CEDIPRO_bkp_rmark[2,1]`, `r  banco_curso_parente_CEDIPRO_bkp_rmark[3,1]` e `r  banco_curso_parente_CEDIPRO_bkp_rmark[4,1]`. Tais cursos concentram `r sum(banco_curso_parente_CEDIPRO_bkp_rmark$PERCENTUAL)`% do total da procura.\
+Ressalta-se que os parentes podem realizar mais de um curso. \vspace{1cm}
+
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[81,].png')
 ```
 
 \newpage
 
+## CORRE LEGAL
 
+Em parceria com o Departamento de Esportes (DESP), da Escola de Educação Física, Fisioterapia e Terapia Ocupacional (EEFFTO), da UFMG,  a Vara Infracional  busca oferecer aos adolescentes em cumprimento de medidas restritivas de liberdade – Internação e Semiliberdade - a oportunidade de praticar atividades físicas saudáveis, usando o esporte como ferramenta de ressocialização. Criado em 2020 pela Vara Infracional da Infância e Juventude da capital, o CORRE LEGAL tem como foco a reeducação social de participantes entre 12 e 18 anos e é desenvolvido com o apoio da SUASE, do Instituto Elo e o PEMSE – Polo de Evolução de Medidas Socioeducativas.    
+
+**Breve descrição das categorias dos treinos:**   
+Essas atividades visam promover saúde, condicionamento físico e integração social dos adolescentes.    
+
+**Treino Regular**    
+Frequência: 2 a 3 vezes por semana.    
+Local: Quadras das Unidades (internação) / Parques Públicos da cidade (semiliberdade).    
+Atividades: Intercalar corrida e caminhada, alternar alta e baixa velocidade, flexão de braço, tríceps no banco, agachamento, avanço, ponte, etc.    
+Objetivo: Fortalecimento muscular, melhora cardiovascular e resistência física.    
+
+**Treino no CTE**    
+Frequência: 1 vez por mês.    
+Local: Centro de Treinamento Esportivo (CTE) da Escola de Educação Física, Fisioterapia e Terapia Ocupacional da UFMG.    
+Atividades: Atletismo (corridas, saltos, arremessos).    
+Objetivo: Aprimorar capacidades físicas para desempenho esportivo.    
+
+**Curso de Natação**    
+Frequência: 2 vezes ao ano (janeiro e julho).    
+Atividades: flutuação e palmateio, exercícios de respiração, propulsão, imersão, introdução aos nados crawl, peito, costas e borboleta.    
+Local: Escolas públicas parceiras.    
+Objetivo: Adaptação ao meio líquido, técnicas de nado seguras e desenvolvimento físico e mental.
+
+\newpage
+
+## Total de adolescentes incluídos no CORRE LEGAL
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[80,].png')
+```
+
+Os adolescentes incluídos no projeto CORRE LEGAL, distribuem-se conforme os grupos mencionados na tabela.
+
+`r tabela_total_adls_CORRE[1,2]` adolescentes cumprem medida de semiliberdade e `r tabela_total_adls_CORRE[2,2]` adolescentes cumprem medida de internação.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[82,].png')
+```
+
+\newpage
+
+### Atividades esportivas realizadas pelos adolescentes em cumprimento de semiliberdade
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[81,].png')
+```
+
+As atividades realizadas pelos adolescentes em cumprimento de semiliberdade, distribuem-se conforme apresentado pela tabela. Nota-se que o `r tabela_atividades_semiliberdade_CORRE_bkp[1,1]` foi o mais praticado pelos adolescentes. Observa-se que um adolescente pode realizar mais de uma atividade e mais de uma vez cada uma delas.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[83,].png')
+```
+
+\newpage
+
+### Frequência dos adolescentes em cumprimento de semiliberdade
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[82,].png')
+```
+
+A frequência dos adolescentes em cumprimento de semiliberdade às atividades oferecidas distribuem-se conforme apresentado pela tabela. Refere-se à quantidade de vezes em que um adolescente frequentou as atividades.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[84,].png')
+```
+
+\newpage
+
+### Dia da prática esportiva oferecida aos adolescentes em cumprimento de semiliberdade
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[83,].png')
+```
+
+Os dias das práticas esportivas distribuem-se conforme apresentado pela tabela. Nota-se que `r tabela_dias_semiliberdade_CORRE_bkp[1,1]`, `r tabela_dias_semiliberdade_CORRE_bkp[2,1]` e `r tabela_dias_semiliberdade_CORRE_bkp[3,1]` são os dias de maior ocorrência.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[85,].png')
+```
+
+\newpage
+
+### Turno da prática esportiva oferecida aos adolescentes em cumprimento de semiliberdade
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[84,].png')
+```
+
+Os períodos do dia em que se dão as práticas esportivas distribuem-se conforme apresentado pela tabela. Nota-se que que a diferença percentual entre o período de maior e menor ocorrência de atividades é `r sum(tabela_periodo_semiliberdade_CORRE_bkp[1,3]-tabela_periodo_semiliberdade_CORRE_bkp[2,3])`%.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[86,].png')
+```
+
+\newpage
+
+### Unidade socioeducativa dos adolescentes em cumprimento de semiliberdade
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[85,].png')
+```
+
+A frênquência de comparecimento dos adolescentes, por unidade socioeducativa, nas práticas esportivas, distribuem-se conforme apresentado pela tabela. Nota-se que que os adolescentes da unidade `r tabela_unidade_semiliberdade_CORRE_bkp[1,1]` foram os que mais frequentaram as atividades. \vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[87,].png')
+```
+
+\newpage
+
+### Idade e sexo
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[88,].png')
+```
+
+Sexo e idade dos adolescentes incluídos no CORRE LEGAL se distribuem conforme a tabela apresentada.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[89,].png')
+```
+
+\newpage
+
+### Escolaridade
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[86,].png')
+```
+
+Entrevistados quanto a escolaridade, os adolescentes incluídos no CORRE LEGAL assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[90,].png')
+```
+
+\newpage
+
+### Regional Residencial
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[87,].png')
+```
+
+As regionais `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp),1]`, `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp) - 1, 1]` e `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp) - 2, 1]` concentram os maiores índices de residência de adolescentes incluídos no CORRE LEGAL.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[91,].png')
+```
+
+\newpage
+
+### Incidência atos infracionais
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[88,].png')
+```
+
+Apresenta-se a incidência de atos infracionais relacionados aos adolescentes incluídos no CORRE LEGAL. Ressalta-se que um adolescente pode responder pelo cometimento de mais de um ato infracional.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[92,].png')
+```
+
+\newpage
+
+### Regional ato infracional
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[89,].png')
+```
+
+As regionais `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp),1]`, `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp) - 1, 1]` e `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp) - 2, 1]` concentram os maiores índices de ocorrência dos atos infracionais.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[93,].png')
+```
+
+\newpage
+
+### Sentenças
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[90,].png')
+```
+
+Da tabela e gráfico apresentado é possível extrair as sentenças proferidas em relação aos `r tabela_total_adls_CORRE[1,2]` adolescentes que cumprem medida de semiliberdade e foram incluídos no CORRE LEGAL.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[94,].png')
+```
+
+\newpage
+
+### Medidas protetivas
+
+As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente: \leavevmode \newline
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('img_nao_apagar/art101eca.png')
+```
+
+\leavevmode
+\newline
+
+Para os `r tabela_total_adls_CORRE[1,2]` adolescentes em cumprimento de medida de semiliberdade incluídos no CORRE LEGAL, foram aplicadas um total de `r sum(PROTETIVAS_banco_semiliberdade_CORRE_bkp$QUANTIDADE)` medidas protetivas. Ressalte-se que mais de uma medida pode ser aplicada a determinado adolescente.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[91,].png')
+```
+
+\newpage
+
+O gráfico a seguir aponta que a medida relacionada ao `r PROTETIVAS_banco_semiliberdade_CORRE_bkp[nrow(PROTETIVAS_banco_semiliberdade_CORRE_bkp),1]` foi a que mais se aplicou no ano em estudo. As medidas dos `r PROTETIVAS_banco_semiliberdade_CORRE_bkp[nrow(PROTETIVAS_banco_semiliberdade_CORRE_bkp) - 1, 1]` e `r PROTETIVAS_banco_semiliberdade_CORRE_bkp[nrow(PROTETIVAS_banco_semiliberdade_CORRE_bkp) - 2, 1]` seguiram-na no ranking de medidas aplicadas.
+
+\leavevmode
+\newline
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[95,].png')
+```
+
+\newpage
+
+## Atividades esportivas realizadas pelos adolescentes em cumprimento de internacao
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[92,].png')
+```
+
+As atividades realizadas pelos adolescentes em cumprimento de internacao, distribuem-se conforme apresentado pela tabela. Nota-se que o `r tabela_atividades_internacao_CORRE_bkp[1,1]` foi o mais praticado pelos adolescentes. Observa-se que um adolescente pode realizar mais de uma atividade e mais de uma vez cada uma delas.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[96,].png')
+```
+
+\newpage
+
+### Frequência dos adolescentes em cumprimento de internacao
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[93,].png')
+```
+
+A frequência dos adolescentes em cumprimento de internacao às atividades oferecidas distribuem-se conforme apresentado pela tabela. Refere-se à quantidade de vezes em que um adolescente frequentou as atividades.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[97,].png')
+```
+
+\newpage
+
+### Dia da prática esportiva oferecida aos adolescentes em cumprimento de internacao
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[94,].png')
+```
+
+Os dias das práticas esportivas distribuem-se conforme apresentado pela tabela. Nota-se que `r tabela_dias_internacao_CORRE_bkp[1,1]`, `r tabela_dias_internacao_CORRE_bkp[2,1]` e `r tabela_dias_internacao_CORRE_bkp[3,1]` são os dias de maior ocorrência.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[98,].png')
+```
+
+\newpage
+
+### Turno da prática esportiva oferecida aos adolescentes em cumprimento de internacao
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[95,].png')
+```
+
+Os períodos do dia em que se dão as práticas esportivas distribuem-se conforme apresentado pela tabela. Nota-se que que a diferença percentual entre o período de maior e menor ocorrência de atividades é `r sum(tabela_periodo_internacao_CORRE_bkp[1,3]-tabela_periodo_internacao_CORRE_bkp[2,3])`%. \vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[99,].png')
+```
+
+\newpage
+
+### Unidade socioeducativa dos adolescentes em cumprimento de internacao
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[96,].png')
+```
+
+A frênquência de comparecimento dos adolescentes, por unidade socioeducativa, nas práticas esportivas, distribuem-se conforme apresentado pela tabela. Nota-se que que os adolescentes da unidade `r tabela_unidade_internacao_CORRE_bkp[1,1]` foram os que mais frequentaram as atividades. \vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[100,].png')
+```
+
+\newpage
+
+### Idade e sexo
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[101,].png')
+```
+
+Sexo e idade dos adolescentes incluídos no CORRE LEGAL se distribuem conforme a tabela apresentada.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[102,].png')
+```
+
+\newpage
+
+### Escolaridade
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[97,].png')
+```
+
+Entrevistados quanto a escolaridade, os adolescentes incluídos no CORRE LEGAL assim declararam, conforme exposto na tabela e gráfico em tela.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[103,].png')
+```
+
+\newpage
+
+### Regional Residencial
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[98,].png')
+```
+
+As regionais `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp),1]`, `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp) - 1, 1]` e `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp) - 2, 1]` concentram os maiores índices de residência de adolescentes incluídos no CORRE LEGAL.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[104,].png')
+```
+
+\newpage
+
+### Incidência atos infracionais
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[99,].png')
+```
+
+Apresenta-se a incidência de atos infracionais relacionados aos adolescentes incluídos no CORRE LEGAL. Ressalta-se que um adolescente pode responder pelo cometimento de mais de um ato infracional.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[105,].png')
+```
+
+\newpage
+
+### Regional ato infracional
+
+```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[100,].png')
+```
+
+As regionais `r REGIONAL_ATO_banco_internacao_CORRE_bkp[nrow(REGIONAL_ATO_banco_internacao_CORRE_bkp),1]`, `r REGIONAL_ATO_banco_internacao_CORRE_bkp[nrow(REGIONAL_ATO_banco_internacao_CORRE_bkp) - 1, 1]` e `r REGIONAL_ATO_banco_internacao_CORRE_bkp[nrow(REGIONAL_ATO_banco_internacao_CORRE_bkp) - 2, 1]` concentram os maiores índices de ocorrência dos atos infracionais.
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[106,].png')
+```
+
+\newpage
+
+### Sentenças
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[101,].png')
+```
+
+Da tabela e gráfico apresentado é possível extrair as sentenças proferidas em relação aos `r tabela_total_adls_CORRE[2,2]` adolescentes que cumprem medida de internacao e foram incluídos no CORRE LEGAL.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[107,].png')
+```
+
+\newpage
+
+### Medidas protetivas
+
+As medidas protetivas são estabelecidas pelo Estatuto da Criança e do Adolescente: \leavevmode \newline
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('img_nao_apagar/art101eca.png')
+```
+
+\leavevmode
+\newline
+
+Para os `r tabela_total_adls_CORRE[2,2]` adolescentes em cumprimento de medida de internação incluídos no CORRE LEGAL, foram aplicadas um total de `r sum(PROTETIVAS_banco_internacao_CORRE_bkp$QUANTIDADE)` medidas protetivas. Ressalte-se que mais de uma medida pode ser aplicada a determinado adolescente.
+
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[102,].png')
+```
+
+\newpage
+
+O gráfico a seguir aponta que a medida relacionada ao `r PROTETIVAS_banco_internacao_CORRE_bkp[nrow(PROTETIVAS_banco_internacao_CORRE_bkp),1]` foi a que mais se aplicou no ano em estudo. As medidas dos `r PROTETIVAS_banco_internacao_CORRE_bkp[nrow(PROTETIVAS_banco_internacao_CORRE_bkp) - 1, 1]` e `r PROTETIVAS_banco_internacao_CORRE_bkp[nrow(PROTETIVAS_banco_internacao_CORRE_bkp) - 2, 1]` seguiram-na no ranking de medidas aplicadas.
+
+\leavevmode
+\newline
+\vspace{2cm}
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[108,].png')
+```
+
+\newpage
