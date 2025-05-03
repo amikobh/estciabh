@@ -42,7 +42,7 @@ source('024_tratamento_CEDIPRO_bkp02.R')
 source('028_corre_legal_bkp03.R')
 #Sys.sleep(8)
 #Sys.sleep(5)
-source('022_letalidade_flex_BKP06_web4.R')
+source('022_letalidade_flex_BKP07_web4.R')
 
 })
 

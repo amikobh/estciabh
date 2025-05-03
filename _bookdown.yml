@@ -1,11 +1,12 @@
-book_filename: "relatorio_ciabh_2023"
+book_filename: "relatorio_ciabh_2024"
 delete_merged_file: TRUE
 new_session: no
 
 
 before_chapter_script: ["script001.R", "script002.R", "script003.R", "script004.R",
 "script005.R", "script006.R", "script007.R", "script008.R", "script009.R", "script010.R",
-"script011.R", "script015.R", "script021.R", "script022.R", "script023.R", "script024.R"]
+"script011.R", "script015.R", "script021.R", "script022.R", "script023.R", "script024.R",
+"script028.R"]
 
 
 
