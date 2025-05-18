@@ -77,8 +77,8 @@ banco_ESCOLA$ATO_INFRACIONAL = sub("121C/C14.*.*", "HOMICÍDIO (TENTATIVA)", ban
 banco_ESCOLA$ATO_INFRACIONAL = sub("129.*.*", "LESÃO CORPORAL", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("129§.*.*", "LESÃO CORPORAL", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("137.*.*", "RIXA", banco_ESCOLA$ATO_INFRACIONAL)
-banco_ESCOLA$ATO_INFRACIONAL = sub("140.ART.*.*", "RIXA", banco_ESCOLA$ATO_INFRACIONAL)
-banco_ESCOLA$ATO_INFRACIONAL = sub("140§*.*", "RIXA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("140.ART.*.*", "INJÚRIA", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("140§*.*", "INJÚRIA", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("147.*.*", "AMEAÇA", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("148.ART.*.*", "SEQUESTRO", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("155.ART.*.*", "FURTO", banco_ESCOLA$ATO_INFRACIONAL)
@@ -90,7 +90,7 @@ banco_ESCOLA$ATO_INFRACIONAL = sub("157§.*.*", "ROUBO", banco_ESCOLA$ATO_INFRAC
 banco_ESCOLA$ATO_INFRACIONAL = sub("163.ART.*.*", "DANO", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("171.ART.*.*", "ESTELIONATO", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("180.ART.*.*", "RECEPTAÇÃO", banco_ESCOLA$ATO_INFRACIONAL)
-#banco_ESCOLA$ATO_INFRACIONAL = sub("19.ART.*.*", "PORTE ARMA (LCP)", banco_ESCOLA$ATO_INFRACIONAL)
+banco_ESCOLA$ATO_INFRACIONAL = sub("19.ART.*.*", "PORTE ARMA (LCP)", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("21.ART.*.*", "VIAS DE FATO", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("213.ART.*.*", "ESTUPRO", banco_ESCOLA$ATO_INFRACIONAL)
 banco_ESCOLA$ATO_INFRACIONAL = sub("215.ART.*.*", "VIOLAÇÃO SEXUAL MEDIANTE FRAUDE", banco_ESCOLA$ATO_INFRACIONAL)
@@ -702,6 +702,7 @@ banco_ESCOLA_vitima$VITIMA = ajustar_nomes(banco_ESCOLA_vitima$VITIMA)
 banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "COMUNIDADEESCOLAR"]<- "COMUNIDADE ESCOLAR"
 banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "DIRETORA"]<- "DIRETOR(A)"
 banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "FUNCIONARIODAESCOLA"]<- "FUNCIONÁRIO DA ESCOLA"
+banco_ESCOLA_vitima$VITIMA[banco_ESCOLA_vitima$VITIMA == "NAOESPECIFICADO"]<- "NÃO ESPECIFICADO"
 #banco_ESCOLA_vitima$VITIMA[agrep(".ART", banco_ESCOLA_vitima$VITIMA)] <- "OUTROS"
 #########################################################################################################
 #########################################################################################################
@@ -825,8 +826,38 @@ colnames(banco_ESCOLA_regional_residencia_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 banco_ESCOLA_regional_residencia_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_regional_residencia_bkp$PERCENTUAL))
-banco_ESCOLA_regional_residencia_bkp_rmd = tail(banco_ESCOLA_regional_residencia_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+banco_ESCOLA_regional_residencia_bkp_bh <- banco_ESCOLA_regional_residencia_bkp %>%
+  filter(banco_ESCOLA_regional_residencia_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(banco_ESCOLA_regional_residencia_bkp = as.character(banco_ESCOLA_regional_residencia_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_residencia_ESCOLA <- banco_ESCOLA_regional_residencia_bkp %>%
+  filter(banco_ESCOLA_regional_residencia_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_residencia_ESCOLA <- banco_ESCOLA_regional_residencia_bkp %>%
+  filter(banco_ESCOLA_regional_residencia_bkp == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_residencia_ESCOLA <- banco_ESCOLA_regional_residencia_bkp %>%
+  filter(banco_ESCOLA_regional_residencia_bkp == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_residencia_ESCOLA <- banco_ESCOLA_regional_residencia_bkp %>%
+  filter(banco_ESCOLA_regional_residencia_bkp == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
+
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
 
@@ -1017,8 +1048,38 @@ colnames(banco_ESCOLA_regional_ato_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 banco_ESCOLA_regional_ato_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_ESCOLA_regional_ato_bkp$PERCENTUAL))
-banco_ESCOLA_regional_ato_bkp_rmd = tail(banco_ESCOLA_regional_ato_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+banco_ESCOLA_regional_ato_bkp_bh <- banco_ESCOLA_regional_ato_bkp %>%
+  filter(banco_ESCOLA_regional_ato_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(banco_ESCOLA_regional_ato_bkp = as.character(banco_ESCOLA_regional_ato_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_ato_ESCOLA <- banco_ESCOLA_regional_ato_bkp %>%
+  filter(banco_ESCOLA_regional_ato_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_ato_ESCOLA <- banco_ESCOLA_regional_ato_bkp %>%
+  filter(banco_ESCOLA_regional_ato_bkp == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_ato_ESCOLA <- banco_ESCOLA_regional_ato_bkp %>%
+  filter(banco_ESCOLA_regional_ato_bkp == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_ato_ESCOLA <- banco_ESCOLA_regional_ato_bkp %>%
+  filter(banco_ESCOLA_regional_ato_bkp == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
+
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
 

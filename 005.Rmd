@@ -1,38 +1,51 @@
 # Perfil dos adolescentes atendidos
+
 ## Idade e Sexo
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[3,].png')
 ```
+
 \vspace{2cm}
-Os autores de atos infracionais são, de forma exponencial, do sexo masculino, com idade entre `r banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` e `r banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` anos. 
+
+Os autores de atos infracionais são, de forma exponencial, do sexo masculino, com idade entre `r banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd)-2,1]` e `r banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_GERAL_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` anos.
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[4,].png')
 ```
+
 \newpage
+
 ## Regional de Residência
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[2,].png')
 ```
 
-Em Belo Horizonte, as Regionais `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-1,1]`, `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-2,1]` e `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-3,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais. Destaca-se que `r df_snr_regional_residencia_bkp_rmd[nrow(df_snr_regional_residencia_bkp_rmd)-0,2]` adolescentes atendidos, residem nos demais municípios da Região Metropolitana. `r df_snr_regional_residencia[11,2]` adolescentes são de outras cidades do interior de Minas Gerais e `r df_snr_regional_residencia[12,2]` é oriundo de outro estado.
+Em Belo Horizonte, as Regionais `r df_snr_regional_residencia_bkp_bh[1,1]`, `r df_snr_regional_residencia_bkp_bh[2,1]` e `r df_snr_regional_residencia_bkp_bh[3,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais. Destaca-se que `r qtd_regiao_metropolitana_regional_residencia` adolescentes atendidos, residem nos demais municípios da Região Metropolitana. `r qtd_outra_cidade_regional_residencia` adolescentes são de outras cidades do interior de Minas Gerais e `r qtd_outro_estado_regional_residencia` são oriundos de outros estados.
 
 \vspace{1cm}
+
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[5,].png')
 ```
+
 \newpage
 
 ## Taxa por 100.000 habitantes
+
 ```{r , pop_estimada, echo=FALSE}
-pop_estimada_bh_ibge = 2315560
+pop_estimada_bh_ibge = 2416339
 
 pop_estimada_bh_ibge1 = format(pop_estimada_bh_ibge, nsmall=0, big.mark=".", decimal.mark=",")
 ```
-O indicador calcula os atos infracionais. Aprecia-se o número de atos incidentes para cada 100 mil habitantes e inclui-se todas as categorias de atos infracionais. A população `r format(Sys.Date()-365*1, "%Y")` foi apurada junto ao portal eletrônico do IBGE^[https://ibge.gov.br/cidades-e-estados/mg/belo-horizonte.html]: `r pop_estimada_bh_ibge1` habitantes.
-Método de cálculo:
+
+O indicador calcula os atos infracionais. Aprecia-se o número de atos incidentes para cada 100 mil habitantes e inclui-se todas as categorias de atos infracionais. A população `r format(Sys.Date()-365*1, "%Y")` foi apurada junto ao portal eletrônico do IBGE[^005-1]: `r pop_estimada_bh_ibge1` habitantes. Método de cálculo:
+
+[^005-1]: https://ibge.gov.br/cidades-e-estados/mg/belo-horizonte.html
+
 ```{r echo=FALSE, out.width='30%', fig.align='center', dpi=1024, }
 knitr::include_graphics('img_nao_apagar/equacao_por_cem_mil.png')
 ```
-O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((sum(banco_incidencia_geral_atual$QUANTIDADE)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes.
-\newpage
+
+O ano de `r format(Sys.Date()-365*1, "%Y")` apresentou taxa de `r round((sum(banco_incidencia_geral_atual$QUANTIDADE)/pop_estimada_bh_ibge*100000),2)` atos infracionais por 100.000 habitantes. \newpage

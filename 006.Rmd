@@ -1,29 +1,37 @@
 # Mandados de busca e apreensão cumpridos e encaminhados ao CIABH
+
 \leavevmode
 \newline
 
-Mandado de busca e apreensão é a diligência que tem por fim procurar o adolescente que se deseja encontrar para trazê-lo à presença da autoridade judiciária com competência da Justiça da Infância e da Juventude. Pode ser expedido tanto na fase processual de conhecimento^[Art. 184, § 3º, Lei Nº 8.069, de 13 de julho de 1990 - ECA 
-<http://www.planalto.gov.br/ccivil_03/leis/l8069.htm>] quanto na de execução^[Art. 47, Lei Nº 12.594, de 18 janeiro de 2012 - SINASE <http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12594.htm>] das medidas socioeducativas.    
-No ano em estudo, `r nrow(banco_mba_com_ato)` adolescentes foram encaminhados ao CIABH por conta da expedição de MBA:  `r nrow(banco_mba_com_ato)-nrow(banco_so_com_mba)` com cometimento de novo ato infracional e `r nrow(banco_so_com_mba)` sem cometimento de novo ato infracional.
+Mandado de busca e apreensão é a diligência que tem por fim procurar o adolescente que se deseja encontrar para trazê-lo à presença da autoridade judiciária com competência da Justiça da Infância e da Juventude. Pode ser expedido tanto na fase processual de conhecimento[^006-1] quanto na de execução[^006-2] das medidas socioeducativas.\
+No ano em estudo, `r nrow(banco_mba_com_ato)` adolescentes foram encaminhados ao CIABH por conta da expedição de MBA: `r nrow(banco_mba_com_ato)-nrow(banco_so_com_mba)` com cometimento de novo ato infracional e `r nrow(banco_so_com_mba)` sem cometimento de novo ato infracional.
 
+[^006-1]: Art. 184, § 3º, Lei Nº 8.069, de 13 de julho de 1990 - ECA <http://www.planalto.gov.br/ccivil_03/leis/l8069.htm>
 
+[^006-2]: Art. 47, Lei Nº 12.594, de 18 janeiro de 2012 - SINASE <http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12594.htm>
 
 \newpage
 
 ## Total de mandados de busca e apreensão cumpridos e encaminhados ao CIABH
+
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[3,].png')
 ```
 
 ## Idade e sexo
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[6,].png')
 ```
+
 \vspace{1cm}
+
 Os adolecentes encaminhados ao CIABH em virtude do cumprimento de MBA são, de forma exponencial, do sexo masculino com idade entre `r banco_MBA_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_MBA_snr_SEXO_IDADE_pizza_bkp_rmd)-1,1]` e `r banco_MBA_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_MBA_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` anos. Importa considerar que mais de 01 MBA pode ser expedido para o mesmo adolescente.
+
 ```{r echo=FALSE, out.width='65%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[7,].png')
 ```
+
 \newpage
 
 ## Regional de Residência dos adolescentes encaminhados ao CIABH por MBA
@@ -31,28 +39,31 @@ knitr::include_graphics('imagens/GRAFICO[7,].png')
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[4,].png')
 ```
+
 \vspace{1cm}
 
-Em Belo Horizonte, as regionais `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-1,1]`, `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-2,1]`, `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-3,1]` e `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-4,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CIABH por MBA. Destaca-se que `r df_snr_regional_residencia_MBA_bkp_rmd[nrow(df_snr_regional_residencia_MBA_bkp_rmd)-0,2]` adolescentes residem nos demais municípios da Região Metropolitana.
-
+Em Belo Horizonte, as regionais `r df_snr_regional_residencia_MBA_bkp_bh[1,1]`, `r df_snr_regional_residencia_MBA_bkp_bh[2,1]`, `r df_snr_regional_residencia_MBA_bkp_bh[3,1]` e `r df_snr_regional_residencia_MBA_bkp_bh[4,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CIABH por MBA. Destaca-se que `r qtd_regiao_metropolitana` adolescentes residem nos demais municípios da Região Metropolitana.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[8,].png')
 ```
+
 \newpage
+
 ## Motivo da expedição do MBA
-
-
 
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[5,].png')
 ```
+
 \vspace{1cm}
-Os motivos da expedição dos mandados de busca e apreensão são indicados, conforme exposto na tabela e gráfico em tela.
-\vspace{1cm}
+
+Os motivos da expedição dos mandados de busca e apreensão são indicados, conforme exposto na tabela e gráfico em tela. \vspace{1cm}
+
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[9,].png')
 ```
+
 \newpage
 
 ## Regional do local de cumprimento do MBA
@@ -60,15 +71,19 @@ knitr::include_graphics('imagens/GRAFICO[9,].png')
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[6,].png')
 ```
+
 \vspace{1cm}
-Em Belo Horizonte, a Regional `r df_regional_ATO_banco_MBA_bkp_rmd[nrow(df_regional_ATO_banco_MBA_bkp_rmd)-0,1]` concentra o maior índice relacionado ao cumprimento de MBA.
+
+Em Belo Horizonte, a Regional `r df_regional_ATO_banco_MBA_bkp_bh[1,1]` concentra o maior índice relacionado ao cumprimento de MBA.
 
 ## Dia da semana do cumprimento do MBA
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[7,].png')
 ```
+
 \vspace{1cm}
-`r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-0,1]`, `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-1,1]` e `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-2,1]` concentram os maiores índices de atos infracionais relacionados ao cumprimento do MBA.
+
+`r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-0,1]`, `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-1,1]` e `r df_DIA_SEMANA_banco_MBA_bkp_rmd[nrow(df_DIA_SEMANA_banco_MBA_bkp_rmd)-2,1]` concentram os maiores índices relacionados ao cumprimento do MBA.
 
 \newpage

@@ -2,8 +2,8 @@
 #TRATAMENTO COORDENADAS USO_DE_DROGAS:
 #########################################################################################################
 ##CRIANDO E MUDANDO O DIRETORIO PARA TRABALHAR coordenadas:
-dir.create(file.path("~/tester", "coordenadas"))
-setwd(file.path("~/tester/coordenadas"))
+dir.create(file.path("~/diretorio_r/estciabh", "coordenadas"))
+setwd(file.path("~/diretorio_r/estciabh/coordenadas"))
 #########################################################################################################
 
 
@@ -59,7 +59,7 @@ register_google(key = "AIzaSyDKYIchtAe_gwjE1R2L7sIKns2mTxDf0NI")
 #latlon_USO_DE_DROGAS = geocode(dt_ender_USO_DE_DROGAS$ENDERECO, key=key)
 
 latlon_USO_DE_DROGAS =
-  
+
 dt_ender_USO_DE_DROGAS %>%
   geocode(ENDERECO,
           method = "arcgis",
@@ -77,7 +77,7 @@ coordenadas_USO_DE_DROGAS
 
 write.csv(coordenadas_USO_DE_DROGAS, file ="COORDENADAS_USO_DE_DROGAS.csv",row.names=FALSE)
 
-setwd(file.path("~/tester/scripts_v_001/"))#configurar diretorio
+setwd(file.path("~/diretorio_r/estciabh/R/scripts_coordenadas/"))#configurar diretorio
 #########################################################################################################
 #FIM TRATAMENTO COORDENADAS USO_DE_DROGAS
 #########################################################################################################

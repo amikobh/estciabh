@@ -37,12 +37,12 @@ source('021_tratamento_flex_jr_web2_bkp2.R')
 #Sys.sleep(5)
 source('023_tratamento_flex_mba_web2_bkp1.R')
 #Sys.sleep(1)
-source('024_tratamento_CEDIPRO_bkp02.R')
+source('024_tratamento_CEDIPRO_bkp04.R')
 #Sys.sleep(5)
 source('028_corre_legal_bkp03.R')
 #Sys.sleep(8)
 #Sys.sleep(5)
-source('022_letalidade_flex_BKP07_web4.R')
+source('022_letalidade_flex_BKP08_web4.R')
 
 })
 
@@ -50,9 +50,9 @@ source('022_letalidade_flex_BKP07_web4.R')
 print(tempo_script)
 
 tempo_graficos <- system.time({
-source('025_tabelas_BKP05_gt.R')
+source('025_tabelas_BKP06_gt.R')
 #Sys.sleep(5)
-source('026_graficos_BKP03.R')
+source('026_graficos_BKP06.R')
 #Sys.sleep(5)
 })
 

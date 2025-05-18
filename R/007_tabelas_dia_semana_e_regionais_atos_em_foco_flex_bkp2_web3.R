@@ -150,8 +150,38 @@ colnames(df_regional_banco_HOMICIDIO_gt_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 df_regional_banco_HOMICIDIO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_HOMICIDIO_gt_bkp$PERCENTUAL))
-df_regional_banco_HOMICIDIO_gt_bkp_rmd = tail(df_regional_banco_HOMICIDIO_gt_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_regional_banco_HOMICIDIO_gt_bkp_bh <- df_regional_banco_HOMICIDIO_gt_bkp %>%
+  filter(REGIONAL_ATO %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO = as.character(REGIONAL_ATO))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_residencia_HOMICIDIO <- df_regional_banco_HOMICIDIO_gt_bkp %>%
+  filter(REGIONAL_ATO == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_residencia_HOMICIDIO <- df_regional_banco_HOMICIDIO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_residencia_HOMICIDIO <- df_regional_banco_HOMICIDIO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_residencia_HOMICIDIO <- df_regional_banco_HOMICIDIO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
+
 # Adaptando para scrip grafico:
 #SUBSTITUIR
 df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO[df_regional_banco_HOMICIDIO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
@@ -365,8 +395,38 @@ colnames(df_regional_banco_ROUBO_gt_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 df_regional_banco_ROUBO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_ROUBO_gt_bkp$PERCENTUAL))
-df_regional_banco_ROUBO_gt_bkp_rmd = tail(df_regional_banco_ROUBO_gt_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_regional_banco_ROUBO_gt_bkp_bh <- df_regional_banco_ROUBO_gt_bkp %>%
+  filter(REGIONAL_ATO %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO = as.character(REGIONAL_ATO))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_residencia_ROUBO <- df_regional_banco_ROUBO_gt_bkp %>%
+  filter(REGIONAL_ATO == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_residencia_ROUBO <- df_regional_banco_ROUBO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_residencia_ROUBO <- df_regional_banco_ROUBO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_residencia_ROUBO <- df_regional_banco_ROUBO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
+
 # Adaptando para scrip grafico:
 #SUBSTITUIR
 df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO[df_regional_banco_ROUBO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
@@ -580,8 +640,38 @@ colnames(df_regional_banco_FURTO_gt_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 df_regional_banco_FURTO_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_FURTO_gt_bkp$PERCENTUAL))
-df_regional_banco_FURTO_gt_bkp_rmd = tail(df_regional_banco_FURTO_gt_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_regional_banco_FURTO_gt_bkp_bh <- df_regional_banco_FURTO_gt_bkp %>%
+  filter(REGIONAL_ATO %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO = as.character(REGIONAL_ATO))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_residencia_FURTO <- df_regional_banco_FURTO_gt_bkp %>%
+  filter(REGIONAL_ATO == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_residencia_FURTO <- df_regional_banco_FURTO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_residencia_FURTO <- df_regional_banco_FURTO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_residencia_FURTO <- df_regional_banco_FURTO_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
+
 # Adaptando para scrip grafico:
 #SUBSTITUIR
 df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO[df_regional_banco_FURTO_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
@@ -795,8 +885,38 @@ colnames(df_regional_banco_USO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 df_regional_banco_USO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_USO_DE_DROGAS_gt_bkp$PERCENTUAL))
-df_regional_banco_USO_DE_DROGAS_gt_bkp_rmd = tail(df_regional_banco_USO_DE_DROGAS_gt_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_regional_banco_USO_DE_DROGAS_gt_bkp_bh <- df_regional_banco_USO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO = as.character(REGIONAL_ATO))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_residencia_USO_DE_DROGAS <- df_regional_banco_USO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_residencia_USO_DE_DROGAS <- df_regional_banco_USO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_residencia_USO_DE_DROGAS <- df_regional_banco_USO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_residencia_USO_DE_DROGAS <- df_regional_banco_USO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
+
 # Adaptando para scrip grafico:
 #SUBSTITUIR
 df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_USO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"
@@ -908,9 +1028,10 @@ colnames(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
 
 #########################################################################################################
 #para script rmd:
-df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL))
-df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd = tail(df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp,5)
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_dia_semana_banco_USO_DE_DROGAS_gt_bkp$PERCENTUAL))
+df_dia_semana_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd = tail(df_dia_semana_banco_USO_DE_DROGAS_gt_bkp,5)
 #########################################################################################################
+
 #########################################################################################################
 df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "DOMINGO"]<- "ADOMINGO"
 df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA[df_dia_semana_banco_TRAFICO_DE_DROGAS_gt$DIA_SEMANA == "SEGUNDA"]<- "BSEGUNDA"
@@ -1010,8 +1131,38 @@ colnames(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$PERCENTUAL))
-df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_rmd = tail(df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp_bh <- df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO = as.character(REGIONAL_ATO))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_residencia_TRAFICO_DE_DROGAS <- df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_residencia_TRAFICO_DE_DROGAS <- df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_residencia_TRAFICO_DE_DROGAS <- df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_residencia_TRAFICO_DE_DROGAS <- df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp %>%
+  filter(REGIONAL_ATO == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
+
 # Adaptando para scrip grafico:
 #SUBSTITUIR
 df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO[df_regional_banco_TRAFICO_DE_DROGAS_gt_bkp$REGIONAL_ATO == "ZSEM INFORMAÇÃO"]<- "SEM INFORMAÇÃO"

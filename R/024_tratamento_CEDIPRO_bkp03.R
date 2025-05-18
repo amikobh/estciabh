@@ -1843,7 +1843,30 @@ colnames(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO)[3]<-'PERCENTUAL'
 #  REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO %>%
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
 #  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
 
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp_bh <- REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp = as.character(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_banco_matriculados_CEDIPRO_QUANTIDADE <- REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+
+qtd_regiao_metropolitana_banco_matriculados_CEDIPRO_PERCENTUAL <- REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(PERCENTUAL)
 
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
@@ -3211,6 +3234,7 @@ REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO = banco_desistencia_CEDIPRO
 #########################################################################################################
 #AGREGAR RMBH
 REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO$regional_residencial <- str_replace(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO$regional_residencial, "RMBH.*", "ZREGIÃO METROPOLITANA")
+REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO$regional_residencial <- str_replace(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO$regional_residencial, "CIDADE DE RIO MANSO/MG", "ZREGIÃO METROPOLITANA")
 
 #SUBSTITUIR
 REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO$regional_residencial[REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO$regional_residencial == ""]<- "ZSEM INFORMAÇÃO"
@@ -3267,6 +3291,28 @@ colnames(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO)[3]<-'PERCENTUAL'
 #  mutate(PERCENTUAL = PERCENTUAL*100)%>%
 #  mutate(PERCENTUAL = sprintf("%.2f", PERCENTUAL))
 
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp_bh <- REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp = as.character(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_banco_desistencia_CEDIPRO_QUANTIDADE <- REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+
+qtd_regiao_metropolitana_banco_desistencia_CEDIPRO_PERCENTUAL <- REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_desistencia_CEDIPRO_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(PERCENTUAL)
 
 #########################################################################################################
 setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio

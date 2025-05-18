@@ -403,7 +403,17 @@ atos_em_foco_rmd = atos_em_foco
 atos_em_foco$PERCENTUAL = NULL
 atos_em_foco$PERCENTUAL2 = NULL
 #########################################################################################################
+# Calcula o total da coluna INCIDÊNCIA
+total_incidencia <- sum(atos_em_foco$INCIDÊNCIA)
 
+# Cria um novo data frame com a linha TOTAL
+linha_total_incidencia <- data.frame(ATO = "TOTAL", INCIDÊNCIA = total_incidencia)
+
+# Adiciona a linha ao dataframe original
+atos_em_foco_com_total <- rbind(atos_em_foco, linha_total_incidencia)
+
+# Visualiza o resultado
+#print(atos_em_foco_com_total)
 #########################################################################################################
 
 

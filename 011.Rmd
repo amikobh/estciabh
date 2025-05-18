@@ -1,89 +1,82 @@
 # Atos infracionais nas escolas de Belo Horizonte
+
 \leavevmode
 \newline
 
-Ante ao crescente número de adolescentes encaminhados a Vara da Infância e da
-Juventude, desta capital, em razão de conflitos no ambiente escolar, a Vara Infracional da Infância e
-da Juventude de Belo Horizonte divulga os dados de atendimento relacionados ao cometimento de
-atos infracionais ocorridos nas escolas de Belo Horizonte.    
+Ante ao crescente número de adolescentes encaminhados a Vara da Infância e da Juventude, desta capital, em razão de conflitos no ambiente escolar, a Vara Infracional da Infância e da Juventude de Belo Horizonte divulga os dados de atendimento relacionados ao cometimento de atos infracionais ocorridos nas escolas de Belo Horizonte.
 
-Os dados expostos se originam nas anotações arrecadadas em documentos provenientes
-dos seguintes órgãos integrantes do CIABH: 
+Os dados expostos se originam nas anotações arrecadadas em documentos provenientes dos seguintes órgãos integrantes do CIABH:
 
-a. Delegacia de Orientação e Proteção à Criança e ao
-Adolescente (DOPCAD); 
-a. Subsecretaria de Atendimento às Medidas Socioeducativas (SUASE) e
-a. Vara Infracional da Infância e da Juventude.    
+a.  Delegacia de Orientação e Proteção à Criança e ao Adolescente (DOPCAD);
+b.  Subsecretaria de Atendimento às Medidas Socioeducativas (SUASE) e
+c.  Vara Infracional da Infância e da Juventude.
 
-Torna-se de suma importância a elaboração destes dados estatísticos, com o objetivo de se
-diagnosticar os fatores para que se possa subsidiar a Secretaria de Educação na construção de
-planejamento estratégico preventivo junto aos educadores e alunos.    
-
+Torna-se de suma importância a elaboração destes dados estatísticos, com o objetivo de se diagnosticar os fatores para que se possa subsidiar a Secretaria de Educação na construção de planejamento estratégico preventivo junto aos educadores e alunos.
 
 \newpage
 
 ## Total de casos encaminhados
+
 ```{r echo=FALSE, out.width='40%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[45,].png')
 ```
 
 ## Idade e sexo
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[39,].png')
 ```
-Os autores de atos infracionais praticados em ambiente escolar são, de forma exponencial, do sexo masculino com idade entre `r banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` e `r banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd)-3,1]`. 
+
+Os autores de atos infracionais praticados em ambiente escolar são, de forma exponencial, do sexo masculino com idade entre `r banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd)-0,1]` e `r banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd[nrow(banco_ESCOLA_snr_SEXO_IDADE_pizza_bkp_rmd)-3,1]`.
+
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[40,].png')
 ```
+
 \newpage
 
-
 ## Escolaridade
-
-
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[46,].png')
 ```
 
-Entrevistados quanto a escolaridade, os adolescentes envolvidos em atos infracionais no
-ambiente escolar assim declararam, conforme exposto na tabela e gráfico em tela.
+Entrevistados quanto a escolaridade, os adolescentes envolvidos em atos infracionais no ambiente escolar assim declararam, conforme exposto na tabela e gráfico em tela.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[41,].png')
 ```
+
 \newpage
 
 ## Incidências dos atos infracionais no ambiente escolar
-
-
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[47,].png')
 ```
 
-Apresenta-se a incidência de atos infracionais relacionados ao ambiente escolar. Sublinha-se que o ato `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-0,1]` é o que possui maior índice seguido dos atos `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-1,1]` e `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-2,1]`.
-\vspace{2cm}
+Apresenta-se a incidência de atos infracionais relacionados ao ambiente escolar. Sublinha-se que o ato `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-0,1]` é o que possui maior índice seguido dos atos `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-1,1]` e `r banco_ESCOLA_incidencia_bkp_rmd[nrow(banco_ESCOLA_incidencia_bkp_rmd)-2,1]`. \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[42,].png')
 ```
+
 \newpage
 
 ## Primariedade
 
-
-`r banco_ESCOLA_primariedade_bkp_rmd[nrow(banco_ESCOLA_primariedade_bkp_rmd)-0,3]` dos adolescentes autores de atos infracionais relacionados ao ambiente escolar são
-primários. Já `r banco_ESCOLA_primariedade_bkp_rmd[nrow(banco_ESCOLA_primariedade_bkp_rmd)-1,3]` deles tiveram outras passagens pelo CIA-BH, conforme ilustra o gráfico a
-seguir.
-
+`r banco_ESCOLA_primariedade_bkp_rmd[nrow(banco_ESCOLA_primariedade_bkp_rmd)-0,3]` dos adolescentes autores de atos infracionais relacionados ao ambiente escolar são primários. Já `r banco_ESCOLA_primariedade_bkp_rmd[nrow(banco_ESCOLA_primariedade_bkp_rmd)-1,3]` deles tiveram outras passagens pelo CIA-BH, conforme ilustra o gráfico a seguir.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[43,].png')
 ```
+
 \newpage
 
 ## Decisões em audiências preliminares
+
 \leavevmode
 \newline
 
@@ -91,30 +84,26 @@ knitr::include_graphics('imagens/GRAFICO[43,].png')
 knitr::include_graphics('imagens/TABELA[48,].png')
 ```
 
-De se notar que, no rol das decisões tomadas em audiências preliminares, `r sum(banco_ESCOLA_decisao_bkp_rmd1$QUANTIDADE)` casos foram resolvidos, com fim do processo de conhecimento, na primeira audiência a que o adolescente foi apresentado. Esses casos representam `r sum(banco_ESCOLA_decisao_bkp_rmd1$PERCENTUAL2)`% do total de decisões proferidas.
-Põem fim ao processo de conhecimento as decisões de arquivamento e todos os tipos de remissão elencados na tabela acima.
-\leavevmode
-\newline
-\newline
+De se notar que, no rol das decisões tomadas em audiências preliminares, `r sum(banco_ESCOLA_decisao_bkp_rmd1$QUANTIDADE)` casos foram resolvidos, com fim do processo de conhecimento, na primeira audiência a que o adolescente foi apresentado. Esses casos representam `r sum(banco_ESCOLA_decisao_bkp_rmd1$PERCENTUAL2)`% do total de decisões proferidas. Põem fim ao processo de conhecimento as decisões de arquivamento e todos os tipos de remissão elencados na tabela acima. \leavevmode \newline \newline
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[44,].png')
 ```
+
 \newpage
 
 ## Vítima
-
-
-
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[49,].png')
 ```
 
-Ao se analisar os dados expostos verifica-se que `r banco_ESCOLA_vitima_bkp_rmd[nrow(banco_ESCOLA_vitima_bkp_rmd)-0,1]` é a maior vítima dos atos infracionais praticados nas escolas de Belo Horizonte.
-\vspace{2cm}
+Ao se analisar os dados expostos verifica-se que `r banco_ESCOLA_vitima_bkp_rmd[nrow(banco_ESCOLA_vitima_bkp_rmd)-0,1]` é a maior vítima dos atos infracionais praticados nas escolas de Belo Horizonte. \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[45,].png')
 ```
+
 \newpage
 
 ## Regional de Residência
@@ -123,24 +112,27 @@ knitr::include_graphics('imagens/GRAFICO[45,].png')
 knitr::include_graphics('imagens/TABELA[50,].png')
 ```
 
-Em Belo Horizonte, as Regionais `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-0,1]` e `r banco_ESCOLA_regional_residencia_bkp_rmd[nrow(banco_ESCOLA_regional_residencia_bkp_rmd)-1,1]` concentram os maiores índices de residência de adolescentes autores de atos infracionais cometidos nas escolas.
+Em Belo Horizonte, as Regionais `r banco_ESCOLA_regional_residencia_bkp_bh[1,1]` e `r banco_ESCOLA_regional_residencia_bkp_bh[2,1]` 
+concentram os maiores índices de residência de adolescentes autores de atos infracionais cometidos nas escolas.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[46,].png')
 ```
+
 \newpage
 
 ## Tipo de escola
 
-
-A(s) escola(s) `r banco_ESCOLA_tipo_escola_bkp_rmd[nrow(banco_ESCOLA_tipo_escola_bkp_rmd)-0,1]`(AIS) concentram os maiores
-índices de ocorrências de atos infracionais praticados no ambiente escolar. 
+A(s) escola(s) `r banco_ESCOLA_tipo_escola_bkp_rmd[nrow(banco_ESCOLA_tipo_escola_bkp_rmd)-0,1]`(AIS) concentram os maiores índices de ocorrências de atos infracionais praticados no ambiente escolar.
 
 \vspace{2cm}
+
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[47,].png')
 ```
+
 \newpage
 
 ## Regional da escola
@@ -148,14 +140,15 @@ knitr::include_graphics('imagens/GRAFICO[47,].png')
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[51,].png')
 ```
+
 \vspace{2cm}
-Em Belo Horizonte, as Regionais `r banco_ESCOLA_regional_ato_bkp_rmd[nrow(banco_ESCOLA_regional_ato_bkp_rmd)-0,1]`, `r banco_ESCOLA_regional_ato_bkp_rmd[nrow(banco_ESCOLA_regional_ato_bkp_rmd)-1,1]` e `r banco_ESCOLA_regional_ato_bkp_rmd[nrow(banco_ESCOLA_regional_ato_bkp_rmd)-2,1]` concentram os maiores índices de atos infracionais no ambiente escolar.
+
+Em Belo Horizonte, as Regionais `r banco_ESCOLA_regional_ato_bkp_bh[1,1]`, `r banco_ESCOLA_regional_ato_bkp_bh[2,1]` e `r banco_ESCOLA_regional_ato_bkp_bh[3,1]` concentram os maiores índices de atos infracionais no ambiente escolar.
 
 \vspace{2cm}
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/GRAFICO[48,].png')
 ```
+
 \newpage
-
-

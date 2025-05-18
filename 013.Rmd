@@ -55,7 +55,7 @@ knitr::include_graphics('imagens/GRAFICO[64,].png')
 knitr::include_graphics('imagens/GRAFICO[65,].png')
 ```
 
-Os adolescentes matriculados no CEDIPRO, em sua maioria, são do sexo masculino com idade entre `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[9,1]` e `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[11,1]` anos.
+Os adolescentes matriculados no CEDIPRO, em sua maioria, são do sexo masculino com idade entre `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[11,1]` e `r df_snr_sexo_idade_banco_matriculados_CEDIPRO_bkp[20,1]` anos.
 
 \vspace{2cm}
 
@@ -87,7 +87,7 @@ knitr::include_graphics('imagens/GRAFICO[67,].png')
 knitr::include_graphics('imagens/TABELA[68,].png')
 ```
 
-As regionais `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[nrow(REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp),1]`, `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[10,1]` e `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[9,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CEDIPRO. Destaca-se que `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[2,3]` dos adolescentes, num total de `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp[2,2]` encaminhamentos, residem nos demais municípios da Região Metropolitana.
+As regionais `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp_bh[1,1]`, `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp_bh[2,1]` e `r REGIONAL_RESIDENCIAL_banco_matriculados_CEDIPRO_bkp_bh[3,1]` concentram os maiores índices de residência de adolescentes encaminhados ao CEDIPRO. Destaca-se que `r qtd_regiao_metropolitana_banco_matriculados_CEDIPRO_PERCENTUAL` dos adolescentes, num total de `r qtd_regiao_metropolitana_banco_matriculados_CEDIPRO_QUANTIDADE` encaminhamentos, residem nos demais municípios da Região Metropolitana.
 
 \vspace{1cm}
 
@@ -103,7 +103,7 @@ knitr::include_graphics('imagens/GRAFICO[68,].png')
 knitr::include_graphics('imagens/TABELA[69,].png')
 ```
 
-Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO. Sublinha-se que o ato `r INCIDENCIA_banco_matriculados_CEDIPRO_bkp[18,1]` é o que possui maior índice.\
+Apresenta-se a incidência de atos infracionais relacionados aos adolescentes encaminhados para o CEDIPRO. Sublinha-se que o ato `r INCIDENCIA_banco_matriculados_CEDIPRO_bkp[15,1]` é o que possui maior índice.\
 Ressalta-se que um adolescente pode responder pelo cometimento de mais de um ato infracional.
 
 \vspace{1cm}
@@ -151,7 +151,7 @@ knitr::include_graphics('imagens/TABELA[71,].png')
 
 \newpage
 
-O gráfico a seguir aponta que a medida relacionada ao `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[6,1]` foi a que mais se aplicou no ano em estudo atingindo o índice de `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[6,3]`. As medidas do `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[5,1]` e `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[4,1]` seguiram-na no ranking de medidas aplicadas.
+O gráfico a seguir aponta que a medida relacionada ao `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[5,1]` foi a que mais se aplicou no ano em estudo atingindo o índice de `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[5,3]`. As medidas do `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[4,1]` e `r PROTETIVAS_banco_matriculados_CEDIPRO_bkp[3,1]` seguiram-na no ranking de medidas aplicadas.
 
 \leavevmode
 \newline
@@ -328,28 +328,25 @@ knitr::include_graphics('imagens/GRAFICO[81,].png')
 
 ## CORRE LEGAL
 
-Em parceria com o Departamento de Esportes (DESP), da Escola de Educação Física, Fisioterapia e Terapia Ocupacional (EEFFTO), da UFMG,  a Vara Infracional  busca oferecer aos adolescentes em cumprimento de medidas restritivas de liberdade – Internação e Semiliberdade - a oportunidade de praticar atividades físicas saudáveis, usando o esporte como ferramenta de ressocialização. Criado em 2020 pela Vara Infracional da Infância e Juventude da capital, o CORRE LEGAL tem como foco a reeducação social de participantes entre 12 e 18 anos e é desenvolvido com o apoio da SUASE, do Instituto Elo e o PEMSE – Polo de Evolução de Medidas Socioeducativas.    
+Em parceria com o Departamento de Esportes (DESP), da Escola de Educação Física, Fisioterapia e Terapia Ocupacional (EEFFTO), da UFMG, a Vara Infracional busca oferecer aos adolescentes em cumprimento de medidas restritivas de liberdade - Internação e Semiliberdade - a oportunidade de praticar atividades físicas saudáveis, e com regularidade, usando o esporte como ferramenta de inclusão social.\
+Criado em 2020 por Juízes de Direito da Vara Infracional da Infância e Juventude da capital, o CORRE LEGAL é desenvolvido em parceria com a SUASE, com o Instituto Elo e com o PEMSE - Polo de Evolução de Medidas Socioeducativas. Conta, ainda, como o apoio institucional da AMAGIS – Associação dos Magistrados Mineiros; da AMMP – Associação Mineira do Ministério Público; ADEPMG -Associação das Defensoras e dos Defensores Públicos de Minas Gerais e do Fórum Permanente do Sistema Socioeducativo de Belo Horizonte.\
+Mais informações pelo instagram @projetocorrelegal.
 
-**Breve descrição das categorias dos treinos:**   
-Essas atividades visam promover saúde, condicionamento físico e integração social dos adolescentes.    
+**Breve descrição das categorias dos treinos:** Essas atividades visam promover condicionamento físico, integração social e benefícios emocionais para os adolescentes.
 
-**Treino Regular**    
-Frequência: 2 a 3 vezes por semana.    
-Local: Quadras das Unidades (internação) / Parques Públicos da cidade (semiliberdade).    
-Atividades: Intercalar corrida e caminhada, alternar alta e baixa velocidade, flexão de braço, tríceps no banco, agachamento, avanço, ponte, etc.    
-Objetivo: Fortalecimento muscular, melhora cardiovascular e resistência física.    
+**Treino Regular** Frequência: 2 a 3 vezes por semana.\
+Local: Quadras das Unidades (internação) / Parques Públicos da cidade (semiliberdade).\
+Atividades: Exercícios de aquecimento e alongamento físico, atividades de interação em grupo, prática, com supervisão técnica, de caminhadas e corridas, com alternância de velocidade e atividades de reforço muscular.\
+Objetivo: Alcançar os benefícios da prática regular da atividade física, dentre eles a melhoria do condicionamento cardiovascular, fortalecimento muscular e ósseo, redução do estresse e da ansiedade, sintomas muito presentes, particularmente , em pessoas em situação de privação de liberdade.
 
-**Treino no CTE**    
-Frequência: 1 vez por mês.    
-Local: Centro de Treinamento Esportivo (CTE) da Escola de Educação Física, Fisioterapia e Terapia Ocupacional da UFMG.    
-Atividades: Atletismo (corridas, saltos, arremessos).    
-Objetivo: Aprimorar capacidades físicas para desempenho esportivo.    
+**Treino no CTE** Frequência: 1 vez por mês.\
+Local: Centro de Treinamento Esportivo (CTE) da Escola de Educação Física, Fisioterapia e Terapia Ocupacional da UFMG.\
+Atividades: Experimentações e vivências nas 26 modalidades do atletismo, na melhor estrutura para essa finalidade do Estado de Minas Gerais.\
+Objetivo: Oportunizar vivências esportivas e de lazer, normalmente, pouco acessadas por esse público.
 
-**Curso de Natação**    
-Frequência: 2 vezes ao ano (janeiro e julho).    
-Atividades: flutuação e palmateio, exercícios de respiração, propulsão, imersão, introdução aos nados crawl, peito, costas e borboleta.    
-Local: Escolas públicas parceiras.    
-Objetivo: Adaptação ao meio líquido, técnicas de nado seguras e desenvolvimento físico e mental.
+**Curso de Natação** Frequência: 2 vezes ao ano (janeiro e julho).\
+Atividades: flutuação com palmateio. exercícios de respiração, propulsão, imersão, introdução aos nados crawl, peito, costas e borboleta. Local: Escolas públicas e outros parceiros.\
+Objetivo: Oportunizar vivências esportivas e de lazer, normalmente, pouco acessadas por esse público.
 
 \newpage
 
@@ -425,7 +422,7 @@ knitr::include_graphics('imagens/GRAFICO[85,].png')
 knitr::include_graphics('imagens/TABELA[84,].png')
 ```
 
-Os períodos do dia em que se dão as práticas esportivas distribuem-se conforme apresentado pela tabela. Nota-se que que a diferença percentual entre o período de maior e menor ocorrência de atividades é `r sum(tabela_periodo_semiliberdade_CORRE_bkp[1,3]-tabela_periodo_semiliberdade_CORRE_bkp[2,3])`%.
+Os períodos do dia em que se dão as práticas esportivas distribuem-se conforme apresentado pela tabela. Nota-se que a diferença percentual entre o período de maior e menor ocorrência de atividades é `r sum(tabela_periodo_semiliberdade_CORRE_bkp[1,3]-tabela_periodo_semiliberdade_CORRE_bkp[2,3])`%.
 
 \vspace{1cm}
 
@@ -489,7 +486,7 @@ knitr::include_graphics('imagens/GRAFICO[90,].png')
 knitr::include_graphics('imagens/TABELA[87,].png')
 ```
 
-As regionais `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp),1]`, `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp) - 1, 1]` e `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp) - 2, 1]` concentram os maiores índices de residência de adolescentes incluídos no CORRE LEGAL.
+As regionais `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp_bh[1,1]`, `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp_bh[2,1]` e `r REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp_bh[3,1]` concentram os maiores índices de residência de adolescentes incluídos no CORRE LEGAL.
 
 \vspace{1cm}
 
@@ -521,7 +518,7 @@ knitr::include_graphics('imagens/GRAFICO[92,].png')
 knitr::include_graphics('imagens/TABELA[89,].png')
 ```
 
-As regionais `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp),1]`, `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp) - 1, 1]` e `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp[nrow(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp) - 2, 1]` concentram os maiores índices de ocorrência dos atos infracionais.
+As regionais `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp_bh[1,1]`, `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp_bh[2,1]`, `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp_bh[3,1]` e `r REGIONAL_ATO_banco_semiliberdade_CORRE_bkp_bh[4,1]` concentram os maiores índices de ocorrência dos atos infracionais.
 
 \vspace{1cm}
 
@@ -580,13 +577,13 @@ knitr::include_graphics('imagens/GRAFICO[95,].png')
 
 \newpage
 
-## Atividades esportivas realizadas pelos adolescentes em cumprimento de internacao
+## Atividades esportivas realizadas pelos adolescentes em cumprimento de internação
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[92,].png')
 ```
 
-As atividades realizadas pelos adolescentes em cumprimento de internacao, distribuem-se conforme apresentado pela tabela. Nota-se que o `r tabela_atividades_internacao_CORRE_bkp[1,1]` foi o mais praticado pelos adolescentes. Observa-se que um adolescente pode realizar mais de uma atividade e mais de uma vez cada uma delas.
+As atividades realizadas pelos adolescentes em cumprimento de internação, distribuem-se conforme apresentado pela tabela. Nota-se que o `r tabela_atividades_internacao_CORRE_bkp[1,1]` foi o mais praticado pelos adolescentes. Observa-se que um adolescente pode realizar mais de uma atividade e mais de uma vez cada uma delas.
 
 \vspace{1cm}
 
@@ -596,13 +593,13 @@ knitr::include_graphics('imagens/GRAFICO[96,].png')
 
 \newpage
 
-### Frequência dos adolescentes em cumprimento de internacao
+### Frequência dos adolescentes em cumprimento de internação
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[93,].png')
 ```
 
-A frequência dos adolescentes em cumprimento de internacao às atividades oferecidas distribuem-se conforme apresentado pela tabela. Refere-se à quantidade de vezes em que um adolescente frequentou as atividades.
+A frequência dos adolescentes em cumprimento de internação às atividades oferecidas distribuem-se conforme apresentado pela tabela. Refere-se à quantidade de vezes em que um adolescente frequentou as atividades.
 
 \vspace{1cm}
 
@@ -612,7 +609,7 @@ knitr::include_graphics('imagens/GRAFICO[97,].png')
 
 \newpage
 
-### Dia da prática esportiva oferecida aos adolescentes em cumprimento de internacao
+### Dia da prática esportiva oferecida aos adolescentes em cumprimento de internação
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[94,].png')
@@ -628,7 +625,7 @@ knitr::include_graphics('imagens/GRAFICO[98,].png')
 
 \newpage
 
-### Turno da prática esportiva oferecida aos adolescentes em cumprimento de internacao
+### Turno da prática esportiva oferecida aos adolescentes em cumprimento de internação
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[95,].png')
@@ -642,7 +639,7 @@ knitr::include_graphics('imagens/GRAFICO[99,].png')
 
 \newpage
 
-### Unidade socioeducativa dos adolescentes em cumprimento de internacao
+### Unidade socioeducativa dos adolescentes em cumprimento de internação
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
 knitr::include_graphics('imagens/TABELA[96,].png')
@@ -696,7 +693,7 @@ knitr::include_graphics('imagens/GRAFICO[103,].png')
 knitr::include_graphics('imagens/TABELA[98,].png')
 ```
 
-As regionais `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp),1]`, `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp) - 1, 1]` e `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp[nrow(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp) - 2, 1]` concentram os maiores índices de residência de adolescentes incluídos no CORRE LEGAL.
+As regionais `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp_bh[1,1]`, `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp_bh[2,1]` e `r REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp_bh[3,1]` concentram os maiores índices de residência de adolescentes incluídos no CORRE LEGAL.
 
 \vspace{1cm}
 
@@ -728,7 +725,7 @@ knitr::include_graphics('imagens/GRAFICO[105,].png')
 knitr::include_graphics('imagens/TABELA[100,].png')
 ```
 
-As regionais `r REGIONAL_ATO_banco_internacao_CORRE_bkp[nrow(REGIONAL_ATO_banco_internacao_CORRE_bkp),1]`, `r REGIONAL_ATO_banco_internacao_CORRE_bkp[nrow(REGIONAL_ATO_banco_internacao_CORRE_bkp) - 1, 1]` e `r REGIONAL_ATO_banco_internacao_CORRE_bkp[nrow(REGIONAL_ATO_banco_internacao_CORRE_bkp) - 2, 1]` concentram os maiores índices de ocorrência dos atos infracionais.
+As regionais `r REGIONAL_ATO_banco_internacao_CORRE_bkp_bh[1,1]`, `r REGIONAL_ATO_banco_internacao_CORRE_bkp_bh[2,1]` e `r REGIONAL_ATO_banco_internacao_CORRE_bkp_bh[3,1]` concentram os maiores índices de ocorrência dos atos infracionais.
 
 \vspace{1cm}
 
@@ -744,7 +741,7 @@ knitr::include_graphics('imagens/GRAFICO[106,].png')
 knitr::include_graphics('imagens/TABELA[101,].png')
 ```
 
-Da tabela e gráfico apresentado é possível extrair as sentenças proferidas em relação aos `r tabela_total_adls_CORRE[2,2]` adolescentes que cumprem medida de internacao e foram incluídos no CORRE LEGAL.
+Da tabela e gráfico apresentado é possível extrair as sentenças proferidas em relação aos `r tabela_total_adls_CORRE[2,2]` adolescentes que cumprem medida de internação e foram incluídos no CORRE LEGAL.
 
 \vspace{2cm}
 

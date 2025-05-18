@@ -12,6 +12,10 @@ banco_atos_em_foco$ATO_INFRACIONAL_ATA_03 <- gsub(" ","", banco_atos_em_foco$ATO
 #########################################################################################################
 banco_incidencia_geral_ESCOLA = banco_atos_em_foco
 #########################################################################################################
+#########################################################################################################
+banco_atos_em_foco = banco_atos_em_foco |>
+  filter(!IDADE < 12)
+#########################################################################################################
 #DESMEMBRANDO PARA QUE NÃO FIQUE MAIS DE UM ATO NA MESMA LINHA. TODOS INDO PARA NOVA COLUNA ATO_INFRACIONAL.
 banco_incidencia_geral =
 
@@ -48,7 +52,7 @@ banco_incidencia_geral$ATO_INFRACIONAL = sub("157§.*.*", "ROUBO", banco_inciden
 banco_incidencia_geral$ATO_INFRACIONAL = sub("163.ART.*.*", "DANO", banco_incidencia_geral$ATO_INFRACIONAL)
 banco_incidencia_geral$ATO_INFRACIONAL = sub("171.ART.*.*", "ESTELIONATO", banco_incidencia_geral$ATO_INFRACIONAL)
 banco_incidencia_geral$ATO_INFRACIONAL = sub("180.ART.*.*", "RECEPTAÇÃO", banco_incidencia_geral$ATO_INFRACIONAL)
-#banco_incidencia_geral$ATO_INFRACIONAL = sub("19.ART.*.*", "PORTE ARMA (LCP)", banco_incidencia_geral$ATO_INFRACIONAL)
+banco_incidencia_geral$ATO_INFRACIONAL = sub("19.ART.*.*", "PORTE ARMA (LCP)", banco_incidencia_geral$ATO_INFRACIONAL)
 banco_incidencia_geral$ATO_INFRACIONAL = sub("21.ART.*.*", "VIAS DE FATO", banco_incidencia_geral$ATO_INFRACIONAL)
 banco_incidencia_geral$ATO_INFRACIONAL = sub("213.ART.*.*", "ESTUPRO", banco_incidencia_geral$ATO_INFRACIONAL)
 banco_incidencia_geral$ATO_INFRACIONAL = sub("215.ART.*.*", "VIOLAÇÃO SEXUAL MEDIANTE FRAUDE", banco_incidencia_geral$ATO_INFRACIONAL)
@@ -62,7 +66,7 @@ banco_incidencia_geral$ATO_INFRACIONAL = sub("65.ART9.*.*", "PICHAÇÃO", banco_
 
 #substituindo os restantes em outros
 banco_incidencia_geral$ATO_INFRACIONAL = sub(".*OUTROS.*.*", "VOUTROS", banco_incidencia_geral$ATO_INFRACIONAL)
-banco_incidencia_geral$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS", banco_incidencia_geral$ATO_INFRACIONAL)
+banco_incidencia_geral$ATO_INFRACIONAL = sub(".*ART.*.*", "OUTROS", banco_incidencia_geral$ATO_INFRACIONAL)
 
 
 #########################################################################################################

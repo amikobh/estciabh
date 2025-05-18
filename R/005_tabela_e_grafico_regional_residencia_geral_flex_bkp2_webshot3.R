@@ -17,7 +17,11 @@ df_snr_regional_residencia$regional_residencial[agrep("/MG", df_snr_regional_res
 df_snr_regional_residencia$regional_residencial[agrep("RMBH", df_snr_regional_residencia$regional_residencial)] <- "REGIÃO METROPOLITANA"
 df_snr_regional_residencia$regional_residencial[agrep("RIBEIRAO DAS NEVES", df_snr_regional_residencia$regional_residencial)] <- "REGIÃO METROPOLITANA"
 df_snr_regional_residencia$regional_residencial[agrep("CATAGUASES", df_snr_regional_residencia$regional_residencial)] <- "UOUTRA CIDADE MG"
+df_snr_regional_residencia$regional_residencial[agrep("MURIAE", df_snr_regional_residencia$regional_residencial)] <- "UOUTRA CIDADE MG"
+df_snr_regional_residencia$regional_residencial[agrep("PEDRA AZUL", df_snr_regional_residencia$regional_residencial)] <- "UOUTRA CIDADE MG"
 df_snr_regional_residencia$regional_residencial[agrep("CIDADE DE BRASILIA/DF", df_snr_regional_residencia$regional_residencial)] <- "VOUTRO ESTADO"
+df_snr_regional_residencia$regional_residencial[agrep("CIDADE DE SAO PAULO/SP", df_snr_regional_residencia$regional_residencial)] <- "VOUTRO ESTADO"
+df_snr_regional_residencia$regional_residencial[agrep("CIDADE DO RIO DE JANEIRO/RJ", df_snr_regional_residencia$regional_residencial)] <- "VOUTRO ESTADO"
 df_snr_regional_residencia$regional_residencial[agrep("N/DISP", df_snr_regional_residencia$regional_residencial)] <- "ZSEM INFORMAÇÃO"
 df_snr_regional_residencia$regional_residencial[agrep("INFORMACAO", df_snr_regional_residencia$regional_residencial)] <- "ZSEM INFORMAÇÃO"
 #substituindo
@@ -55,14 +59,47 @@ df_snr_regional_residencia_bkp$regional_residencial[df_snr_regional_residencia_b
 df_snr_regional_residencia_bkp$regional_residencial[df_snr_regional_residencia_bkp$regional_residencial == "UOUTRA CIDADE MG"]<- "OUTRA CIDADE MG"
 df_snr_regional_residencia_bkp$regional_residencial[df_snr_regional_residencia_bkp$regional_residencial == "VOUTRO ESTADO"]<- "OUTRO ESTADO"
 
+
 colnames(df_snr_regional_residencia_bkp)[1]<-'df_snr_regional_residencia_bkp'
 colnames(df_snr_regional_residencia_bkp)[2]<-'QUANTIDADE'
 colnames(df_snr_regional_residencia_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #########################################################################################################
+#########################################################################################################
 #para script rmd:
 df_snr_regional_residencia_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_snr_regional_residencia_bkp$PERCENTUAL))
-df_snr_regional_residencia_bkp_rmd = tail(df_snr_regional_residencia_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_snr_regional_residencia_bkp_bh <- df_snr_regional_residencia_bkp %>%
+  filter(df_snr_regional_residencia_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(df_snr_regional_residencia_bkp = as.character(df_snr_regional_residencia_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_regional_residencia <- df_snr_regional_residencia_bkp %>%
+  filter(df_snr_regional_residencia_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+qtd_outra_cidade_regional_residencia <- df_snr_regional_residencia_bkp %>%
+  filter(df_snr_regional_residencia_bkp == "OUTRA CIDADE MG") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_estado_regional_residencia <- df_snr_regional_residencia_bkp %>%
+  filter(df_snr_regional_residencia_bkp == "OUTRO ESTADO") %>%
+  pull(QUANTIDADE)
+
+qtd_outro_pais_regional_residencia <- df_snr_regional_residencia_bkp %>%
+  filter(df_snr_regional_residencia_bkp == "OUTRO PAÍS") %>%
+  pull(QUANTIDADE)
+#########################################################################################################
+
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem

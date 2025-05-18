@@ -2,8 +2,8 @@
 #TRATAMENTO COORDENADAS FURTO:
 #########################################################################################################
 ##CRIANDO E MUDANDO O DIRETORIO PARA TRABALHAR coordenadas:
-dir.create(file.path("~/tester", "coordenadas"))
-setwd(file.path("~/tester/coordenadas"))
+dir.create(file.path("~/diretorio_r/estciabh", "coordenadas"))
+setwd(file.path("~/diretorio_r/estciabh/coordenadas"))
 #########################################################################################################
 
 
@@ -59,7 +59,7 @@ register_google(key = "AIzaSyDKYIchtAe_gwjE1R2L7sIKns2mTxDf0NI")
 #latlon_FURTO = geocode(dt_ender_FURTO$ENDERECO, key=key)
 
 latlon_FURTO =
-  
+
 dt_ender_FURTO %>%
   geocode(ENDERECO,
           method = "arcgis",
@@ -77,7 +77,7 @@ coordenadas_FURTO
 
 write.csv(coordenadas_FURTO, file ="COORDENADAS_FURTO.csv",row.names=FALSE)
 
-setwd(file.path("~/tester/scripts_v_001/"))#configurar diretorio
+setwd(file.path("~/diretorio_r/estciabh/R/scripts_coordenadas/"))#configurar diretorio
 #########################################################################################################
 #FIM TRATAMENTO COORDENADAS FURTO
 #########################################################################################################

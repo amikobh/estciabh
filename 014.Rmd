@@ -289,6 +289,12 @@ A redução expressiva da parcela de óbitos por causa ignorada em 2022, bem com
 
 ### Óbitos por causas violentas e passagem pelo CIABH
 
+Nesta seção, faremos o cruzamento de dados de letalidade de adolescentes e jovens com a variável "passagem pelo Sistema Socioeducativo". Os dados acima apontam que 117 adolescentes e jovens foram vítimas de mortes violentas em 2022, sendo 79 por homicídio e 38 por causa ignorada.
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[110,].png')
+```
+
 \vspace{1cm}
 
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
@@ -297,11 +303,21 @@ knitr::include_graphics('imagens/GRAFICO[117,].png')
 
 \vspace{2cm}
 
-Nesta seção, faremos o cruzamento de dados de letalidade de adolescentes e jovens com a variável "passagem pelo Sistema Socioeducativo". Os dados acima apontam que 117 adolescentes e jovens foram vítimas de mortes violentas em 2022, sendo 79 por homicídio e 38 por causa ignorada.
-
 Dentre estes 117 adolescentes e jovens, 45 (38,46%) tiveram passagem pelo CIABH ao menos uma vez ao longo da vida. Em relação à causalidade do óbito, verifica-se a prevalência de homicídios: desses 45 adolescentes e jovens que passaram pelo Sistema Socioeducativo, 37 foram vitimados por homicídio e 08 por causa ignorada.
 
 Os dados indicam que, entre os 79 adolescentes e jovens vítimas de homicídio em 2022, em Belo Horizonte e municípios limítrofes, a maior parte não apresentou passagens pelo CIA, ao contrário do observado no ano anterior: em 2021, 61,4% dos adolescentes vítimas de homicídio tinham passado pelo Sistema Socioeducativo em algum momento de suas vidas, ao passo que, em 2022, esse percentual caiu para 47%.
+
+```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/TABELA[111,].png')
+```
+
+\vspace{1cm}
+
+```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
+knitr::include_graphics('imagens/GRAFICO[118,].png')
+```
+
+\vspace{2cm}
 
 Este quadro remete à importância de pensar a rede de proteção para além do Sistema Socioeducativo, com implicações para outros atores do território de vivência dos(as) adolescentes e da rede de serviços na oferta de proteção para esses sujeitos.
 
@@ -314,7 +330,7 @@ Ressaltamos, ainda, a importância de estudos complementares que possibilitem ma
 \vspace{2cm}
 
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[118,].png')
+knitr::include_graphics('imagens/GRAFICO[119,].png')
 ```
 
 \vspace{2cm}
@@ -332,7 +348,7 @@ Na faixa etária de 12 a 16 anos, foram registrados 13 óbitos de adolescentes v
 \vspace{2cm}
 
 ```{r echo=FALSE, out.width='100%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[119,].png')
+knitr::include_graphics('imagens/GRAFICO[120,].png')
 ```
 
 \vspace{2cm}
@@ -360,7 +376,7 @@ Dentre os(as) 37 adolescentes e jovens com passagem pelo CIABH que foram vítima
 \vspace{2cm}
 
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[120,].png')
+knitr::include_graphics('imagens/GRAFICO[121,].png')
 ```
 
 \newpage
@@ -368,7 +384,7 @@ knitr::include_graphics('imagens/GRAFICO[120,].png')
 ### Características étnico-raciais de adolescentes e jovens vítimas de homicídio em 2022, com passagem pelo Sistema Socioeducativo
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[110,].png')
+knitr::include_graphics('imagens/TABELA[112,].png')
 ```
 
 No ano de 2022, dentre os(as) 37 adolescentes e jovens vítimas de homicídio que tiveram passagem pelo Sistema Socioeducativo, 32 eram negros(as), percentual ainda maior do que o apresentado na seção 13.1.6, que considerava a totalidade de adolescentes e jovens vítimas de mortes violentas, independente da passagem pelo Sistema Socioeducativo.
@@ -380,7 +396,7 @@ Conforme já apresentado, do total de 117 adolescentes e jovens vitimados por ho
 Notório, pois, o aumento do percentual de pessoas negras quando somados esses dois fenômenos: a passagem pelo Sistema Socioeducativo e a vitimização por morte violenta.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[121,].png')
+knitr::include_graphics('imagens/GRAFICO[122,].png')
 ```
 
 \newpage
@@ -388,7 +404,7 @@ knitr::include_graphics('imagens/GRAFICO[121,].png')
 ### Localidade do óbito de adolescentes e jovens vítimas de homicídio em 2022, com passagem pelo Sistema Socioeducativo
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[111,].png')
+knitr::include_graphics('imagens/TABELA[113,].png')
 ```
 
 Os dados sobre a localidade do óbito passaram a compor o relatório do CIABH no ano de 2023, a partir da parceria com o IMLAR, possibilitando a identificação dos locais onde ocorreram mortes violentas de adolescentes e jovens com passagem pelo Sistema Socioeducativo.
@@ -396,7 +412,7 @@ Os dados sobre a localidade do óbito passaram a compor o relatório do CIABH no
 A Tabela 88 apresenta a quantidade e o percentual de óbitos de adolescentes e jovens com passagem pelo Sistema Socioeducativo, por localidade do óbito, ocorridos no ano de 2022. Destacam-se as ocorrências registradas em vias públicas (45,94% em 2022), que também eram a maioria no relatório anterior (58,82% em 2021), seguidas das ocorrências em unidade de saúde. O Anuário Brasileiro de Segurança Pública de 2023 chama atenção para o fato de que, em relação ao local da ocorrência de mortes violentas intencionais (MVI) entre crianças (0 a 12 anos incompletos), o percentual de registros dentro das residências é de 65,4% e, na via pública, de 15,4%. No que se refere às vítimas entre 12 e 17 anos, tais percentuais se invertem: os registros em vias públicas sobem para 59,4% do total e os ocorridos nas residências caem para 15,8% no Brasil.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[122,].png')
+knitr::include_graphics('imagens/GRAFICO[123,].png')
 ```
 
 \newpage
@@ -404,7 +420,7 @@ knitr::include_graphics('imagens/GRAFICO[122,].png')
 ### Tempo médio entre a última entrada e o óbito do(a) adolescente
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[112,].png')
+knitr::include_graphics('imagens/TABELA[114,].png')
 ```
 
 A análise da dimensão da temporalidade fornece indicativos relevantes para compreender a relação entre a data de ocorrência do óbito e a trajetória do(a) adolescente no Sistema de Justiça e no Sistema Socioeducativo. Embora os dados quantitativos não permitam identificar as circunstâncias e a situação do(a) adolescente em relação ao cumprimento/descumprimento da medida socioeducativa, constituem norteadores para estudos complementares sobre a trajetória de adolescentes e jovens no Sistema Socioeducativo, bem como para proposição de ações protetivas e preventivas.
@@ -412,7 +428,7 @@ A análise da dimensão da temporalidade fornece indicativos relevantes para com
 A Tabela 89 mostra que, entre os(as) adolescentes e jovens vítimas de homicídio em 2022, com passagem pelo CIABH, o tempo médio entre a última entrada no Sistema Socioeducativo e o óbito foi de 1342.9 dias (em torno de 44 meses), pouco mais do que o dobro do intervalo observado no ano anterior.
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[113,].png')
+knitr::include_graphics('imagens/TABELA[115,].png')
 ```
 
 Os dados apontam, ainda, que a maior parte dos óbitos por homicídio entre adolescentes e jovens registrados em 2022, ocorreu a partir de 03 anos depois da última apreensão e passagem pelo Sistema Socioeducativo, intervalo maior do que o observado no ano anterior.
@@ -420,7 +436,7 @@ Os dados apontam, ainda, que a maior parte dos óbitos por homicídio entre adol
 Quanto ao recorte temporal, houve uma concentração maior de casos no intervalo acima de 04 anos, correspondendo a 37,84% do total de registros. Ressaltamos que, em 2021, a maior concentração de óbitos ocorreu no intervalo entre 01 e 02 anos após a última entrada no CIABH.
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[123,].png')
+knitr::include_graphics('imagens/GRAFICO[124,].png')
 ```
 
 \newpage
@@ -428,7 +444,7 @@ knitr::include_graphics('imagens/GRAFICO[123,].png')
 ### Tempo médio entre a primeira e última entrada no CIABH de adolescentes e jovens vítimas de homicídio
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[114,].png')
+knitr::include_graphics('imagens/TABELA[116,].png')
 ```
 
 Os dados apresentados nas tabelas 91 e 92 tratam do intervalo de tempo observado entre a primeira e a última entrada no CIABH, fornecendo estimativas sobre a dimensão temporal da trajetória no Sistema Socioeducativo dos(as) adolescentes e jovens vítimas de homicídio em 2022. Vale ressaltar que esses dados são baseados nos registros das entradas no Sistema de Justiça, a partir das apreensões policiais de adolescentes pela prática de atos infracionais, não abarcando o tempo de permanência no cumprimento de medidas socioeducativas aplicadas ao longo de sua trajetória. A análise desta última variável poderá ser realizada por meio de estudos complementares.
@@ -436,13 +452,13 @@ Os dados apresentados nas tabelas 91 e 92 tratam do intervalo de tempo observado
 A tabela 91 nos aponta que o tempo médio entre a primeira e a última entrada no CIABH dos(as) adolescentes e jovens vítimas de homicídio em 2022 é de 563 dias (18 meses). Esse intervalo se aproxima do observado no relatório anterior, que registrou o tempo médio de 525,1 dias (17 meses).
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[115,].png')
+knitr::include_graphics('imagens/TABELA[117,].png')
 ```
 
 A maior parte dos(as) adolescentes vítimas de homicídio em 2022 apresentou um intervalo de até 01 mês entre a primeira e a última passagem pelo CIABH (35,14%), ou seja, tiveram uma curta trajetória no Sistema Socioeducativo. Em seguida, temos os intervalos entre 01 e 02 anos, com 24,32% dos casos e entre 02 e 03 anos, com 21,62%. Essa distribuição se encontra próxima ao observado no ano anterior e ressalta a importância da qualificação do atendimento inicial, da acolhida e da implementação de intervenções protetivas desde o primeiro encontro com o(a) adolescente.
 
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[124,].png')
+knitr::include_graphics('imagens/GRAFICO[125,].png')
 ```
 
 \newpage
@@ -450,19 +466,19 @@ knitr::include_graphics('imagens/GRAFICO[124,].png')
 ### Número de entradas no CIABH
 
 ```{r echo=FALSE, out.width='60%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[116,].png')
+knitr::include_graphics('imagens/TABELA[118,].png')
 ```
 
 A tabela 93 aponta para um aumento da média de entradas no CIABH quando comparada com o relatório anterior: em 2021, os(as) adolescentes vítimas de homicídio em Belo Horizonte e municípios limítrofes, com passagem pelo Sistema Socioeducativo, tiveram, em média, 3,5 entradas no CIABH ao longo de sua trajetória, ao passo que, em 2022, essa média passou para 6,1 entradas.
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[117,].png')
+knitr::include_graphics('imagens/TABELA[119,].png')
 ```
 
 Com base nos dados acima, verifica-se que, dentre os(as) adolescentes vítimas de homicídio em 2022 que passaram pelo Sistema Socioeducativo, a maior parte apresentou entre 01 e 05 entradas no CIABH ao longo de sua trajetória (62,16%). Reforça-se, a partir dessa análise, a importância da qualificação da escuta e intervenções preventivas desde o início da trajetória dos(as) adolescentes atendidos pelo Sistema Socioeducativo.
 
 ```{r echo=FALSE, out.width='70%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[125,].png')
+knitr::include_graphics('imagens/GRAFICO[126,].png')
 ```
 
 \newpage
@@ -481,13 +497,13 @@ knitr::include_graphics('img_nao_apagar/art101eca.png')
 O Gráfico 99 mostra que, entre os(as) adolescentes e jovens vítimas de homicídio em 2022, que tiveram passagem pelo CIABH, 33,33% também tiveram, em sua trajetória, a aplicação de medidas de proteção previstas no Estatuto da Criança e do Adolescente (art. 101), aplicáveis sempre que os direitos reconhecidos na referida lei forem ameaçados ou violados (art.98).
 
 ```{r echo=FALSE, out.width='90%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[126,].png')
+knitr::include_graphics('imagens/GRAFICO[127,].png')
 ```
 
 \newpage
 
 ```{r echo=FALSE, out.width='55%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[118,].png')
+knitr::include_graphics('imagens/TABELA[120,].png')
 ```
 
 Conforme consta na Tabela 95, foram aplicadas 52 medidas protetivas a adolescentes e jovens que foram vítimas de homicídio em 2022. Importante esclarecer que tais dados não se referem a número de indivíduos, mas sim ao número de medidas protetivas aplicadas ao longo da trajetória dos(as) adolescentes e jovens vítimas de homicídio em 2022, com entrada no Sistema Socioeducativo, haja vista que, a cada adolescente pode ser aplicada mais de uma medida socioeducativa ao longo de sua trajetória.
@@ -495,7 +511,7 @@ Conforme consta na Tabela 95, foram aplicadas 52 medidas protetivas a adolescent
 As medidas protetivas podem ser aplicadas logo após a apreensão ou ao longo da trajetória socioeducativa e de vida do(a) adolescente. A medida protetiva mais aplicada refere-se ao artigo 101, III do Estatuto da Criança e do Adolescente, concernente ao encaminhamento dos(as) adolescentes para inclusão escolar, seguida pelas medidas protetivas atinentes à saúde (art. 101, V).
 
 ```{r echo=FALSE, out.width='65%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[127,].png')
+knitr::include_graphics('imagens/GRAFICO[128,].png')
 ```
 
 Nesse sentido, mostra-se de extrema relevância a realização de outros estudos que possam aprofundar as análises quanto à desproteção social e às medidas protetivas aplicadas aos(às) adolescentes e jovens com passagem pelo Sistema Socioeducativo. Faz-se necessário compreender e avaliar se esses(as) adolescentes e jovens foram alcançados anteriormente pelo Sistema de Garantia de Direitos e pela rede de proteção social, bem como qualificar e/ou reordenar as estratégias de atuação preventiva. Importa, também, entender se a família foi inserida e se é acompanhada pelas políticas públicas, bem como seu percurso nas redes protetivas do território. Debruçar sobre esta análise será fundamental para a construção de estratégias e ações mais assertivas pelo Sistema de Garantia de Direitos e o Sistema Socioeducativo, por meio de uma atuação intersetorial e interinstitucional, buscando superar a fragmentação das ações, considerando a trajetória dos(as) adolescentes, jovens e famílias.
@@ -505,7 +521,7 @@ Nesse sentido, mostra-se de extrema relevância a realização de outros estudos
 ### Decisões aplicadas
 
 ```{r echo=FALSE, out.width='50%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/TABELA[119,].png')
+knitr::include_graphics('imagens/TABELA[121,].png')
 ```
 
 A tabela 96 apresenta a quantidade de decisões judiciais que os(as)adolescentes e jovens receberam de acordo com o recorte específico da letalidade. Diante desses dados, conseguimos aferir o percentual da correlação entre mortes e medidas aplicadas e a representatividade que cada categoria assume. Importante destacar que os dados se referem ao número de decisões judiciais aplicadas ao longo da trajetória dos(as) adolescentes e jovens vítimas de homicídio em 2022, com entrada no Sistema Socioeducativo, e não ao número de indivíduos, haja vista que, cada adolescente pode receber mais de uma medida socioeducativa ao longo de sua trajetória.
@@ -513,7 +529,7 @@ A tabela 96 apresenta a quantidade de decisões judiciais que os(as)adolescentes
 Salienta-se, ainda, que o relatório anterior contemplava 10 categorias de decisões e, na análise atual, são 14, com a incorporação de novas categorias, a saber: Carta Devolvida, Extinção por Prescrição, Extinção Punibilidade por Morte e Remissão Extintiva e/e Exclusão Processual.
 
 ```{r echo=FALSE, out.width='80%', fig.align='center', dpi=1024}
-knitr::include_graphics('imagens/GRAFICO[128,].png')
+knitr::include_graphics('imagens/GRAFICO[129,].png')
 ```
 
 Pela análise da tabela 96, assim como do gráfico 101, é possível afirmar que a Remissão Extintiva e/e Advertência ocupou o lugar de maior incidência na aplicação, seguida pela Remissão Extintiva. A Remissão Extintiva e/e Exclusão Processual que foi incluída nesta análise apresenta um valor significativo, ocupando o quarto lugar conforme o gráfico acima, enquanto no ano anterior esta categoria sequer constava nas análises. Outro ponto a se destacar é o lugar da medida de Internação neste relatório, que ocupa o sexto lugar com um percentual de 6,06% e, no ano anterior, figurava como a medida menos aplicada (10ª e última posição), com o percentual de 3,31%.

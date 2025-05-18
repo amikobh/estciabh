@@ -241,7 +241,24 @@ colnames(df_snr_regional_residencia_MBA_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 df_snr_regional_residencia_MBA_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_snr_regional_residencia_MBA_bkp$PERCENTUAL))
-df_snr_regional_residencia_MBA_bkp_rmd = tail(df_snr_regional_residencia_MBA_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_snr_regional_residencia_MBA_bkp_bh <- df_snr_regional_residencia_MBA_bkp %>%
+  filter(df_snr_regional_residencia_MBA_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(df_snr_regional_residencia_MBA_bkp = as.character(df_snr_regional_residencia_MBA_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana <- df_snr_regional_residencia_MBA_bkp %>%
+  filter(df_snr_regional_residencia_MBA_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
 #########################################################################################################
 # Fazer uma tabela de frequência com valores totais,
 # e porcentagem
@@ -921,7 +938,25 @@ colnames(df_regional_ATO_banco_MBA_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
 #para script rmd:
 df_regional_ATO_banco_MBA_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", df_regional_ATO_banco_MBA_bkp$PERCENTUAL))
-df_regional_ATO_banco_MBA_bkp_rmd = tail(df_regional_ATO_banco_MBA_bkp,5)
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+df_regional_ATO_banco_MBA_bkp_bh <- df_regional_ATO_banco_MBA_bkp %>%
+  filter(REGIONAL_ATO %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO = as.character(REGIONAL_ATO))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_ATO_banco_MBA <- df_regional_ATO_banco_MBA_bkp %>%
+  filter(REGIONAL_ATO == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
 #########################################################################################################
 # Adaptando para scrip grafico:
 #SUBSTITUIR

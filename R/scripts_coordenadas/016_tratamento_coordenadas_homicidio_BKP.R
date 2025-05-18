@@ -2,8 +2,8 @@
 #TRATAMENTO COORDENADAS HOMICIDIO:
 #########################################################################################################
 ##CRIANDO E MUDANDO O DIRETORIO PARA TRABALHAR coordenadas:
-dir.create(file.path("~/tester", "coordenadas"))
-setwd(file.path("~/tester/coordenadas"))
+dir.create(file.path("~/diretorio_r/estciabh", "coordenadas"))
+setwd(file.path("~/diretorio_r/estciabh/coordenadas"))
 #########################################################################################################
 
 
@@ -59,7 +59,7 @@ register_google(key = "AIzaSyDKYIchtAe_gwjE1R2L7sIKns2mTxDf0NI")
 #latlon_HOMICIDIO = geocode(dt_ender_HOMICIDIO$ENDERECO, key=key)
 
 latlon_HOMICIDIO =
-  
+
 dt_ender_HOMICIDIO %>%
   geocode(ENDERECO,
           method = "arcgis",
@@ -77,7 +77,7 @@ coordenadas_HOMICIDIO
 
 write.csv(coordenadas_HOMICIDIO, file ="COORDENADAS_HOMICIDIO.csv",row.names=FALSE)
 
-setwd(file.path("~/tester/scripts_v_001/"))#configurar diretorio
+setwd(file.path("~/diretorio_r/estciabh/scripts_coordenadas/"))#configurar diretorio
 #########################################################################################################
 #FIM TRATAMENTO COORDENADAS HOMICIDIO
 #########################################################################################################

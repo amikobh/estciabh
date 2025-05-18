@@ -376,8 +376,19 @@ total_atividades <- data.frame(
 # Combinar tabelas
 tabela_atividades_semiliberdade_CORRE <- rbind(tabela_atividades_semiliberdade_CORRE, total_atividades)
 
-
 colnames(tabela_atividades_semiliberdade_CORRE) = c("ATIVIDADE", "QUANTIDADE", "PERCENTUAL")
+
+# Verificar os tipos das colunas após a conversão
+sapply(tabela_atividades_semiliberdade_CORRE, typeof)
+
+# Modificar o valor específico
+
+tabela_atividades_semiliberdade_CORRE$ATIVIDADE <- as.character(tabela_atividades_semiliberdade_CORRE$ATIVIDADE)
+
+
+tabela_atividades_semiliberdade_CORRE$ATIVIDADE[
+  tabela_atividades_semiliberdade_CORRE$ATIVIDADE == "BANCONATACAO"] <- "NATAÇÃO"
+
 
 library(dplyr)
 
@@ -389,9 +400,6 @@ tabela_atividades_semiliberdade_CORRE_bkp <- tabela_atividades_semiliberdade_COR
 # Carregar o pacote
 library(dplyr)
 
-
-# Exibir o dataframe resultante
-#print(tabela_total_adls_CORRE_bkp)
 
 
 # Exibir tabela
@@ -515,6 +523,8 @@ tabela_unidade_semiliberdade_CORRE <- rbind(tabela_unidade_semiliberdade_CORRE, 
 
 
 colnames(tabela_unidade_semiliberdade_CORRE) = c("UNIDADE", "QUANTIDADE", "PERCENTUAL")
+
+
 
 library(dplyr)
 
@@ -991,7 +1001,7 @@ semiliberdade_GERAL <- semiliberdade_GERAL %>%
 
 
 # Criar tabela de frequências cruzadas entre IDADE e SEXO
-tabela_IDADE_SEXO_semiliberdade_CORRE <- semiliberdade_GERAL %>%
+tabela_IDADE_SEXO_semiliberdade_CORRE <- semiliberdade_GERAL_SNR %>%
   tabyl(IDADE, SEXO) %>%
   adorn_totals(c("row", "col")) %>% # Adicionar totais nas linhas e colunas
   adorn_percentages("col") %>% # Calcular porcentagens por coluna (SEXO)
@@ -1013,7 +1023,7 @@ colnames(tabela_IDADE_SEXO_semiliberdade_CORRE) <- c("IDADE", "FEMININO", "MASCU
 
 # para o gráfico:
 
-tabela_IDADE_SEXO_semiliberdade_CORRE_bkp = semiliberdade_GERAL |>
+tabela_IDADE_SEXO_semiliberdade_CORRE_bkp = semiliberdade_GERAL_SNR |>
   select(IDADE, SEXO) |>
   mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
 
@@ -1025,7 +1035,7 @@ tabela_IDADE_SEXO_semiliberdade_CORRE_bkp <- tabela_IDADE_SEXO_semiliberdade_COR
 
 # para o gráfico:
 
-tabela_IDADE_SEXO_semiliberdade_CORRE_bkp1 = semiliberdade_GERAL |>
+tabela_IDADE_SEXO_semiliberdade_CORRE_bkp1 = semiliberdade_GERAL_SNR |>
   select(IDADE, SEXO) |>
   mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
 
@@ -1077,7 +1087,7 @@ internacao_GERAL <- internacao_GERAL %>%
 
 
 # Criar tabela de frequências cruzadas entre IDADE e SEXO
-tabela_IDADE_SEXO_internacao_CORRE <- internacao_GERAL %>%
+tabela_IDADE_SEXO_internacao_CORRE <- internacao_GERAL_SNR %>%
   tabyl(IDADE, SEXO) %>%
   adorn_totals(c("row", "col")) %>% # Adicionar totais nas linhas e colunas
   adorn_percentages("col") %>% # Calcular porcentagens por coluna (SEXO)
@@ -1100,7 +1110,7 @@ colnames(tabela_IDADE_SEXO_internacao_CORRE) <- c("IDADE", "FEMININO", "MASCULIN
 
 # para o gráfico:
 
-tabela_IDADE_SEXO_internacao_CORRE_bkp = internacao_GERAL |>
+tabela_IDADE_SEXO_internacao_CORRE_bkp = internacao_GERAL_SNR |>
   select(IDADE, SEXO) |>
   mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
 
@@ -1112,7 +1122,7 @@ tabela_IDADE_SEXO_internacao_CORRE_bkp <- tabela_IDADE_SEXO_internacao_CORRE_bkp
 
 # para o gráfico:
 
-tabela_IDADE_SEXO_internacao_CORRE_bkp1 = internacao_GERAL |>
+tabela_IDADE_SEXO_internacao_CORRE_bkp1 = internacao_GERAL_SNR |>
   select(IDADE, SEXO) |>
   mutate(IDADE = paste0(IDADE, " anos")) # Adicionar "anos" à coluna IDADE
 
@@ -1132,8 +1142,8 @@ tabela_IDADE_SEXO_internacao_CORRE_bkp1 <- tabela_IDADE_SEXO_internacao_CORRE_bk
 # Criar uma tabela com as contagens de linhas
 tabela_total_adls_CORRE <- tribble(
   ~GRUPO, ~QUANTIDADE,
-  "SEMILIBERDADE", nrow(semiliberdade_SNR),
-  "INTERNAÇÃO", nrow(internacao_SNR)
+  "SEMILIBERDADE", nrow(semiliberdade_GERAL_SNR),
+  "INTERNAÇÃO", nrow(internacao_GERAL_SNR)
 ) %>%
   bind_rows(  # Adicionar linha de total
     tibble(GRUPO = "Total", QUANTIDADE = sum(.$QUANTIDADE))
@@ -1209,7 +1219,7 @@ ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE[ESCOLARIDADE_s
 ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE[ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE == "NAOSABE"]<- "ONAOSABE"
 ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE[ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE == "NAORESPONDEU"]<- "PNAORESPONDEU"
 ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE[ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE == "SEMINFORMACAO"]<- "QSEMINFORMACAO"
-
+ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE[ESCOLARIDADE_semiliberdade_CORRE$ESCOLARIDADE_semiliberdade_CORRE == "SEMINFORMACAO2"]<- "QSEMINFORMACAO"
 #########################################################################################################
 # salvando para gráfico
 ESCOLARIDADE_semiliberdade_CORRE_bkp = ESCOLARIDADE_semiliberdade_CORRE
@@ -1387,6 +1397,7 @@ banco_incidencia_semiliberdade_GERAL$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS
 
 #########################################################################################################
 banco_geral_sem_concurso_semiliberdade_CORRE = distinct(banco_incidencia_semiliberdade_GERAL, DATA_ATO, PROCESSO, ATO_INFRACIONAL, .keep_all= TRUE)
+banco_geral_sem_concurso_semiliberdade_CORRE_REGIONAL_ATO = banco_geral_sem_concurso_semiliberdade_CORRE
 #########################################################################################################
 banco_geral_semiliberdade_SNR = distinct(banco_incidencia_semiliberdade_GERAL, IDS, .keep_all= TRUE)
 #########################################################################################################
@@ -1425,6 +1436,9 @@ banco_geral_sem_concurso_semiliberdade_CORRE_bkp =
 colnames(banco_geral_sem_concurso_semiliberdade_CORRE_bkp)[1]<-'banco_geral_sem_concurso_semiliberdade_CORRE_bkp'
 colnames(banco_geral_sem_concurso_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(banco_geral_sem_concurso_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
+
+banco_geral_sem_concurso_semiliberdade_CORRE_bkp$banco_geral_sem_concurso_semiliberdade_CORRE_bkp[banco_geral_sem_concurso_semiliberdade_CORRE_bkp$banco_geral_sem_concurso_semiliberdade_CORRE_bkp == "VOUTROS"]<- "OUTROS"
+
 #########################################################################################################
 #para script rmd:
 banco_geral_sem_concurso_semiliberdade_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_geral_sem_concurso_semiliberdade_CORRE_bkp$PERCENTUAL))
@@ -1444,6 +1458,8 @@ banco_geral_sem_concurso_semiliberdade_CORRE =
 colnames(banco_geral_sem_concurso_semiliberdade_CORRE)[1]<-'ATO'
 colnames(banco_geral_sem_concurso_semiliberdade_CORRE)[2]<-'QUANTIDADE'
 colnames(banco_geral_sem_concurso_semiliberdade_CORRE)[3]<-'PERCENTUAL'
+
+banco_geral_sem_concurso_semiliberdade_CORRE$ATO[banco_geral_sem_concurso_semiliberdade_CORRE$ATO == "VOUTROS"]<- "OUTROS"
 
 #############################################################################################################
 #########################################################################################################
@@ -1591,7 +1607,7 @@ setwd(file.path("~/diretorio_r/estciabh/corre"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-SENTENCA_banco_semiliberdade_CORRE = semiliberdade_GERAL
+SENTENCA_banco_semiliberdade_CORRE = banco_geral_sem_concurso_semiliberdade_CORRE_REGIONAL_ATO
 #SENTENCA_geral_bkp = SENTENCA_geral
 #SENTENCA02 = banco_sem_mba %>%
 # select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, SENTENCA, SENTENCA_PROTETIVA, QUAL_SENTENCA_PROTETIVA_01,
@@ -1722,8 +1738,13 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 
 PROTETIVAS_banco_semiliberdade_CORRE =
 
-  semiliberdade_GERAL %>%
+  banco_geral_sem_concurso_semiliberdade_CORRE_REGIONAL_ATO %>%
   filter(MEDIDA_PROTETIVA == "SIM")
+
+
+PROTETIVAS_banco_semiliberdade_CORRE = PROTETIVAS_banco_semiliberdade_CORRE |>
+  select(-name)
+
 
 PROTETIVAS_banco_semiliberdade_CORRE =
   PROTETIVAS_banco_semiliberdade_CORRE %>%
@@ -1819,7 +1840,7 @@ setwd(file.path("~/diretorio_r/estciabh/corre"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE = semiliberdade_GERAL
+REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE = semiliberdade_GERAL_SNR
 
 REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE <- REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE %>%
   mutate(REGIONAL_RESIDENCIAL = case_when(
@@ -1838,6 +1859,7 @@ REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE$REGIONAL_RESIDENCIAL <- str_repla
 
 #SUBSTITUIR
 REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE$REGIONAL_RESIDENCIAL[REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE$REGIONAL_RESIDENCIAL == ""]<- "ZSEM INFORMAÇÃO"
+REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE$REGIONAL_RESIDENCIAL[REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE$REGIONAL_RESIDENCIAL == "SEM INFORMACAO2"]<- "ZSEM INFORMAÇÃO"
 
 
 #########################################################################################################
@@ -1862,6 +1884,30 @@ colnames(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp)[1]<-'REGIONAL_RESID
 colnames(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+#########################################################################################################
+#para script rmd:
+REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp$PERCENTUAL))
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp_bh <- REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp = as.character(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_semiliberdade_CORRE <- REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_semiliberdade_CORRE_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+#########################################################################################################
+
 # Fazer uma tabela de frequência com valores totais,
 # e PERCENTUAL
 
@@ -1905,7 +1951,7 @@ setwd(file.path("~/diretorio_r/estciabh/corre"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-REGIONAL_ATO_banco_semiliberdade_CORRE = semiliberdade_GERAL
+REGIONAL_ATO_banco_semiliberdade_CORRE = banco_geral_sem_concurso_semiliberdade_CORRE_REGIONAL_ATO
 #REGIONAL_ATO_geral_bkp = REGIONAL_ATO_geral
 #REGIONAL_ATO02 = banco_sem_mba %>%
 # select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, REGIONAL_ATO, REGIONAL_ATO_PROTETIVA, QUAL_REGIONAL_ATO_PROTETIVA_01,
@@ -1942,6 +1988,30 @@ colnames(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp)[1]<-'REGIONAL_ATO_banco_sem
 colnames(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+#########################################################################################################
+#para script rmd:
+REGIONAL_ATO_banco_semiliberdade_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", REGIONAL_ATO_banco_semiliberdade_CORRE_bkp$PERCENTUAL))
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+REGIONAL_ATO_banco_semiliberdade_CORRE_bkp_bh <- REGIONAL_ATO_banco_semiliberdade_CORRE_bkp %>%
+  filter(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp = as.character(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_semiliberdade_CORRE <- REGIONAL_ATO_banco_semiliberdade_CORRE_bkp %>%
+  filter(REGIONAL_ATO_banco_semiliberdade_CORRE_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+#########################################################################################################
+
 # Fazer uma tabela de frequência com valores totais,
 # e PERCENTUAL
 
@@ -2020,7 +2090,7 @@ ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE[ESCOLARIDADE_interna
 ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE[ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE == "NAOSABE"]<- "ONAOSABE"
 ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE[ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE == "NAORESPONDEU"]<- "PNAORESPONDEU"
 ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE[ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE == "SEMINFORMACAO"]<- "QSEMINFORMACAO"
-
+ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE[ESCOLARIDADE_internacao_CORRE$ESCOLARIDADE_internacao_CORRE == "SEMINFORMACAO2"]<- "QSEMINFORMACAO"
 #########################################################################################################
 # salvando para gráfico
 ESCOLARIDADE_internacao_CORRE_bkp = ESCOLARIDADE_internacao_CORRE
@@ -2198,6 +2268,7 @@ banco_incidencia_internacao_GERAL$ATO_INFRACIONAL = sub(".*ART.*.*", "VOUTROS", 
 
 #########################################################################################################
 banco_geral_sem_concurso_internacao_CORRE = distinct(banco_incidencia_internacao_GERAL, DATA_ATO, PROCESSO, ATO_INFRACIONAL, .keep_all= TRUE)
+banco_geral_sem_concurso_internacao_CORRE_REGIONAL_ATO = banco_geral_sem_concurso_internacao_CORRE
 #########################################################################################################
 banco_geral_internacao_SNR = distinct(banco_incidencia_internacao_GERAL, IDS, .keep_all= TRUE)
 #########################################################################################################
@@ -2236,6 +2307,9 @@ banco_geral_sem_concurso_internacao_CORRE_bkp =
 colnames(banco_geral_sem_concurso_internacao_CORRE_bkp)[1]<-'banco_geral_sem_concurso_internacao_CORRE_bkp'
 colnames(banco_geral_sem_concurso_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(banco_geral_sem_concurso_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
+
+banco_geral_sem_concurso_internacao_CORRE_bkp$banco_geral_sem_concurso_internacao_CORRE_bkp[banco_geral_sem_concurso_internacao_CORRE_bkp$banco_geral_sem_concurso_internacao_CORRE_bkp == "VOUTROS"]<- "OUTROS"
+
 #########################################################################################################
 #para script rmd:
 banco_geral_sem_concurso_internacao_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", banco_geral_sem_concurso_internacao_CORRE_bkp$PERCENTUAL))
@@ -2255,6 +2329,8 @@ banco_geral_sem_concurso_internacao_CORRE =
 colnames(banco_geral_sem_concurso_internacao_CORRE)[1]<-'ATO'
 colnames(banco_geral_sem_concurso_internacao_CORRE)[2]<-'QUANTIDADE'
 colnames(banco_geral_sem_concurso_internacao_CORRE)[3]<-'PERCENTUAL'
+
+banco_geral_sem_concurso_internacao_CORRE$ATO[banco_geral_sem_concurso_internacao_CORRE$ATO == "VOUTROS"]<- "OUTROS"
 
 #############################################################################################################
 #########################################################################################################
@@ -2402,7 +2478,7 @@ setwd(file.path("~/diretorio_r/estciabh/corre"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-SENTENCA_banco_internacao_CORRE = internacao_GERAL
+SENTENCA_banco_internacao_CORRE = banco_geral_sem_concurso_internacao_CORRE_REGIONAL_ATO
 #SENTENCA_geral_bkp = SENTENCA_geral
 #SENTENCA02 = banco_sem_mba %>%
 # select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, SENTENCA, SENTENCA_PROTETIVA, QUAL_SENTENCA_PROTETIVA_01,
@@ -2533,8 +2609,13 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 
 PROTETIVAS_banco_internacao_CORRE =
 
-  internacao_GERAL %>%
+  banco_geral_sem_concurso_internacao_CORRE_REGIONAL_ATO %>%
   filter(MEDIDA_PROTETIVA == "SIM")
+
+
+PROTETIVAS_banco_internacao_CORRE = PROTETIVAS_banco_internacao_CORRE |>
+  select(-name)
+
 
 PROTETIVAS_banco_internacao_CORRE =
   PROTETIVAS_banco_internacao_CORRE %>%
@@ -2630,9 +2711,7 @@ setwd(file.path("~/diretorio_r/estciabh/corre"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-REGIONAL_RESIDENCIAL_banco_internacao_CORRE = internacao_GERAL
-
-library(dplyr)
+REGIONAL_RESIDENCIAL_banco_internacao_CORRE = internacao_GERAL_SNR
 
 REGIONAL_RESIDENCIAL_banco_internacao_CORRE <- REGIONAL_RESIDENCIAL_banco_internacao_CORRE %>%
   mutate(REGIONAL_RESIDENCIAL = case_when(
@@ -2640,8 +2719,6 @@ REGIONAL_RESIDENCIAL_banco_internacao_CORRE <- REGIONAL_RESIDENCIAL_banco_intern
     grepl("METROPOLITANA", REGIONAL_RESIDENCIAL) ~ "REGIÃO METROPOLITANA",
     TRUE ~ REGIONAL_RESIDENCIAL # Mantém os valores inalterados caso não atendam aos critérios
   ))
-
-
 #regional_ato_geral_bkp = regional_ato_geral
 #regional_ato02 = banco_sem_mba %>%
 # select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, regional_ato, regional_ato_PROTETIVA, QUAL_regional_ato_PROTETIVA_01,
@@ -2653,6 +2730,7 @@ REGIONAL_RESIDENCIAL_banco_internacao_CORRE$REGIONAL_RESIDENCIAL <- str_replace(
 
 #SUBSTITUIR
 REGIONAL_RESIDENCIAL_banco_internacao_CORRE$REGIONAL_RESIDENCIAL[REGIONAL_RESIDENCIAL_banco_internacao_CORRE$REGIONAL_RESIDENCIAL == ""]<- "ZSEM INFORMAÇÃO"
+REGIONAL_RESIDENCIAL_banco_internacao_CORRE$REGIONAL_RESIDENCIAL[REGIONAL_RESIDENCIAL_banco_internacao_CORRE$REGIONAL_RESIDENCIAL == "SEM INFORMACAO2"]<- "ZSEM INFORMAÇÃO"
 
 
 #########################################################################################################
@@ -2677,6 +2755,30 @@ colnames(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp)[1]<-'REGIONAL_RESIDENC
 colnames(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+#########################################################################################################
+#para script rmd:
+REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp$PERCENTUAL))
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp_bh <- REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp = as.character(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_internacao_CORRE <- REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp %>%
+  filter(REGIONAL_RESIDENCIAL_banco_internacao_CORRE_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+#########################################################################################################
+
 # Fazer uma tabela de frequência com valores totais,
 # e PERCENTUAL
 
@@ -2720,7 +2822,7 @@ setwd(file.path("~/diretorio_r/estciabh/corre"))
 #SEPARANDO SOMENTE VARIAVEIS NECESSARIAS PARA AGILIZAR TRATAMENTO:
 library(dplyr)
 
-REGIONAL_ATO_banco_internacao_CORRE = internacao_GERAL
+REGIONAL_ATO_banco_internacao_CORRE = banco_geral_sem_concurso_internacao_CORRE_REGIONAL_ATO
 #REGIONAL_ATO_geral_bkp = REGIONAL_ATO_geral
 #REGIONAL_ATO02 = banco_sem_mba %>%
 # select(SEXO, DATA_ATO, DATA_AUDIENCIA_PRELIMINAR, SENTENCA, DATA_SENTENCA, REGIONAL_ATO, REGIONAL_ATO_PROTETIVA, QUAL_REGIONAL_ATO_PROTETIVA_01,
@@ -2757,6 +2859,30 @@ colnames(REGIONAL_ATO_banco_internacao_CORRE_bkp)[1]<-'REGIONAL_ATO_banco_intern
 colnames(REGIONAL_ATO_banco_internacao_CORRE_bkp)[2]<-'QUANTIDADE'
 colnames(REGIONAL_ATO_banco_internacao_CORRE_bkp)[3]<-'PERCENTUAL'
 #########################################################################################################
+#########################################################################################################
+#para script rmd:
+REGIONAL_ATO_banco_internacao_CORRE_bkp$PERCENTUAL2 = as.numeric(gsub("%", "", REGIONAL_ATO_banco_internacao_CORRE_bkp$PERCENTUAL))
+
+# 1. Carregar bibliotecas necessárias (se já não estiverem carregadas)
+library(dplyr)
+
+# 2. Definir as regionais oficiais de Belo Horizonte
+regionais_bh <- c("PAMPULHA", "BARREIRO", "CENTRO-SUL", "LESTE", "NORDESTE",
+                  "NOROESTE", "NORTE", "OESTE", "VENDA NOVA", "HIPERCENTRO")
+
+# 3. Criar dataframe apenas com regionais de BH, ordenado por quantidade decrescente
+REGIONAL_ATO_banco_internacao_CORRE_bkp_bh <- REGIONAL_ATO_banco_internacao_CORRE_bkp %>%
+  filter(REGIONAL_ATO_banco_internacao_CORRE_bkp %in% regionais_bh) %>%
+  arrange(desc(QUANTIDADE)) %>%
+  mutate(REGIONAL_ATO_banco_internacao_CORRE_bkp = as.character(REGIONAL_ATO_banco_internacao_CORRE_bkp))
+
+# 5. Obter o valor da Região Metropolitana
+qtd_regiao_metropolitana_internacao_CORRE <- REGIONAL_ATO_banco_internacao_CORRE_bkp %>%
+  filter(REGIONAL_ATO_banco_internacao_CORRE_bkp == "REGIÃO METROPOLITANA") %>%
+  pull(QUANTIDADE)
+
+#########################################################################################################
+
 # Fazer uma tabela de frequência com valores totais,
 # e PERCENTUAL
 

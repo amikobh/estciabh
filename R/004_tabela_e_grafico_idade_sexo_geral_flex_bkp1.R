@@ -144,11 +144,11 @@ setwd(file.path("~/diretorio_r/estciabh/R/"))#configurar diretorio
 
 #criando data frame com os dados:
 #criando data frame com os dados:
-df_atendimento <- data.frame(ANO = c(2015,2016,2017, 2018, 2019, 2020, 2021, 2022, format(Sys.Date()-365*1, "%Y")),
-                             ATENDIMENTO = c(8518,8176,8244,7786, 6838, 4672, 3649, 3054, nrow(numero_de_casos_geral)))
+df_atendimento <- data.frame(ANO = c(2015,2016,2017, 2018, 2019, 2020, 2021, 2022, 2023, format(Sys.Date()-365*1, "%Y")),
+                             ATENDIMENTO = c(8518,8176,8244,7786, 6838, 4672, 3649, 3054, 3390, nrow(numero_de_casos_geral)))
 
-df_atendimento1 <- data.frame(ANO = c(2015,2016,2017, 2018, 2019, 2020, 2021, 2022, format(Sys.Date()-365*1, "%Y")),
-                              ADOLESCENTES = c(5718, 5456, 4854, 4520, 4022, 2680, 2102, 1848, nrow(banco_geral_SNR)))
+df_atendimento1 <- data.frame(ANO = c(2015,2016,2017, 2018, 2019, 2020, 2021, 2022, 2023, format(Sys.Date()-365*1, "%Y")),
+                              ADOLESCENTES = c(5718, 5456, 4854, 4520, 4022, 2680, 2102, 1848, 2005, nrow(banco_geral_SNR)))
 
 
 df_atendimento = full_join(df_atendimento,df_atendimento1,by="ANO")
