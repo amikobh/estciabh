@@ -50,9 +50,9 @@ library(dplyr)
 library(RCurl)
 library(googleway)
 
-key <- 'AIzaSyD'
+key <- 
 
-register_google(key = "AIzaSy")
+
 
 
 
